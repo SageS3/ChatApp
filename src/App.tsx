@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
+import './App.css'; 
 
-function App() {
+
+function App() {  
   return (
     <div className="App">
       <div>Chat App</div>
@@ -9,4 +9,5 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
+
