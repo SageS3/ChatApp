@@ -40,13 +40,16 @@ export default function Register() {
     setEmail('') 
     setPassword('')
     setConfirm('') 
-  }  
+  }   
+
   
+
   return ( 
     <>  
       <form onSubmit={(event) => submitSignUpHandler(event)}> 
       <h1>Sign Up</h1>
         <input
+        autoFocus
           required
           type='text' 
           name='email'
@@ -57,7 +60,7 @@ export default function Register() {
         ></input>
         <input
           required
-          type='text' 
+          type='password' 
           name='password'
           placeholder='Password*' 
           value={password} 
@@ -66,7 +69,7 @@ export default function Register() {
         ></input>
         <input
           required
-          type='text' 
+          type='password' 
           name='confirm password'
           placeholder='Confirm Password*' 
           value={confirm} 
