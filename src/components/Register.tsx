@@ -53,7 +53,7 @@ export default function Register() {
           required
           type='text' 
           name='email'
-          placeholder='Email*' 
+          placeholder='Email' 
           value={email} 
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
             setEmail(e.target.value)}
@@ -62,7 +62,7 @@ export default function Register() {
           required
           type='password' 
           name='password'
-          placeholder='Password*' 
+          placeholder='Password' 
           value={password} 
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
             setPassword(e.target.value)}
@@ -71,7 +71,7 @@ export default function Register() {
           required
           type='password' 
           name='confirm password'
-          placeholder='Confirm Password*' 
+          placeholder='Confirm Password' 
           value={confirm} 
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
             setConfirm(e.target.value)}
