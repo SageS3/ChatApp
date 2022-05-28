@@ -28,14 +28,16 @@ export default function Register() {
       console.log(errorMessage)
       if (errorMessage.includes('auth/weak-password')){ 
         setRegisterError('Enter stronger password') 
-      } 
+      }  
+      
       if(errorMessage.includes('auth/email-already-in-use')){ 
         setRegisterError('Email already in use')
       } 
+
       if(errorMessage.includes('auth/invalid-email')){ 
         setRegisterError('Invalid email') 
       } 
-      setRegisterError('Unable to sign in')
+      // setRegisterError('Unable to sign in')
     }) 
     setEmail('') 
     setPassword('')
@@ -45,7 +47,7 @@ export default function Register() {
   
 
   return ( 
-    <>  
+    <div>  
       <form onSubmit={(event) => submitSignUpHandler(event)}> 
       <h1>Sign Up</h1>
         <input
@@ -76,8 +78,10 @@ export default function Register() {
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
             setConfirm(e.target.value)}
         ></input>
-        <button type='submit'>Submit</button> 
-      </form>  
-    </>
+      <button type='submit'>Submit</button> 
+    
+      </form>   
+      <p>{registerError}</p>
+    </div>
   )
 }
