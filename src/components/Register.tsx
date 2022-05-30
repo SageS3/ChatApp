@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {auth} from './config/firebase' 
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import './Register.css'
 
@@ -9,7 +9,7 @@ export default function Register() {
   const [password, setPassword] = useState<string>('')
   const [registerError, setRegisterError] = useState<string>(''); 
   const [confirm, setConfirm] = useState<string>('');  
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const submitSignUpHandler = (event: React.FormEvent<HTMLFormElement>) => {
     
@@ -19,7 +19,7 @@ export default function Register() {
 
     createUserWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => { 
-      // navigate('/login')
+      navigate('/login')
       const user = userCredential.user 
       console.log(user)
     }) 
@@ -37,7 +37,6 @@ export default function Register() {
       if(errorMessage.includes('auth/invalid-email')){ 
         setRegisterError('Invalid email') 
       } 
-      // setRegisterError('Unable to sign in')
     }) 
     setEmail('') 
     setPassword('')
