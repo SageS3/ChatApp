@@ -44,10 +44,8 @@ export default function Register() {
     setConfirm('') 
   }   
 
-  
-
   return ( 
-    <div>  
+    <>  
       <form onSubmit={(event) => submitSignUpHandler(event)}> 
       <h1>Sign Up</h1>
         <input
@@ -79,9 +77,8 @@ export default function Register() {
             setConfirm(e.target.value)}
         ></input>
       <button type='submit'>Submit</button> 
-    
       </form>   
       <p>{registerError}</p>
-    </div>
+    </>
   )
 }

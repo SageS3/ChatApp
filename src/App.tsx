@@ -4,11 +4,13 @@ import {useState} from 'react'
 import Register from './components/Register';
 import Login from './components/Login'
 function App() {   
-  const [isRegistered, setIsRegistered] = useState<Boolean>(true)
-  
+  const [isRegistered, setIsRegistered] = useState<boolean>(false) 
+  const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
+
+
   return (
     <div className="App">  
-    {isRegistered ? <Login/> : <Register/>}
+    {isRegistered ? <Login/> : <Register/>} 
     </div>
   );
 }

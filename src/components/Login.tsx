@@ -1,8 +1,31 @@
-
-
-function Login() {
+import {useState} from 'react'
+function Login() { 
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
   return (
-    <div>Login</div>
+    <> 
+      <form>  
+        <h1>Log In</h1>
+        <input
+          autoFocus
+          required
+          type='text' 
+          name='email'
+          placeholder='Email' 
+          value={email}  
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <input
+          autoFocus
+          required
+          type='password' 
+          name='password'
+          placeholder='Password' 
+          value={password}  
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+      </form>
+    </>
   )
 }
 
