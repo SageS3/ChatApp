@@ -6,5 +6,6 @@
   background-color: rgb(55,47, 73); 
   display: flex; 
   justify-content: center; 
-  align-items: center;
+  align-items: center;  
+  flex-direction: column;
 }

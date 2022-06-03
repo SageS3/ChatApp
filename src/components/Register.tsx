@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {auth} from './config/firebase' 
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+
 import './Register.css'
 
 export default function Register() {  
@@ -12,16 +13,17 @@ export default function Register() {
   const navigate = useNavigate()
 
   const submitSignUpHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()  
     
     if(registerError !== '') setRegisterError('') 
     if(password !== confirm) setRegisterError('Password does not match')
-    event.preventDefault()  
-
+    
     createUserWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => { 
       navigate('/login')
       const user = userCredential.user 
       console.log(user)
+      console.log(auth)
     }) 
     .catch((error) =>{  
       const errorMessage = error.message  
@@ -45,12 +47,16 @@ export default function Register() {
 
   return ( 
     <>  
+      <div className='toggle'> 
+        <button>Sign Up</button> 
+        <button>Sign In</button>
+      </div>  
       <form onSubmit={(event) => submitSignUpHandler(event)}> 
       <h1>Sign Up</h1>
         <input
         autoFocus
           required
-          type='text' 
+          type='email' 
           name='email'
           placeholder='Email' 
           value={email} 
@@ -65,7 +71,7 @@ export default function Register() {
           value={password} 
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
             setPassword(e.target.value)}
-        ></input>
+        ></input> 
         <input
           required
           type='password' 

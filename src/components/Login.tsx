@@ -2,6 +2,8 @@ import {useState} from 'react'
 function Login() { 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+
   return (
     <> 
       <form>  
@@ -9,7 +11,7 @@ function Login() {
         <input
           autoFocus
           required
-          type='text' 
+          type='email' 
           name='email'
           placeholder='Email' 
           value={email}  
