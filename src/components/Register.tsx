@@ -46,11 +46,7 @@ export default function Register() {
   }   
 
   return ( 
-    <>  
-      <div className='toggle'> 
-        <button>Sign Up</button> 
-        <button>Sign In</button>
-      </div>  
+    <>    
       <form onSubmit={(event) => submitSignUpHandler(event)}> 
       <h1>Sign Up</h1>
         <input

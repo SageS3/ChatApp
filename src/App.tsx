@@ -1,17 +1,13 @@
 import './App.css'; 
-import {useState} from 'react' 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login'
+import EntryPage from './components/EntryPage';
 function App() {  
 
   return ( 
-    <div className="App"> 
-         
+    <div className="App">   
       <Router>  
         <Routes>  
-          <Route path='/' element={<Register></Register>}></Route>
-          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/' element={<EntryPage/>}></Route>
         </Routes>
       </Router>
     </div> 
