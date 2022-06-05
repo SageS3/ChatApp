@@ -1,0 +1,32 @@
+.toggle span {
+  background-color: rgb(255, 6, 200);
+  width: 100px;
+  height: 40px;
+  position: absolute;
+}
+.toggle .left {
+  border-radius: 12px 0 0 12px;
+}
+.toggle .right {
+  border-radius: 0 12px 12px 0;
+}
+.toggle button {
+  width: 100px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border-radius: 12px 0 0 12px;
+  outline: none;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  font-size: 1.1rem;
+  transition: font-size 200ms ease-in;
+}
+.toggle button:last-of-type {
+  border-radius: 0 12px 12px 0;
+}
+.toggle button:hover {
+  font-size: 1.2rem;
+}/*# sourceMappingURL=EntryPage.css.map */

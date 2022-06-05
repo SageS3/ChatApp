@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import {auth} from './config/firebase' 
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import './Register.css'  
 
-import './Register.css'
+type registerProps = { 
+  setForm: React.Dispatch<React.SetStateAction<string>>
+}
 
-export default function Register() {  
+
+export default function Register(props: registerProps) {  
   const [email, setEmail] = useState<string>(''); 
   const [password, setPassword] = useState<string>('')
   const [registerError, setRegisterError] = useState<string>(''); 
@@ -20,7 +24,7 @@ export default function Register() {
     
     createUserWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => { 
-      navigate('/login')
+      props.setForm('login')
       const user = userCredential.user 
       console.log(user)
       console.log(auth)
@@ -50,7 +54,7 @@ export default function Register() {
       <form onSubmit={(event) => submitSignUpHandler(event)}> 
       <h1>Sign Up</h1>
         <input
-        autoFocus
+          autoFocus
           required
           type='email' 
           name='email'

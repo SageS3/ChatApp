@@ -18,14 +18,14 @@ function Login() {
           onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
-          autoFocus
           required
           type='password' 
           name='password'
           placeholder='Password' 
           value={password}  
           onChange={(e) => setPassword(e.target.value)}
-        ></input>
+        ></input> 
+        <button type='submit'>Login</button>
       </form>
     </>
   )
