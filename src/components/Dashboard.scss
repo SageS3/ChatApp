@@ -1,0 +1,27 @@
+.user-dashboard {  
+  height: 100%; 
+  width: 100%;
+  display: grid; 
+  grid-template-columns: 0.5fr 2fr; 
+  grid-template-rows: 0.3fr 4fr 0.7fr; 
+  grid-template-areas: 'sidebar navbar'
+                       'sidebar main'
+                       'sidebar input'; 
+                       
+  nav { 
+    grid-area: navbar;
+    background-color: rgb(33,30,41); 
+    border-bottom: 4px solid rgb(255,6,200);
+    color: white;
+  } 
+
+  main { 
+    grid-area: main;
+    background-color: rgb(33,30,41);
+  } 
+
+  .user-input { 
+    grid-area: input;
+    background-color: rgb(33,30,41);
+  }
+}

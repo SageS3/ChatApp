@@ -1,10 +1,16 @@
 import React from 'react'
-import Sidebar from './Sidebar'
+import Sidebar from './Sidebar' 
+import './Dashboard.css'
 
 function Dashboard() {
   return (
-    <div> 
-      <Sidebar></Sidebar>
+    <div className='user-dashboard'> 
+      <nav>nav</nav>
+      <Sidebar></Sidebar> 
+      <main>main</main> 
+      <div className='user-input'> 
+        <input></input>
+      </div>
     </div>
   )
 }

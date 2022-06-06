@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {auth} from './config/firebase' 
-import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import './Register.css'  
 
@@ -8,13 +7,11 @@ type registerProps = {
   setForm: React.Dispatch<React.SetStateAction<string>>
 }
 
-
 export default function Register(props: registerProps) {  
   const [email, setEmail] = useState<string>(''); 
   const [password, setPassword] = useState<string>('')
   const [registerError, setRegisterError] = useState<string>(''); 
   const [confirm, setConfirm] = useState<string>('');  
-  const navigate = useNavigate()
 
   const submitSignUpHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()  
