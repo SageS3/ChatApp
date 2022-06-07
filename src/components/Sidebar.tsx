@@ -3,7 +3,11 @@ import './Sidebar.css'
 
 function Sidebar() {
   return (
-    <div className='sidebar-wrapper'>Sidebar</div>
+    <div className='sidebar-wrapper'> 
+      <button>Chats</button>
+      <button>Profile</button>
+      <button>Settings</button>
+    </div>
   )
 }
 

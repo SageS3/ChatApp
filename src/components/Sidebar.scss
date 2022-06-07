@@ -1,4 +1,21 @@
 .sidebar-wrapper { 
   grid-area: sidebar;
   background-color: rgb(55,47,73);
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+
+  button { 
+    height: 40px; 
+    width: 80%; 
+    margin-bottom: 10px; 
+    background-color:rgba(255,6,200);
+    outline: none; 
+    border: none;
+    color: white; 
+    font-weight: 600;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
 }

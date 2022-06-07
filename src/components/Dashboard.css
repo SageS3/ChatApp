@@ -5,13 +5,12 @@
   grid-gap: 4px;
   background-color: rgb(255, 6, 200);
   grid-template-columns: 0.5fr 2fr;
-  grid-template-rows: 0.3fr 4fr 0.7fr;
+  grid-template-rows: 0.3fr 4fr 1fr;
   grid-template-areas: "sidebar navbar" "sidebar main" "sidebar input";
 }
 .user-dashboard nav {
   grid-area: navbar;
   background-color: rgb(33, 30, 41);
-  border-bottom: 4px solid rgb(255, 6, 200);
   color: white;
 }
 .user-dashboard main {
@@ -21,4 +20,19 @@
 .user-dashboard .user-input {
   grid-area: input;
   background-color: rgb(33, 30, 41);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+}
+.user-dashboard .user-input input {
+  width: 50%;
+  height: 30px;
+  background-color: rgb(55, 47, 73);
+  border-radius: 12px;
+  border: 2px solid white;
+  font-size: 1.1rem;
+  padding: 5px;
+  outline: none;
+  color: white;
 }/*# sourceMappingURL=Dashboard.css.map */
