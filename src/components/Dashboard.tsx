@@ -9,7 +9,7 @@ function Dashboard() {
   return (
     <div className='user-dashboard'> 
       <nav> 
-        <input type='checkbox'></input> 
+        {/* <input type='checkbox'></input>  */}
         <button type='button' onClick={() => navigate('/')}>Logout</button>
       </nav>
       <Sidebar></Sidebar> 
