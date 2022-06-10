@@ -13,6 +13,9 @@
   background-color: rgb(33, 30, 41);
   color: white;
 }
+.user-dashboard nav button {
+  cursor: pointer;
+}
 .user-dashboard main {
   grid-area: main;
   background-color: rgb(33, 30, 41);

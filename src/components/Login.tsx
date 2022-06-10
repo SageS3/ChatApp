@@ -15,17 +15,6 @@ function Login() {
     .then((userCredential) => { 
       setIsLoggedIn(true)
       navigate('/dashboard')
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          const uid = user.uid; 
-          // console.log(uid) 
-          console.log('lit')
-        } else {
-          // User is signed out
-        }
-      });
       const user = userCredential.user;
       console.log(user)
     })
@@ -35,9 +24,18 @@ function Login() {
       console.log(errorCode) 
       console.log(errorMessage)
     });
-  } 
+  }  
 
-  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid; 
+      // console.log(uid) 
+    } else {
+      // User is signed out
+    }
+  });
   
   return (
     <> 
