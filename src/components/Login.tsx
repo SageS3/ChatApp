@@ -1,13 +1,14 @@
 import {useState} from 'react'
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {auth} from './config/firebase' 
+import {signInWithEmailAndPassword} from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+
 function Login() { 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('') 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   const navigate = useNavigate() 
-  const auth = getAuth();
 
   const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => { 
     event.preventDefault() 
@@ -25,17 +26,6 @@ function Login() {
       console.log(errorMessage)
     });
   }  
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid; 
-      // console.log(uid) 
-    } else {
-      // User is signed out
-    }
-  });
   
   return (
     <> 

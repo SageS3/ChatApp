@@ -2,8 +2,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EntryPage from './components/EntryPage';
 import Dashboard from './components/Dashboard';
-function App() {  
-
+function App() {    
+ 
   return ( 
     <div className="App">   
       <Router>  

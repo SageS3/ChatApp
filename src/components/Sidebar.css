@@ -3,7 +3,7 @@
   background-color: rgb(55, 47, 73);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 .sidebar-wrapper button {
@@ -17,4 +17,14 @@
   font-weight: 600;
   font-size: 1.3rem;
   cursor: pointer;
+}
+.sidebar-wrapper .image-container {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 30px;
+  margin-top: 50px;
+  border-radius: 100px;
+  background-image: linear-gradient(rgb(255, 6, 200), rgb(55, 47, 73));
+  border: 1px solid rgb(33, 30, 41);
+  position: relative;
 }/*# sourceMappingURL=Sidebar.css.map */

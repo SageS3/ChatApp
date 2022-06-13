@@ -5,11 +5,6 @@ import './EntryPage.css'
 
 function EntryPage() {  
   const [form, setForm] = useState<string>('register')  
-
-  // const toggleButtonAnimation = () => { 
-  //   const toggleButton = document.querySelector('.left') 
-  //   toggleButton.classList.toggle('right')
-  // }
   
   const registerHandler = () => { 
     // toggleButtonAnimation() 
@@ -21,7 +16,6 @@ function EntryPage() {
     setForm('login')
   }
 
-   
   return (
     <>
       <div className='toggle'>  
