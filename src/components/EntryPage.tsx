@@ -1,11 +1,15 @@
 import {useState} from 'react'
 import Register from './Register'
 import Login from './Login' 
-import './EntryPage.css' 
+import './EntryPage.css'  
 
-function EntryPage() {  
+type EntryPageProps = { 
+  setIsLoggedIn: (a: boolean) => void,
+}
+
+function EntryPage({setIsLoggedIn}:EntryPageProps) {  
   const [form, setForm] = useState<string>('register')  
-  
+
   const registerHandler = () => { 
     // toggleButtonAnimation() 
     setForm('register')
@@ -24,7 +28,7 @@ function EntryPage() {
         <button type='button' onClick={loginHandler}>Sign In</button>
       </div> 
       {form === 'register' && <Register setForm={setForm}/>}
-      {form === 'login' && <Login/>}
+      {form === 'login' && <Login setIsLoggedIn={setIsLoggedIn}/>}
     </>
   )
 }

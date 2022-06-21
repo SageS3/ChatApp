@@ -8,8 +8,8 @@
 }
 .sidebar-wrapper button {
   height: 40px;
-  width: 80%;
-  margin-bottom: 10px;
+  width: 70%;
+  margin-bottom: 20px;
   background-color: rgb(255, 6, 200);
   outline: none;
   border: none;
@@ -17,6 +17,10 @@
   font-weight: 600;
   font-size: 1.3rem;
   cursor: pointer;
+  transition: font-size 200ms ease-out;
+}
+.sidebar-wrapper button:hover {
+  font-size: 1.4rem;
 }
 .sidebar-wrapper .image-container {
   width: 120px;
@@ -42,5 +46,5 @@
   transition: border 400ms ease-in;
 }
 .sidebar-wrapper .image-container button:hover {
-  border: 2px solid rgb(200, 200, 200);
+  border: 2px solid rgb(120, 120, 120);
 }/*# sourceMappingURL=Sidebar.css.map */

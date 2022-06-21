@@ -49,7 +49,6 @@ export default function Register(props: registerProps) {
   return ( 
     <>    
       <form onSubmit={(event) => submitSignUpHandler(event)}> 
-      <h1>Sign Up</h1>
         <input
           autoFocus
           required

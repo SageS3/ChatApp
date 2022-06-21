@@ -1,23 +1,37 @@
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {auth} from './config/firebase' 
-import {signInWithEmailAndPassword} from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import {signInWithEmailAndPassword,onAuthStateChanged} from "firebase/auth";
+import { useNavigate } from 'react-router-dom';  
 
-function Login() { 
+type LoginProps = { 
+  setIsLoggedIn: (a: boolean) => void,
+}
+
+function Login({setIsLoggedIn}:LoginProps) { 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('') 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   const navigate = useNavigate() 
 
   const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => { 
     event.preventDefault() 
-  signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => { 
-      setIsLoggedIn(true)
-      navigate('/dashboard')
-      const user = userCredential.user;
+      const user = userCredential.user; 
       console.log(user)
+      setIsLoggedIn(true)
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          console.log(uid)
+          navigate('/dashboard')
+        } else {
+          // do something
+        }
+      });
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -25,12 +39,16 @@ function Login() {
       console.log(errorCode) 
       console.log(errorMessage)
     });
-  }  
+  }   
+
+  useEffect(() => { 
+    setIsLoggedIn(false)
+  }, []) 
   
-  return (
-    <> 
+  return ( 
+    <>  
+
       <form onSubmit={(event) => submitLoginHandler(event)}>  
-        <h1>Log In</h1>
         <input
           autoFocus
           required
