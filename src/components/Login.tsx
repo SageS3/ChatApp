@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 type LoginProps = { 
   setIsLoggedIn: (a: boolean) => void,
+  setUserData: (a: object) => void,
 }
 
-function Login({setIsLoggedIn}:LoginProps) { 
+function Login({setIsLoggedIn, setUserData}:LoginProps) { 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('') 
+  const [loginError, setLoginError] = useState<string>('')
 
   const navigate = useNavigate() 
 
@@ -18,15 +20,14 @@ function Login({setIsLoggedIn}:LoginProps) {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => { 
       const user = userCredential.user; 
-      console.log(user)
       setIsLoggedIn(true)
-
+      setUserData(user)
+      
       onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
           const uid = user.uid;
-          console.log(uid)
           navigate('/dashboard')
         } else {
           // do something
@@ -37,7 +38,11 @@ function Login({setIsLoggedIn}:LoginProps) {
       const errorCode = error.code;
       const errorMessage = error.message; 
       console.log(errorCode) 
-      console.log(errorMessage)
+      console.log(errorMessage) 
+
+      errorCode === 'auth/wrong-password' && setLoginError('password is incorrect')
+      errorCode === 'auth/user-not-found' && setLoginError('User not found')
+
     });
   }   
 
@@ -66,7 +71,8 @@ function Login({setIsLoggedIn}:LoginProps) {
           value={password}  
           onChange={(e) => setPassword(e.target.value)}
         ></input> 
-        <button type='submit'>Login</button>
+        <button type='submit'>Login</button> 
+        <p>{loginError}</p>
       </form>
     </>
   )

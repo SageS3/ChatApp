@@ -40,6 +40,13 @@ form {
     font-weight: 600;
   } 
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px rgb(255,6,200) inset !important;
+    -webkit-text-fill-color: rgb(55,47,73);
+  }
 
   button {  
     font-size: 1.2rem;  
@@ -66,7 +73,8 @@ form:hover {
 } 
 
 p { 
-  color: white;
+  color: white; 
+  font-weight: 700;
 }  
 
 

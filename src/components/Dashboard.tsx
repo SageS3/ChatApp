@@ -2,8 +2,12 @@ import Sidebar from './Sidebar'
 import './Dashboard.css'
 import { useNavigate} from 'react-router-dom'; 
 
-function Dashboard() {
-  const navigate = useNavigate() 
+type DashboardProps = { 
+  userData: object,
+}
+function Dashboard({userData}:DashboardProps) {
+  const navigate = useNavigate()   
+  console.log(userData)
 
   return (
     <div className='user-dashboard'> 
@@ -12,7 +16,7 @@ function Dashboard() {
       </nav>
       <Sidebar></Sidebar> 
       <main> 
-        <div>chats</div>
+        <div></div>
       </main> 
       <div className='user-input'> 
         <input></input>

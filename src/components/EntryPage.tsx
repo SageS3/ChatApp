@@ -4,10 +4,11 @@ import Login from './Login'
 import './EntryPage.css'  
 
 type EntryPageProps = { 
-  setIsLoggedIn: (a: boolean) => void,
+  setIsLoggedIn: (a:boolean) => void,
+  setUserData: (a:object) => void
 }
 
-function EntryPage({setIsLoggedIn}:EntryPageProps) {  
+function EntryPage({setIsLoggedIn, setUserData}:EntryPageProps) {  
   const [form, setForm] = useState<string>('register')  
 
   const registerHandler = () => { 
@@ -28,7 +29,9 @@ function EntryPage({setIsLoggedIn}:EntryPageProps) {
         <button type='button' onClick={loginHandler}>Sign In</button>
       </div> 
       {form === 'register' && <Register setForm={setForm}/>}
-      {form === 'login' && <Login setIsLoggedIn={setIsLoggedIn}/>}
+      {form === 'login' && <Login 
+      setIsLoggedIn={setIsLoggedIn} 
+      setUserData={setUserData}/>}
     </>
   )
 }
