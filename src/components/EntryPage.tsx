@@ -5,7 +5,7 @@ import './EntryPage.css'
 
 type EntryPageProps = { 
   setIsLoggedIn: (a:boolean) => void,
-  setUserData: (a:object) => void
+  setUserData: (a:Object) => void
 }
 
 function EntryPage({setIsLoggedIn, setUserData}:EntryPageProps) {  

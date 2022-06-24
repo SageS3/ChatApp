@@ -7,7 +7,7 @@ import RequiredAuth from './components/config/RequiredAuth';
 
 function App() {    
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-  const [userData, setUserData] = useState<object>({})
+  const [userData, setUserData] = useState<Object>({})
 
   return (  
       <div className="App">   

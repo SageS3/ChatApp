@@ -4,8 +4,8 @@ import {signInWithEmailAndPassword,onAuthStateChanged} from "firebase/auth";
 import { useNavigate } from 'react-router-dom';  
 
 type LoginProps = { 
-  setIsLoggedIn: (a: boolean) => void,
-  setUserData: (a: object) => void,
+  setIsLoggedIn: (a:boolean) => void,
+  setUserData: (a:Object) => void,
 }
 
 function Login({setIsLoggedIn, setUserData}:LoginProps) { 
@@ -20,17 +20,19 @@ function Login({setIsLoggedIn, setUserData}:LoginProps) {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => { 
       const user = userCredential.user; 
+      console.log(user)
       setIsLoggedIn(true)
-      setUserData(user)
-      
+     
       onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
-          const uid = user.uid;
+          setUserData(user)
+          // const uid = user.uid; 
+          // const username = user.email
           navigate('/dashboard')
         } else {
-          // do something
+          // ...
         }
       });
     })
@@ -48,11 +50,10 @@ function Login({setIsLoggedIn, setUserData}:LoginProps) {
 
   useEffect(() => { 
     setIsLoggedIn(false)
-  }, []) 
+  }, [setIsLoggedIn]) 
   
   return ( 
     <>  
-
       <form onSubmit={(event) => submitLoginHandler(event)}>  
         <input
           autoFocus
@@ -72,8 +73,8 @@ function Login({setIsLoggedIn, setUserData}:LoginProps) {
           onChange={(e) => setPassword(e.target.value)}
         ></input> 
         <button type='submit'>Login</button> 
-        <p>{loginError}</p>
       </form>
+      <p>{loginError}</p>
     </>
   )
 }

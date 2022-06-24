@@ -2,19 +2,18 @@ import Sidebar from './Sidebar'
 import './Dashboard.css'
 import { useNavigate} from 'react-router-dom'; 
 
-type DashboardProps = { 
-  userData: object,
+type DashboardProps = {  
+  userData: {[key: string]: any},
 }
 function Dashboard({userData}:DashboardProps) {
-  const navigate = useNavigate()   
-  console.log(userData)
+  const navigate = useNavigate()    
 
   return (
     <div className='user-dashboard'> 
       <nav> 
         <button type='button' onClick={() => navigate('/')}>Logout</button>
       </nav>
-      <Sidebar></Sidebar> 
+      <Sidebar userData={userData}></Sidebar> 
       <main> 
         <div></div>
       </main> 
