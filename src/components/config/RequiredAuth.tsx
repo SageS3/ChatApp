@@ -8,7 +8,7 @@ type RequiredAuthProps = {
 
 function RequiredAuth({children, isLoggedIn}:RequiredAuthProps) { 
 
-  if(isLoggedIn === false) { 
+  if(!isLoggedIn) { 
     return( 
       <Navigate to='/' replace/>
     )

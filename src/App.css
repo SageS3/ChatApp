@@ -5,7 +5,7 @@
   height: 100vh; 
   background-color: rgb(55,47, 73); 
   display: flex; 
-  justify-content: center; 
+  justify-content: flex-start; 
   align-items: center;  
   flex-direction: column;
 }

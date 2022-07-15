@@ -75,7 +75,9 @@ form:hover {
 }
 
 p {
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: 700;
   margin: none;
+  -webkit-animation: text-appear 200ms ease-in forwards;
+          animation: text-appear 200ms ease-in forwards;
 }/*# sourceMappingURL=Register.css.map */

@@ -7,24 +7,22 @@ type registerProps = {
   setForm: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function Register(props: registerProps) {  
+export default function Register(props: registerProps){  
   const [email, setEmail] = useState<string>(''); 
   const [password, setPassword] = useState<string>('')
   const [registerError, setRegisterError] = useState<string>(''); 
-  const [confirm, setConfirm] = useState<string>('');  
+  const [confirmPassword, setConfirmPassword] = useState<string>('');  
 
   const submitSignUpHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()  
     
     if(registerError !== '') setRegisterError('') 
-    if(password !== confirm) setRegisterError('Password does not match')
+    if(password !== confirmPassword) setRegisterError('Password does not match')
     
     createUserWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => { 
       props.setForm('login')
-      const user = userCredential.user 
-      console.log(user)
-      console.log(auth)
+      const user = userCredential.user  
     }) 
     .catch((error) =>{  
       const errorMessage = error.message  
@@ -41,9 +39,9 @@ export default function Register(props: registerProps) {
         setRegisterError('Invalid email') 
       } 
     }) 
-    setEmail('') 
-    setPassword('')
-    setConfirm('') 
+      setEmail('') 
+      setPassword('')
+      setConfirmPassword('') 
   }   
 
   return ( 
@@ -73,9 +71,9 @@ export default function Register(props: registerProps) {
           type='password' 
           name='confirm password'
           placeholder='Confirm Password' 
-          value={confirm} 
+          value={confirmPassword} 
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
-            setConfirm(e.target.value)}
+            setConfirmPassword(e.target.value)}
         ></input>
       <button type='submit'>Submit</button> 
       </form>   

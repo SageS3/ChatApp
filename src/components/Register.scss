@@ -11,7 +11,7 @@ form {
   padding: 40px;
   margin: 20px; 
   cursor: pointer;
-  transition: box-shadow 600ms ease-in;
+  transition: box-shadow 600ms ease-in; 
   
   h1 { 
     color: white; 
@@ -73,10 +73,12 @@ form:hover {
 } 
 
 p { 
-  color: white; 
+  color:rgba(255,255,255,1); 
   font-weight: 700;
-  margin: none;
-}  
+  margin: none; 
+  animation: text-appear 200ms ease-in forwards;
+}   
+
 
 
 // issues 

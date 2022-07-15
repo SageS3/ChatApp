@@ -7,4 +7,3 @@ const firebase = initializeApp(firebaseConfig);
 export const auth = getAuth(firebase) 
 export default firebase 
 
-console.log(auth)
