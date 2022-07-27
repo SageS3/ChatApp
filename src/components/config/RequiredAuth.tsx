@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'  
+import React, {useState, useEffect} from 'react'  
 import {useNavigate} from 'react-router-dom';  
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
@@ -8,7 +8,8 @@ type RequiredAuthProps = {
   setUserData: (a:Object) => void
 }
 
-function RequiredAuth({children, setUserData}:RequiredAuthProps) {  
+function RequiredAuth({children, setUserData}:RequiredAuthProps) {   
+  const [authenticated, setAuthenticated] = useState(false)
   const auth = getAuth()   
   const navigate = useNavigate()
 
@@ -19,17 +20,26 @@ function RequiredAuth({children, setUserData}:RequiredAuthProps) {
 
   const authCheck = () => { 
     onAuthStateChanged(auth, (user) => {
-      if(user){  
-        setUserData(user)
+      if(user){
+        setUserData(user) 
+        setAuthenticated(true)
       } else {
-        console.log('unauthorized') 
+        console.log('unauthorized')  
+        setAuthenticated(false)
         navigate('/') 
       } 
     });
-  }  
+  }   
+
+  const loading = () => ( 
+    <div className='animation-container'>
+      <h2>Loading...</h2>
+    </div>
+  )
+    
   return (  
     <> 
-    {children}
+    {authenticated ? children : loading()}
     </>
   )
 }

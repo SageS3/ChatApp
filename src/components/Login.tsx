@@ -25,6 +25,7 @@ const Login: React.FunctionComponent<LoginProps> = ({setIsLoggedIn}:LoginProps) 
       setIsLoggedIn(true)
       navigate('/dashboard')
       const user = userCredential.user;
+      console.log(user)
     })
     .catch((error) => {
       const errorCode = error.code;
