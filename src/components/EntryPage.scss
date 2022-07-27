@@ -2,13 +2,13 @@
   margin-top: 100px;
   position: relative;  
   z-index: 0;
-  
+
   .slider { 
-    background-color: rgba(255,6,200,.8); 
+    background-color: rgb(255,6,200); 
     width: 100px;  
     height: 40px;  
     position: absolute;   
-    z-index: -1;
+    z-index: -1; 
   }  
 
   button { 
@@ -21,7 +21,7 @@
     outline: none; 
     font-weight: 800; 
     cursor: pointer; 
-    border: none; 
+    border: 2px solid rgb(255,6,200); 
     font-size: 1.1rem; 
     transition: font-size 200ms ease-in; 
   } 
@@ -29,8 +29,4 @@
   button:last-of-type{ 
     border-radius: 0 12px 12px 0; 
   }   
-
-  button:hover { 
-    font-size: 1.2rem;
-  } 
 } 
