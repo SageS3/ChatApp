@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {auth} from './config/firebase' 
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import './Register.css'  
+import './Register.css'   
 
 type registerProps = { 
   setForm: React.Dispatch<React.SetStateAction<string>>
@@ -66,7 +66,7 @@ export default function Register(props: registerProps){
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
             setPassword(e.target.value)}
         ></input> 
-        <input
+        <input 
           required
           type='password' 
           name='confirm password'
