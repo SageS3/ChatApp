@@ -1,19 +1,32 @@
-import React from 'react'  
-import {Navigate} from 'react-router-dom'; 
+import React, {useEffect} from 'react'  
+import {useNavigate} from 'react-router-dom';  
+import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
 type RequiredAuthProps = { 
-  children: React.ReactNode 
-  isLoggedIn: boolean
+  children: React.ReactNode,
+  isLoggedIn: boolean, 
+  setUserData: (a:Object) => void
 }
 
-function RequiredAuth({children, isLoggedIn}:RequiredAuthProps) { 
+function RequiredAuth({children, setUserData}:RequiredAuthProps) {  
+  const auth = getAuth()   
+  const navigate = useNavigate()
 
-  if(!isLoggedIn) { 
-    return( 
-      <Navigate to='/' replace/>
-    )
-  } 
+  useEffect(() => {
+    authCheck() 
+    return () => authCheck() // componentWillUnmount
+  }, [auth])
 
+  const authCheck = () => { 
+    onAuthStateChanged(auth, (user) => {
+      if(user){  
+        setUserData(user)
+      } else {
+        console.log('unauthorized') 
+        navigate('/') 
+      } 
+    });
+  }  
   return (  
     <> 
     {children}
@@ -21,4 +34,4 @@ function RequiredAuth({children, isLoggedIn}:RequiredAuthProps) {
   )
 }
 
-export default RequiredAuth
+export default RequiredAuth 
