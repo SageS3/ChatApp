@@ -4,12 +4,8 @@ import Login from './Login'
 import './EntryPage.css'   
 import {animated, useSpring} from '@react-spring/web'
 
-type EntryPageProps = { 
-  setIsLoggedIn: (a:boolean) => void,  
-  isLoggedIn: boolean,
-}
 
-function EntryPage({setIsLoggedIn, isLoggedIn}:EntryPageProps) {  
+function EntryPage() {  
   const [form, setForm] = useState<string>('register')   
 
   const slider = useSpring({  
@@ -36,10 +32,7 @@ function EntryPage({setIsLoggedIn, isLoggedIn}:EntryPageProps) {
         <button type='button' onClick={loginHandler}>Sign In</button>
       </div> 
       {form === 'register' && <Register setForm={setForm}/>}
-      {form === 'login' && <Login 
-      setIsLoggedIn={setIsLoggedIn} 
-      isLoggedIn={isLoggedIn}
-      />}
+      {form === 'login' && <Login/>}
     </>
   )
 }

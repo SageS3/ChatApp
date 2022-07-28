@@ -2,12 +2,7 @@ import React, {useState} from 'react'
 import {signInWithEmailAndPassword, getAuth} from "firebase/auth";
 import { useNavigate } from 'react-router-dom';  
 
-type LoginProps = { 
-  setIsLoggedIn: (a:boolean) => void, 
-  isLoggedIn: boolean,
-}
-
-const Login: React.FunctionComponent<LoginProps> = ({setIsLoggedIn}:LoginProps) => {  
+const Login: React.FunctionComponent = () => {  
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('') 
   const [loginError, setLoginError] = useState<string>('')
@@ -22,7 +17,6 @@ const Login: React.FunctionComponent<LoginProps> = ({setIsLoggedIn}:LoginProps) 
   
     signInWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => {  
-      setIsLoggedIn(true)
       navigate('/dashboard')
       const user = userCredential.user;
       console.log(user)
@@ -55,8 +49,9 @@ const Login: React.FunctionComponent<LoginProps> = ({setIsLoggedIn}:LoginProps) 
           onChange={(e) => setPassword(e.target.value)}
         ></input> 
         <button type='submit'>Login</button> 
+        <h4>forgot password?</h4>
       </form>
-      <p>{loginError}</p>
+      <p>{loginError}</p> 
     </>
   )
 }

@@ -8,12 +8,10 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 40px;
+  padding: 20px;
   margin: 20px;
-  cursor: pointer;
   transition: box-shadow 600ms ease-in;
-  position: absolute;
-  top: 160px;
+  margin-top: 80px;
 }
 form:hover {
   box-shadow: 0 0 2em 0 rgb(255, 6, 200);
@@ -73,6 +71,11 @@ form button {
   font-weight: 600;
   border: 2px solid rgb(255, 6, 200);
   cursor: pointer;
+}
+form h4 {
+  margin: 0;
+  padding: none;
+  color: white;
 }
 
 p {

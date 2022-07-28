@@ -4,7 +4,6 @@ import {signOut, getAuth} from 'firebase/auth'
 
 type DashboardProps = {  
   userData: {[key: string]: any}, 
-  setIsLoggedIn: (a:boolean) => void
 }
 function Dashboard({userData}:DashboardProps) { 
   const auth = getAuth() 

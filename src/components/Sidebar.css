@@ -1,6 +1,6 @@
 .sidebar-wrapper {
   grid-area: sidebar;
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(33, 30, 41);
   display: flex;
   align-items: center;
   justify-content: flex-start;

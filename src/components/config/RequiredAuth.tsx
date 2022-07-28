@@ -4,7 +4,6 @@ import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
 type RequiredAuthProps = { 
   children: React.ReactNode,
-  isLoggedIn: boolean, 
   setUserData: (a:Object) => void
 }
 
