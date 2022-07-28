@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {auth} from './config/firebase' 
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth' 
 import './Register.css'   
 
 type registerProps = { 
@@ -42,7 +42,7 @@ export default function Register(props: registerProps){
       setEmail('') 
       setPassword('')
       setConfirmPassword('') 
-  }   
+  }    
 
   return ( 
     <>    

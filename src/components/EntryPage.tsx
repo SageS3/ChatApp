@@ -4,7 +4,6 @@ import Login from './Login'
 import './EntryPage.css'   
 import {animated, useSpring} from '@react-spring/web'
 
-
 function EntryPage() {  
   const [form, setForm] = useState<string>('register')   
 
@@ -15,12 +14,10 @@ function EntryPage() {
   }) 
 
   const registerHandler = () => { 
-    // toggleButtonAnimation() 
     setForm('register')
   } 
 
   const loginHandler = () => { 
-    // toggleButtonAnimation() 
     setForm('login')
   }
 

@@ -5,7 +5,9 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column; 
-
+  animation: slide-in 300ms cubic-bezier(.89,0,.1,.99) forwards; 
+  
+  
   button { 
     height: 40px; 
     width: 70%; 
@@ -51,4 +53,22 @@
       }
     }
   } 
+} 
+
+@media screen and (max-width: 1190px) {
+  .sidebar-wrapper{ 
+    display: none;
+  }
+}
+
+@keyframes slide-in {
+  0% {  
+    position: relative; 
+    top: -100%;
+  } 
+
+  100% { 
+    position: relative; 
+    top: 0;
+  }
 }
