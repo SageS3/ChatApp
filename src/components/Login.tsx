@@ -31,6 +31,7 @@ const Login: React.FunctionComponent = () => {
   return ( 
     <>  
       <form onSubmit={(event) => submitLoginHandler(event)}>  
+      {loginError && <p>{loginError}</p> }
         <input
           autoFocus
           required
@@ -51,7 +52,7 @@ const Login: React.FunctionComponent = () => {
         <button type='submit'>Login</button> 
         <h4>forgot password?</h4>
       </form>
-      <p>{loginError}</p> 
+     
     </>
   )
 }
