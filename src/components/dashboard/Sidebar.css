@@ -5,24 +5,24 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  -webkit-animation: slide-in 300ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
-          animation: slide-in 300ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
+  -webkit-animation: slide-in 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
+          animation: slide-in 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
 }
 .sidebar-wrapper button {
   height: 40px;
   width: 70%;
   margin-bottom: 20px;
-  background-color: rgb(255, 6, 200);
+  background-color: rgb(55, 47, 73);
   outline: none;
   border: none;
   color: white;
   font-weight: 600;
   font-size: 1.3rem;
   cursor: pointer;
-  transition: font-size 200ms ease-out;
+  transition: border 400ms ease-in;
 }
 .sidebar-wrapper button:hover {
-  font-size: 1.4rem;
+  border: 2px solid rgb(120, 120, 120);
 }
 .sidebar-wrapper .image-container {
   width: 120px;
@@ -51,7 +51,7 @@
   border: 2px solid rgb(120, 120, 120);
 }
 
-@media screen and (max-width: 1190px) {
+@media screen and (max-width: 1000px) {
   .sidebar-wrapper {
     display: none;
   }

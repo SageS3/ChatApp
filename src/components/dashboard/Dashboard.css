@@ -4,7 +4,7 @@
   display: grid;
   grid-gap: 4px;
   background-color: rgb(55, 47, 73);
-  grid-template-columns: 0.5fr 2fr;
+  grid-template-columns: 280px 2fr;
   grid-template-rows: 0.4fr 4fr 1fr;
   grid-template-areas: "sidebar navbar" "sidebar main" "sidebar input";
 }
@@ -45,7 +45,7 @@
   padding: 20px;
 }
 .user-dashboard .user-input input {
-  width: 50%;
+  width: 600px;
   height: 30px;
   background-color: rgb(55, 47, 73);
   border-radius: 12px;
@@ -56,7 +56,7 @@
   color: white;
 }
 
-@media screen and (max-width: 1190px) {
+@media screen and (max-width: 1000px) {
   .user-dashboard {
     height: 100%;
     width: 100%;
@@ -66,5 +66,9 @@
     grid-template-columns: 1fr;
     grid-template-rows: 0.4fr 4fr 1fr;
     grid-template-areas: "navbar" "main" "input";
+  }
+  .user-dashboard .user-input input {
+    width: 70%;
+    min-width: 250px;
   }
 }/*# sourceMappingURL=Dashboard.css.map */

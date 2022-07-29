@@ -5,23 +5,22 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column; 
-  animation: slide-in 300ms cubic-bezier(.89,0,.1,.99) forwards; 
-  
+  animation: slide-in 450ms cubic-bezier(.89,0,.1,.99) forwards; 
   
   button { 
     height: 40px; 
     width: 70%; 
     margin-bottom: 20px; 
-    background-color:rgba(255,6,200);
+    background-color:rgb(55,47,73);
     outline: none; 
     border: none;
     color: white; 
     font-weight: 600;
     font-size: 1.3rem;
     cursor: pointer;  
-    transition: font-size 200ms ease-out;
-    &:hover{ 
-      font-size:1.4rem;
+    transition: border 400ms ease-in;
+    &:hover { 
+      border: 2px solid rgb(120,120,120);
     }
   } 
 
@@ -55,7 +54,7 @@
   } 
 } 
 
-@media screen and (max-width: 1190px) {
+@media screen and (max-width: 1000px) {
   .sidebar-wrapper{ 
     display: none;
   }

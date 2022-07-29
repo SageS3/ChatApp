@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar' 
+import Sidebar from '../dashboard/Sidebar'
 import './Dashboard.css'
 import {signOut, getAuth} from 'firebase/auth'
 
@@ -16,7 +16,15 @@ function Dashboard({userData}:DashboardProps) {
     .catch(error => {  
       console.log(error)
     })
-  }
+  } 
+
+  const tabletNavbar = () => ( 
+    <div className='tablet-nav'> 
+      <button>Profile</button>
+      <button>Chats</button>
+      <button>Settings</button>
+    </div>
+  )
 
   return (
     <div className='user-dashboard'> 
