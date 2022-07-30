@@ -57,7 +57,28 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    position: relative;
+    -webkit-animation: slide-left 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
+            animation: slide-left 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
+  }
+  @-webkit-keyframes slide-left {
+    0% {
+      position: relative;
+      right: -100%;
+    }
+    100% {
+      position: relative;
+      right: 0;
+    }
+  }
+  @keyframes slide-left {
+    0% {
+      position: relative;
+      right: -100%;
+    }
+    100% {
+      position: relative;
+      right: 0;
+    }
   }
   .user-dashboard nav button {
     cursor: pointer;

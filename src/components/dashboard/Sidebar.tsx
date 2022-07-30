@@ -6,7 +6,7 @@ type SidebarProps = {
   userData: {[key: string]: any}
 } 
 
-const handleSignOut = () => {  
+const handleLogOut = () => {  
   const auth = getAuth()
   signOut(auth) 
   .then(() => { 
@@ -25,7 +25,7 @@ function Sidebar({userData}:SidebarProps) {
       <button>Chats</button>
       <button>Profile</button>
       <button>Settings</button>
-      <button onClick={handleSignOut}>Logout</button>
+      <button onClick={handleLogOut}>Logout</button>
     </div>
   )
 }

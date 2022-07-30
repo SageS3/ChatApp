@@ -8,6 +8,26 @@
   -webkit-animation: slide-in 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
           animation: slide-in 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
 }
+@-webkit-keyframes slide-in {
+  0% {
+    position: relative;
+    top: -100%;
+  }
+  100% {
+    position: relative;
+    top: 0;
+  }
+}
+@keyframes slide-in {
+  0% {
+    position: relative;
+    top: -100%;
+  }
+  100% {
+    position: relative;
+    top: 0;
+  }
+}
 .sidebar-wrapper button {
   height: 40px;
   width: 70%;
@@ -54,25 +74,5 @@
 @media screen and (max-width: 1000px) {
   .sidebar-wrapper {
     display: none;
-  }
-}
-@-webkit-keyframes slide-in {
-  0% {
-    position: relative;
-    top: -100%;
-  }
-  100% {
-    position: relative;
-    top: 0;
-  }
-}
-@keyframes slide-in {
-  0% {
-    position: relative;
-    top: -100%;
-  }
-  100% {
-    position: relative;
-    top: 0;
   }
 }/*# sourceMappingURL=Sidebar.css.map */

@@ -67,8 +67,20 @@
       display: flex; 
       align-items: center; 
       justify-content: flex-end;
-      position: relative;
-  
+      animation: slide-left 450ms cubic-bezier(.89,0,.1,.99) forwards;
+
+      @keyframes slide-left {
+        0% {  
+          position: relative; 
+          right: -100%;
+        } 
+      
+        100% { 
+          position: relative; 
+          right: 0;
+        }
+      }
+      
       button { 
         cursor: pointer; 
         width: 5rem;

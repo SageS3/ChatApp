@@ -8,7 +8,7 @@ type DashboardProps = {
 function Dashboard({userData}:DashboardProps) { 
   const auth = getAuth() 
 
-  const handleSignOut = () => { 
+  const handleLogOut = () => { 
     signOut(auth) 
     .then(() => { 
       console.log('user is signed out')
@@ -16,12 +16,12 @@ function Dashboard({userData}:DashboardProps) {
     .catch(error => {  
       console.log(error)
     })
-  } 
+  }  
 
   return (
     <div className='user-dashboard'> 
       <nav> 
-        <button type='button' onClick={handleSignOut}>Logout</button>
+        <button type='button' onClick={handleLogOut}>Logout</button>
       </nav>
       <Sidebar userData={userData}></Sidebar> 
       <main> 
