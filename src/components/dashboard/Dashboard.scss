@@ -6,35 +6,11 @@
   background-color: rgb(55,47,73); 
   grid-template-columns:280px 2fr; 
   grid-template-rows: 0.4fr 4fr 1fr; 
-  grid-template-areas: 'sidebar navbar'
+  grid-template-areas: 'sidebar main'
                        'sidebar main'
                        'sidebar input'; 
-                       
-  nav { 
-    grid-area: navbar;
-    background-color: rgb(33,30,41); 
-    color: white; 
-    display: flex; 
-    align-items: center; 
-    justify-content: flex-end;
-
-    button { 
-      cursor: pointer; 
-      width: 5rem;
-      padding: 10px; 
-      border: 2px solid rgb(255,6,200); 
-      background-color: rgb(33,30,41);  
-      border-radius: 12px;
-      color: white; 
-      font-weight: 700; 
-      margin-right: 20px; 
-      transition: all 400ms ease-in-out;
-
-      &:hover { 
-        background-color:rgb(255,6,200); 
-        color: rgb(33,30,41);
-      }
-    }  
+  nav{ 
+    display: none;
   } 
 
   main { 
@@ -46,9 +22,9 @@
     grid-area: input;
     background-color: rgb(33,30,41); 
     display:flex; 
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start; 
-    padding: 20px;
+    padding: 10px;
 
     input { 
       width:600px; 
@@ -76,12 +52,40 @@
     grid-template-areas: 'navbar'
                          'main'
                          'input'; 
-
+                         
     .user-input{ 
       input{ 
         width: 70%; 
         min-width: 250px;
       }
     } 
+
+    nav { 
+      grid-area: navbar;
+      background-color: rgb(33,30,41); 
+      color: white; 
+      display: flex; 
+      align-items: center; 
+      justify-content: flex-end;
+      position: relative;
+  
+      button { 
+        cursor: pointer; 
+        width: 5rem;
+        padding: 10px; 
+        border: 2px solid rgb(255,6,200); 
+        background-color: rgb(33,30,41);  
+        border-radius: 12px;
+        color: white; 
+        font-weight: 700; 
+        margin-right: 20px; 
+        transition: all 400ms ease-in-out;
+  
+        &:hover { 
+          background-color:rgb(255,6,200); 
+          color: rgb(33,30,41);
+        }
+      }  
+    }
   }  
 }
