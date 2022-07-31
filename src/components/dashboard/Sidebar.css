@@ -53,22 +53,9 @@
   background-image: linear-gradient(rgb(255, 6, 200), rgb(55, 47, 73));
   position: relative;
 }
-.sidebar-wrapper .image-container button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 100px;
-  background-color: rgb(55, 47, 73);
-  bottom: -3px;
-  right: 1px;
-  border: 4px solid rgb(55, 47, 73);
-  transition: border 400ms ease-in;
-}
-.sidebar-wrapper .image-container button:hover {
-  border: 2px solid rgb(120, 120, 120);
+.sidebar-wrapper p {
+  margin-bottom: 50px;
+  margin-top: 0;
 }
 
 @media screen and (max-width: 1000px) {

@@ -1,12 +1,15 @@
+import {useState} from 'react'
 import Sidebar from '../dashboard/Sidebar'
 import './Dashboard.css'
 import {signOut, getAuth} from 'firebase/auth'
+import Profile from '../Profile'
 
 type DashboardProps = { 
   userData: {[key: string]: any}, 
 }
 function Dashboard({userData}:DashboardProps) { 
-  const auth = getAuth() 
+  const [profile, setProfile] = useState<boolean>(false)
+  const auth = getAuth()  
 
   const handleLogOut = () => { 
     signOut(auth) 
@@ -16,20 +19,29 @@ function Dashboard({userData}:DashboardProps) {
     .catch(error => {  
       console.log(error)
     })
-  }  
+  }   
+
+  const userInput = () => ( 
+      <div className='user-input'> 
+        <input></input>
+      </div>
+  )
 
   return (
     <div className='user-dashboard'> 
       <nav> 
         <button type='button' onClick={handleLogOut}>Logout</button>
       </nav>
-      <Sidebar userData={userData}></Sidebar> 
+      <Sidebar 
+        userData={userData} 
+        setProfile={setProfile}
+      ></Sidebar> 
       <main> 
-        <div></div>
-      </main> 
-      <div className='user-input'> 
-        <input></input>
-      </div>
+        {profile && <Profile/>}
+      </main>  
+      {profile === false && 
+        userInput()
+      }
     </div>
   )
 }

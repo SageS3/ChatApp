@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import Register from './Register'
+import Register from '../entrypage/Register'
 import Login from './Login' 
 import './EntryPage.css'   
 import {animated, useSpring} from '@react-spring/web'

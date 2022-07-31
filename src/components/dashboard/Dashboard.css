@@ -5,8 +5,8 @@
   grid-gap: 4px;
   background-color: rgb(55, 47, 73);
   grid-template-columns: 280px 2fr;
-  grid-template-rows: 0.4fr 4fr 1fr;
-  grid-template-areas: "sidebar main" "sidebar main" "sidebar input";
+  grid-template-rows: 4fr 1fr;
+  grid-template-areas: "sidebar main" "sidebar input";
 }
 .user-dashboard nav {
   display: none;
