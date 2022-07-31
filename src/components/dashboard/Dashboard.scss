@@ -6,9 +6,9 @@
   background-color: rgb(55,47,73); 
   grid-template-columns:280px 2fr; 
   grid-template-rows: 4fr 1fr; 
-  grid-template-areas: 
-                       'sidebar main'
-                       'sidebar input'; 
+  grid-template-areas: 'sidebar main'
+                       'sidebar main'; 
+
   nav{ 
     display: none;
   } 

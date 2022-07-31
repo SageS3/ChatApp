@@ -3,12 +3,13 @@ import Sidebar from '../dashboard/Sidebar'
 import './Dashboard.css'
 import {signOut, getAuth} from 'firebase/auth'
 import Profile from '../Profile'
+import Threads from '../Threads'
 
 type DashboardProps = { 
   userData: {[key: string]: any}, 
 }
 function Dashboard({userData}:DashboardProps) { 
-  const [profile, setProfile] = useState<boolean>(false)
+  const [dashboard, setDashboard] = useState<string>('chats')
   const auth = getAuth()  
 
   const handleLogOut = () => { 
@@ -21,12 +22,6 @@ function Dashboard({userData}:DashboardProps) {
     })
   }   
 
-  const userInput = () => ( 
-      <div className='user-input'> 
-        <input></input>
-      </div>
-  )
-
   return (
     <div className='user-dashboard'> 
       <nav> 
@@ -34,14 +29,12 @@ function Dashboard({userData}:DashboardProps) {
       </nav>
       <Sidebar 
         userData={userData} 
-        setProfile={setProfile}
+        setDashboard={setDashboard}
       ></Sidebar> 
       <main> 
-        {profile && <Profile/>}
+        {dashboard === 'profile' && <Profile/>} 
+        {dashboard === 'chats' && <Threads/>}
       </main>  
-      {profile === false && 
-        userInput()
-      }
     </div>
   )
 }

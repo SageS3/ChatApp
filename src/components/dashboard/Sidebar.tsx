@@ -3,10 +3,10 @@ import {signOut, getAuth} from 'firebase/auth'
 
 type SidebarProps = { 
   userData: {[key: string]: any}, 
-  setProfile: (profile: boolean) => void
+  setDashboard: (profile: string) => void
 } 
 
-function Sidebar({userData, setProfile}:SidebarProps) { 
+function Sidebar({userData, setDashboard}:SidebarProps) { 
   const handleLogOut = () => {  
     const auth = getAuth()
     signOut(auth) 
@@ -22,8 +22,8 @@ function Sidebar({userData, setProfile}:SidebarProps) {
     <div className='sidebar-wrapper'> 
       <div className='image-container'></div> 
       <p>{userEmail}</p>
-      <button>Chats</button>
-      <button onClick={() => setProfile(true)}>Profile</button>
+      <button onClick={() => setDashboard('chats')}>Chats</button>
+      <button onClick={() => setDashboard('profile')}>Profile</button>
       <button>Settings</button>
       <button onClick={handleLogOut}>Logout</button>
     </div>
