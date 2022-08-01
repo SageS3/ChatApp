@@ -1,9 +1,15 @@
 .threads-wrapper { 
-  padding: 60px;  
+  padding: 30px;  
   display: flex; 
   flex-direction: column;
-  align-items: center; 
-  justify-content: flex-start; 
+  align-items: flex-start; 
+  justify-content: flex-start;  
+
+  .chats-container { 
+    width: 100%; 
+    height: 590px; 
+    overflow-y: scroll;
+  }
 
   .chat-container { 
     width: 100%; 
@@ -13,26 +19,62 @@
     flex-direction: row;  
     align-items: center; 
     justify-content:left;
-    padding: 20px; 
+    padding: 10px; 
     border: 1px solid rgb(120,120,120); 
     margin-bottom: 10px;  
+    
+    &:hover{ 
+      background-color: rgb(50,42,68);
+    }
+
     h3{ 
       padding-right: 30px; 
-      color: rgb(255,6,200)
+      color: rgb(255,6,200); 
+      cursor:default;
+    }  
+
+    p{ 
+      cursor: default; 
+      color:  rgb(200,200,200);
+    }
+
+    .edit-chat-button{ 
+      display: flex;
+      flex-direction: column; 
+      align-items: center;
+      justify-content: center;
+      width: 20px; 
+      height: 40px; 
+      margin-right: 20px; 
+      cursor: pointer;
+     
+      span { 
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        background-color: rgb(33,30,41); 
+        margin: 2px; 
+        transition: background-color 300ms ease-in-out;
+      } 
+
+      &:hover{ 
+        span{ 
+          background-color: white;
+        }
+      }
     }
   } 
 
   .input-wrapper { 
-    width: 700px; 
+    width: 90%; 
     height: 100px; 
     border: 1px solid rgb(120,120,120); 
     border-radius: 12px; 
     display: flex; 
     justify-content: flex-start;
     align-items: center; 
-    padding: 0 20px 0 20px; 
-    position: absolute; 
-    bottom:10%; 
+    padding: 0 20px 0 20px;  
+    margin-top: 20px;
 
     input { 
       width: 100%; 
@@ -40,7 +82,7 @@
       background-color: rgb(55,47,73);
       border: none; 
       outline: none; 
-      font-size: 1.2rem; 
+      font-size: 1.1rem; 
       color: white;
     }
   }
