@@ -5,8 +5,8 @@ const Threads = () => {
   const threads = [
      {user:'Programmer', message: 'Hello World'}, 
      {user:'Alice', message: 'woof woof woof, woof. WOOF! woof woof- woof.'}, 
-     {user: 'Google', message: 'Congrats! you are hired'}, 
-     {user: 'Google', message: 'Congrats! you are hired'}, 
+     {user:'Google', message: 'Congrats! you are hired'}, 
+     {user:'Google', message: 'Congrats! you are hired'}, 
     //  {user: 'Google', message: 'Congrats! you are hired'},
     //  {user: 'Google', message: 'Congrats! you are hired'},
     //  {user: 'Google', message: 'Congrats! you are hired'},

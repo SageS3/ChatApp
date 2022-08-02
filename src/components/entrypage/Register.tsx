@@ -22,7 +22,8 @@ export default function Register(props: registerProps){
     createUserWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => { 
       props.setForm('login')
-      const user = userCredential.user  
+      const user = userCredential.user
+      console.log(user)
     }) 
     .catch((error) =>{  
       const errorMessage = error.message  

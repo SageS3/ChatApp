@@ -32,7 +32,7 @@ function Dashboard({userData}:DashboardProps) {
         setDashboard={setDashboard}
       ></Sidebar> 
       <main> 
-        {dashboard === 'profile' && <Profile/>} 
+        {dashboard === 'profile' && <Profile userData={userData}/>} 
         {dashboard === 'chats' && <Threads/>}
       </main>  
     </div>
