@@ -5,10 +5,7 @@ import {signOut, getAuth} from 'firebase/auth'
 import Profile from '../Profile'
 import Threads from '../Threads'
 
-type DashboardProps = { 
-  userData: {[key: string]: any}, 
-}
-function Dashboard({userData}:DashboardProps) { 
+function Dashboard() { 
   const [dashboard, setDashboard] = useState<string>('chats')
   const auth = getAuth()  
 
@@ -28,11 +25,10 @@ function Dashboard({userData}:DashboardProps) {
         <button type='button' onClick={handleLogOut}>Logout</button>
       </nav>
       <Sidebar 
-        userData={userData} 
         setDashboard={setDashboard}
       ></Sidebar> 
       <main> 
-        {dashboard === 'profile' && <Profile userData={userData}/>} 
+        {dashboard === 'profile' && <Profile/>} 
         {dashboard === 'chats' && <Threads/>}
       </main>  
     </div>

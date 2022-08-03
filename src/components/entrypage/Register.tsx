@@ -18,12 +18,11 @@ export default function Register(props: registerProps){
     
     if(registerError !== '') setRegisterError('') 
     if(password !== confirmPassword) setRegisterError('Password does not match')
-    
+
     createUserWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => { 
       props.setForm('login')
-      const user = userCredential.user
-      console.log(user)
+      const user = userCredential.user 
     }) 
     .catch((error) =>{  
       const errorMessage = error.message  
@@ -47,7 +46,7 @@ export default function Register(props: registerProps){
 
   return ( 
     <>    
-      <form onSubmit={(event) => submitSignUpHandler(event)}> 
+      <form className='entry-page-form' onSubmit={(event) => submitSignUpHandler(event)}> 
         <input
           autoFocus
           required

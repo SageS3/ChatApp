@@ -1,14 +1,13 @@
 import './Sidebar.css'
 import {signOut, getAuth} from 'firebase/auth'
 
-type SidebarProps = { 
-  userData: {[key: string]: any}, 
+type SidebarProps = {
   setDashboard: (profile: string) => void
 } 
 
-function Sidebar({userData, setDashboard}:SidebarProps) { 
+function Sidebar({setDashboard}:SidebarProps) { 
+  const auth = getAuth()
   const handleLogOut = () => {  
-    const auth = getAuth()
     signOut(auth) 
     .then(() => { 
       console.log('user is signed out')
@@ -17,11 +16,11 @@ function Sidebar({userData, setDashboard}:SidebarProps) {
       console.log(error)
     })
   } 
-  const userEmail = userData.email
+  const userName = auth.currentUser?.displayName
   return (
     <div className='sidebar-wrapper'> 
       <div className='image-container'></div> 
-      <p>{userEmail}</p>
+      <p>{userName}</p>
       <button onClick={() => setDashboard('chats')}>Chats</button>
       <button onClick={() => setDashboard('profile')}>Profile</button>
       <button>Settings</button>

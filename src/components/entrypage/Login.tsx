@@ -19,6 +19,7 @@ const Login: React.FunctionComponent = () => {
     .then((userCredential) => {  
       navigate('/dashboard')
       const user = userCredential.user;
+      //
       console.log(user)
     })
     .catch((error) => {
@@ -30,7 +31,7 @@ const Login: React.FunctionComponent = () => {
   
   return ( 
     <>  
-      <form onSubmit={(event) => submitLoginHandler(event)}>  
+      <form className='entry-page-form' onSubmit={(event) => submitLoginHandler(event)}>  
       {loginError && <p>{loginError}</p> }
         <input
           autoFocus

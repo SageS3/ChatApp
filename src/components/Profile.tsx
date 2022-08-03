@@ -1,21 +1,26 @@
 import React, {useState} from 'react' 
 import './Profile.css'
-import {getAuth, updateProfile} from 'firebase/auth'
+import {getAuth, updateProfile, onAuthStateChanged} from 'firebase/auth'
 
 const Profile: React.FunctionComponent = () => {  
-  const [userName, setUserName] = useState<string>('userName')
-  const auth = getAuth() 
+  const [userName, setUserName] = useState<string>('')
+  
   
   const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {  
     e.preventDefault()  
-    
-    // updateProfile(auth, {
-    //   displayName: userName
-    // }).then(() => {
-    //   console.log('profile updated')
-    // }).catch((error) => {
-    //   console.log(error)
-    // });
+
+    const auth = getAuth()  
+    const user = auth.currentUser 
+
+    if(user){ 
+      updateProfile(user, {displayName: userName})
+      .then(() => { 
+        console.log('profile updated')
+      }) 
+      .catch((error) => { 
+        console.log(error)
+      })
+    }
   }
  
   return (
@@ -27,7 +32,8 @@ const Profile: React.FunctionComponent = () => {
           type='text' 
           value={userName} 
           onChange={(e) => setUserName(e.target.value)}
-        ></input>
+        ></input> 
+        <button type='submit'>Save</button>
       </div>
     </form>
   )

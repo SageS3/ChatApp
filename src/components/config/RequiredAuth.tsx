@@ -4,10 +4,9 @@ import {getAuth, onAuthStateChanged, updateProfile} from 'firebase/auth'
 
 type RequiredAuthProps = { 
   children: React.ReactNode,
-  setUserData: (a:Object) => void
 }
 
-function RequiredAuth({children, setUserData}:RequiredAuthProps) {   
+function RequiredAuth({children}:RequiredAuthProps) {   
   const [authenticated, setAuthenticated] = useState(false)
   const auth = getAuth()   
   const navigate = useNavigate()
@@ -16,11 +15,15 @@ function RequiredAuth({children, setUserData}:RequiredAuthProps) {
     authCheck() 
     return () => authCheck() // componentWillUnmount
   }, [auth])
-
+  
   const authCheck = () => { 
     onAuthStateChanged(auth, (user) => {
       if(user){
-        setUserData(user) 
+        updateProfile(user, {displayName: 'username' }).then(() => { 
+          console.log('userName')
+        }).catch((error) =>{ 
+          console.log(error)
+        })
         setAuthenticated(true) 
       } else {
         console.log('unauthorized')  

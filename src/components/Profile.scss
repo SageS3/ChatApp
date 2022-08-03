@@ -15,7 +15,7 @@
   .displayname-container {  
     width: 90%;
     padding: 20px; 
-    border: 1px solid white; 
+    border: 1px solid rgb(120,120,120); 
     margin-top: 20px;
     display: flex; 
     flex-direction: row;
@@ -23,7 +23,7 @@
     justify-content: space-around; 
 
     h3{ 
-      color: white;
+      color: white; 
     } 
 
     input { 
@@ -32,7 +32,7 @@
       width: 200px; 
       font-size: 1.2rem; 
       border: none;
-      border-bottom: 2px solid white;
+      border-bottom: 2px solid rgb(120,120,120);
       color: white;
     }
   }
