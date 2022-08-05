@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'  
 import {useNavigate} from 'react-router-dom';  
-import {getAuth, onAuthStateChanged, updateProfile} from 'firebase/auth'
+import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
 type RequiredAuthProps = { 
   children: React.ReactNode,
@@ -19,11 +19,11 @@ function RequiredAuth({children}:RequiredAuthProps) {
   const authCheck = () => { 
     onAuthStateChanged(auth, (user) => {
       if(user){
-        updateProfile(user, {displayName: 'username' }).then(() => { 
-          console.log('userName')
-        }).catch((error) =>{ 
-          console.log(error)
-        })
+        // updateProfile(user, {displayName: 'username' }).then(() => { 
+        //   console.log('userName')
+        // }).catch((error) =>{ 
+        //   console.log(error)
+        // })
         setAuthenticated(true) 
       } else {
         console.log('unauthorized')  

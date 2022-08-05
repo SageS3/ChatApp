@@ -15,8 +15,10 @@ function Sidebar({setDashboard}:SidebarProps) {
     .catch(error => {  
       console.log(error)
     })
-  } 
+  }     
+
   const userName = auth.currentUser?.displayName
+  
   return (
     <div className='sidebar-wrapper'> 
       <div className='image-container'></div> 
@@ -30,8 +32,3 @@ function Sidebar({setDashboard}:SidebarProps) {
 }
 
 export default Sidebar 
-
-// If Profile or Settings is selected, 
-//the grid will change removing the input portion
-
-// If Chats is selected, the grid will include input

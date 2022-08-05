@@ -22,7 +22,10 @@ function Dashboard() {
   return (
     <div className='user-dashboard'> 
       <nav> 
-        <button type='button' onClick={handleLogOut}>Logout</button>
+        <button onClick={() => setDashboard('chats')}>Chats</button>
+        <button onClick={() => setDashboard('profile')}>Profile</button>
+        <button>Settings</button>
+        <button onClick={handleLogOut}>Logout</button> 
       </nav>
       <Sidebar 
         setDashboard={setDashboard}
