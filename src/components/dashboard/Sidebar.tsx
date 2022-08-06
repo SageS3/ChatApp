@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import './Sidebar.css'
 import {signOut, getAuth} from 'firebase/auth'
 
@@ -15,14 +16,12 @@ function Sidebar({setDashboard}:SidebarProps) {
     .catch(error => {  
       console.log(error)
     })
-  }     
-
+  }    
   const userName = auth.currentUser?.displayName
-  
   return (
     <div className='sidebar-wrapper'> 
       <div className='image-container'></div> 
-      <p>{userName}</p>
+      {<p>{userName}</p>}
       <button onClick={() => setDashboard('chats')}>Chats</button>
       <button onClick={() => setDashboard('profile')}>Profile</button>
       <button>Settings</button>

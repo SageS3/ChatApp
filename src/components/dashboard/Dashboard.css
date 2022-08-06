@@ -80,7 +80,7 @@
       right: 0;
     }
   }
-  .user-dashboard nav button {
+  .user-dashboard nav button:last-of-type {
     cursor: pointer;
     width: 5rem;
     padding: 10px;
@@ -92,8 +92,23 @@
     margin-right: 20px;
     transition: all 400ms ease-in-out;
   }
-  .user-dashboard nav button:hover {
+  .user-dashboard nav button:last-of-type:hover {
     background-color: rgb(255, 6, 200);
     color: rgb(33, 30, 41);
+  }
+  .user-dashboard nav button {
+    width: 5rem;
+    padding: 10px;
+    background-color: rgb(55, 47, 73);
+    color: white;
+    border: none;
+    outline: none;
+    margin: 0 10px 0 10px;
+    transition: border 400ms ease-in;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .user-dashboard nav button:hover {
+    border: 2px solid rgb(120, 120, 120);
   }
 }/*# sourceMappingURL=Dashboard.css.map */

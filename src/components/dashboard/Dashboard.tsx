@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Sidebar from '../dashboard/Sidebar'
 import './Dashboard.css'
 import {signOut, getAuth} from 'firebase/auth'
@@ -7,7 +7,8 @@ import Threads from '../Threads'
 
 function Dashboard() { 
   const [dashboard, setDashboard] = useState<string>('chats')
-  const auth = getAuth()  
+  const [userName, setUserName] = useState<string | null>('')
+  const auth = getAuth()   
 
   const handleLogOut = () => { 
     signOut(auth) 
@@ -17,7 +18,7 @@ function Dashboard() {
     .catch(error => {  
       console.log(error)
     })
-  }   
+  }    
 
   return (
     <div className='user-dashboard'> 

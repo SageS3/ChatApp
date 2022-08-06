@@ -5,8 +5,8 @@ import {getAuth, updateProfile} from 'firebase/auth'
 const Profile: React.FunctionComponent = () => {  
   const [userName, setUserName] = useState<string>('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  
+  const [password, setPassword] = useState('') 
+
   const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {  
     e.preventDefault()  
     const auth = getAuth()  
@@ -20,8 +20,7 @@ const Profile: React.FunctionComponent = () => {
         console.error(error)
       })
     }
-  } 
- 
+  }   
   return (
     <form onSubmit={(e) => updateUserProfile(e)} className='profile-wrapper' >
       <div className='profile-photo'/> 
@@ -55,3 +54,7 @@ const Profile: React.FunctionComponent = () => {
 } 
 
 export default Profile
+
+
+// Each input must display the value without clearing 
+// update all instances of userName being displayed in the app

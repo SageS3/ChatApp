@@ -19,11 +19,6 @@ function RequiredAuth({children}:RequiredAuthProps) {
   const authCheck = () => { 
     onAuthStateChanged(auth, (user) => {
       if(user){
-        // updateProfile(user, {displayName: 'username' }).then(() => { 
-        //   console.log('userName')
-        // }).catch((error) =>{ 
-        //   console.log(error)
-        // })
         setAuthenticated(true) 
       } else {
         console.log('unauthorized')  
