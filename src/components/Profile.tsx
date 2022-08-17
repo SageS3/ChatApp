@@ -1,31 +1,24 @@
-import React, {useState, useEffect} from 'react' 
+import React, {useEffect} from 'react' 
 import './Profile.css'
-import {getAuth, updateProfile} from 'firebase/auth'
 
-const Profile: React.FunctionComponent = () => {  
-  const [userName, setUserName] = useState<string>('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('') 
+type ProfileProps = { 
+  userName: any, 
+  userEmail: string,
+  setUserEmail: (a: string | null) => void,
+  setUserName: (a: string | null) => void, 
+  updateUser: (e: React.FormEvent<HTMLFormElement>) => void,  
+  isUpdating: boolean
+}
 
-  const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {  
-    e.preventDefault()  
-    const auth = getAuth()  
-    const user = auth.currentUser 
-    if(user){ 
-      updateProfile(user, {displayName: userName})
-      .then(() => { 
-        console.log('profile updated')
-      }) 
-      .catch((error) => { 
-        console.error(error)
-      })
-    }
-  }   
+const Profile = (props:ProfileProps) => {  
+  const { userName, userEmail, setUserName, 
+        setUserEmail, updateUser, isUpdating } = props 
   return (
-    <form onSubmit={(e) => updateUserProfile(e)} className='profile-wrapper' >
-      <div className='profile-photo'/> 
+    <form onSubmit={(e) => updateUser(e)} className='profile-wrapper' >
+      <div className='profile-photo'/>  
+      <button type='button'>Edit</button>
       <div className='profile-info-container'>
-        <h3>Display Name</h3>  
+        <h3>Username</h3>  
         <input 
           type='text' 
           value={userName} 
@@ -36,25 +29,25 @@ const Profile: React.FunctionComponent = () => {
         <h3>Email</h3>  
         <input 
           type='email' 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)}
+          value={userEmail}
+         
+          onChange={(e) => setUserEmail(e.target.value)}
         ></input> 
       </div>
-      <div className='profile-info-container'>
+      {/* <div className='profile-info-container'>
         <h3>Password</h3>  
         <input 
           type='password' 
           value={password} 
           onChange={(e) => setPassword(e.target.value)}
         ></input> 
-      </div>
-      <button type='submit'>Save</button>
+      </div> */} 
+      { 
+        isUpdating ? <p>loading...</p> : <button type='submit'>Save</button>
+      }
     </form>
   )
 } 
 
-export default Profile
+export default Profile 
 
-
-// Each input must display the value without clearing 
-// update all instances of userName being displayed in the app
