@@ -1,27 +1,27 @@
-import {useEffect} from 'react'
 import './Sidebar.css'
 import {signOut, getAuth} from 'firebase/auth'
 
 type SidebarProps = {
-  setDashboard: (profile: string) => void
+  setDashboard: (profile: string) => void,
 } 
 
-function Sidebar({setDashboard}:SidebarProps) { 
+const Sidebar: React.FC<SidebarProps> = ({setDashboard}:SidebarProps) => { 
   const auth = getAuth()
-  const handleLogOut = () => {  
-    signOut(auth) 
-    .then(() => { 
+  let userDisplayName = auth.currentUser?.displayName
+  const handleLogOut = () => {
+    signOut(auth)
+    .then(() => {
       console.log('user is signed out')
-    }) 
-    .catch(error => {  
+    })
+    .catch(error => {
       console.log(error)
     })
-  }    
-  const userName = auth.currentUser?.displayName
+  }
+
   return (
-    <div className='sidebar-wrapper'> 
-      <div className='image-container'></div> 
-      {<p>{userName}</p>}
+    <div className='sidebar-wrapper'>
+      <div className='image-container'></div>
+      {<p>{userDisplayName}</p>}
       <button onClick={() => setDashboard('chats')}>Chats</button>
       <button onClick={() => setDashboard('profile')}>Profile</button>
       <button>Settings</button>
@@ -30,4 +30,10 @@ function Sidebar({setDashboard}:SidebarProps) {
   )
 }
 
-export default Sidebar 
+export default Sidebar  
+
+
+// userName prop updates the username in realtime 
+// user.displayName updates username after a rerender 
+
+// how do I make the component update after there is a change ?

@@ -7,7 +7,7 @@
   grid-template-columns:280px 2fr; 
   grid-template-rows: 4fr 1fr; 
   grid-template-areas: 'sidebar main'
-                       'sidebar main'; 
+                       'sidebar main';  
 
   nav{ 
     display: none;
@@ -16,7 +16,7 @@
   main { 
     grid-area: main;
     background-color: rgb(33,30,41); 
-  } 
+  }  
 
   .user-input { 
     grid-area: input;
@@ -81,25 +81,6 @@
         }
       }
 
-      
-      button:last-of-type { 
-        cursor: pointer; 
-        width: 5rem;
-        padding: 10px; 
-        border: 2px solid rgb(255,6,200); 
-        background-color: rgb(33,30,41);  
-        border-radius: 12px;
-        color: white; 
-        font-weight: 700; 
-        margin-right: 20px; 
-        transition: all 400ms ease-in-out;
-  
-        &:hover { 
-          background-color:rgb(255,6,200); 
-          color: rgb(33,30,41);
-        }
-      }  
-      
       button { 
         width: 5rem;
         padding: 10px;  
@@ -115,6 +96,23 @@
           border: 2px solid rgb(120,120,120);
         }
       }
+
+      .logout-nav-button { 
+        cursor: pointer; 
+        width: 5rem;
+        padding: 10px; 
+        border: 2px solid rgb(255,6,200); 
+        background-color: rgb(33,30,41);  
+        border-radius: 12px;
+        color: white; 
+        font-weight: 700; 
+        margin-right: 20px; 
+        transition: all 400ms ease-in-out;
+        &:hover { 
+          background-color:rgb(255,6,200); 
+          color: rgb(33,30,41);
+        }
+      }  
     }
   }  
 }

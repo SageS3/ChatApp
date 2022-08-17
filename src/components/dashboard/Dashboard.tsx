@@ -69,17 +69,16 @@ function Dashboard() {
       </nav>
       <Sidebar  
         setDashboard={setDashboard} 
-        userName={userName}
       ></Sidebar> 
       <main>  
         {dashboard === 'profile' && 
         <Profile 
-        userName={userName} 
-        userEmail={userEmail}
-        setUserName={setUserName}
-        updateUser={updateUserProfile}  
-        setUserEmail={setUserEmail}
-        isUpdating={updating}
+          userName={userName} 
+          userEmail={userEmail}
+          setUserName={setUserName}
+          updateUser={updateUserProfile}  
+          setUserEmail={setUserEmail}
+          isUpdating={updating}
         />} 
         {dashboard === 'chats' && <Threads/>}
       </main>  

@@ -80,22 +80,6 @@
       right: 0;
     }
   }
-  .user-dashboard nav button:last-of-type {
-    cursor: pointer;
-    width: 5rem;
-    padding: 10px;
-    border: 2px solid rgb(255, 6, 200);
-    background-color: rgb(33, 30, 41);
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    margin-right: 20px;
-    transition: all 400ms ease-in-out;
-  }
-  .user-dashboard nav button:last-of-type:hover {
-    background-color: rgb(255, 6, 200);
-    color: rgb(33, 30, 41);
-  }
   .user-dashboard nav button {
     width: 5rem;
     padding: 10px;
@@ -110,5 +94,21 @@
   }
   .user-dashboard nav button:hover {
     border: 2px solid rgb(120, 120, 120);
+  }
+  .user-dashboard nav .logout-nav-button {
+    cursor: pointer;
+    width: 5rem;
+    padding: 10px;
+    border: 2px solid rgb(255, 6, 200);
+    background-color: rgb(33, 30, 41);
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    margin-right: 20px;
+    transition: all 400ms ease-in-out;
+  }
+  .user-dashboard nav .logout-nav-button:hover {
+    background-color: rgb(255, 6, 200);
+    color: rgb(33, 30, 41);
   }
 }/*# sourceMappingURL=Dashboard.css.map */

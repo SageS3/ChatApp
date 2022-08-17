@@ -16,7 +16,7 @@ function App() {
             <Route path='/dashboard' 
             element={
             <RequiredAuth>
-              <Dashboard />
+              <Dashboard/>
             </RequiredAuth> 
             }/>
           </Routes>
