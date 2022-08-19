@@ -7,16 +7,17 @@ type ProfileProps = {
   setUserEmail: (a: string | null) => void,
   setUserName: (a: string | null) => void, 
   updateUser: (e: React.FormEvent<HTMLFormElement>) => void,  
-  isUpdating: boolean
+  isUpdating: boolean, 
 }
 
 const Profile = (props:ProfileProps) => {  
-  const { userName, userEmail, setUserName, 
-        setUserEmail, updateUser, isUpdating } = props 
+
+  const { userName, userEmail, isUpdating, 
+        setUserName, setUserEmail, updateUser
+        } = props 
+
   return (
     <form onSubmit={(e) => updateUser(e)} className='profile-wrapper' >
-      <div className='profile-photo'/>  
-      <button type='button'>Edit</button>
       <div className='profile-info-container'>
         <h3>Username</h3>  
         <input 
@@ -34,14 +35,6 @@ const Profile = (props:ProfileProps) => {
           onChange={(e) => setUserEmail(e.target.value)}
         ></input> 
       </div>
-      {/* <div className='profile-info-container'>
-        <h3>Password</h3>  
-        <input 
-          type='password' 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)}
-        ></input> 
-      </div> */} 
       { 
         isUpdating ? <p>loading...</p> : <button type='submit'>Save</button>
       }

@@ -31,9 +31,3 @@ const Sidebar: React.FC<SidebarProps> = ({setDashboard}:SidebarProps) => {
 }
 
 export default Sidebar  
-
-
-// userName prop updates the username in realtime 
-// user.displayName updates username after a rerender 
-
-// how do I make the component update after there is a change ?

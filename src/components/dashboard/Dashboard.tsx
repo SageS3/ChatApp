@@ -16,16 +16,18 @@ function Dashboard() {
   const [userName, setUserName] = useState<string | null>('')
   const [userEmail, setUserEmail] = useState<any>('')
   const [updating, setUpdating] = useState<boolean>(false)
-  // const [password, setPassword] = useState('')
 
+  // const [photoURL, setPhotoURL] = useState<string | null>('')
+  // const defaultProfilePicture = ''
   const auth = getAuth()
-  const user = auth.currentUser  
+  const user = auth.currentUser   
+  const userDisplayName = user?.displayName // used for the navbar
   
   // onComponentDidMount update the user state
   useEffect(() => { 
     if(user){  
       setUserName(user.displayName) 
-      setUserEmail(user.email) 
+      setUserEmail(user.email)
     } 
   },[])  
 
@@ -47,8 +49,8 @@ function Dashboard() {
     setUpdating(false)
   }
 
-  const handleLogOut = () => { 
-    signOut(auth) 
+  const handleLogOut = async () => { 
+    await signOut(auth) 
     .then(() => { 
       console.log('user is signed out')
     }) 
@@ -61,6 +63,7 @@ function Dashboard() {
     
     <div className='user-dashboard'>   
       <nav> 
+        <p>{userDisplayName}</p>
         <button onClick={() => setDashboard(navigateTo.chats)}>Chats</button>
         <button onClick={() => setDashboard(navigateTo.profile)}>Profile</button>
         <button>Settings</button>

@@ -80,6 +80,10 @@
       right: 0;
     }
   }
+  .user-dashboard nav p {
+    position: absolute;
+    left: 50px;
+  }
   .user-dashboard nav button {
     width: 5rem;
     padding: 10px;

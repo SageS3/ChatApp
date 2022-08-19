@@ -13,6 +13,8 @@
 }
 .profile-wrapper .profile-info-container {
   width: 90%;
+  min-width: 500px;
+  max-width: 80%;
   padding: 20px 20px 0 20px;
   border-bottom: 1px solid rgb(120, 120, 120);
   margin-top: 20px;
@@ -34,8 +36,8 @@
   color: rgb(120, 120, 120);
   margin-right: 100px;
 }
-.profile-wrapper button:last-of-type {
-  width: 250px;
+.profile-wrapper button {
+  width: 150px;
   height: 40px;
   padding: 10px;
   background-color: rgb(55, 47, 73);
@@ -47,16 +49,20 @@
   font-size: 1.1rem;
   transition: background-color 200ms ease-out;
 }
-.profile-wrapper button:last-of-type:hover {
+.profile-wrapper button:hover {
   background-color: rgb(255, 6, 200);
 }
-.profile-wrapper button:first-of-type {
-  width: 100px;
-  height: auto;
-  background-color: rgb(55, 47, 73);
-  outline: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  margin-top: 5px;
+
+@media screen and (max-width: 500px) {
+  .profile-wrapper > .profile-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+  }
+  .profile-wrapper > .profile-info-container input {
+    width: auto;
+    place-items: center;
+  }
 }/*# sourceMappingURL=Profile.css.map */
