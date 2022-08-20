@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import Sidebar from '../dashboard/Sidebar'
-import {signOut, getAuth, updateProfile} from 'firebase/auth'
+import {signOut, getAuth, updateProfile, updateEmail} from 'firebase/auth'
 import Profile from '../Profile'
 import Threads from '../Threads' 
 import './Dashboard.css'
@@ -29,24 +29,29 @@ function Dashboard() {
       setUserName(user.displayName) 
       setUserEmail(user.email)
     } 
-  },[])  
+  },[user])   
 
-  const updateUserProfile = async (e: React.FormEvent<HTMLFormElement>) => {  
+  const updateUsername = async (user:any) => {    
+    setUpdating(true)
+    await updateProfile(user, {displayName: userName}) 
+    .then(() => { 
+      console.log('updated username')
+    })
+    setUpdating(false)
+  } 
+
+  // const updateUserEmail = () => { 
+  //   updateEmail()
+  // }
+
+  const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {  
     e.preventDefault() 
     const auth = getAuth()  
-    const user = auth.currentUser
-    // if user is signed in continue to update...
-    if(user){  
-      setUpdating(true)
-      await updateProfile(user, {displayName: userName})
-      .then(() => { 
-        setUserName(user.displayName)
-      }) 
-      .catch((error) => { 
-        console.error(error)
-      })
+    const user = auth.currentUser  
+    if(user){ 
+      user?.displayName !== userName && updateUsername(user)
     } 
-    setUpdating(false)
+    // suspence?
   }
 
   const handleLogOut = async () => { 
