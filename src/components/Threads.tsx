@@ -1,36 +1,36 @@
-import React from 'react'
-import './Threads.css'
+import {useState, useEffect} from 'react' 
+import {db} from '../components/config/firebase'
+import {collection,getDocs,query,limit,onSnapshot} from "firebase/firestore"; 
+import './Threads.css' 
 
-const Threads = () => { 
-  const threads = [
-     {user:'Programmer', message: 'Hello World'}, 
-     {user:'Alice', message: 'woof woof woof, woof. WOOF! woof woof- woof.'}, 
-     {user:'Google', message: 'Congrats! you are hired'}, 
-     {user:'Google', message: 'Congrats! you are hired'}, 
-    //  {user: 'Google', message: 'Congrats! you are hired'},
-    //  {user: 'Google', message: 'Congrats! you are hired'},
-    //  {user: 'Google', message: 'Congrats! you are hired'},
-    //  {user: 'Google', message: 'Congrats! you are hired'}
-  ]  
+const Threads = () => {  
+  const [userMessages, setUserMessages] = useState<string[]>([])
+  const messagesRef = collection(db, 'messages')
+  const q = query(collection(db, 'messages'), limit(10))
+ 
+  const getMessages = async () => {
+    const {docs} = await getDocs(q)  
+    
+  }   
 
-  const chats = threads.map((chat, i) => { 
+  const mapMessages = () => { 
     return( 
-      <div key={i} className='chat-container'> 
-        <div className='edit-chat-button'> 
-          <span/> 
-          <span/>
-          <span/>
+      userMessages.map((message, i) => ( 
+        <div key={i}> 
+          {message}
         </div>
-        <h3>{chat.user}</h3> 
-        <p>{chat.message}</p>
-      </div>
+      ))
     )
-  })
+  }
+
+  useEffect(() => { 
+    getMessages()
+  }, [])
 
   return (
     <div className='threads-wrapper'>  
       <div className='chats-container'> 
-        {chats}
+      {mapMessages()}
       </div>
       <div className='input-wrapper'> 
         <input></input>

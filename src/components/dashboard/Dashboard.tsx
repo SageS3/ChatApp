@@ -38,19 +38,29 @@ function Dashboard() {
       console.log('updated username')
     })
     setUpdating(false)
-  } 
+  }  
 
-  // const updateUserEmail = () => { 
-  //   updateEmail()
-  // }
+  const updateUserPhoneNumber = () => { 
+    // some code
+  }
+
+  const updateUserEmail = async (user:any) => {  
+    setUpdating(true) 
+    await updateEmail(user, userEmail).then(() => {
+      console.log('email updated')
+    }).catch((error) => {
+      console.log(error)
+    });
+    setUpdating(false) 
+  }
 
   const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {  
-    e.preventDefault() 
-    const auth = getAuth()  
-    const user = auth.currentUser  
-    if(user){ 
+    e.preventDefault()  
+    if(user){  
       user?.displayName !== userName && updateUsername(user)
-    } 
+      user.email !== userEmail && updateUserEmail(user)
+    }  
+
     // suspence?
   }
 

@@ -30,9 +30,9 @@
     font-weight: 600;
     font-size: 1.3rem;
     cursor: pointer;  
-    transition: border 400ms ease-in;
+    transition: outline 400ms ease-in;
     &:hover { 
-      border: 2px solid rgb(120,120,120);
+      outline: 2px solid rgb(120,120,120);
     }
   } 
 

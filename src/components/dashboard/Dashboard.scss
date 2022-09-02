@@ -82,7 +82,7 @@
       }
       p { 
         position: absolute;
-        left: 50px;
+        left: 40px;
       }
 
       button { 
@@ -93,11 +93,11 @@
         border: none; 
         outline: none; 
         margin: 0 10px 0 10px;
-        transition: border 400ms ease-in;
+        transition: outline 400ms ease-in;
         font-weight: 700;
         cursor: pointer;
         &:hover { 
-          border: 2px solid rgb(120,120,120);
+          outline: 2px solid rgb(120,120,120);
         }
       }
 
@@ -119,4 +119,13 @@
       }  
     }
   }  
+} 
+
+
+@media screen and (max-width: 550px){ 
+
+  .user-dashboard
+    nav{ 
+      display: none;
+    }
 }

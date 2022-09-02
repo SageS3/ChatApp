@@ -26,6 +26,7 @@ const Profile = (props:ProfileProps) => {
         <h3>Username</h3>  
         <input
           required
+          spellCheck={false}
           onKeyPress={(e) => preventEnterKey(e)} 
           type='text' 
           value={userName} 
@@ -39,7 +40,7 @@ const Profile = (props:ProfileProps) => {
           onKeyPress={(e) => preventEnterKey(e)} 
           type='text' 
           value={'(650)-455-0826'} 
-          // onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => setUserName(e.target.value)}
         ></input> 
       </div>
       <p>Requires user credentials to change</p>
@@ -47,6 +48,7 @@ const Profile = (props:ProfileProps) => {
         <h3>Email</h3>  
         <input 
           required
+          spellCheck={false}
           type='email' 
           value={userEmail}
           onKeyPress={(e) => preventEnterKey(e)}

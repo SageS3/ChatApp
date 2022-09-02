@@ -21,12 +21,12 @@ function RequiredAuth({children}:RequiredAuthProps) {
       if(user){
         setAuthenticated(true) 
       } else {
-        console.log('unauthorized')
+        console.error('unauthorized')
         setAuthenticated(false)
         navigate('/')
       }
     });
-  }
+  } 
 
   const loading = () => ( 
     <div className='animation-container'>

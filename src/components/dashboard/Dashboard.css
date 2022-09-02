@@ -82,7 +82,7 @@
   }
   .user-dashboard nav p {
     position: absolute;
-    left: 50px;
+    left: 40px;
   }
   .user-dashboard nav button {
     width: 5rem;
@@ -92,12 +92,12 @@
     border: none;
     outline: none;
     margin: 0 10px 0 10px;
-    transition: border 400ms ease-in;
+    transition: outline 400ms ease-in;
     font-weight: 700;
     cursor: pointer;
   }
   .user-dashboard nav button:hover {
-    border: 2px solid rgb(120, 120, 120);
+    outline: 2px solid rgb(120, 120, 120);
   }
   .user-dashboard nav .logout-nav-button {
     cursor: pointer;
@@ -114,5 +114,10 @@
   .user-dashboard nav .logout-nav-button:hover {
     background-color: rgb(255, 6, 200);
     color: rgb(33, 30, 41);
+  }
+}
+@media screen and (max-width: 550px) {
+  .user-dashboard nav {
+    display: none;
   }
 }/*# sourceMappingURL=Dashboard.css.map */

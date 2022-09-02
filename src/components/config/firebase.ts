@@ -6,6 +6,6 @@ import {getFirestore} from 'firebase/firestore'
 const firebase = initializeApp(firebaseConfig);  
 
 export const auth = getAuth(firebase) 
-export const db = getFirestore()
+export const db = getFirestore(firebase)
 export default firebase 
 
