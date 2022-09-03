@@ -51,7 +51,7 @@
 .entry-page-form input:-webkit-autofill:hover,
 .entry-page-form input:-webkit-autofill:focus,
 .entry-page-form input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px rgb(255, 6, 200) inset !important;
+  -webkit-box-shadow: 0 0 0 30px rgb(255, 6, 200) inset;
   -webkit-text-fill-color: rgb(55, 47, 73);
 }
 .entry-page-form button {

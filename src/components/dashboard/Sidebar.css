@@ -32,12 +32,12 @@
   height: 40px;
   width: 70%;
   margin-bottom: 20px;
+  font-size: 1.3rem;
   background-color: rgb(55, 47, 73);
   outline: none;
   border: none;
   color: white;
   font-weight: 600;
-  font-size: 1.3rem;
   cursor: pointer;
   transition: outline 400ms ease-in;
 }

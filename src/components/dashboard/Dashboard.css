@@ -87,14 +87,14 @@
   .user-dashboard nav button {
     width: 5rem;
     padding: 10px;
-    background-color: rgb(55, 47, 73);
-    color: white;
-    border: none;
-    outline: none;
     margin: 0 10px 0 10px;
-    transition: outline 400ms ease-in;
-    font-weight: 700;
+    background-color: rgb(55, 47, 73);
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: 600;
     cursor: pointer;
+    transition: outline 400ms ease-in;
   }
   .user-dashboard nav button:hover {
     outline: 2px solid rgb(120, 120, 120);
@@ -103,7 +103,8 @@
     cursor: pointer;
     width: 5rem;
     padding: 10px;
-    border: 2px solid rgb(255, 6, 200);
+    border: none;
+    outline: 2px solid rgb(255, 6, 200);
     background-color: rgb(33, 30, 41);
     border-radius: 12px;
     color: white;
@@ -112,6 +113,7 @@
     transition: all 400ms ease-in-out;
   }
   .user-dashboard nav .logout-nav-button:hover {
+    outline: none;
     background-color: rgb(255, 6, 200);
     color: rgb(33, 30, 41);
   }

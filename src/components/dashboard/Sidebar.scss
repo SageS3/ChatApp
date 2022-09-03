@@ -1,3 +1,5 @@
+@use '../styles/Mixins.scss';
+
 .sidebar-wrapper { 
   grid-area: sidebar;
   background-color: rgb(33,30,41);
@@ -22,18 +24,9 @@
   button { 
     height: 40px; 
     width: 70%; 
-    margin-bottom: 20px; 
-    background-color:rgb(55,47,73);
-    outline: none; 
-    border: none;
-    color: white; 
-    font-weight: 600;
+    margin-bottom: 20px;
     font-size: 1.3rem;
-    cursor: pointer;  
-    transition: outline 400ms ease-in;
-    &:hover { 
-      outline: 2px solid rgb(120,120,120);
-    }
+    @include Mixins.white-border-button
   } 
 
   .image-container { 

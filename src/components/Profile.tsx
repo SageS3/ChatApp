@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react' 
+import React, {useState} from 'react' 
 import './Profile.css'
 
 type ProfileProps = { 
@@ -11,13 +11,32 @@ type ProfileProps = {
 }
 
 const Profile = (props:ProfileProps) => {  
-
+  const [authorizing, setAuthorizing] = useState(false)
   const { userName, userEmail, isUpdating, setUserName, 
     setUserEmail, updateUser
     } = props  
 
   const preventEnterKey = (e:any) => { 
     e.key === 'Enter' && e.preventDefault()
+  }
+
+  if(authorizing) {
+    return( 
+      <div className='auth-modal-container'> 
+        <form className='auth-modal'>  
+          <h3>Enter Credentials</h3>
+          <input/>
+          <input/> 
+          <button onClick={() => setAuthorizing(false)}>Cancel</button> 
+          <button>Confirm</button>
+        </form>
+      </div>
+    )
+  } 
+
+  const requiresAuth = () => { 
+    // check if email is different from the user email  
+    // if true, require user credentials 
   }
 
   return (
@@ -33,17 +52,7 @@ const Profile = (props:ProfileProps) => {
           onChange={(e) => setUserName(e.target.value)}
         ></input> 
       </div> 
-      <div className='profile-info-container'>
-        <h3>Phone Number</h3>  
-        <input
-          required
-          onKeyPress={(e) => preventEnterKey(e)} 
-          type='text' 
-          value={'(650)-455-0826'} 
-          onChange={(e) => setUserName(e.target.value)}
-        ></input> 
-      </div>
-      <p>Requires user credentials to change</p>
+      {/* <p>Requires user credentials to change</p> */}
       <div className='profile-info-container'>
         <h3>Email</h3>  
         <input 

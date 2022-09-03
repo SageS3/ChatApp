@@ -17,8 +17,6 @@ function Dashboard() {
   const [userEmail, setUserEmail] = useState<any>('')
   const [updating, setUpdating] = useState<boolean>(false)
 
-  // const [photoURL, setPhotoURL] = useState<string | null>('')
-  // const defaultProfilePicture = ''
   const auth = getAuth()
   const user = auth.currentUser   
   const userDisplayName = user?.displayName // used for the navbar
@@ -39,10 +37,6 @@ function Dashboard() {
     })
     setUpdating(false)
   }  
-
-  const updateUserPhoneNumber = () => { 
-    // some code
-  }
 
   const updateUserEmail = async (user:any) => {  
     setUpdating(true) 
