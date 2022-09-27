@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
-import Sidebar from '../dashboard/Sidebar'
+import Sidebar from '../dashboard/Sidebar' 
 import {signOut, getAuth, updateProfile, updateEmail} from 'firebase/auth'
+import {updateDoc, collection,doc } from 'firebase/firestore'
+import {db} from '../../components/config/firebase'
 import Profile from '../Profile'
 import Threads from '../Threads' 
 import './Dashboard.css'
@@ -9,29 +11,38 @@ import './Dashboard.css'
 const navigateTo = {
   chats: 'chats',
   profile: 'profile'
-}
+} 
 
-function Dashboard() {
+const Dashboard = () => {
   const [dashboard, setDashboard] = useState<string>(navigateTo.chats)
   const [userName, setUserName] = useState<string | null>('')
   const [userEmail, setUserEmail] = useState<any>('')
   const [updating, setUpdating] = useState<boolean>(false)
 
   const auth = getAuth()
-  const user = auth.currentUser   
-  const userDisplayName = user?.displayName // used for the navbar
-  
+  const user = auth.currentUser
+  const userDisplayName = user?.displayName //used for the navbar
+  const collectionRef = collection(db, 'users')
+
   // onComponentDidMount update the user state
   useEffect(() => { 
     if(user){  
       setUserName(user.displayName) 
       setUserEmail(user.email)
+      // updateFirestoreUsername()
+      console.log(user.uid)
     } 
   },[user])   
 
   const updateUsername = async (user:any) => {    
     setUpdating(true)
-    await updateProfile(user, {displayName: userName}) 
+    //updating Firestore userName...
+    const docRef = doc(collectionRef, user.uid) // document id === user.uid
+    await updateDoc(docRef, { 
+      userName: userName, 
+    })
+    //updating Firebase auth displayName...
+    await updateProfile(user, {displayName: userName})
     .then(() => { 
       console.log('updated username')
     })
@@ -54,9 +65,8 @@ function Dashboard() {
       user?.displayName !== userName && updateUsername(user)
       user.email !== userEmail && updateUserEmail(user)
     }  
-
     // suspence?
-  }
+  } 
 
   const handleLogOut = async () => { 
     await signOut(auth) 
@@ -66,10 +76,9 @@ function Dashboard() {
     .catch(error => {  
       console.log(error)
     })
-  }  
+  }   
 
   return (
-    
     <div className='user-dashboard'>   
       <nav> 
         <p>{userDisplayName}</p>
