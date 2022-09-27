@@ -1,4 +1,5 @@
 import React, {useState} from 'react' 
+import { EmailAuthProvider,reauthenticateWithCredential, getAuth} from 'firebase/auth'
 import './Profile.css'
 
 type ProfileProps = { 
@@ -12,32 +13,65 @@ type ProfileProps = {
 
 const Profile = (props:ProfileProps) => {  
   const [authorizing, setAuthorizing] = useState(false)
+  const [reauthEmail, setReauthEmail] = useState('')
+  const [reauthPassword, setReauthPassword] = useState('')
   const { userName, userEmail, isUpdating, setUserName, 
     setUserEmail, updateUser
-    } = props  
+    } = props   
+
+  const auth = getAuth() 
+  const user = auth.currentUser  
+  
+  const credentials = EmailAuthProvider.credential(reauthEmail, reauthPassword)
+
+  const reauthUser = async () => {  
+    if(user){ 
+      await reauthenticateWithCredential(user, credentials )
+      .then(() => {
+        console.log('user reauthenticated')
+      }).catch((error) => {
+        console.log(error)
+      });
+    }
+  } 
 
   const preventEnterKey = (e:any) => { 
     e.key === 'Enter' && e.preventDefault()
+  } 
+
+  const setUsernameHandler = (e: any) => { // not preventing page reload (not working)
+    setUserName(e.target.value)
+    e.preventDefault()
   }
 
-  if(authorizing) {
+  if(authorizing){
     return( 
       <div className='auth-modal-container'> 
         <form className='auth-modal'>  
           <h3>Enter Credentials</h3>
-          <input/>
-          <input/> 
-          <button onClick={() => setAuthorizing(false)}>Cancel</button> 
-          <button>Confirm</button>
+          <input 
+          type='email' 
+          placeholder='Email'
+          value={reauthEmail} 
+          onChange={(e) => setReauthEmail(e.target.value)}
+          />
+          <input 
+          type='password' 
+          placeholder='Password'
+          value={reauthPassword} 
+          onChange={(e) => setReauthPassword(e.target.value)}
+          /> 
+          <button 
+            type='submit' 
+            onClick={() => reauthUser()} 
+            >Confirm</button>
+          <button 
+            type='button' 
+            onClick={() => setAuthorizing(false)}>Cancel</button> 
         </form>
       </div>
     )
   } 
-
-  const requiresAuth = () => { 
-    // check if email is different from the user email  
-    // if true, require user credentials 
-  }
 
   return (
     <form onSubmit={(e) => updateUser(e)} className='profile-wrapper' >
@@ -49,10 +83,9 @@ const Profile = (props:ProfileProps) => {
           onKeyPress={(e) => preventEnterKey(e)} 
           type='text' 
           value={userName} 
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => setUsernameHandler(e)}
         ></input> 
       </div> 
-      {/* <p>Requires user credentials to change</p> */}
       <div className='profile-info-container'>
         <h3>Email</h3>  
         <input 
