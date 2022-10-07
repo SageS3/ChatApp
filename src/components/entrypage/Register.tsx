@@ -1,24 +1,31 @@
 import React, {useState } from 'react'
-import { addDoc, collection} from 'firebase/firestore';
+import { setDoc,doc} from 'firebase/firestore';
 import {db} from '../../components/config/firebase'
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth' 
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth' 
+import { auth, storage } from '../config/firebase'
+import {ref, getDownloadURL} from 'firebase/storage'
 import './Register.css'  
 
 type registerProps = { 
-  setForm: React.Dispatch<React.SetStateAction<string>>, 
+  setForm: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function Register(props: registerProps){  
+export default function Register(props: registerProps){ 
   const [email, setEmail] = useState<string>(''); 
   const [password, setPassword] = useState<string>('')
   const [registerError, setRegisterError] = useState<string>(''); 
-  const [confirmPassword, setConfirmPassword] = useState<string>('');  
-  const usersCollection = collection(db, 'users')
-
-  const auth = getAuth()
-  
-  const createDefaultUsername = async (userName:string) => { 
-    const user = auth.currentUser 
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  // const [loading, setLoading] = useState<boolean>(false)
+  console.log('Register Form log')
+  // When register form is submitted, updates user.photoURL
+  const createDefaultProfilePic = async (user: any, snapShot:string) => { 
+    await updateProfile(user, {photoURL: snapShot}) 
+    .then(() => { 
+      console.log('default picture updated')
+    })
+  }
+  // when user registers, updates user.displayname 
+  const createDefaultUsername = async (userName:string, user:any) => {  
     if(user){ 
       await updateProfile(user, {displayName: userName}) 
       .then(() => { 
@@ -27,20 +34,28 @@ export default function Register(props: registerProps){
     }
   } 
 
-  const sliceEmail = (email:string) => {
+  // creates a default username by slicing user's email
+  const sliceEmail = (email:string) => { 
     const atSymbolIndex = email.indexOf('@')
     const defaultUserName = email.slice(0,atSymbolIndex) 
     return defaultUserName
   }
   
-  const addUser = async (email:string) => {  
-     const userName = sliceEmail(email) 
-     createDefaultUsername(userName)
-    const userInfo = await addDoc(usersCollection, { 
+  const addUserToFirestore = async (email:string, user:any) => {
+    const userId = user?.uid 
+    const userPath = `users/${userId}` // using user's unique id as key to user's data
+    const docRef = doc(db, userPath)
+    const userName = sliceEmail(email)
+    const pathName = ref(storage, 'gs://chatapp-a6f5e.appspot.com/defaultImg/user.png')
+    const snapShot = await getDownloadURL(pathName)
+   
+    createDefaultProfilePic(user, snapShot)
+    createDefaultUsername(userName, user) 
+
+    await setDoc(docRef, {
       userName: userName, 
-      photoURL: 'photourl' 
+      photoURL: snapShot
     })  
-    console.log(userInfo)
     console.log('user added to users collection')
   }
 
@@ -50,11 +65,12 @@ export default function Register(props: registerProps){
     if(password !== confirmPassword) setRegisterError('Password does not match')
     createUserWithEmailAndPassword(auth, email, password) 
     .then((userCredential) => {
-      addUser(email) 
+      const currentUser = auth.currentUser
+      addUserToFirestore(email, currentUser)
       props.setForm('login')
-      const user = userCredential.user 
+      const user = userCredential.user
     }) 
-    .catch((error) =>{  
+    .catch((error) =>{  // error handling 
       const errorMessage = error.message  
       console.log(errorMessage)
       if (errorMessage.includes('auth/weak-password')){ 
@@ -72,6 +88,7 @@ export default function Register(props: registerProps){
       setConfirmPassword('') 
   }    
 
+
   return ( 
     <>    
       <form className='entry-page-form' onSubmit={(event) => submitSignUpHandler(event)}> 
@@ -82,7 +99,7 @@ export default function Register(props: registerProps){
           name='email'
           placeholder='Email' 
           value={email} 
-          onChange={(e:React.ChangeEvent<HTMLInputElement>) => 
+          onChange={(e:React.ChangeEvent<HTMLInputElement>) =>
             setEmail(e.target.value)}
         ></input>
         <input
