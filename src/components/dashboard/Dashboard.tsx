@@ -1,25 +1,25 @@
 import {useState, useEffect} from 'react'
 import Sidebar from '../dashboard/Sidebar' 
-import {signOut, getAuth, updateProfile, updateEmail} from 'firebase/auth'
-import {updateDoc, collection,doc } from 'firebase/firestore'
+import {signOut, updateProfile, updateEmail} from 'firebase/auth'
+import {auth} from '../config/firebase'
+import {updateDoc, collection, doc } from 'firebase/firestore'
 import {db} from '../../components/config/firebase'
 import Profile from '../Profile'
 import Threads from '../Threads' 
 import './Dashboard.css'
 
-//navigate to directories
 const navigateTo = {
   chats: 'chats',
   profile: 'profile'
-} 
+}
 
 const Dashboard = () => {
   const [dashboard, setDashboard] = useState<string>(navigateTo.chats)
   const [userName, setUserName] = useState<string | null>('')
   const [userEmail, setUserEmail] = useState<any>('')
+  const [userPhoto, setUserPhoto] = useState<any>('')
   const [updating, setUpdating] = useState<boolean>(false)
 
-  const auth = getAuth()
   const user = auth.currentUser
   const userDisplayName = user?.displayName //used for the navbar
   const collectionRef = collection(db, 'users')
@@ -29,10 +29,9 @@ const Dashboard = () => {
     if(user){  
       setUserName(user.displayName) 
       setUserEmail(user.email)
-      // updateFirestoreUsername()
-      console.log(user.uid)
+      setUserPhoto(user.photoURL)
     } 
-  },[user])   
+  },[user])  
 
   const updateUsername = async (user:any) => {    
     setUpdating(true)
@@ -51,21 +50,22 @@ const Dashboard = () => {
 
   const updateUserEmail = async (user:any) => {  
     setUpdating(true) 
-    await updateEmail(user, userEmail).then(() => {
+    await updateEmail(user, userEmail)
+    .then(() => {
       console.log('email updated')
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.log(error)
     });
     setUpdating(false) 
   }
-
+  
   const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {  
     e.preventDefault()  
     if(user){  
-      user?.displayName !== userName && updateUsername(user)
+      user.displayName !== userName && updateUsername(user)
       user.email !== userEmail && updateUserEmail(user)
-    }  
-    // suspence?
+    }
   } 
 
   const handleLogOut = async () => { 
@@ -90,6 +90,7 @@ const Dashboard = () => {
       </nav>
       <Sidebar  
         setDashboard={setDashboard} 
+        userPhoto={userPhoto}
       ></Sidebar> 
       <main>  
         {dashboard === 'profile' && 
@@ -97,12 +98,14 @@ const Dashboard = () => {
           userName={userName} 
           userEmail={userEmail}
           setUserName={setUserName}
-          updateUser={updateUserProfile}  
+          updateUser={updateUserProfile}
           setUserEmail={setUserEmail}
           isUpdating={updating}
-        />} 
+          userPhoto={userPhoto}
+          setUserPhoto={setUserPhoto}
+        />}
         {dashboard === 'chats' && <Threads/>}
-      </main>  
+      </main>
     </div>
   )
 }
