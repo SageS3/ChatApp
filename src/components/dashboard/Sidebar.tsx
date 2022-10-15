@@ -3,24 +3,23 @@ import {signOut, getAuth} from 'firebase/auth'
 
 type SidebarProps = {
   setDashboard: (profile: string) => void,
+  userPhoto: string
 } 
 
-const Sidebar: React.FC<SidebarProps> = ({setDashboard}:SidebarProps) => { 
+const Sidebar: React.FC<SidebarProps> = ({setDashboard, userPhoto}:SidebarProps) => { 
   const auth = getAuth()
   let userDisplayName = auth.currentUser?.displayName
+
   const handleLogOut = () => {
     signOut(auth)
-    .then(() => {
-      console.log('user is signed out')
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    console.log('user is signed out')
   }
-
+  
   return (
     <div className='sidebar-wrapper'>
-      <div className='image-container'></div>
+      <div className='image-container'> 
+        <img src={userPhoto} alt=''/>
+      </div>
       {<p>{userDisplayName}</p>}
       <button onClick={() => setDashboard('chats')}>Chats</button>
       <button onClick={() => setDashboard('profile')}>Profile</button>
