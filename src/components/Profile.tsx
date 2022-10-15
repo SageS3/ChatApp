@@ -1,5 +1,7 @@
-import React, {useState} from 'react' 
-import { EmailAuthProvider,reauthenticateWithCredential, getAuth} from 'firebase/auth'
+import React, {useState, useRef} from 'react' 
+import { EmailAuthProvider,reauthenticateWithCredential, updateProfile} from 'firebase/auth'
+import { auth, storage } from '../components/config/firebase'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import './Profile.css'
 
 type ProfileProps = { 
@@ -7,20 +9,25 @@ type ProfileProps = {
   userEmail: string,
   setUserEmail: (a: string | null) => void,
   setUserName: (a: string | null) => void, 
-  updateUser: (e: React.FormEvent<HTMLFormElement>) => void,  
+  updateUser: (e: React.FormEvent<HTMLFormElement>) => void,
   isUpdating: boolean, 
+  userPhoto: string,
+  setUserPhoto: (a: any) => void
 }
 
-const Profile = (props:ProfileProps) => {  
+const Profile = (props:ProfileProps) => {
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [authorizing, setAuthorizing] = useState(false)
   const [reauthEmail, setReauthEmail] = useState('')
-  const [reauthPassword, setReauthPassword] = useState('')
-  const { userName, userEmail, isUpdating, setUserName, 
-    setUserEmail, updateUser
-    } = props   
+  const [reauthPassword, setReauthPassword] = useState('') 
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
 
-  const auth = getAuth() 
-  const user = auth.currentUser  
+  const { userName, userEmail, isUpdating, setUserName, 
+    setUserEmail, updateUser, userPhoto, setUserPhoto
+    } = props   
+ 
+  const user = auth.currentUser 
+  // const photoURL = user?.photoURL
   
   const credentials = EmailAuthProvider.credential(reauthEmail, reauthPassword)
 
@@ -42,6 +49,29 @@ const Profile = (props:ProfileProps) => {
   const setUsernameHandler = (e: any) => { // not preventing page reload (not working)
     setUserName(e.target.value)
     e.preventDefault()
+  } 
+
+  const handleInputRef = (e:any) => { 
+    e.preventDefault() 
+    fileInputRef.current?.click() 
+  } 
+
+  const handlePictureChange = async (e:any) => { 
+    setUploadingPhoto(true) 
+    // const fileName = e.target.files[0].name 
+    // const dotIndex = fileName.indexOf('.')
+    // const fileExtension = fileName.slice(dotIndex, fileName.length - 1)
+    if(e.target.files[0] && user){ 
+      const fileRef = ref(storage,`userPhotoStorage/${user?.uid}.png`)
+      await uploadBytes(fileRef, e.target.files[0]) // updating photo url in firebase storage
+      const downloadedPhoto = await getDownloadURL(fileRef)
+      setUserPhoto(downloadedPhoto)
+      await updateProfile(user, {photoURL: userPhoto }) // updating user photoURL in firebase Auth
+    } else {
+      // set profile picture to last picture. useRef? 
+      // or set profile picture to default user picture
+    }
+    setUploadingPhoto(false)
   }
 
   if(authorizing){
@@ -75,6 +105,16 @@ const Profile = (props:ProfileProps) => {
 
   return (
     <form onSubmit={(e) => updateUser(e)} className='profile-wrapper' >
+      <div className='edit_image_container'> 
+        <div className='img-container'> 
+          { 
+          uploadingPhoto ? (<div>loading</div>) :
+          <img className='profile-picture' src={userPhoto} />
+          }
+        </div>
+          <button onClick={e => handleInputRef(e)}>Edit profile picture</button>
+        <input type='file' style={{display:'none'}} ref={fileInputRef} onChange={(e) => handlePictureChange(e)}/>
+      </div>
       <div className='profile-info-container'>
         <h3>Username</h3>  
         <input
@@ -102,7 +142,8 @@ const Profile = (props:ProfileProps) => {
         <button>Delete Account</button>
       </div>
       { 
-        isUpdating ? <p>loading...</p> : <button type='submit'>Save</button>
+        isUpdating ? <button type='submit' disabled={isUpdating}>Loading...</button> : 
+        <button type='submit' >Save</button>
       }
     </form>
   )
