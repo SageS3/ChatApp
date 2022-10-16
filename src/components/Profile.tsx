@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react' 
-import { EmailAuthProvider,reauthenticateWithCredential, updateProfile} from 'firebase/auth'
+import { updateProfile, updateEmail} from 'firebase/auth'
 import { auth, storage } from '../components/config/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import './Profile.css'
@@ -12,35 +12,29 @@ type ProfileProps = {
   updateUser: (e: React.FormEvent<HTMLFormElement>) => void,
   isUpdating: boolean, 
   userPhoto: string,
-  setUserPhoto: (a: any) => void
+  setUserPhoto: (a: string | null) => void, 
+  authorizing: boolean, 
+  setAuthorizing: (a:boolean) => void,
+  reauthEmail: string, 
+  reauthPassword: string, 
+  reauthUser: (e:any) => void, 
+  setReauthEmail: (e:any) => void, 
+  setReauthPassword: (e:any) => void, 
 }
+
 
 const Profile = (props:ProfileProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [authorizing, setAuthorizing] = useState(false)
-  const [reauthEmail, setReauthEmail] = useState('')
-  const [reauthPassword, setReauthPassword] = useState('') 
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
 
-  const { userName, userEmail, isUpdating, setUserName, 
-    setUserEmail, updateUser, userPhoto, setUserPhoto
+  const { 
+    userName, userEmail, isUpdating, setUserName, 
+    setUserEmail, updateUser, userPhoto, setUserPhoto, 
+    authorizing, reauthEmail, reauthPassword, reauthUser, 
+    setAuthorizing, setReauthEmail, setReauthPassword
     } = props   
  
   const user = auth.currentUser 
-  // const photoURL = user?.photoURL
-  
-  const credentials = EmailAuthProvider.credential(reauthEmail, reauthPassword)
-
-  const reauthUser = async () => {  
-    if(user){ 
-      await reauthenticateWithCredential(user, credentials )
-      .then(() => {
-        console.log('user reauthenticated')
-      }).catch((error) => {
-        console.log(error)
-      });
-    }
-  } 
 
   const preventEnterKey = (e:any) => { 
     e.key === 'Enter' && e.preventDefault()
@@ -51,6 +45,7 @@ const Profile = (props:ProfileProps) => {
     e.preventDefault()
   } 
 
+
   const handleInputRef = (e:any) => { 
     e.preventDefault() 
     fileInputRef.current?.click() 
@@ -58,9 +53,7 @@ const Profile = (props:ProfileProps) => {
 
   const handlePictureChange = async (e:any) => { 
     setUploadingPhoto(true) 
-    // const fileName = e.target.files[0].name 
-    // const dotIndex = fileName.indexOf('.')
-    // const fileExtension = fileName.slice(dotIndex, fileName.length - 1)
+ 
     if(e.target.files[0] && user){ 
       const fileRef = ref(storage,`userPhotoStorage/${user?.uid}.png`)
       await uploadBytes(fileRef, e.target.files[0]) // updating photo url in firebase storage
@@ -77,7 +70,7 @@ const Profile = (props:ProfileProps) => {
   if(authorizing){
     return( 
       <div className='auth-modal-container'> 
-        <form className='auth-modal'>  
+        <form className='auth-modal' onSubmit={(event) => reauthUser(event)} >  
           <h3>Enter Credentials</h3>
           <input 
           type='email' 
@@ -93,7 +86,6 @@ const Profile = (props:ProfileProps) => {
           /> 
           <button 
             type='submit' 
-            onClick={() => reauthUser()} 
             >Confirm</button>
           <button 
             type='button' 
