@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import Sidebar from '../dashboard/Sidebar' 
-import {signOut, updateProfile, updateEmail} from 'firebase/auth'
+import {signOut, updateProfile, updateEmail, reauthenticateWithCredential, EmailAuthProvider} from 'firebase/auth'
 import {auth} from '../config/firebase'
 import {updateDoc, collection, doc } from 'firebase/firestore'
 import {db} from '../../components/config/firebase'
@@ -19,6 +19,9 @@ const Dashboard = () => {
   const [userEmail, setUserEmail] = useState<any>('')
   const [userPhoto, setUserPhoto] = useState<any>('')
   const [updating, setUpdating] = useState<boolean>(false)
+  const [authorizing, setAuthorizing] = useState<boolean>(false)
+  const [reauthEmail, setReauthEmail] = useState<string>('')
+  const [reauthPassword, setReauthPassword] = useState<string>('') 
 
   const user = auth.currentUser
   const userDisplayName = user?.displayName //used for the navbar
@@ -48,14 +51,30 @@ const Dashboard = () => {
     setUpdating(false)
   }  
 
+  const credentials = EmailAuthProvider.credential(reauthEmail, reauthPassword)
+
+  const reauthUser = async (event:any) => { 
+    event.preventDefault()
+    if(user){ 
+      await reauthenticateWithCredential(user, credentials )
+      .then(() => {
+        console.log('user reauthenticated')
+        setAuthorizing(false)
+      }).catch((error) => {
+        console.log(error)
+      });
+    }
+  } 
+
   const updateUserEmail = async (user:any) => {  
     setUpdating(true) 
-    await updateEmail(user, userEmail)
+    await updateEmail(user, reauthEmail)
     .then(() => {
       console.log('email updated')
     })
     .catch((error) => {
       console.log(error)
+      setAuthorizing(true)
     });
     setUpdating(false) 
   }
@@ -103,6 +122,13 @@ const Dashboard = () => {
           isUpdating={updating}
           userPhoto={userPhoto}
           setUserPhoto={setUserPhoto}
+          authorizing={authorizing} 
+          reauthEmail={reauthEmail} 
+          reauthPassword={reauthPassword}
+          reauthUser={reauthUser} 
+          setReauthEmail={setReauthEmail}
+          setReauthPassword={setReauthPassword}
+          setAuthorizing={setAuthorizing}
         />}
         {dashboard === 'chats' && <Threads/>}
       </main>
