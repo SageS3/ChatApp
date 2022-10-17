@@ -61,20 +61,20 @@ const Dashboard = () => {
         console.log('user reauthenticated')
         setAuthorizing(false)
       }).catch((error) => {
-        console.log(error)
+        console.log(error.message)
       });
     }
   } 
 
   const updateUserEmail = async (user:any) => {  
     setUpdating(true) 
-    await updateEmail(user, reauthEmail)
+    await updateEmail(user, userEmail)
     .then(() => {
       console.log('email updated')
     })
     .catch((error) => {
-      console.log(error)
-      setAuthorizing(true)
+      console.log(error.message)
+      error.message.includes('auth/requires-recent-login') && setAuthorizing(true)
     });
     setUpdating(false) 
   }
