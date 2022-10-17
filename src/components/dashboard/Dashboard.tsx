@@ -21,7 +21,8 @@ const Dashboard = () => {
   const [updating, setUpdating] = useState<boolean>(false)
   const [authorizing, setAuthorizing] = useState<boolean>(false)
   const [reauthEmail, setReauthEmail] = useState<string>('')
-  const [reauthPassword, setReauthPassword] = useState<string>('') 
+  const [reauthPassword, setReauthPassword] = useState<string>('')
+  const [reauthError, setReauthError] = useState<string>('')
 
   const user = auth.currentUser
   const userDisplayName = user?.displayName //used for the navbar
@@ -60,8 +61,9 @@ const Dashboard = () => {
       .then(() => {
         console.log('user reauthenticated')
         setAuthorizing(false)
-      }).catch((error) => {
+      }).catch((error) => { 
         console.log(error.message)
+        setReauthError('incorrect email or password')
       });
     }
   } 
@@ -129,6 +131,7 @@ const Dashboard = () => {
           setReauthEmail={setReauthEmail}
           setReauthPassword={setReauthPassword}
           setAuthorizing={setAuthorizing}
+          reauthError={reauthError}
         />}
         {dashboard === 'chats' && <Threads/>}
       </main>
