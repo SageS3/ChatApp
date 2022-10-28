@@ -1,37 +1,39 @@
-import React, {useState, useRef} from 'react' 
-import { updateProfile, updateEmail} from 'firebase/auth'
+import React, {useState, useRef} from 'react'
+import SetNewPassword from './editProfileForms/SetNewPassword'
+import { updateProfile} from 'firebase/auth'
 import { auth, storage } from '../components/config/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import './Profile.css'
 
 type ProfileProps = { 
-  userName: any, 
-  userEmail: string,
   setUserEmail: (a: string | null) => void,
   setUserName: (a: string | null) => void, 
   updateUser: (e: React.FormEvent<HTMLFormElement>) => void,
-  isUpdating: boolean, 
-  userPhoto: string,
-  setUserPhoto: (a: string | null) => void, 
-  authorizing: boolean, 
-  setAuthorizing: (a:boolean) => void,
-  reauthEmail: string, 
-  reauthPassword: string, 
   reauthUser: (e:any) => void, 
   setReauthEmail: (e:any) => void, 
   setReauthPassword: (e:any) => void, 
+  setUserPhoto: (a: string | null) => void, 
+  setAuthorizing: (a:boolean) => void,
+  userName: any, 
+  userEmail: string,
+  isUpdating: boolean, 
+  userPhoto: string,
+  authorizing: boolean, 
+  reauthEmail: string, 
+  reauthPassword: string, 
+  reauthError:string
 }
-
 
 const Profile = (props:ProfileProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
+  const [isSettingPassword, setIsSettingPassword] = useState<Boolean>(false)
 
   const { 
     userName, userEmail, isUpdating, setUserName, 
     setUserEmail, updateUser, userPhoto, setUserPhoto, 
     authorizing, reauthEmail, reauthPassword, reauthUser, 
-    setAuthorizing, setReauthEmail, setReauthPassword
+    setAuthorizing, setReauthEmail, setReauthPassword, reauthError
     } = props   
  
   const user = auth.currentUser 
@@ -44,7 +46,6 @@ const Profile = (props:ProfileProps) => {
     setUserName(e.target.value)
     e.preventDefault()
   } 
-
 
   const handleInputRef = (e:any) => { 
     e.preventDefault() 
@@ -63,6 +64,7 @@ const Profile = (props:ProfileProps) => {
     } else {
       // set profile picture to last picture. useRef? 
       // or set profile picture to default user picture
+      console.log("Wrong file type")
     }
     setUploadingPhoto(false)
   }
@@ -89,11 +91,19 @@ const Profile = (props:ProfileProps) => {
             >Confirm</button>
           <button 
             type='button' 
-            onClick={() => setAuthorizing(false)}>Cancel</button> 
-        </form>
+            onClick={() => setAuthorizing(false)}>Cancel
+          </button> 
+          <p>{reauthError}</p>
+        </form> 
       </div>
     )
-  } 
+  }  
+
+  if(isSettingPassword) { 
+    return( 
+      <SetNewPassword/>
+    )
+  }
 
   return (
     <form onSubmit={(e) => updateUser(e)} className='profile-wrapper' >
@@ -129,13 +139,13 @@ const Profile = (props:ProfileProps) => {
           onChange={(e) => setUserEmail(e.target.value)}
         ></input> 
       </div>  
-      <div className='sensitive-zone'> 
-        <button>Change Password</button>
+      <div className='sensitive-zone'>
+        <button type='button' onClick={() => setIsSettingPassword(true)}>Change Password</button>
         <button>Delete Account</button>
       </div>
       { 
         isUpdating ? <button type='submit' disabled={isUpdating}>Loading...</button> : 
-        <button type='submit' >Save</button>
+        <button type='submit'>Save</button>
       }
     </form>
   )
