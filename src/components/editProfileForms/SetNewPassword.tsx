@@ -1,8 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-const SetNewPassword = () => {
+const SetNewPassword = () => { 
+
+  useEffect(() => { 
+    console.log('set new password form')
+  },[])
   return (
-    <div>SetNewPassword</div>
+    <div> 
+      <h3>Set Password</h3>
+      <input type="text" placeholder="New password"/>
+      <input type="text" placeholder="Confirm password"/>
+    </div>
   )
 }
 
