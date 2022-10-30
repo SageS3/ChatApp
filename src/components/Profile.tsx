@@ -101,7 +101,7 @@ const Profile = (props:ProfileProps) => {
 
   if(isSettingPassword) { 
     return( 
-      <SetNewPassword/>
+      <SetNewPassword setIsSettingPassword={setIsSettingPassword}/>
     )
   }
 
