@@ -1,4 +1,5 @@
 .profile-wrapper {
+  align-self: flex-start;
   border-radius: 12px;
   padding: 30px;
   display: flex;
@@ -177,59 +178,4 @@
     align-self: center;
     width: 100%;
   }
-}
-.auth-modal-container {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -60%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(20, 20, 40, 0.4);
-}
-.auth-modal-container .auth-modal {
-  width: 500px;
-  height: 40%;
-  background-color: rgb(55, 47, 73);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 12px;
-  border: 1px solid rgb(120, 120, 120);
-}
-.auth-modal-container .auth-modal h3 {
-  color: white;
-  margin-bottom: 32px;
-}
-.auth-modal-container .auth-modal input {
-  outline: none;
-  border: none;
-  border-bottom: 2px solid rgb(120, 120, 120);
-  background-color: rgb(55, 47, 73);
-  color: white;
-  width: 50%;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-}
-.auth-modal-container .auth-modal button {
-  width: 50%;
-  background-color: rgb(33, 30, 41);
-  border: none;
-  margin: 10px 0 10px 0;
-  color: white;
-  height: 35px;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-.auth-modal-container .auth-modal button:first-of-type {
-  outline: 1px solid rgb(255, 6, 200);
-  transition: outline 200ms ease-in;
-}
-.auth-modal-container .auth-modal button:first-of-type:hover {
-  outline: 2px solid rgb(255, 6, 200);
 }/*# sourceMappingURL=Profile.css.map */

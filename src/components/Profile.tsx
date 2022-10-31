@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react'
 import SetNewPassword from './editProfileForms/SetNewPassword'
+import ReauthForm from './editProfileForms/ReauthForm'
 import { updateProfile} from 'firebase/auth'
 import { auth, storage } from '../components/config/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
@@ -70,33 +71,17 @@ const Profile = (props:ProfileProps) => {
   }
 
   if(authorizing){
-    return( 
-      <div className='auth-modal-container'> 
-        <form className='auth-modal' onSubmit={(event) => reauthUser(event)} >  
-          <h3>Enter Credentials</h3>
-          <input 
-          type='email' 
-          placeholder='Email'
-          value={reauthEmail} 
-          onChange={(e) => setReauthEmail(e.target.value)}
-          />
-          <input 
-          type='password' 
-          placeholder='Password'
-          value={reauthPassword} 
-          onChange={(e) => setReauthPassword(e.target.value)}
-          /> 
-          <button 
-            type='submit' 
-            >Confirm</button>
-          <button 
-            type='button' 
-            onClick={() => setAuthorizing(false)}>Cancel
-          </button> 
-          <p>{reauthError}</p>
-        </form> 
-      </div>
-    )
+    return ( 
+      <ReauthForm 
+      reauthError={reauthError}
+      reauthEmail={reauthEmail} 
+      reauthPassword={reauthPassword} 
+      reauthUser={reauthUser} 
+      setAuthorizing={setAuthorizing} 
+      setReauthEmail={setReauthEmail} 
+      setReauthPassword={setReauthPassword}
+      />
+    ) 
   }  
 
   if(isSettingPassword) { 
