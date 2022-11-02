@@ -25,7 +25,7 @@ const Login: React.FunctionComponent = () => {
       errorCode === 'auth/wrong-password' && setLoginError('password is incorrect')
       errorCode === 'auth/user-not-found' && setLoginError('User not found') 
     });
-  }    
+  }
   
   return ( 
     <>  

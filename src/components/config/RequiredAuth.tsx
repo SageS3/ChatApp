@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react'  
 import {useNavigate} from 'react-router-dom';  
-import {getAuth, onAuthStateChanged} from 'firebase/auth'
-
+import {onAuthStateChanged} from 'firebase/auth'
+import {auth} from './firebase'
 type RequiredAuthProps = {
   children: React.ReactNode,
 }   
 
 function RequiredAuth({children}:RequiredAuthProps) {
   const [authenticated, setAuthenticated] = useState(false) 
-  const auth = getAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -21,7 +20,7 @@ function RequiredAuth({children}:RequiredAuthProps) {
       if(user){
         setAuthenticated(true) 
       } else {
-        console.error('unauthorized')
+        console.log('unauthorized')
         setAuthenticated(false)
         navigate('/')
       }

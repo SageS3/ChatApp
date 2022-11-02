@@ -15,8 +15,7 @@ export default function Register(props: registerProps){
   const [password, setPassword] = useState<string>('')
   const [registerError, setRegisterError] = useState<string>(''); 
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  // const [loading, setLoading] = useState<boolean>(false)
-  console.log('Register Form log')
+
   // When register form is submitted, updates user.photoURL
   const createDefaultProfilePic = async (user: any, snapShot:string) => { 
     await updateProfile(user, {photoURL: snapShot}) 
@@ -64,11 +63,10 @@ export default function Register(props: registerProps){
     if(registerError !== '') setRegisterError('') 
     if(password !== confirmPassword) setRegisterError('Password does not match')
     createUserWithEmailAndPassword(auth, email, password) 
-    .then((userCredential) => {
+    .then(() => {
       const currentUser = auth.currentUser
       addUserToFirestore(email, currentUser)
       props.setForm('login')
-      const user = userCredential.user
     }) 
     .catch((error) =>{  // error handling 
       const errorMessage = error.message  

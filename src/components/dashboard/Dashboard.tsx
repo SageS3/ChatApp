@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react'
 import Sidebar from '../dashboard/Sidebar' 
-import {signOut, updateProfile, updateEmail, reauthenticateWithCredential, EmailAuthProvider} from 'firebase/auth'
-import {auth} from '../config/firebase'
+import {signOut, updateProfile, updateEmail, reauthenticateWithCredential, EmailAuthProvider, updatePassword} from 'firebase/auth'
+import {auth, db} from '../config/firebase'
 import {updateDoc, collection, doc } from 'firebase/firestore'
-import {db} from '../../components/config/firebase'
 import Profile from '../Profile'
 import Threads from '../Threads' 
 import './Dashboard.css'
@@ -34,7 +33,15 @@ const Dashboard = () => {
       setUserName(user.displayName) 
       setUserEmail(user.email)
       setUserPhoto(user.photoURL)
-    } 
+    }  
+
+    return () => { 
+      if(user){  
+        setUserName(user.displayName) 
+        setUserEmail(user.email)
+        setUserPhoto(user.photoURL)
+      } 
+    }
   },[user])  
 
   const updateUsername = async (user:any) => {    
@@ -65,7 +72,9 @@ const Dashboard = () => {
         console.log(error.message)
         setReauthError('incorrect email or password')
       });
-    }
+    } 
+    setReauthEmail('')
+    setReauthPassword('')
   } 
 
   const updateUserEmail = async (user:any) => {  

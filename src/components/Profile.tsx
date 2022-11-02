@@ -1,6 +1,6 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import SetNewPassword from './editProfileForms/SetNewPassword'
-import ReauthForm from './editProfileForms/ReauthForm'
+import ReauthForm from './editProfileForms/ReauthForm' 
 import { updateProfile} from 'firebase/auth'
 import { auth, storage } from '../components/config/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
@@ -23,21 +23,32 @@ type ProfileProps = {
   reauthEmail: string, 
   reauthPassword: string, 
   reauthError:string
-}
+}  
 
 const Profile = (props:ProfileProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
   const [isSettingPassword, setIsSettingPassword] = useState<Boolean>(false)
-
   const { 
     userName, userEmail, isUpdating, setUserName, 
     setUserEmail, updateUser, userPhoto, setUserPhoto, 
     authorizing, reauthEmail, reauthPassword, reauthUser, 
     setAuthorizing, setReauthEmail, setReauthPassword, reauthError
-    } = props   
- 
+  } = props  
+  
   const user = auth.currentUser 
+  
+  useEffect(() => { 
+    return () => { 
+      if(user){  
+        setUserName(user.displayName) 
+        setUserEmail(user.email)
+        setUserPhoto(user.photoURL)
+      } 
+    }
+  },[]) 
+ 
+ 
 
   const preventEnterKey = (e:any) => { 
     e.key === 'Enter' && e.preventDefault()

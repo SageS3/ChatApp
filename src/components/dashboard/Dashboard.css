@@ -14,6 +14,9 @@
 .user-dashboard main {
   grid-area: main;
   background-color: rgb(33, 30, 41);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .user-dashboard .user-input {
   grid-area: input;
@@ -24,7 +27,7 @@
   padding: 10px;
 }
 .user-dashboard .user-input input {
-  width: 600px;
+  width: 100%;
   height: 30px;
   background-color: rgb(55, 47, 73);
   border-radius: 12px;
