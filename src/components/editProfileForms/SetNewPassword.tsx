@@ -7,7 +7,8 @@ type SetNewPasswordProps = {
 }
 const SetNewPassword = ({setIsSettingPassword}:SetNewPasswordProps) => { 
   const [newPassword, setNewPassword] = useState('') 
-  const [confirmNewPassword, setConfirmNewPassword] = useState('')
+  const [confirmNewPassword, setConfirmNewPassword] = useState('') 
+  const [formError, setFormError] = useState('')
 
   useEffect(() => { 
     console.log('set new password form')
@@ -15,8 +16,9 @@ const SetNewPassword = ({setIsSettingPassword}:SetNewPasswordProps) => {
 
   const user = auth.currentUser
 
-  const handleFormSubmit = () => { 
-    if(confirmNewPassword != newPassword) console.log('password is different')
+  const handleFormSubmit = (e: any) => {  
+    e.preventDefault()
+    if(confirmNewPassword != newPassword) setFormError('Passwords not matching')
     if(user) { 
       updatePassword(user, confirmNewPassword) 
       .then(() => { 
@@ -26,7 +28,7 @@ const SetNewPassword = ({setIsSettingPassword}:SetNewPasswordProps) => {
   }
   return (
     <div className='password-modal-container'> 
-      <form className='password-modal' onSubmit={() => handleFormSubmit()}> 
+      <form className='password-modal' onSubmit={(e) => handleFormSubmit(e)}> 
         <h3>Set Password</h3>
         <input  
           type="password"  
@@ -42,7 +44,8 @@ const SetNewPassword = ({setIsSettingPassword}:SetNewPasswordProps) => {
         />
         <button type='submit'>confirm</button>
         <button type='button' onClick={() => setIsSettingPassword(false)}>cancel</button>
-      </form>  
+        {formError !== '' && <p>{formError}</p>}
+      </form>   
     </div>
   )
 }
