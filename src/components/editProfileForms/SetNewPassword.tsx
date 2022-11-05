@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react'
-import { updatePassword,reauthenticateWithCredential} from 'firebase/auth' 
+import { updatePassword,reauthenticateWithCredential, EmailAuthProvider} from 'firebase/auth' 
 import {auth} from '../config/firebase' 
 
 import './SetNewPassword.css'
 type SetNewPasswordProps = { 
-  setIsSettingPassword: (a:boolean) => void
+  setIsSettingPassword: (a:boolean) => void, 
+  userEmail: string
 }
-const SetNewPassword = ({setIsSettingPassword}:SetNewPasswordProps) => { 
+const SetNewPassword = ({setIsSettingPassword, userEmail}:SetNewPasswordProps) => { 
   const [newPassword, setNewPassword] = useState('') 
   const [confirmNewPassword, setConfirmNewPassword] = useState('') 
   const [formError, setFormError] = useState('') 
@@ -16,20 +17,39 @@ const SetNewPassword = ({setIsSettingPassword}:SetNewPasswordProps) => {
     console.log('set new password form')
   },[])  
 
-  const user = auth.currentUser
+  const user = auth.currentUser  
 
-  const handleFormSubmit = (e: any) => {  
-    e.preventDefault()
-    if(confirmNewPassword != newPassword) setFormError('Passwords not matching')
-    if(user) {  
-
-      updatePassword(user, confirmNewPassword) 
+  const updateUserPassword = async () => {  
+    if(user){ 
+      await updatePassword(user, confirmNewPassword) 
       .then(() => { 
-        console.log('password updated')
+        console.log('password updated') 
+        setIsSettingPassword(false)
+      }) 
+      .catch((error) => { 
+        setFormError(error)
       })
     }
-  } 
+  }
 
+  const handleFormSubmit = async (e: any) => {  
+    e.preventDefault() 
+    setFormError('')
+    if(confirmNewPassword !== newPassword) setFormError('Passwords not matching')
+    if(user) { 
+      const credentials = EmailAuthProvider.credential(userEmail, currentPassword)
+      await reauthenticateWithCredential(user, credentials )  
+      .then(() => { 
+        updateUserPassword()
+      })
+      .catch((error) => { 
+        setFormError(error)
+      }) 
+    }  
+    setCurrentPassword('') 
+    setNewPassword('') 
+    setConfirmNewPassword('') 
+  }
   // const credentials = EmailAuthProvider.credential(reauthEmail, reauthPassword)
 
   // const reauthUser = async (event:any) => { 
