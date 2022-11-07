@@ -1,13 +1,11 @@
-import {useState} from 'react' 
-import ReauthForm from './ReauthForm'
 import {deleteUser } from "firebase/auth";
 import {auth} from '../config/firebase'
 
 type DeleteAccountFormProps = { 
-  setIsDeletingAccount: (a:boolean) => void
+  setIsDeletingAccount: (a:boolean) => void, 
+  setAuthorizing: (a:boolean) => void
 }
-const DeleteAccountForm = ({setIsDeletingAccount}:DeleteAccountFormProps) => { 
-  const [isUserReauth, setIsUserReauth] = useState<boolean>(false)
+const DeleteAccountForm = ({setIsDeletingAccount, setAuthorizing}:DeleteAccountFormProps) => { 
   const user = auth.currentUser
 
   const handleDeleteAccount = async (event:any) => {  
@@ -18,11 +16,11 @@ const DeleteAccountForm = ({setIsDeletingAccount}:DeleteAccountFormProps) => {
         console.log('User Account Successfully Deleted')
       }) 
       .catch((error) => { 
-        console.log(error)
+        error.message.includes('requires-recent-login') && setAuthorizing(true)
       })
     }
   }  
-  
+
   return ( 
     <div className="delete-account-form-container"> 
       <form onSubmit={(event) => handleDeleteAccount(event)}>  
