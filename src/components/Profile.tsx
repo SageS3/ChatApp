@@ -5,6 +5,7 @@ import { updateProfile} from 'firebase/auth'
 import { auth, storage } from '../components/config/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import './Profile.css'
+import DeleteAccountForm from './editProfileForms/DeleteAccountForm'
 
 type ProfileProps = { 
   setUserEmail: (a: string | null) => void,
@@ -28,7 +29,8 @@ type ProfileProps = {
 const Profile = (props:ProfileProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
-  const [isSettingPassword, setIsSettingPassword] = useState<Boolean>(false)
+  const [isSettingPassword, setIsSettingPassword] = useState<boolean>(false)
+  const [isDeletingAccout, setIsDeletingAccount] = useState<boolean>(false)
   const { 
     userName, userEmail, isUpdating, setUserName, 
     setUserEmail, updateUser, userPhoto, setUserPhoto, 
@@ -37,19 +39,16 @@ const Profile = (props:ProfileProps) => {
   } = props  
   
   const user = auth.currentUser 
-  
+
   useEffect(() => { 
     return () => { 
       if(user){  
         setUserName(user.displayName) 
         setUserEmail(user.email)
-        setUserPhoto(user.photoURL)
       } 
     }
   },[]) 
  
- 
-
   const preventEnterKey = (e:any) => { 
     e.key === 'Enter' && e.preventDefault()
   } 
@@ -95,12 +94,23 @@ const Profile = (props:ProfileProps) => {
     ) 
   }  
 
-  if(isSettingPassword) { 
+  if(isSettingPassword) {  
     return( 
-      <SetNewPassword setIsSettingPassword={setIsSettingPassword}/>
+      <SetNewPassword 
+      setIsSettingPassword={setIsSettingPassword} 
+      userEmail={userEmail} 
+      />
+    )
+  }  
+
+  if(isDeletingAccout){ 
+    return( 
+      <DeleteAccountForm 
+      setIsDeletingAccount={setIsDeletingAccount} 
+      setAuthorizing={setAuthorizing}
+      />
     )
   }
-
   return (
     <form onSubmit={(e) => updateUser(e)} className='profile-wrapper' >
       <div className='edit_image_container'> 
@@ -137,7 +147,7 @@ const Profile = (props:ProfileProps) => {
       </div>  
       <div className='sensitive-zone'>
         <button type='button' onClick={() => setIsSettingPassword(true)}>Change Password</button>
-        <button>Delete Account</button>
+        <button type='button' onClick={() => setIsDeletingAccount(true)}>Delete Account</button>
       </div>
       { 
         isUpdating ? <button type='submit' disabled={isUpdating}>Loading...</button> : 
