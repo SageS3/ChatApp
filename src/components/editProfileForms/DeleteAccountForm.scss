@@ -1,0 +1,45 @@
+.delete-account-container {  
+  width: 100vw; 
+  height: 100vh;
+  position: absolute;
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%,-50%); 
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  background-color: rgb(20,20,40,.4); 
+
+  .delete-account-modal { 
+    width: 500px; 
+    height: auto; 
+    background-color: rgb(55,47,73);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;  
+    border-radius: 12px; 
+    border: 1px solid rgb(120,120,120);
+    margin-bottom: 200px;
+    
+    button {  
+      width: 50%;
+      background-color: rgb(33,30,41);
+      border: none; 
+      margin: 10px 0 10px 0; 
+      color: white; 
+      height: 35px;  
+      border-radius: 12px; 
+      font-size: 1.1rem; 
+      cursor: pointer;
+    }  
+    
+    button:first-of-type{  
+      outline: 1px solid rgb(255,6,200);
+      transition: outline 200ms ease-in;  
+      &:hover{ 
+        outline: 2px solid rgb(255,6,200);
+      }
+     }
+  }
+}
