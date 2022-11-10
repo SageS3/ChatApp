@@ -1,13 +1,15 @@
 import {useEffect, useState} from 'react'
-import { updatePassword,reauthenticateWithCredential, EmailAuthProvider} from 'firebase/auth' 
+import {updatePassword,reauthenticateWithCredential, EmailAuthProvider} from 'firebase/auth' 
 import {auth} from '../config/firebase' 
 
 import './SetNewPassword.css'
 type SetNewPasswordProps = { 
   setIsSettingPassword: (a:boolean) => void, 
-  userEmail: string
+  userEmail: string, 
+  isUpdating: boolean, 
+  setIsUpdating: (a:boolean) => void
 }
-const SetNewPassword = ({setIsSettingPassword, userEmail}:SetNewPasswordProps) => { 
+const SetNewPassword = ({setIsSettingPassword, userEmail, isUpdating, setIsUpdating}:SetNewPasswordProps) => { 
   const [newPassword, setNewPassword] = useState('') 
   const [confirmNewPassword, setConfirmNewPassword] = useState('') 
   const [formError, setFormError] = useState('') 
@@ -50,23 +52,6 @@ const SetNewPassword = ({setIsSettingPassword, userEmail}:SetNewPasswordProps) =
     setNewPassword('') 
     setConfirmNewPassword('') 
   }
-  // const credentials = EmailAuthProvider.credential(reauthEmail, reauthPassword)
-
-  // const reauthUser = async (event:any) => { 
-  //   event.preventDefault()
-  //   if(user){ 
-  //     await reauthenticateWithCredential(user, credentials )
-  //     .then(() => {
-  //       console.log('user reauthenticated')
-  //       setAuthorizing(false)
-  //     }).catch((error) => { 
-  //       console.log(error.message)
-  //       setReauthError('incorrect email or password')
-  //     });
-  //   } 
-  //   setReauthEmail('')
-  //   setReauthPassword('')
-  // } 
 
   return (
     <div className='password-modal-container'> 
@@ -89,8 +74,12 @@ const SetNewPassword = ({setIsSettingPassword, userEmail}:SetNewPasswordProps) =
           placeholder="Confirm New Password"  
           value={confirmNewPassword} 
           onChange={ event => setConfirmNewPassword(event.target.value)}
-        />
+        /> 
+        {isUpdating ?
+        <button>loading...</button> :
         <button type='submit'>confirm</button>
+        }
+        
         <button type='button' onClick={() => setIsSettingPassword(false)}>cancel</button>
         {formError !== '' && <p>{formError}</p>}
       </form>   

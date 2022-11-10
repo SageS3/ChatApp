@@ -99,7 +99,9 @@ const Profile = (props:ProfileProps) => {
     return( 
       <SetNewPassword 
       setIsSettingPassword={setIsSettingPassword} 
-      userEmail={userEmail} 
+      userEmail={userEmail}  
+      setIsUpdating={setIsUpdating}
+      isUpdating={isUpdating}
       />
     )
   }  
