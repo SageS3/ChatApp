@@ -1,31 +1,39 @@
 import {deleteUser } from "firebase/auth";
 import {auth} from '../config/firebase'
-
+import './DeleteAccountForm.css'
 type DeleteAccountFormProps = { 
-  setIsDeletingAccount: (a:boolean) => void, 
-  setAuthorizing: (a:boolean) => void
+  setIsDeletingAccount: (a:boolean) => void,
+  setAuthorizing: (a:boolean) => void, 
+  setIsUpdating: (a:boolean) => void, 
+  isUpdating: boolean
 }
-const DeleteAccountForm = ({setIsDeletingAccount, setAuthorizing}:DeleteAccountFormProps) => { 
-  const user = auth.currentUser
+const DeleteAccountForm = (props:DeleteAccountFormProps) => { 
+  const user = auth.currentUser 
+  const { setIsDeletingAccount, setAuthorizing, setIsUpdating, isUpdating} = props
 
   const handleDeleteAccount = async (event:any) => {  
     event.preventDefault()
-    if(user) { 
+    if(user) {  
+      setIsUpdating(true)
       await deleteUser(user) 
       .then(() => { 
         console.log('User Account Successfully Deleted')
       }) 
       .catch((error) => { 
         error.message.includes('requires-recent-login') && setAuthorizing(true)
-      })
+      }) 
+      setIsUpdating(false)
     }
   }  
 
   return ( 
-    <div className="delete-account-form-container"> 
-      <form onSubmit={(event) => handleDeleteAccount(event)}>  
-        <p>Are you sure you want to do this?</p>
-        <button type="submit">Delete Account</button> 
+    <div className="delete-account-container"> 
+      <form className='delete-account-modal' onSubmit={(event) => handleDeleteAccount(event)}>  
+        <p>Are you sure you want to do this?</p> 
+        {isUpdating ? <button>loading...</button> :
+        <button type="submit">delete account</button>  
+        
+        }
         <button type='button' onClick={() => setIsDeletingAccount(false)}>cancel</button>
       </form>
     </div> 

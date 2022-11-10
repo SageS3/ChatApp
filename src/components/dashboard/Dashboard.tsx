@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import Sidebar from '../dashboard/Sidebar' 
-import {signOut, updateProfile, updateEmail, reauthenticateWithCredential, EmailAuthProvider, updatePassword} from 'firebase/auth'
+import {signOut, updateProfile, updateEmail, reauthenticateWithCredential, EmailAuthProvider} from 'firebase/auth'
 import {auth, db} from '../config/firebase'
 import {updateDoc, collection, doc } from 'firebase/firestore'
 import Profile from '../Profile'
@@ -17,7 +17,7 @@ const Dashboard = () => {
   const [userName, setUserName] = useState<string | null>('')
   const [userEmail, setUserEmail] = useState<any>('')
   const [userPhoto, setUserPhoto] = useState<any>('')
-  const [updating, setUpdating] = useState<boolean>(false)
+  const [isUpdating, setIsUpdating] = useState<boolean>(false)
   const [authorizing, setAuthorizing] = useState<boolean>(false)
   const [reauthEmail, setReauthEmail] = useState<string>('')
   const [reauthPassword, setReauthPassword] = useState<string>('')
@@ -34,18 +34,10 @@ const Dashboard = () => {
       setUserEmail(user.email)
       setUserPhoto(user.photoURL)
     }  
-
-    return () => { 
-      if(user){  
-        setUserName(user.displayName) 
-        setUserEmail(user.email)
-        setUserPhoto(user.photoURL)
-      } 
-    }
   },[user])  
 
   const updateUsername = async (user:any) => {    
-    setUpdating(true)
+    setIsUpdating(true)
     //updating Firestore userName...
     const docRef = doc(collectionRef, user.uid) // document id === user.uid
     await updateDoc(docRef, { 
@@ -56,7 +48,7 @@ const Dashboard = () => {
     .then(() => { 
       console.log('updated username')
     })
-    setUpdating(false)
+    setIsUpdating(false)
   }  
 
   const credentials = EmailAuthProvider.credential(reauthEmail, reauthPassword)
@@ -78,7 +70,7 @@ const Dashboard = () => {
   } 
 
   const updateUserEmail = async (user:any) => {  
-    setUpdating(true) 
+    setIsUpdating(true) 
     await updateEmail(user, userEmail)
     .then(() => {
       console.log('email updated')
@@ -87,7 +79,7 @@ const Dashboard = () => {
       console.log(error.message)
       error.message.includes('auth/requires-recent-login') && setAuthorizing(true)
     });
-    setUpdating(false) 
+    setIsUpdating(false) 
   }
   
   const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {  
@@ -130,7 +122,7 @@ const Dashboard = () => {
           setUserName={setUserName}
           updateUser={updateUserProfile}
           setUserEmail={setUserEmail}
-          isUpdating={updating}
+          isUpdating={isUpdating}
           userPhoto={userPhoto}
           setUserPhoto={setUserPhoto}
           authorizing={authorizing} 
@@ -140,7 +132,8 @@ const Dashboard = () => {
           setReauthEmail={setReauthEmail}
           setReauthPassword={setReauthPassword}
           setAuthorizing={setAuthorizing}
-          reauthError={reauthError}
+          reauthError={reauthError} 
+          setIsUpdating={setIsUpdating}
         />}
         {dashboard === 'chats' && <Threads/>}
       </main>

@@ -15,7 +15,8 @@ type ProfileProps = {
   setReauthEmail: (e:any) => void, 
   setReauthPassword: (e:any) => void, 
   setUserPhoto: (a: string | null) => void, 
-  setAuthorizing: (a:boolean) => void,
+  setAuthorizing: (a:boolean) => void, 
+  setIsUpdating: (a:boolean) => void,
   userName: any, 
   userEmail: string,
   isUpdating: boolean, 
@@ -35,7 +36,7 @@ const Profile = (props:ProfileProps) => {
     userName, userEmail, isUpdating, setUserName, 
     setUserEmail, updateUser, userPhoto, setUserPhoto, 
     authorizing, reauthEmail, reauthPassword, reauthUser, 
-    setAuthorizing, setReauthEmail, setReauthPassword, reauthError
+    setAuthorizing, setReauthEmail, setReauthPassword, reauthError, setIsUpdating
   } = props  
   
   const user = auth.currentUser 
@@ -108,9 +109,12 @@ const Profile = (props:ProfileProps) => {
       <DeleteAccountForm 
       setIsDeletingAccount={setIsDeletingAccount} 
       setAuthorizing={setAuthorizing}
+      setIsUpdating={setIsUpdating} 
+      isUpdating={isUpdating}
       />
     )
   }
+
   return (
     <form onSubmit={(e) => updateUser(e)} className='profile-wrapper' >
       <div className='edit_image_container'> 
