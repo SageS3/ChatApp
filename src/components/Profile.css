@@ -21,8 +21,8 @@
   align-items: center;
   margin: 20px 0 0 0;
   background-color: rgb(120, 120, 120);
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   border-radius: 100px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -30,8 +30,8 @@
   overflow: hidden;
 }
 .profile-wrapper .edit_image_container .img-container .profile-picture {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   border-radius: 100%;
   -o-object-fit: cover;
      object-fit: cover;
