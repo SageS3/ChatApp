@@ -33,6 +33,7 @@
   width: 70%;
   margin-bottom: 20px;
   font-size: 1.3rem;
+  border-radius: 12px;
   background-color: rgb(55, 47, 73);
   outline: none;
   border: none;
@@ -47,7 +48,7 @@
 .sidebar-wrapper .image-container {
   width: 90px;
   height: 90px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-top: 50px;
   border-radius: 100px;
   background-color: rgb(33, 30, 41);
@@ -62,9 +63,10 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.sidebar-wrapper p {
-  margin-bottom: 50px;
+.sidebar-wrapper h3 {
+  margin-bottom: 40px;
   margin-top: 0;
+  color: white;
 }
 
 @media screen and (max-width: 1000px) {
