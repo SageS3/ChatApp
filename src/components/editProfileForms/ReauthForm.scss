@@ -4,7 +4,7 @@
   position: absolute;
   left: 50%; 
   top: 50%; 
-  transform: translate(-50%,-60%); 
+  transform: translate(-50%,-50%); 
   display: flex; 
   justify-content: center;
   align-items: center; 
@@ -20,7 +20,7 @@
     flex-direction: column;  
     border-radius: 12px; 
     border: 1px solid rgb(120,120,120);
-
+    margin-bottom: 200px;
     h3 { 
       color: white; 
       margin-bottom: 32px;

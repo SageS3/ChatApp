@@ -1,32 +1,33 @@
-import './Sidebar.css'
-import {signOut, getAuth} from 'firebase/auth'
-
+import "./Sidebar.css"
+import { signOut } from "firebase/auth"
+import { auth } from "../config/firebase"
 type SidebarProps = {
-  setDashboard: (profile: string) => void,
+  setDashboard: (profile: string) => void
   userPhoto: string
-} 
+}
 
-const Sidebar: React.FC<SidebarProps> = ({setDashboard, userPhoto}:SidebarProps) => { 
-  const auth = getAuth()
+const Sidebar: React.FC<SidebarProps> = ({
+  setDashboard,
+  userPhoto,
+}: SidebarProps) => {
   let userDisplayName = auth.currentUser?.displayName
 
-  const handleLogOut = () => {
+  const handleLogOut = (auth: any) => {
     signOut(auth)
-    console.log('user is signed out')
+    console.log("user is signed out")
   }
-  
+
   return (
-    <div className='sidebar-wrapper'>
-      <div className='image-container'> 
-        <img src={userPhoto} alt=''/>
+    <div className="sidebar-wrapper">
+      <div className="image-container">
+        <img src={userPhoto} alt="" />
       </div>
-      {<p>{userDisplayName}</p>}
-      <button onClick={() => setDashboard('chats')}>Chats</button>
-      <button onClick={() => setDashboard('profile')}>Profile</button>
-      <button>Settings</button>
-      <button onClick={handleLogOut}>Logout</button>
+      {<h3>{userDisplayName}</h3>}
+      <button onClick={() => setDashboard("chats")}>Chats</button>
+      <button onClick={() => setDashboard("profile")}>Profile</button>
+      <button onClick={() => handleLogOut(auth)}>Logout</button>
     </div>
   )
 }
 
-export default Sidebar  
+export default Sidebar

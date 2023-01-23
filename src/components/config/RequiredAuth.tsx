@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from 'react'  
-import {useNavigate} from 'react-router-dom';  
-import {onAuthStateChanged} from 'firebase/auth'
-import {auth} from './firebase'
-type RequiredAuthProps = {
-  children: React.ReactNode,
-}   
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "./firebase"
+import "./RequiredAuth.css"
 
-function RequiredAuth({children}:RequiredAuthProps) {
-  const [authenticated, setAuthenticated] = useState(false) 
+type RequiredAuthProps = {
+  children: React.ReactNode
+}
+
+function RequiredAuth({ children }: RequiredAuthProps) {
+  const [authenticated, setAuthenticated] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -17,29 +19,25 @@ function RequiredAuth({children}:RequiredAuthProps) {
 
   const authCheck = () => {
     onAuthStateChanged(auth, (user) => {
-      if(user){
-        setAuthenticated(true) 
+      if (user) {
+        setAuthenticated(true)
       } else {
-        console.log('unauthorized')
+        console.log("unauthorized")
         setAuthenticated(false)
-        navigate('/')
+        navigate("/")
       }
-    });
-  } 
+    })
+  }
 
-  const loading = () => ( 
-    <div className='animation-container'>
-      <h2>Loading...</h2>
-    </div>
-  ) 
+  // change to cauldron eventually
+  const loading = () =>
+    setTimeout(() => (
+      <div className="sign_in_loading">
+        <h2>Loading...</h2>
+      </div>
+    ))
 
-  return (
-    <>
-    {authenticated ? children : loading()}
-    </>
-  )
+  return <>{authenticated ? children : loading()}</>
 }
 
 export default RequiredAuth
-
-

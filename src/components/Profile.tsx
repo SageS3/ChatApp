@@ -1,7 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import SetNewPassword from './editProfileForms/SetNewPassword'
 import ReauthForm from './editProfileForms/ReauthForm' 
-import { updateProfile} from 'firebase/auth'
+import { updateProfile } from 'firebase/auth'
 import { auth, storage } from '../components/config/firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import './Profile.css'
@@ -32,6 +32,7 @@ const Profile = (props:ProfileProps) => {
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
   const [isSettingPassword, setIsSettingPassword] = useState<boolean>(false)
   const [isDeletingAccout, setIsDeletingAccount] = useState<boolean>(false)
+
   const { 
     userName, userEmail, isUpdating, setUserName, 
     setUserEmail, updateUser, userPhoto, setUserPhoto, 
@@ -41,7 +42,8 @@ const Profile = (props:ProfileProps) => {
   
   const user = auth.currentUser 
 
-  useEffect(() => { 
+  useEffect(() => {  
+    console.log('rendered')
     return () => { 
       if(user){  
         setUserName(user.displayName) 
@@ -72,7 +74,7 @@ const Profile = (props:ProfileProps) => {
       await uploadBytes(fileRef, e.target.files[0]) // updating photo url in firebase storage
       const downloadedPhoto = await getDownloadURL(fileRef)
       setUserPhoto(downloadedPhoto)
-      await updateProfile(user, {photoURL: userPhoto }) // updating user photoURL in firebase Auth
+      await updateProfile(user, {photoURL: downloadedPhoto }) // updating user photoURL in firebase Auth
     } else {
       // set profile picture to last picture. useRef? 
       // or set profile picture to default user picture
@@ -127,7 +129,10 @@ const Profile = (props:ProfileProps) => {
           }
         </div>
           <button onClick={e => handleInputRef(e)}>Edit profile picture</button>
-        <input type='file' style={{display:'none'}} ref={fileInputRef} onChange={(e) => handlePictureChange(e)}/>
+        <input  
+          type='file' style={{display:'none'}}  
+          ref={fileInputRef} onChange={(e) => handlePictureChange(e)}  
+        />
       </div>
       <div className='profile-info-container'>
         <h3>Username</h3>  

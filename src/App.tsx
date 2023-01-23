@@ -5,22 +5,22 @@ import Dashboard from './components/dashboard/Dashboard'
 import RequiredAuth from './components/config/RequiredAuth'; 
 
 function App() {
- 
-  return (  
-      <div className="App">   
-        <Router>  
-          <Routes>  
-            <Route path='/' element={<EntryPage/> 
-            }>
-            </Route>
-            <Route path='/dashboard' 
-            element={
-            <RequiredAuth>
-              <Dashboard/>
-            </RequiredAuth> 
-            }/>
-          </Routes>
-        </Router>
+
+  return (
+      <div className="App">
+          <Router>
+            <Routes>
+              <Route path='/' element={<EntryPage />
+              }>
+              </Route>
+              <Route path='/dashboard' 
+              element={
+              <RequiredAuth>
+                <Dashboard/>
+              </RequiredAuth> 
+              }/>
+            </Routes>
+          </Router>
       </div> 
   );
 }
