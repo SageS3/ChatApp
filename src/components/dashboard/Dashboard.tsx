@@ -7,7 +7,7 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
 } from "firebase/auth"
-import { auth, db, user } from "../config/firebase"
+import { auth, db } from "../config/firebase"
 import { updateDoc, collection, doc } from "firebase/firestore"
 import Profile from "../Profile"
 import Threads from "../Threads"
@@ -29,9 +29,9 @@ const Dashboard = () => {
   const [reauthPassword, setReauthPassword] = useState<string>("")
   const [reauthError, setReauthError] = useState<string>("")
 
+  const user = auth.currentUser
   const userDisplayName = user?.displayName //used for the navbar
   const collectionRef = collection(db, "users")
-
   // onComponentDidMount update the user state
   useEffect(() => {
     if (user) {
