@@ -1,23 +1,22 @@
 @use "./styles/Mixins.scss";
 
 .profile-wrapper {
-  align-self: flex-start;
   border-radius: 12px;
-  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
+  height: 100vh;
   max-width: 600px;
-  // box-shadow: rgba(0, 0, 0, 05) 3px 4px 12px;
+
   .edit_image_container {
     @include Mixins.display-flex-center;
     flex-direction: column;
 
     .img-container {
       @include Mixins.display-flex-center;
-      margin: 20px 0 0 0;
+      position: absolute;
       background-color: rgb(55, 47, 73);
       width: 120px;
       height: 120px;
@@ -62,20 +61,23 @@
         object-fit: cover;
       }
     }
-    > button {
+    > .image__edit--button {
       @include Mixins.display-flex-center;
-      padding: 15px;
-      margin-top: 15px;
+      position: relative;
+      left: 48px;
+      top: 48px;
       background-color: rgb(33, 30, 41);
+      outline: 1px solid rgb(100, 100, 100);
       border: none;
-      border-radius: 12px;
-      width: auto;
-      height: 25px;
+      border-radius: 100px;
+      width: 42px;
+      height: 42px;
       color: white;
       cursor: pointer;
-      transition: background-color 200ms ease-in-out;
+      transition: transform 200ms ease-in, outline 200ms ease-in;
       &:hover {
-        background-color: rgb(55, 47, 73);
+        outline: 1px solid rgb(130, 130, 130);
+        transform: scale(1.1);
       }
     }
   }
@@ -88,9 +90,7 @@
   .profile-info-container {
     width: 100%;
     max-width: 600px;
-    // padding: 20px 20px 0 20px;
     border-bottom: 1px solid rgb(120, 120, 120);
-    margin: 20px 0 20px 0;
     @include Mixins.display-flex-center;
     overflow: hidden;
 

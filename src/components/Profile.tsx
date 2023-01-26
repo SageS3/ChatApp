@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react"
 import SetNewPassword from "./editProfileForms/SetNewPassword"
 import ReauthForm from "./editProfileForms/ReauthForm"
+import { FiEdit } from "react-icons/fi"
+import { IconContext } from "react-icons"
 import { updateProfile } from "firebase/auth"
 import { storage, auth } from "../components/config/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
@@ -141,7 +143,16 @@ const Profile = (props: ProfileProps) => {
             <img className="profile-picture" src={userPhoto} />
           )}
         </div>
-        <button onClick={(e) => handleInputRef(e)}>Edit profile picture</button>
+        <button
+          className="image__edit--button"
+          onClick={(e) => handleInputRef(e)}
+        >
+          <FiEdit
+            size="1.2em"
+            color={"rgb(100,100,100)"}
+            className="button__icon"
+          />
+        </button>
         <input
           type="file"
           style={{ display: "none" }}
