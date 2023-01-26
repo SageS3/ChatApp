@@ -1,7 +1,8 @@
 import { deleteUser } from "firebase/auth"
 import { auth, storage } from "../config/firebase"
 import { ref, deleteObject } from "firebase/storage"
-// import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore"
+import { db } from "../config/firebase"
 
 import "./DeleteAccountForm.css"
 
@@ -22,6 +23,13 @@ const DeleteAccountForm = (props: DeleteAccountFormProps) => {
       .catch(() => console.log("user storage deletion unsuccessful"))
   }
 
+  const handleDeleteUserDoc = async () => {
+    const userID = user?.uid
+    await deleteDoc(doc(db, `users/${userID}`))
+      .then(() => console.log("user doc deleted"))
+      .catch(() => console.log("user doc deletion unsuccessful"))
+  }
+
   const handleDeleteAccount = async (event: any) => {
     event.preventDefault()
     if (user) {
@@ -30,6 +38,7 @@ const DeleteAccountForm = (props: DeleteAccountFormProps) => {
         .then(() => {
           console.log("User Account Successfully Deleted")
           handleDeleteUserStorage()
+          handleDeleteUserDoc()
         })
         .catch((error) => {
           error.message.includes("requires-recent-login") &&
