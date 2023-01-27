@@ -147,11 +147,7 @@ const Profile = (props: ProfileProps) => {
           className="image__edit--button"
           onClick={(e) => handleInputRef(e)}
         >
-          <FiEdit
-            size="1.2em"
-            color={"rgb(100,100,100)"}
-            className="button__icon"
-          />
+          <FiEdit size="1.2em" color={"white"} className="button__icon" />
         </button>
         <input
           type="file"

@@ -90,14 +90,14 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  left: 48px;
-  top: 48px;
+  left: 45px;
+  top: 45px;
   background-color: rgb(33, 30, 41);
   outline: 1px solid rgb(100, 100, 100);
   border: none;
   border-radius: 100px;
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
   color: white;
   cursor: pointer;
   transition: transform 200ms ease-in, outline 200ms ease-in;
@@ -148,10 +148,11 @@
   background-color: rgb(33, 30, 41);
   border-bottom: 1px solid rgb(120, 120, 120);
   cursor: pointer;
-  transition: border 200ms ease-out;
+  transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out;
 }
 .profile-wrapper .sensitive-zone button:hover {
   border-bottom: 5px solid rgb(120, 120, 120);
+  margin-bottom: -5px;
 }
 .profile-wrapper .sensitive-zone button:nth-of-type(2) {
   outline: none;
@@ -168,28 +169,31 @@
   height: 40px;
   padding: 10px;
   background-color: rgb(55, 47, 73);
-  outline: none;
   border: none;
   color: white;
-  margin-top: 100px;
+  margin-top: 80px;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: outline 700ms ease-out;
+  transition: outline 200ms ease-out;
   border-radius: 12px;
 }
 .profile-wrapper > button:hover {
   outline: 1px solid rgb(255, 6, 200);
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   .profile-wrapper {
-    box-shadow: none;
+    height: 100%;
   }
 }
 @media screen and (max-width: 625px) {
+  .profile-wrapper {
+    padding-left: 80px;
+    padding-right: 80px;
+    height: 100%;
+  }
   .profile-wrapper .sensitive-zone {
     flex-direction: column;
-    width: 100%;
   }
   .profile-wrapper .sensitive-zone button {
     width: 100%;
@@ -200,9 +204,9 @@
 }
 @media screen and (max-width: 500px) {
   .profile-wrapper {
-    padding-left: 100px;
-    padding-right: 100px;
-    padding: 10%;
+    padding-left: 80px;
+    padding-right: 80px;
+    height: 100%;
   }
   .profile-wrapper .profile-info-container {
     display: flex;
