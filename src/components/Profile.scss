@@ -1,6 +1,6 @@
 @use "./styles/Mixins.scss";
 
-.profile-wrapper {
+.profile--wrapper {
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -34,23 +34,23 @@
       }
       @keyframes pulse {
         0% {
-          transform: scale(-0.2);
+          transform: scale(-0.5);
         }
         25% {
           transform: scale(0.5);
-          border: 2px solid rgb(200, 200, 200);
+          border: 2px solid rgb(255, 6, 200, 0.6);
         }
         50% {
           transform: scale(1);
-          border: 2px solid rgb(200, 200, 200);
+          border: 2px solid rgb(255, 6, 200, 0.6);
         }
         75% {
           transform: scale(1.5);
-          border: 2px solid rgb(100, 100, 100);
+          border: 2px solid rgb(255, 6, 200, 0.4);
         }
         100% {
           transform: scale(2);
-          border: 1px solid rgb(100, 100, 100, 0);
+          border: 2px solid rgb(255, 6, 200, 0.2);
         }
       }
 
@@ -157,8 +157,12 @@
     font-size: 1.1rem;
     transition: outline 200ms ease-out;
     border-radius: 12px;
-    &:hover {
-      outline: 1px solid rgb(255, 6, 200);
+    outline: 1px solid rgb(255, 6, 200);
+
+    &:disabled {
+      outline: none;
+      color: rgb(120, 120, 120);
+      cursor: default;
     }
   }
 }

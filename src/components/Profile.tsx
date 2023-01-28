@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react"
 import SetNewPassword from "./editProfileForms/SetNewPassword"
 import ReauthForm from "./editProfileForms/ReauthForm"
 import { FiEdit } from "react-icons/fi"
-import { IconContext } from "react-icons"
 import { updateProfile } from "firebase/auth"
 import { storage, auth } from "../components/config/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
@@ -55,6 +54,9 @@ const Profile = (props: ProfileProps) => {
     setIsUpdating,
   } = props
 
+  const isSaveBtnDisabled =
+    userName === user?.displayName && userEmail === user?.email
+
   useEffect(() => {
     console.log("rendered")
     return () => {
@@ -70,7 +72,7 @@ const Profile = (props: ProfileProps) => {
   }
 
   const setUsernameHandler = (e: any) => {
-    // not preventing page reload (not working)
+    // not preventing page reload
     setUserName(e.target.value)
     e.preventDefault()
   }
@@ -134,7 +136,7 @@ const Profile = (props: ProfileProps) => {
   }
 
   return (
-    <form onSubmit={(e) => updateUser(e)} className="profile-wrapper">
+    <form onSubmit={(e) => updateUser(e)} className="profile--wrapper">
       <div className="edit_image_container">
         <div className="img-container">
           {uploadingPhoto ? (
@@ -191,7 +193,9 @@ const Profile = (props: ProfileProps) => {
           Loading...
         </button>
       ) : (
-        <button type="submit">Save</button>
+        <button disabled={isSaveBtnDisabled} type="submit">
+          Save
+        </button>
       )}
     </form>
   )

@@ -1,4 +1,4 @@
-.threads-wrapper {
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,7 +7,7 @@
   height: 100%;
   position: relative;
 }
-.threads-wrapper .input_container {
+.main .input {
   width: 80%;
   height: 35px;
   padding: 0 14px 0 14px;
@@ -22,7 +22,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.threads-wrapper .input_container textarea {
+.main .input .input__textarea {
   width: 100%;
   height: 30px;
   background-color: rgb(55, 47, 73);

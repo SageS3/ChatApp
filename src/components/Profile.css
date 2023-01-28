@@ -1,4 +1,4 @@
-.profile-wrapper {
+.profile--wrapper {
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -8,13 +8,13 @@
   height: 100vh;
   max-width: 600px;
 }
-.profile-wrapper .edit_image_container {
+.profile--wrapper .edit_image_container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.profile-wrapper .edit_image_container .img-container {
+.profile--wrapper .edit_image_container .img-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +28,7 @@
   border: none;
   overflow: hidden;
 }
-.profile-wrapper .edit_image_container .img-container .image__loading {
+.profile--wrapper .edit_image_container .img-container .image__loading {
   border: 2px solid rgb(220, 220, 220);
   width: 30px;
   height: 30px;
@@ -38,54 +38,54 @@
 }
 @-webkit-keyframes pulse {
   0% {
-    transform: scale(-0.2);
+    transform: scale(-0.5);
   }
   25% {
     transform: scale(0.5);
-    border: 2px solid rgb(200, 200, 200);
+    border: 2px solid rgba(255, 6, 200, 0.6);
   }
   50% {
     transform: scale(1);
-    border: 2px solid rgb(200, 200, 200);
+    border: 2px solid rgba(255, 6, 200, 0.6);
   }
   75% {
     transform: scale(1.5);
-    border: 2px solid rgb(100, 100, 100);
+    border: 2px solid rgba(255, 6, 200, 0.4);
   }
   100% {
     transform: scale(2);
-    border: 1px solid rgba(100, 100, 100, 0);
+    border: 2px solid rgba(255, 6, 200, 0.2);
   }
 }
 @keyframes pulse {
   0% {
-    transform: scale(-0.2);
+    transform: scale(-0.5);
   }
   25% {
     transform: scale(0.5);
-    border: 2px solid rgb(200, 200, 200);
+    border: 2px solid rgba(255, 6, 200, 0.6);
   }
   50% {
     transform: scale(1);
-    border: 2px solid rgb(200, 200, 200);
+    border: 2px solid rgba(255, 6, 200, 0.6);
   }
   75% {
     transform: scale(1.5);
-    border: 2px solid rgb(100, 100, 100);
+    border: 2px solid rgba(255, 6, 200, 0.4);
   }
   100% {
     transform: scale(2);
-    border: 1px solid rgba(100, 100, 100, 0);
+    border: 2px solid rgba(255, 6, 200, 0.2);
   }
 }
-.profile-wrapper .edit_image_container .img-container .profile-picture {
+.profile--wrapper .edit_image_container .img-container .profile-picture {
   width: 120px;
   height: 120px;
   border-radius: 100px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.profile-wrapper .edit_image_container > .image__edit--button {
+.profile--wrapper .edit_image_container > .image__edit--button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,15 +102,15 @@
   cursor: pointer;
   transition: transform 200ms ease-in, outline 200ms ease-in;
 }
-.profile-wrapper .edit_image_container > .image__edit--button:hover {
+.profile--wrapper .edit_image_container > .image__edit--button:hover {
   outline: 1px solid rgb(130, 130, 130);
   transform: scale(1.1);
 }
-.profile-wrapper p {
+.profile--wrapper p {
   color: rgb(120, 120, 120);
   align-self: flex-start;
 }
-.profile-wrapper .profile-info-container {
+.profile--wrapper .profile-info-container {
   width: 100%;
   max-width: 600px;
   border-bottom: 1px solid rgb(120, 120, 120);
@@ -119,11 +119,11 @@
   align-items: center;
   overflow: hidden;
 }
-.profile-wrapper .profile-info-container h3 {
+.profile--wrapper .profile-info-container h3 {
   color: white;
   width: 200px;
 }
-.profile-wrapper .profile-info-container input {
+.profile--wrapper .profile-info-container input {
   background-color: rgba(0, 0, 0, 0);
   outline: none;
   font-size: 1.2rem;
@@ -131,7 +131,7 @@
   color: rgb(120, 120, 120);
   width: 100%;
 }
-.profile-wrapper .sensitive-zone {
+.profile--wrapper .sensitive-zone {
   width: 100%;
   max-width: 600px;
   display: flex;
@@ -139,7 +139,7 @@
   align-items: center;
   margin-top: 20px;
 }
-.profile-wrapper .sensitive-zone button {
+.profile--wrapper .sensitive-zone button {
   width: 45%;
   padding: 10px;
   font-size: 1.1rem;
@@ -150,19 +150,19 @@
   cursor: pointer;
   transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out;
 }
-.profile-wrapper .sensitive-zone button:hover {
+.profile--wrapper .sensitive-zone button:hover {
   border-bottom: 5px solid rgb(120, 120, 120);
   margin-bottom: -5px;
 }
-.profile-wrapper .sensitive-zone button:nth-of-type(2) {
+.profile--wrapper .sensitive-zone button:nth-of-type(2) {
   outline: none;
   color: rgb(205, 0, 80);
   border-bottom: 1px solid rgb(205, 0, 80);
 }
-.profile-wrapper .sensitive-zone button:nth-of-type(2):hover {
+.profile--wrapper .sensitive-zone button:nth-of-type(2):hover {
   border-bottom: 5px solid rgb(205, 0, 80);
 }
-.profile-wrapper > button {
+.profile--wrapper > button {
   align-self: flex-start;
   width: 200px;
   max-width: 100%;
@@ -176,9 +176,12 @@
   font-size: 1.1rem;
   transition: outline 200ms ease-out;
   border-radius: 12px;
-}
-.profile-wrapper > button:hover {
   outline: 1px solid rgb(255, 6, 200);
+}
+.profile--wrapper > button:disabled {
+  outline: none;
+  color: rgb(120, 120, 120);
+  cursor: default;
 }
 
 @media screen and (max-width: 1000px) {
