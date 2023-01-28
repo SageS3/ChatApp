@@ -1,14 +1,7 @@
-import { useEffect } from "react"
-import "./Threads.css"
+import React from "react"
 
 const Threads = () => {
-  // const [userMessages, setUserMessages] = useState<{}[]>([])
-
-  useEffect(() => {
-    console.log("threads component mounted")
-  }, [])
-
-  return <main className="main"></main>
+  return <main>Threads</main>
 }
 
 export default Threads
