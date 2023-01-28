@@ -168,16 +168,15 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .profile-wrapper {
+  .profile--wrapper {
     height: 100%;
   }
 }
 
 @media screen and (max-width: 625px) {
-  .profile-wrapper {
-    padding-left: 80px;
-    padding-right: 80px;
-    height: 100%;
+  .profile--wrapper {
+    padding-left: 10%;
+    padding-right: 10%;
     .sensitive-zone {
       flex-direction: column;
 
@@ -192,7 +191,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .profile-wrapper {
+  .profile--wrapper {
     padding-left: 80px;
     padding-right: 80px;
     height: 100%;

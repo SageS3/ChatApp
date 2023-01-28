@@ -185,33 +185,32 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .profile-wrapper {
+  .profile--wrapper {
     height: 100%;
   }
 }
 @media screen and (max-width: 625px) {
-  .profile-wrapper {
-    padding-left: 80px;
-    padding-right: 80px;
-    height: 100%;
+  .profile--wrapper {
+    padding-left: 10%;
+    padding-right: 10%;
   }
-  .profile-wrapper .sensitive-zone {
+  .profile--wrapper .sensitive-zone {
     flex-direction: column;
   }
-  .profile-wrapper .sensitive-zone button {
+  .profile--wrapper .sensitive-zone button {
     width: 100%;
   }
-  .profile-wrapper .sensitive-zone button:nth-of-type(2) {
+  .profile--wrapper .sensitive-zone button:nth-of-type(2) {
     margin-top: 10px;
   }
 }
 @media screen and (max-width: 500px) {
-  .profile-wrapper {
+  .profile--wrapper {
     padding-left: 80px;
     padding-right: 80px;
     height: 100%;
   }
-  .profile-wrapper .profile-info-container {
+  .profile--wrapper .profile-info-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -223,16 +222,16 @@
     overflow: hidden;
     min-width: 270px;
   }
-  .profile-wrapper .profile-info-container h3 {
+  .profile--wrapper .profile-info-container h3 {
     margin: 0 0 10px 0;
     display: flex;
     align-self: flex-start;
     justify-self: center;
   }
-  .profile-wrapper .profile-info-container input {
+  .profile--wrapper .profile-info-container input {
     margin: 0;
   }
-  .profile-wrapper button {
+  .profile--wrapper button {
     align-self: center;
     width: 100%;
   }

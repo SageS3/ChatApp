@@ -9,8 +9,8 @@ import {
 } from "firebase/auth"
 import { auth, db } from "../config/firebase"
 import { updateDoc, collection, doc } from "firebase/firestore"
-import Profile from "../Profile"
-import Threads from "../Threads"
+import Profile from "../profile/Profile"
+import Threads from "../chats/Threads"
 import "./Dashboard.css"
 
 const navigateTo = {

@@ -8,16 +8,7 @@ const Threads = () => {
     console.log("threads component mounted")
   }, [])
 
-  return (
-    <main className="main">
-      <div className="input">
-        <textarea
-          className="input__textarea"
-          placeholder="Type here..."
-        ></textarea>
-      </div>
-    </main>
-  )
+  return <main className="main"></main>
 }
 
 export default Threads

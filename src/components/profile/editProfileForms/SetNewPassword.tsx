@@ -4,7 +4,7 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
 } from "firebase/auth"
-import { user } from "../config/firebase"
+import { user } from "../../config/firebase"
 
 import "./SetNewPassword.css"
 type SetNewPasswordProps = {

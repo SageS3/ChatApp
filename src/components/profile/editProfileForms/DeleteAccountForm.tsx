@@ -1,8 +1,8 @@
 import { deleteUser } from "firebase/auth"
-import { auth, storage } from "../config/firebase"
+import { auth, storage } from "../../config/firebase"
 import { ref, deleteObject } from "firebase/storage"
 import { doc, deleteDoc } from "firebase/firestore"
-import { db } from "../config/firebase"
+import { db } from "../../config/firebase"
 
 import "./DeleteAccountForm.css"
 
