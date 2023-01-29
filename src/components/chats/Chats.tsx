@@ -1,4 +1,6 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
+import Input from "./Input"
+import Threads from "./Threads"
 import "./chats.css"
 
 const Chats = () => {
@@ -9,9 +11,11 @@ const Chats = () => {
   }, [])
 
   return (
-    <>
-      <header className="main__header">header</header>
-    </>
+    <div className="main__chats">
+      <header className="header">header</header>
+      <Threads />
+      <Input />
+    </div>
   )
 }
 

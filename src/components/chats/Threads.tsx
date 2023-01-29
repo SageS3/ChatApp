@@ -1,7 +1,7 @@
 import React from "react"
-
+import "./Threads.css"
 const Threads = () => {
-  return <main>Threads</main>
+  return <div className="threads">Threads</div>
 }
 
 export default Threads

@@ -1,3 +1,21 @@
-.main__header {
-  background-color: grey;
+@use "../styles/Colors.scss";
+
+.main__chats {
+  grid-area: main;
+  width: 100%;
+  // max-width: 600px;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 4fr 1.5fr;
+  grid-template-areas:
+    "navigate navigate"
+    "threads threads"
+    "input input";
+  gap: 4px;
+  background-color: Colors.$secondary-background-color;
+  .header {
+    grid-area: navigate;
+    background-color: Colors.$main-background-color;
+  }
 }
