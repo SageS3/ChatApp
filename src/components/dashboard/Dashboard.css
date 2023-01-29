@@ -2,10 +2,9 @@
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-gap: 4px;
+  gap: 4px;
   background-color: rgb(55, 47, 73);
   grid-template-columns: 280px 2fr;
-  grid-template-rows: 4fr 1fr;
   grid-template-areas: "sidebar main" "sidebar main";
 }
 .user-dashboard nav {
@@ -13,10 +12,9 @@
 }
 .user-dashboard main {
   grid-area: main;
-  background-color: rgb(33, 30, 41);
   display: flex;
   justify-content: center;
-  align-items: center;
+  background-color: rgb(33, 30, 41);
 }
 .user-dashboard .user-input {
   grid-area: input;
