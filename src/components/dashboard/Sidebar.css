@@ -46,6 +46,9 @@
 .sidebar-wrapper button:hover {
   outline: 2px solid rgb(120, 120, 120);
 }
+.sidebar-wrapper #btn--logout {
+  background-color: rgb(33, 30, 41);
+}
 .sidebar-wrapper .image-container {
   width: 90px;
   height: 90px;
