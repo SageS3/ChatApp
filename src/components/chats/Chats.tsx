@@ -3,16 +3,22 @@ import Input from "./Input"
 import Threads from "./Threads"
 import "./chats.css"
 
-const Chats = () => {
-  // const [userMessages, setUserMessages] = useState<{}[]>([])
+type ChatsProps = {
+  setDashboard: (a: string) => void
+}
 
+const Chats = ({ setDashboard }: ChatsProps) => {
   useEffect(() => {
     console.log("chats component mounted")
   }, [])
 
   return (
     <div className="main__chats">
-      <header className="header">header</header>
+      <header className="header">
+        <button className="button" onClick={() => setDashboard("friends")}>
+          Friends
+        </button>
+      </header>
       <Threads />
       <Input />
     </div>
