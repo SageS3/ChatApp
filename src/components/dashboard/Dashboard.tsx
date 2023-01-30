@@ -11,11 +11,13 @@ import { auth, db } from "../config/firebase"
 import { updateDoc, collection, doc } from "firebase/firestore"
 import Profile from "../profile/Profile"
 import Chats from "../chats/Chats"
+import Friends from "../chats/Friends"
 import "./Dashboard.css"
 
 const navigateTo = {
   chats: "chats",
   profile: "profile",
+  friends: "friends",
 }
 
 const Dashboard = () => {
@@ -143,7 +145,8 @@ const Dashboard = () => {
             setIsUpdating={setIsUpdating}
           />
         )}
-        {dashboard === "chats" && <Chats />}
+        {dashboard === "chats" && <Chats setDashboard={setDashboard} />}
+        {dashboard === "friends" && <Friends />}
       </main>
     </div>
   )
