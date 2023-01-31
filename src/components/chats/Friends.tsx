@@ -1,24 +1,23 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { collection, query, getDocs } from "firebase/firestore"
+import { db } from "../config/firebase"
 import "./Friends.css"
 
 const Friends = () => {
+  const [userQuery, setUserQuery] = useState<string>("")
+  const q = query(collection(db, "users"))
+
+  const getUsers = async (userQuery: string) => {
+    const querySnapshot = await getDocs(q)
+    const users = querySnapshot.docs
+  }
+  const handleInput = (event: any) => {
+    setUserQuery(event.target.value)
+    getUsers(userQuery)
+  }
   // Search User
   // qeury search users using firesstore method that returns an array
   // filter array on search feature
-
-  // const users = [
-  //   {
-  //     userName: "AliceIsGod",
-  //   },
-
-  //   { userName: "BellaTheBig" },
-  // ]
-
-  // const queryUsers = setTimeout(() => {
-  //   users.filter(() => {
-
-  //   })
-  // }, 1000)
 
   useEffect(() => {
     console.log("Friends mounted")
@@ -26,7 +25,12 @@ const Friends = () => {
   return (
     <div className="friends-main">
       <section className="input-container">
-        <input placeholder="Search friends..." />
+        <input
+          type="text"
+          placeholder="Find friends..."
+          value={userQuery}
+          onChange={(e) => handleInput(e)}
+        />
       </section>
     </div>
   )

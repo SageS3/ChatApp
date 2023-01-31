@@ -1,10 +1,11 @@
 .friends-main {
   grid-area: main;
   width: 100%;
+  max-width: 600px;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 4fr 1.5fr;
+  grid-template-rows: 1fr 4fr;
   gap: 4px;
   grid-template-areas: "input input" "list lsit";
   gap: 4px;
@@ -17,6 +18,7 @@
   align-items: center;
 }
 .friends-main .input-container input {
+  text-align: center;
   padding: 10px;
   width: 500px;
   height: 40px;
