@@ -1,11 +1,11 @@
-.App { 
-  margin: 0; 
+.App {
+  margin: 0;
   padding: 0;
-  width: 100vw; 
-  height: 100vh; 
-  background-color: rgb(55,47,73); 
-  display: flex; 
-  justify-content: flex-start; 
-  align-items: center;  
-  flex-direction: column; 
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(55, 47, 73);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
 }

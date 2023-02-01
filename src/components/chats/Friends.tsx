@@ -9,7 +9,11 @@ const Friends = () => {
 
   const getUsers = async (userQuery: string) => {
     const querySnapshot = await getDocs(q)
-    const users = querySnapshot.docs
+    const users = querySnapshot.docs.reduce((accum: any, doc) => {
+      accum.push(doc.data().userName)
+    }, [])
+    console.log(users)
+    return users
   }
   const handleInput = (event: any) => {
     setUserQuery(event.target.value)

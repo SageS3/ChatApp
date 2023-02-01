@@ -1,88 +1,88 @@
-.entry-page-form { 
-  height: auto; 
-  width: 500px; 
-  // border: 2px solid rgb(255,6,200);  
-  background-color: rgb(55,47,73);  
+@use "../styles/Colors.scss";
+
+.entry-page-form {
+  height: auto;
+  width: 500px;
+  // border: 2px solid rgb(255,6,200);
+  background-color: Colors.$secondary-background-color;
   border-radius: 24px;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: column;   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding: 20px;
-  margin: 20px; 
-  transition: box-shadow 100ms ease-in; 
-  margin-top: 80px; 
+  margin: 20px;
+  transition: box-shadow 100ms ease-in;
+  margin-top: 80px;
   border: 4px solid black;
 
-  &:hover{ 
+  &:hover {
     box-shadow: -50px 50px 2px 10px black;
   }
 
-  h1 { 
-    color: white; 
+  h1 {
+    color: white;
     margin-bottom: 10px;
   }
 
-  input { 
-    border:none;
-    height: 20px; 
-    width:50%;  
+  input {
+    border: none;
+    height: 20px;
+    width: 50%;
     min-width: 200px;
-    background-color: rgb(255,6,200); 
+    background-color: Colors.$accent-color;
     font-weight: 600;
-    color: rgb(55,47,73); 
-    margin: 10px; 
-    outline: none; 
-    font-size: 1.2rem; 
-    padding: 10px; 
-    border-radius: 12px; 
+    color: Colors.$secondary-background-color;
+    margin: 10px;
+    outline: none;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 12px;
     letter-spacing: 0.1ch;
-  }   
-
-  input::placeholder { 
-    color: rgb(55,47,73); 
-    font-weight: 600;
-  } 
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px rgb(255,6,200) inset;
-    -webkit-text-fill-color: rgb(55,47,73);
   }
 
-  button {  
-    font-size: 1.2rem;  
-    padding: 20px; 
+  input::placeholder {
+    color: Colors.$secondary-background-color;
+    font-weight: 600;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px Colors.$accent-color inset;
+    -webkit-text-fill-color: Colors.$secondary-background-color;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    width: 54%;  
+    width: 54%;
     min-width: 220px;
-    height: 40px; 
-    background-color: rgb(55,47,73); 
-    border: none; 
-    margin: 10px; 
-    color: white; 
-    font-weight: 600; 
-    border: 2px solid rgb(255,6,200);
+    height: 40px;
+    background-color: Colors.$secondary-background-color;
+    border: none;
+    margin: 10px;
+    color: white;
+    font-weight: 600;
+    border: 2px solid Colors.$accent-color;
     cursor: pointer;
-  } 
+  }
 
-  h4{ 
-    margin:0; 
+  h4 {
+    margin: 0;
     padding: none;
     color: white;
   }
-}   
+}
 
-p { 
-  color:rgba(255,255,255,1); 
+p {
+  color: white;
   font-weight: 700;
-  margin: none; 
+  margin: none;
   animation: text-appear 200ms ease-in forwards;
-}   
-
-
+}

@@ -29,7 +29,7 @@
   overflow: hidden;
 }
 .profile--wrapper .edit_image_container .img-container .image__loading {
-  border: 2px solid rgb(220, 220, 220);
+  border: 2px solid rgb(255, 6, 200);
   width: 30px;
   height: 30px;
   border-radius: 100px;
@@ -93,7 +93,7 @@
   left: 45px;
   top: 45px;
   background-color: rgb(33, 30, 41);
-  outline: 1px solid rgb(100, 100, 100);
+  outline: 1px solid rgb(120, 120, 120);
   border: none;
   border-radius: 100px;
   width: 32px;
@@ -103,7 +103,7 @@
   transition: transform 200ms ease-in, outline 200ms ease-in;
 }
 .profile--wrapper .edit_image_container > .image__edit--button:hover {
-  outline: 1px solid rgb(130, 130, 130);
+  outline: 1px solid white;
   transform: scale(1.1);
 }
 .profile--wrapper p {

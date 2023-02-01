@@ -1,18 +1,20 @@
-@mixin white-border-button {
-  background-color:rgb(55,47,73);
-  outline: none; 
-  border: none;
-  color: white; 
-  font-weight: 600;
-  cursor: pointer;  
-  transition: outline 400ms ease-in;
-  &:hover { 
-    outline: 2px solid rgb(120,120,120);
-  }
-} 
+@use "../styles/Colors.scss";
 
-@mixin display-flex-center{ 
-  display: flex; 
+@mixin white-border-button {
+  background-color: Colors.$secondary-background-color;
+  outline: none;
+  border: none;
+  color: Colors.$light-font-color;
+  font-weight: 600;
+  cursor: pointer;
+  transition: outline 400ms ease-in;
+  &:hover {
+    outline: 2px solid Colors.$grey-color;
+  }
+}
+
+@mixin display-flex-center {
+  display: flex;
   justify-content: center;
   align-items: center;
 }

@@ -1,4 +1,5 @@
 @use "../styles/Mixins.scss";
+@use "../styles/Colors.scss";
 
 .profile--wrapper {
   border-radius: 12px;
@@ -17,7 +18,7 @@
     .img-container {
       @include Mixins.display-flex-center;
       position: absolute;
-      background-color: rgb(55, 47, 73);
+      background-color: Colors.$secondary-background-color;
       width: 120px;
       height: 120px;
       border-radius: 100px;
@@ -26,7 +27,7 @@
       overflow: hidden;
 
       .image__loading {
-        border: 2px solid rgb(220, 220, 220);
+        border: 2px solid Colors.$accent-color;
         width: 30px;
         height: 30px;
         border-radius: 100px;
@@ -66,8 +67,8 @@
       position: relative;
       left: 45px;
       top: 45px;
-      background-color: rgb(33, 30, 41);
-      outline: 1px solid rgb(100, 100, 100);
+      background-color: Colors.$main-background-color;
+      outline: 1px solid Colors.$grey-color;
       border: none;
       border-radius: 100px;
       width: 32px;
@@ -76,7 +77,7 @@
       cursor: pointer;
       transition: transform 200ms ease-in, outline 200ms ease-in;
       &:hover {
-        outline: 1px solid rgb(130, 130, 130);
+        outline: 1px solid Colors.$light-font-color;
         transform: scale(1.1);
       }
     }
@@ -90,7 +91,7 @@
   .profile-info-container {
     width: 100%;
     max-width: 600px;
-    border-bottom: 1px solid rgb(120, 120, 120);
+    border-bottom: 1px solid Colors.$grey-color;
     @include Mixins.display-flex-center;
     overflow: hidden;
 
@@ -104,7 +105,7 @@
       outline: none;
       font-size: 1.2rem;
       border: none;
-      color: rgb(120, 120, 120);
+      color: Colors.$grey-color;
       width: 100%;
     }
   }
@@ -123,22 +124,22 @@
       font-size: 1.1rem;
       border: none;
       color: white;
-      background-color: rgb(33, 30, 41);
-      border-bottom: 1px solid rgb(120, 120, 120);
+      background-color: Colors.$main-background-color;
+      border-bottom: 1px solid Colors.$grey-color;
       cursor: pointer;
       transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out;
       &:hover {
-        border-bottom: 5px solid rgb(120, 120, 120);
+        border-bottom: 5px solid Colors.$grey-color;
         margin-bottom: -5px;
       }
     }
 
     button:nth-of-type(2) {
       outline: none;
-      color: rgb(205, 0, 80);
-      border-bottom: 1px solid rgb(205, 0, 80);
+      color: Colors.$alert-color;
+      border-bottom: 1px solid Colors.$alert-color;
       &:hover {
-        border-bottom: 5px solid rgb(205, 0, 80);
+        border-bottom: 5px solid Colors.$alert-color;
       }
     }
   }
@@ -149,19 +150,19 @@
     max-width: 100%;
     height: 40px;
     padding: 10px;
-    background-color: rgb(55, 47, 73);
+    background-color: Colors.$secondary-background-color;
     border: none;
-    color: white;
+    color: Colors.$light-font-color;
     margin-top: 80px;
     cursor: pointer;
     font-size: 1.1rem;
     transition: outline 200ms ease-out;
     border-radius: 12px;
-    outline: 1px solid rgb(255, 6, 200);
+    outline: 1px solid Colors.$accent-color;
 
     &:disabled {
       outline: none;
-      color: rgb(120, 120, 120);
+      color: Colors.$grey-color;
       cursor: default;
     }
   }
