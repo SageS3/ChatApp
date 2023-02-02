@@ -32,7 +32,9 @@ const Friends = () => {
   // filter array on search feature
 
   useEffect(() => {
-    ;(() => {})()
+    ;(() => {
+      getUsers()
+    })()
   }, [])
 
   return (
