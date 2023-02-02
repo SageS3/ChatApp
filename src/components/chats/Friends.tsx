@@ -5,27 +5,36 @@ import "./Friends.css"
 
 const Friends = () => {
   const [userQuery, setUserQuery] = useState<string>("")
+  // const [userArr, setUserArr] = useState<string[]>([])
+
   const q = query(collection(db, "users"))
 
-  const getUsers = async (userQuery: string) => {
+  const getUsers = async () => {
     const querySnapshot = await getDocs(q)
-    const users = querySnapshot.docs.reduce((accum: any, doc) => {
-      accum.push(doc.data().userName)
+    const users = querySnapshot.docs.reduce((acc: any, doc) => {
+      return [...acc, doc.data().userName]
     }, [])
     console.log(users)
-    return users
   }
+
+  // const queryUser = (usersArr: any) => {
+  //   const filteredUsers = usersArr.filter((userName: string) => {
+  //     userName.includes(userQuery)
+  //   })
+  //   console.log(filteredUsers)
+  // }
+
   const handleInput = (event: any) => {
     setUserQuery(event.target.value)
-    getUsers(userQuery)
   }
   // Search User
-  // qeury search users using firesstore method that returns an array
+  // qeury search users using firestore method that returns an array
   // filter array on search feature
 
   useEffect(() => {
-    console.log("Friends mounted")
+    ;(() => {})()
   }, [])
+
   return (
     <div className="friends-main">
       <section className="input-container">
