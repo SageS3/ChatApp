@@ -10,11 +10,13 @@ const Friends = () => {
   const q = query(collection(db, "users"))
 
   const getUsers = async () => {
-    const querySnapshot = await getDocs(q)
-    const users = querySnapshot.docs.reduce((acc: any, doc) => {
-      return [...acc, doc.data().userName]
-    }, [])
-    console.log(users)
+    await getDocs(q).then((results) => {
+      const reduceUser = results.docs.reduce((accum: any, doc) => {
+        return [...accum, doc.data().userName]
+      }, [])
+      console.log(reduceUser)
+      return reduceUser
+    })
   }
 
   // const queryUser = (usersArr: any) => {
@@ -32,9 +34,7 @@ const Friends = () => {
   // filter array on search feature
 
   useEffect(() => {
-    ;(() => {
-      getUsers()
-    })()
+    console.log(getUsers())
   }, [])
 
   return (

@@ -25,6 +25,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {<h3>{userDisplayName}</h3>}
       <button onClick={() => setDashboard("chats")}>Chats</button>
       <button onClick={() => setDashboard("profile")}>Profile</button>
+      <button onClick={() => setDashboard("settings")}>Settings</button>
       <button onClick={() => handleLogOut(auth)} id="btn--logout">
         Logout
       </button>
