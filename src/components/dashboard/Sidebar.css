@@ -38,20 +38,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
-  background-color: rgb(55, 47, 73);
+  justify-content: left;
+  background-color: rgb(33, 30, 41);
   outline: none;
   border: none;
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: outline 400ms ease-in;
+  outline: 2px solid rgb(120, 120, 120);
+  transition: background-color 200ms ease-in;
+  text-indent: 30px;
+  -webkit-padding-start: 20px;
+          padding-inline-start: 20px;
 }
 .sidebar-wrapper button:hover {
-  outline: 2px solid rgb(120, 120, 120);
+  background-color: rgb(55, 47, 73);
 }
 .sidebar-wrapper #btn--logout {
   background-color: rgb(33, 30, 41);
+  outline: none;
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  outline: 2px solid rgb(120, 120, 120);
+  transition: background-color 200ms ease-in;
+  background-color: rgb(33, 30, 41);
+  outline: none;
+}
+.sidebar-wrapper #btn--logout:hover {
+  background-color: rgb(55, 47, 73);
 }
 .sidebar-wrapper .image-container {
   width: 90px;

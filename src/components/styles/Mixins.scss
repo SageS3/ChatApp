@@ -1,15 +1,16 @@
 @use "../styles/Colors.scss";
 
 @mixin white-border-button {
-  background-color: Colors.$secondary-background-color;
+  background-color: Colors.$main-background-color;
   outline: none;
   border: none;
   color: Colors.$light-font-color;
   font-weight: 600;
   cursor: pointer;
-  transition: outline 400ms ease-in;
+  outline: 2px solid Colors.$grey-color;
+  transition: background-color 200ms ease-in;
   &:hover {
-    outline: 2px solid Colors.$grey-color;
+    background-color: Colors.$secondary-background-color;
   }
 }
 

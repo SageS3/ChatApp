@@ -4,6 +4,7 @@ import { auth } from "../config/firebase"
 import { AiOutlineMessage } from "react-icons/ai"
 import { VscAccount } from "react-icons/vsc"
 import { IoMdSettings } from "react-icons/io"
+import { MdOutlineLogout } from "react-icons/md"
 
 type SidebarProps = {
   setDashboard: (profile: string) => void
@@ -40,6 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         Settings
       </button>
       <button onClick={() => handleLogOut(auth)} id="btn--logout">
+        <MdOutlineLogout size={"1.3em"} color={"rgb(255,6,200)"} />
         Logout
       </button>
     </div>

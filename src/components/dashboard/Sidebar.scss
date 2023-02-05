@@ -30,12 +30,16 @@
     font-size: 1.3rem;
     border-radius: 12px;
     @include Mixins.display-flex-center;
-    justify-content: space-evenly;
+    justify-content: left;
     @include Mixins.white-border-button;
+    text-indent: 30px;
+    padding-inline-start: 20px;
   }
 
   #btn--logout {
+    @include Mixins.white-border-button;
     background-color: Colors.$main-background-color;
+    outline: none;
   }
 
   .image-container {

@@ -89,16 +89,17 @@
     width: 5rem;
     padding: 10px;
     margin: 0 10px 0 10px;
-    background-color: rgb(55, 47, 73);
+    background-color: rgb(33, 30, 41);
     outline: none;
     border: none;
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: outline 400ms ease-in;
+    outline: 2px solid rgb(120, 120, 120);
+    transition: background-color 200ms ease-in;
   }
   .user-dashboard nav button:hover {
-    outline: 2px solid rgb(120, 120, 120);
+    background-color: rgb(55, 47, 73);
   }
   .user-dashboard nav .logout-nav-button {
     cursor: pointer;
