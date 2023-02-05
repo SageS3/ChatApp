@@ -35,6 +35,10 @@
   margin-bottom: 20px;
   font-size: 1.3rem;
   border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
   background-color: rgb(55, 47, 73);
   outline: none;
   border: none;

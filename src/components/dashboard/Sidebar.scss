@@ -29,6 +29,8 @@
     margin-bottom: 20px;
     font-size: 1.3rem;
     border-radius: 12px;
+    @include Mixins.display-flex-center;
+    justify-content: space-evenly;
     @include Mixins.white-border-button;
   }
 
