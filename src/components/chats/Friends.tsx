@@ -5,18 +5,13 @@ import "./Friends.css"
 
 const Friends = () => {
   const [userQuery, setUserQuery] = useState<string>("")
-  // const [userArr, setUserArr] = useState<string[]>([])
+  const [userArr, setUserArr] = useState<string[]>([])
 
   const q = query(collection(db, "users"))
 
   const getUsers = async () => {
-    await getDocs(q).then((results) => {
-      const reduceUser = results.docs.reduce((accum: any, doc) => {
-        return [...accum, doc.data().userName]
-      }, [])
-      console.log(reduceUser)
-      return reduceUser
-    })
+    const snapShot = await getDocs(q)
+    return snapShot
   }
 
   // const queryUser = (usersArr: any) => {
@@ -34,7 +29,7 @@ const Friends = () => {
   // filter array on search feature
 
   useEffect(() => {
-    console.log(getUsers())
+    getUsers()
   }, [])
 
   return (

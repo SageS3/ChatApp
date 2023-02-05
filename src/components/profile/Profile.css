@@ -148,7 +148,7 @@
   background-color: rgb(33, 30, 41);
   border-bottom: 1px solid rgb(120, 120, 120);
   cursor: pointer;
-  transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out;
+  transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out, color 300ms ease-out;
 }
 .profile--wrapper .sensitive-zone button:hover {
   border-bottom: 5px solid rgb(120, 120, 120);
@@ -156,11 +156,10 @@
 }
 .profile--wrapper .sensitive-zone button:nth-of-type(2) {
   outline: none;
-  color: rgb(205, 0, 80);
-  border-bottom: 1px solid rgb(205, 0, 80);
 }
 .profile--wrapper .sensitive-zone button:nth-of-type(2):hover {
   border-bottom: 5px solid rgb(205, 0, 80);
+  color: rgb(205, 0, 80);
 }
 .profile--wrapper > button {
   align-self: flex-start;

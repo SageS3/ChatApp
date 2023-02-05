@@ -8,9 +8,7 @@ type ChatsProps = {
 }
 
 const Chats = ({ setDashboard }: ChatsProps) => {
-  useEffect(() => {
-    console.log("chats component mounted")
-  }, [])
+  useEffect(() => {}, [])
 
   return (
     <div className="main__chats">

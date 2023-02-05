@@ -58,7 +58,6 @@ const Profile = (props: ProfileProps) => {
     userName === user?.displayName && userEmail === user?.email
 
   useEffect(() => {
-    console.log("rendered")
     return () => {
       if (user) {
         setUserName(user.displayName)

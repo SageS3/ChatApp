@@ -127,7 +127,8 @@
       background-color: Colors.$main-background-color;
       border-bottom: 1px solid Colors.$grey-color;
       cursor: pointer;
-      transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out;
+      transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out,
+        color 300ms ease-out;
       &:hover {
         border-bottom: 5px solid Colors.$grey-color;
         margin-bottom: -5px;
@@ -136,10 +137,9 @@
 
     button:nth-of-type(2) {
       outline: none;
-      color: Colors.$alert-color;
-      border-bottom: 1px solid Colors.$alert-color;
       &:hover {
         border-bottom: 5px solid Colors.$alert-color;
+        color: Colors.$alert-color;
       }
     }
   }
