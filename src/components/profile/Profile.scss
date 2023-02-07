@@ -1,5 +1,6 @@
 @use "../styles/Mixins.scss";
 @use "../styles/Colors.scss";
+@use "../styles/Fonts.scss";
 
 .profile--wrapper {
   border-radius: 12px;
@@ -98,6 +99,7 @@
     h3 {
       color: white;
       width: 200px;
+      font-family: Fonts.$form-font;
     }
 
     input {
@@ -107,6 +109,7 @@
       border: none;
       color: Colors.$grey-color;
       width: 100%;
+      font-family: Fonts.$form-font;
     }
   }
 
@@ -122,6 +125,7 @@
       width: 45%;
       padding: 10px;
       font-size: 1.1rem;
+      font-family: Fonts.$form-font;
       border: none;
       color: white;
       background-color: Colors.$main-background-color;
@@ -156,6 +160,7 @@
     margin-top: 80px;
     cursor: pointer;
     font-size: 1.1rem;
+    font-family: Fonts.$form-font;
     transition: outline 200ms ease-out;
     border-radius: 12px;
     outline: 1px solid Colors.$accent-color;

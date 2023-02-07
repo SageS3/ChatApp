@@ -1,5 +1,6 @@
 @use "../styles/Mixins.scss";
 @use "../styles/Colors.scss";
+@use "../styles/Fonts.scss";
 
 .sidebar-wrapper {
   grid-area: sidebar;
@@ -32,6 +33,7 @@
     @include Mixins.display-flex-center;
     justify-content: left;
     @include Mixins.white-border-button;
+    font-family: Fonts.$form-font;
     text-indent: 30px;
     padding-inline-start: 20px;
   }
@@ -65,6 +67,7 @@
     margin-bottom: 40px;
     margin-top: 0;
     color: Colors.$light-font-color;
+    font-family: Fonts.$form-font;
   }
 }
 

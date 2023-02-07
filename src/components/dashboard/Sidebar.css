@@ -45,8 +45,8 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-  outline: 2px solid rgb(120, 120, 120);
   transition: background-color 200ms ease-in;
+  font-family: "Signika", sans-serif;
   text-indent: 30px;
   -webkit-padding-start: 20px;
           padding-inline-start: 20px;
@@ -61,7 +61,6 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-  outline: 2px solid rgb(120, 120, 120);
   transition: background-color 200ms ease-in;
   background-color: rgb(33, 30, 41);
   outline: none;
@@ -91,6 +90,7 @@
   margin-bottom: 40px;
   margin-top: 0;
   color: white;
+  font-family: "Signika", sans-serif;
 }
 
 @media screen and (max-width: 1000px) {
