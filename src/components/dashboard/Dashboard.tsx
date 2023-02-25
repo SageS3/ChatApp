@@ -13,10 +13,12 @@ import Profile from "../profile/Profile"
 import Chats from "../chats/Chats"
 import Friends from "../chats/Friends"
 import Settings from "../settings/Settings"
+import Thread from "../chats/Thread"
 import "./Dashboard.css"
 
 const navigateTo = {
   chats: "chats",
+  chatWindow: "chat",
   profile: "profile",
   friends: "friends",
   settings: "settings",
@@ -36,7 +38,7 @@ const Dashboard = () => {
   const user = auth.currentUser
   const userDisplayName = user?.displayName //used for the navbar
   const collectionRef = collection(db, "users")
-  // onComponentDidMount update the user state
+
   useEffect(() => {
     if (user) {
       setUserName(user.displayName)
@@ -150,14 +152,10 @@ const Dashboard = () => {
         {dashboard === "chats" && <Chats setDashboard={setDashboard} />}
         {dashboard === "friends" && <Friends />}
         {dashboard === "settings" && <Settings />}
+        {dashboard === "chat" && <Thread />}
       </main>
     </div>
   )
 }
 
 export default Dashboard
-
-// Instead of directing to the Dashboard directories with state, import react router
-// and create routes- This will improve performance
-
-// useContext?
