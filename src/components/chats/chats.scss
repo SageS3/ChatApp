@@ -7,11 +7,10 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 4fr 1.5fr;
+  grid-template-rows: 0.3fr 4fr;
   grid-template-areas:
     "navigate navigate"
-    "threads threads"
-    "input input";
+    "threads threads";
   gap: 4px;
   background-color: Colors.$secondary-background-color;
   .header {
