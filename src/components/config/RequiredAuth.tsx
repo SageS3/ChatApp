@@ -30,12 +30,11 @@ function RequiredAuth({ children }: RequiredAuthProps) {
   }
 
   // change to cauldron eventually
-  const loading = () =>
-    setTimeout(() => (
-      <div className="sign_in_loading">
-        <h2>Loading...</h2>
-      </div>
-    ))
+  const loading = () => (
+    <div className="sign_in_loading">
+      <h2>Loading...</h2>
+    </div>
+  )
 
   return <>{authenticated ? children : loading()}</>
 }
