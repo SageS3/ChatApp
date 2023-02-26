@@ -1,3 +1,21 @@
+@use "../styles/Colors.scss";
+
 .thread-directory {
   grid-area: main;
+  width: 100%;
+  // max-width: 600px;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 4fr 1fr;
+  gap: 4px;
+  grid-template-areas:
+    "chat-window chat-window"
+    "input input";
+  gap: 4px;
+  background-color: Colors.$secondary-background-color;
+  .chat-window {
+    grid-area: chat-window;
+    background-color: Colors.$main-background-color;
+  }
 }
