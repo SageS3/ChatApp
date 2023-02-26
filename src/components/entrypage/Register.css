@@ -35,10 +35,6 @@
   color: rgb(55, 47, 73);
   font-weight: 600;
 }
-.entry-page-form input:-ms-input-placeholder {
-  color: rgb(55, 47, 73);
-  font-weight: 600;
-}
 .entry-page-form input::placeholder {
   color: rgb(55, 47, 73);
   font-weight: 600;
@@ -78,6 +74,5 @@ p {
   color: white;
   font-weight: 700;
   margin: none;
-  -webkit-animation: text-appear 200ms ease-in forwards;
-          animation: text-appear 200ms ease-in forwards;
+  animation: text-appear 200ms ease-in forwards;
 }/*# sourceMappingURL=Register.css.map */

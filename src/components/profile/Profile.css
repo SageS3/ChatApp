@@ -33,29 +33,7 @@
   width: 30px;
   height: 30px;
   border-radius: 100px;
-  -webkit-animation: pulse 2s linear infinite;
-          animation: pulse 2s linear infinite;
-}
-@-webkit-keyframes pulse {
-  0% {
-    transform: scale(-0.5);
-  }
-  25% {
-    transform: scale(0.5);
-    border: 2px solid rgba(255, 6, 200, 0.6);
-  }
-  50% {
-    transform: scale(1);
-    border: 2px solid rgba(255, 6, 200, 0.6);
-  }
-  75% {
-    transform: scale(1.5);
-    border: 2px solid rgba(255, 6, 200, 0.4);
-  }
-  100% {
-    transform: scale(2);
-    border: 2px solid rgba(255, 6, 200, 0.2);
-  }
+  animation: pulse 2s linear infinite;
 }
 @keyframes pulse {
   0% {
@@ -139,7 +117,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
 }
 .profile--wrapper .sensitive-zone button {
   width: 45%;
@@ -221,7 +198,7 @@
     width: 100%;
     max-width: 100%;
     padding: 10px;
-    margin: 10px 0 10px 0;
+    margin: 20px 0 10px 0;
     overflow: hidden;
     min-width: 270px;
   }
