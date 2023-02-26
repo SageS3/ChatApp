@@ -8,13 +8,18 @@ type ChatsProps = {
 }
 
 const Chats = ({ setDashboard }: ChatsProps) => {
+  const createMessage = () => {
+    setDashboard("chat")
+    addGroup()
+  }
+
   return (
     <div className="main__chats">
       <header className="header">
         <button className="button" onClick={() => setDashboard("friends")}>
           Friends
         </button>
-        <button className="button" onClick={() => addGroup()}>
+        <button className="button" onClick={() => createMessage()}>
           create message
         </button>
       </header>
