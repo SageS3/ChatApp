@@ -4,11 +4,16 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 4fr 1fr;
+  grid-template-rows: 0.5fr 4fr 1fr;
   gap: 4px;
-  grid-template-areas: "chat-window chat-window" "input input";
+  grid-template-areas: "thread-navbar thread-navbar" "chat-window chat-window" "input input";
   gap: 4px;
   background-color: rgb(55, 47, 73);
+}
+.thread-directory .thread-nav {
+  display: flex;
+  grid-area: thread-navbar;
+  background-color: rgb(33, 30, 41);
 }
 .thread-directory .chat-window {
   grid-area: chat-window;
