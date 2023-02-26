@@ -1,7 +1,6 @@
 .friends-main {
   grid-area: main;
   width: 100%;
-  max-width: 600px;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
