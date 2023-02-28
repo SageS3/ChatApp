@@ -3,7 +3,7 @@ import { signOut } from "firebase/auth"
 import { auth } from "../config/firebase"
 import { AiOutlineMessage } from "react-icons/ai"
 import { VscAccount } from "react-icons/vsc"
-import { IoMdSettings } from "react-icons/io"
+import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineLogout } from "react-icons/md"
 
 type SidebarProps = {
@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         Profile
       </button>
       <button onClick={() => setDashboard("settings")}>
-        <IoMdSettings size={"1.3em"} color={"rgb(255,6,200)"} />
+        <IoSettingsOutline size={"1.3em"} color={"rgb(255,6,200)"} />
         Settings
       </button>
       <button onClick={() => handleLogOut(auth)} id="btn--logout">
