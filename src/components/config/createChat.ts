@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore"
 import { db } from "./firebase"
 import { auth } from "../config/firebase"
 
@@ -8,6 +8,13 @@ export const addGroup = async () => {
   console.log("add group function call")
   const user = auth.currentUser
   const date = Date()
-  const docRef = collection(db, "chat")
-  await addDoc(docRef, { createdAt: date, createdBy: user?.displayName })
+  const collectionRef = collection(db, "chat")
+  await addDoc(collectionRef, {
+    createdAt: date,
+    createdBy: user?.displayName,
+    groupName: "",
+  }).then((re) => {
+    let docRef = doc(db, "chat", re.id)
+    updateDoc(docRef, { id: re.id })
+  })
 }
