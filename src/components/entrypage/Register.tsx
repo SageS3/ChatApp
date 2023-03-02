@@ -56,6 +56,7 @@ export default function Register(props: registerProps) {
       userName: userName,
       photoURL: snapShot,
       friends: [{ userName: "fireBot" }],
+      groups: [],
     })
     console.log("user added to users collection")
   }
