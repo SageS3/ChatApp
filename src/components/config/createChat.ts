@@ -13,8 +13,16 @@ export const addGroup = async () => {
     createdAt: date,
     createdBy: user?.displayName,
     groupName: "",
+    members: [user?.displayName],
+    recentMessage: { messageText: "", readBy: { sentAt: "", sentBy: "" } },
+    type: 1,
   }).then((re) => {
     let docRef = doc(db, "chat", re.id)
     updateDoc(docRef, { id: re.id })
   })
+}
+
+export const editGroupName = async (messageId: string, groupName: string) => {
+  const docRef = doc(db, "chat", messageId)
+  await updateDoc(docRef, { groupName: groupName })
 }
