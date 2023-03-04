@@ -12,8 +12,21 @@
 }
 .thread-directory .thread-nav {
   display: flex;
+  align-items: center;
+  justify-content: left;
   grid-area: thread-navbar;
   background-color: rgb(33, 30, 41);
+}
+.thread-directory .thread-nav input {
+  width: 50%;
+  height: 50%;
+  outline: none;
+  border: none;
+  background-color: rgb(33, 30, 41);
+  border-radius: 12px;
+  padding: 2px;
+  color: white;
+  margin-left: 50px;
 }
 .thread-directory .chat-window {
   grid-area: chat-window;

@@ -17,8 +17,21 @@
   background-color: Colors.$secondary-background-color;
   .thread-nav {
     display: flex;
+    align-items: center;
+    justify-content: left;
     grid-area: thread-navbar;
     background-color: Colors.$main-background-color;
+    input {
+      width: 50%;
+      height: 50%;
+      outline: none;
+      border: none;
+      background-color: Colors.$main-background-color;
+      border-radius: 12px;
+      padding: 2px;
+      color: white;
+      margin-left: 50px;
+    }
   }
   .chat-window {
     grid-area: chat-window;
