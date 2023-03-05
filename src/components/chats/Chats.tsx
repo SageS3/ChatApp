@@ -1,6 +1,8 @@
 import { addGroup } from "../config/createChat"
 import Input from "./Input"
 import Threads from "./Threads"
+import { BiMessageSquareEdit } from "react-icons/bi"
+import { FaUserFriends } from "react-icons/fa"
 import "./chats.css"
 
 type ChatsProps = {
@@ -17,10 +19,13 @@ const Chats = ({ setDashboard }: ChatsProps) => {
     <div className="main__chats">
       <header className="header">
         <button className="button" onClick={() => setDashboard("friends")}>
-          Friends
+          <FaUserFriends size={"2.2em"} color={"rgb(255,6,200)"} />
         </button>
-        <button className="button" onClick={() => createMessage()}>
-          create message
+        <button
+          className="chats-nav-create_message button"
+          onClick={() => createMessage()}
+        >
+          <BiMessageSquareEdit size={"2.2em"} color={"rgb(255,6,200)"} />
         </button>
       </header>
       <Threads />

@@ -16,5 +16,21 @@
   .header {
     grid-area: navigate;
     background-color: Colors.$main-background-color;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: Colors.$main-background-color;
+      // border: 2px solid Colors.$secondary-background-color;
+      border: none;
+      cursor: pointer;
+      margin-left: 20px;
+    }
   }
 }
