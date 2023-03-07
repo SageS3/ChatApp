@@ -2,4 +2,20 @@
 .threads {
   grid-area: threads;
   background-color: Colors.$main-background-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
+
+  .group-thread {
+    width: 80%;
+    height: 150px;
+    background-color: Colors.$secondary-background-color;
+    // border: 2px solid white;
+    margin: 2px;
+    border-radius: 12px;
+    position: relative;
+  }
 }

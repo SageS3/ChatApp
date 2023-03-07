@@ -1,4 +1,18 @@
 .threads {
   grid-area: threads;
   background-color: rgb(33, 30, 41);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100%;
+}
+.threads .group-thread {
+  width: 80%;
+  height: 150px;
+  background-color: rgb(55, 47, 73);
+  margin: 2px;
+  border-radius: 12px;
+  position: relative;
 }/*# sourceMappingURL=Threads.css.map */
