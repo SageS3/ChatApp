@@ -7,6 +7,7 @@ import { auth } from "../config/firebase"
 const Threads = () => {
   const [groups, setGroups] = useState<any>([])
   const user = auth.currentUser
+
   const queryGroups = async () => {
     const q = query(
       collection(db, "chat"),
@@ -17,23 +18,23 @@ const Threads = () => {
     querySnapshot.forEach((doc) => {
       groupArr.push(doc.data())
     })
-    setGroups((prev: any) => [prev, ...groupArr])
+    setGroups(groupArr)
   }
+  console.log(groups)
 
   const ListGroups = () => (
-    <>
+    <div className="group-thread">
       {groups.map((group: any) => (
-        <div className="group-thread" key={group.id}>
+        <div className="thread" key={group.id}>
           <p>{group.createdBy}</p>
+          {/* <img src={group.createdBy}></img> */}
         </div>
       ))}
-    </>
+    </div>
   )
 
   useEffect(() => {
     queryGroups()
-
-    console.log(groups)
   }, [])
   return (
     <div className="threads">

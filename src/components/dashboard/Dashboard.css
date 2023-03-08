@@ -14,7 +14,9 @@
   grid-area: main;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: rgb(33, 30, 41);
+  height: 100%;
 }
 .user-dashboard .user-input {
   grid-area: input;

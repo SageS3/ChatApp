@@ -3,7 +3,6 @@
 .main__chats {
   grid-area: main;
   width: 100%;
-  // max-width: 600px;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
@@ -13,6 +12,8 @@
     "threads threads";
   gap: 4px;
   background-color: Colors.$secondary-background-color;
+  // overflow-y: scroll;
+  // overscroll-behavior: none;
   .header {
     grid-area: navigate;
     background-color: Colors.$main-background-color;
