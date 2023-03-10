@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react"
 import "./Threads.css"
-import { getDocs, collection, where, query } from "firebase/firestore"
+import {
+  getDocs,
+  collection,
+  where,
+  query,
+  doc,
+  deleteDoc,
+} from "firebase/firestore"
 import { db } from "../config/firebase"
 import { auth } from "../config/firebase"
+import { AiOutlineDelete } from "react-icons/ai"
 
-const Threads = () => {
+type ThreadsProps = {
+  setDashboard: (a: string) => void
+}
+
+const Threads = ({ setDashboard }: ThreadsProps) => {
   const [groups, setGroups] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const user = auth.currentUser
 
   const queryGroups = async () => {
@@ -20,14 +33,30 @@ const Threads = () => {
     })
     setGroups(groupArr)
   }
-  console.log(groups)
+
+  const deleteThread = async (groupId: string) => {
+    setLoading(true)
+    await deleteDoc(doc(db, "chat", groupId)).then(() => queryGroups())
+    setLoading(false)
+  }
 
   const ListGroups = () => (
     <div className="group-thread">
       {groups.map((group: any) => (
-        <div className="thread" key={group.id}>
+        <div
+          className="thread"
+          key={group.id}
+          onClick={() => setDashboard("chat")}
+        >
           <p>{group.createdBy}</p>
-          {/* <img src={group.createdBy}></img> */}
+          <button
+            disabled={loading}
+            type="button"
+            className="delete-thread"
+            onClick={() => deleteThread(group.id)}
+          >
+            <AiOutlineDelete size={"2em"} color={"rgb(205, 0, 80)"} />
+          </button>
         </div>
       ))}
     </div>
@@ -36,6 +65,7 @@ const Threads = () => {
   useEffect(() => {
     queryGroups()
   }, [])
+
   return (
     <div className="threads">
       <ListGroups />
