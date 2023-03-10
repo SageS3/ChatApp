@@ -28,7 +28,7 @@ const Chats = ({ setDashboard }: ChatsProps) => {
           <BiMessageSquareEdit size={"2.2em"} color={"rgb(255,6,200)"} />
         </button>
       </header>
-      <Threads />
+      <Threads setDashboard={setDashboard} />
     </div>
   )
 }
