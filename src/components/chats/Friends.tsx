@@ -6,7 +6,6 @@ import "./Friends.css"
 const Friends = () => {
   const [userQuery, setUserQuery] = useState<string>("")
   const [userArr, setUserArr] = useState<string[]>([])
-
   const q = query(collection(db, "users"))
 
   const getUsers = async () => {
@@ -36,6 +35,7 @@ const Friends = () => {
     <div className="friends-main">
       <section className="input-container">
         <input
+          autoFocus
           type="text"
           placeholder="Find friends..."
           value={userQuery}
