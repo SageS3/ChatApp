@@ -34,7 +34,7 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 200ms ease-in;
+  transition: background-color 100ms ease-in;
   font-family: "Signika", sans-serif;
   text-indent: 30px;
   -webkit-padding-start: 20px;
@@ -50,7 +50,7 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 200ms ease-in;
+  transition: background-color 100ms ease-in;
   background-color: rgb(33, 30, 41);
   outline: none;
 }

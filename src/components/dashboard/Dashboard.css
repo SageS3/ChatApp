@@ -86,7 +86,7 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 200ms ease-in;
+    transition: background-color 100ms ease-in;
   }
   .user-dashboard nav button:hover {
     background-color: rgb(55, 47, 73);
