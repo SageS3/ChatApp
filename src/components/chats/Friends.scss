@@ -20,7 +20,7 @@
     display: flex;
     @include Mixins.display-flex-center;
     input {
-      text-align: center;
+      text-align: left;
       padding: 10px;
       width: 500px;
       height: 40px;
