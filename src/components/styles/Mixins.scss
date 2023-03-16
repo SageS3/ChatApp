@@ -7,10 +7,9 @@
   color: Colors.$light-font-color;
   font-weight: 600;
   cursor: pointer;
-  // outline: 2px solid Colors.$grey-color;
-  transition: background-color 100ms ease-in;
+  transition: transform 200ms ease-in, border-bottom 200ms ease-in-out;
   &:hover {
-    background-color: Colors.$secondary-background-color;
+    transform: scale(1.1);
   }
 }
 
