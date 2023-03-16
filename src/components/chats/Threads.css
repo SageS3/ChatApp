@@ -1,6 +1,6 @@
 .threads {
   grid-area: threads;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,10 +18,10 @@
   overflow: scroll;
 }
 .threads .group-thread .thread {
-  margin: 2px;
+  margin: 5px;
   background-color: rgb(55, 47, 73);
   display: flex;
-  width: 100%;
+  width: 80%;
   height: 100px;
   border-radius: 10px;
   position: relative;
