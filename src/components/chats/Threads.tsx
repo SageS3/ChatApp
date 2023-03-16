@@ -34,10 +34,15 @@ const Threads = ({ setDashboard }: ThreadsProps) => {
     setGroups(groupArr)
   }
 
-  const deleteThread = async (groupId: string) => {
+  const deleteThread = async (event: any, groupId: string) => {
     setLoading(true)
+    event.stopPropagation()
     await deleteDoc(doc(db, "chat", groupId)).then(() => queryGroups())
     setLoading(false)
+  }
+
+  const handleThreadWindow = () => {
+    setDashboard("chat")
   }
 
   const ListGroups = () => (
@@ -46,14 +51,14 @@ const Threads = ({ setDashboard }: ThreadsProps) => {
         <div
           className="thread"
           key={group.id}
-          onClick={() => setDashboard("chat")}
+          onClick={() => handleThreadWindow()}
         >
           <p>{group.createdBy}</p>
           <button
             disabled={loading}
             type="button"
             className="delete-thread"
-            onClick={() => deleteThread(group.id)}
+            onClick={(e) => deleteThread(e, group.id)}
           >
             <AiOutlineDelete size={"2em"} color={"rgb(205, 0, 80)"} />
           </button>

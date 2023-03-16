@@ -10,6 +10,7 @@ const Thread = () => {
     setGroupName(event.target.value)
     // editGroupName(groupId, groupName)
   }
+
   return (
     <div className="thread-directory">
       <nav className="thread-nav">
