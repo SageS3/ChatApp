@@ -1,5 +1,4 @@
 import { addGroup } from "../config/createChat"
-import Input from "./Input"
 import Threads from "./Threads"
 import { BiMessageSquareEdit } from "react-icons/bi"
 import { FaUserFriends } from "react-icons/fa"
