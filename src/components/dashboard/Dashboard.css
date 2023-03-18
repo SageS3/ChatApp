@@ -2,7 +2,6 @@
   height: 100vh;
   width: 100vw;
   display: grid;
-  gap: 4px;
   background-color: rgb(55, 47, 73);
   grid-template-columns: 280px 2fr;
   grid-template-areas: "sidebar main" "sidebar main";
@@ -15,12 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   height: 100%;
 }
 .user-dashboard .user-input {
   grid-area: input;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -55,7 +54,7 @@
   }
   .user-dashboard nav {
     grid-area: navbar;
-    background-color: rgb(33, 30, 41);
+    background-color: rgb(30, 30, 30);
     color: white;
     display: flex;
     align-items: center;
@@ -80,16 +79,16 @@
     width: 5rem;
     padding: 10px;
     margin: 0 10px 0 10px;
-    background-color: rgb(33, 30, 41);
+    background-color: rgb(30, 30, 30);
     outline: none;
     border: none;
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 100ms ease-in;
+    transition: transform 200ms ease-in, border-bottom 200ms ease-in-out;
   }
   .user-dashboard nav button:hover {
-    background-color: rgb(55, 47, 73);
+    transform: scale(1.1);
   }
   .user-dashboard nav .logout-nav-button {
     cursor: pointer;
@@ -97,7 +96,7 @@
     padding: 10px;
     border: none;
     outline: 2px solid rgb(255, 6, 200);
-    background-color: rgb(33, 30, 41);
+    background-color: rgb(30, 30, 30);
     border-radius: 12px;
     color: white;
     font-weight: 700;
@@ -107,7 +106,7 @@
   .user-dashboard nav .logout-nav-button:hover {
     outline: none;
     background-color: rgb(255, 6, 200);
-    color: rgb(33, 30, 41);
+    color: rgb(30, 30, 30);
   }
 }
 @media screen and (max-width: 550px) {
