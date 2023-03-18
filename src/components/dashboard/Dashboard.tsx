@@ -126,7 +126,11 @@ const Dashboard = () => {
         </button>
       </nav>
       {/* <img src={cauldron}/> */}
-      <Sidebar setDashboard={setDashboard} userPhoto={userPhoto}></Sidebar>
+      <Sidebar
+        dashboard={dashboard}
+        setDashboard={setDashboard}
+        userPhoto={userPhoto}
+      ></Sidebar>
       <main>
         {dashboard === "profile" && (
           <Profile
