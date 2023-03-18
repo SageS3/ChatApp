@@ -4,22 +4,23 @@
   grid-area: main;
   width: 100%;
   height: 100vh;
+  background-color: Colors.$secondary-background-color;
   display: grid;
   grid-template-columns: 1fr;
+  gap: 2px;
   grid-template-rows: 0.3fr 4fr;
   grid-template-areas:
     "navigate navigate"
     "threads threads";
-  gap: 4px;
-  background-color: Colors.$secondary-background-color;
-  // overflow-y: scroll;
-  // overscroll-behavior: none;
+
   .header {
     grid-area: navigate;
     background-color: Colors.$main-background-color;
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: flex-start;
+    padding: 0 10% 0 10%;
+
     button {
       display: flex;
       justify-content: center;
@@ -28,7 +29,6 @@
       height: 50px;
       border-radius: 10px;
       background-color: Colors.$main-background-color;
-      // border: 2px solid Colors.$secondary-background-color;
       border: none;
       cursor: pointer;
       margin-left: 20px;
