@@ -14,9 +14,10 @@ import { AiOutlineDelete } from "react-icons/ai"
 
 type ThreadsProps = {
   setDashboard: (a: string) => void
+  setThreadObj: (a: string) => void
 }
 
-const Threads = ({ setDashboard }: ThreadsProps) => {
+const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
   const [groups, setGroups] = useState<any>([])
   const [loading, setLoading] = useState<boolean>(false)
   const user = auth.currentUser
@@ -41,7 +42,8 @@ const Threads = ({ setDashboard }: ThreadsProps) => {
     setLoading(false)
   }
 
-  const handleThreadWindow = () => {
+  const handleThreadWindow = (groupID: string) => {
+    setThreadObj(groupID)
     setDashboard("chat")
   }
 
@@ -51,7 +53,7 @@ const Threads = ({ setDashboard }: ThreadsProps) => {
         <div
           className="thread"
           key={group.id}
-          onClick={() => handleThreadWindow()}
+          onClick={() => handleThreadWindow(group)}
         >
           <p>{group.createdBy}</p>
           <button
