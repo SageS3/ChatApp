@@ -1,22 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { editGroupName } from "../config/createChat"
 import "./Thread.css"
 import Input from "./Input"
 
-const Thread = () => {
-  const [groupName, setGroupName] = useState<string>("")
+type ThreadProps = {
+  threadObj: object | null
+}
+
+const Thread = ({ threadObj }: ThreadProps) => {
+  const [threadGroupName, setThreadGroupName] = useState<string>("")
   const handleGroupName = (event: any) => {
     event.preventDefault()
-    setGroupName(event.target.value)
+    setThreadGroupName(event.target.value)
     // editGroupName(groupId, groupName)
   }
-
+  useEffect(() => {
+    // setGroupName(threadObj.groupName)
+    console.log(threadObj)
+  }, [])
   return (
     <div className="thread-directory">
       <nav className="thread-nav">
         <input
           placeholder="group name"
-          value={groupName}
+          value={threadGroupName}
           onChange={(event) => handleGroupName(event)}
         ></input>
       </nav>
