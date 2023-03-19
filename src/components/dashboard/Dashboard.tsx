@@ -34,6 +34,7 @@ const Dashboard = () => {
   const [reauthEmail, setReauthEmail] = useState<string>("")
   const [reauthPassword, setReauthPassword] = useState<string>("")
   const [reauthError, setReauthError] = useState<string>("")
+  const [threadObj, setThreadObj] = useState<object | null>(null)
 
   const user = auth.currentUser
   const userDisplayName = user?.displayName //used for the navbar
@@ -153,10 +154,12 @@ const Dashboard = () => {
             setIsUpdating={setIsUpdating}
           />
         )}
-        {dashboard === "chats" && <Chats setDashboard={setDashboard} />}
+        {dashboard === "chats" && (
+          <Chats setDashboard={setDashboard} setThreadObj={setThreadObj} />
+        )}
         {dashboard === "friends" && <Friends />}
         {dashboard === "settings" && <Settings />}
-        {dashboard === "chat" && <Thread />}
+        {dashboard === "chat" && <Thread threadObj={threadObj} />}
       </main>
     </div>
   )
