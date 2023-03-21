@@ -3,12 +3,14 @@ import Threads from "./Threads"
 import { BiMessageSquareEdit } from "react-icons/bi"
 import { FaUserFriends } from "react-icons/fa"
 import "./chats.css"
+import { groupThread } from "../config/interface"
 
 type ChatsProps = {
   setDashboard: (a: string) => void
+  setThreadObj: (a: string) => void
 }
 
-const Chats = ({ setDashboard }: ChatsProps) => {
+const Chats = ({ setDashboard, setThreadObj }: ChatsProps) => {
   const createMessage = () => {
     setDashboard("chat")
     addGroup()
@@ -27,7 +29,7 @@ const Chats = ({ setDashboard }: ChatsProps) => {
           <BiMessageSquareEdit size={"2.2em"} color={"rgb(255,6,200)"} />
         </button>
       </header>
-      <Threads setDashboard={setDashboard} />
+      <Threads setDashboard={setDashboard} setThreadObj={setThreadObj} />
     </div>
   )
 }
