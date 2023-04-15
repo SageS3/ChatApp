@@ -1,13 +1,12 @@
-import { addGroup } from "../config/createChat"
+import { addGroup } from "../config/threadFunctions"
 import Threads from "./Threads"
 import { BiMessageSquareEdit } from "react-icons/bi"
 import { FaUserFriends } from "react-icons/fa"
 import "./chats.css"
-import { groupThread } from "../config/interface"
 
 type ChatsProps = {
   setDashboard: (a: string) => void
-  setThreadObj: (a: string) => void
+  setThreadObj: (a: string | null) => void
 }
 
 const Chats = ({ setDashboard, setThreadObj }: ChatsProps) => {
