@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { editGroupName } from "../config/createChat"
 import "./Thread.css"
 import Input from "./Input"
+import { editGroupName } from "../config/threadFunctions"
 
 type ThreadProps = {
-  threadObj: object | null
+  threadObj: any
 }
 
 const Thread = ({ threadObj }: ThreadProps) => {
@@ -12,11 +12,11 @@ const Thread = ({ threadObj }: ThreadProps) => {
   const handleGroupName = (event: any) => {
     event.preventDefault()
     setThreadGroupName(event.target.value)
-    // editGroupName(groupId, groupName)
   }
+
   useEffect(() => {
-    // setGroupName(threadObj.groupName)
-    console.log(threadObj)
+    setThreadGroupName(threadObj.groupName)
+    console.log(threadObj.groupName)
   }, [])
   return (
     <div className="thread-directory">
@@ -25,7 +25,12 @@ const Thread = ({ threadObj }: ThreadProps) => {
           placeholder="group name"
           value={threadGroupName}
           onChange={(event) => handleGroupName(event)}
+          // event that takes the update groupName function
         ></input>
+        <button
+          type="submit"
+          onClick={() => editGroupName(threadObj.id, threadGroupName)}
+        ></button>
       </nav>
       <section className="chat-window">window</section>
       <Input />
