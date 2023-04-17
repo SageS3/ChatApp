@@ -16,7 +16,6 @@ const Thread = ({ threadObj }: ThreadProps) => {
 
   useEffect(() => {
     setThreadGroupName(threadObj.groupName)
-    console.log(threadObj.groupName)
   }, [])
   return (
     <div className="thread-directory">
@@ -33,7 +32,7 @@ const Thread = ({ threadObj }: ThreadProps) => {
         ></button>
       </nav>
       <section className="chat-window">window</section>
-      <Input />
+      <Input threadObj={threadObj} />
     </div>
   )
 }
