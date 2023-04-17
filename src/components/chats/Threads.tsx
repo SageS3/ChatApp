@@ -14,7 +14,7 @@ import { AiOutlineDelete } from "react-icons/ai"
 
 type ThreadsProps = {
   setDashboard: (a: string) => void
-  setThreadObj: (a: string) => void
+  setThreadObj: (a: string | null) => void
 }
 
 const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
@@ -22,10 +22,12 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
   const [loading, setLoading] = useState<boolean>(false)
   const user = auth.currentUser
 
+  // the function below gets all of the user's chat threads and stores
+  // it in state...
   const queryGroups = async () => {
     const q = query(
       collection(db, "chat"),
-      where("members", "array-contains", user?.displayName)
+      where("members", "array-contains", user?.uid)
     )
     const groupArr: any = []
     const querySnapshot = await getDocs(q)
@@ -38,24 +40,24 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
   const deleteThread = async (event: any, groupId: string) => {
     setLoading(true)
     event.stopPropagation()
-    await deleteDoc(doc(db, "chat", groupId)).then(() => queryGroups())
+    await deleteDoc(doc(db, "chat", groupId)).then(queryGroups)
+    await deleteDoc(doc(db, "message", groupId))
     setLoading(false)
   }
 
-  const handleThreadWindow = (groupID: string) => {
-    setThreadObj(groupID)
+  const handleThreadId = (groupID: string) => {
     setDashboard("chat")
+    setThreadObj(groupID)
   }
 
-  const ListGroups = () => (
+  const ListThreads = () => (
     <div className="group-thread">
       {groups.map((group: any) => (
         <div
           className="thread"
           key={group.id}
-          onClick={() => handleThreadWindow(group)}
+          onClick={() => handleThreadId(group)}
         >
-          <p>{group.createdBy}</p>
           <button
             disabled={loading}
             type="button"
@@ -75,7 +77,7 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
 
   return (
     <div className="threads">
-      <ListGroups />
+      <ListThreads />
     </div>
   )
 }
