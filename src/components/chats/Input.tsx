@@ -9,12 +9,14 @@ const Input = ({ threadObj }: InputProps) => {
   const [messageText, setMessageText] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const handleInputSubmit = () => {
-    setIsLoading(true)
-    addMessageSubCollection(threadObj.id, messageText).then(() => {
-      setMessageText("")
-    })
-    setIsLoading(false)
+  const handleInputSubmit = (event: any) => {
+    if (event.key === "Enter") {
+      setIsLoading(true)
+      addMessageSubCollection(threadObj.id, messageText).then(() => {
+        setMessageText("")
+      })
+      setIsLoading(false)
+    }
   }
   return (
     <div className="input">
@@ -24,10 +26,8 @@ const Input = ({ threadObj }: InputProps) => {
         value={messageText}
         spellCheck={true}
         onChange={(event) => setMessageText(event.target.value)}
+        onKeyDown={(event) => handleInputSubmit(event)}
       />
-      <button type="button" onClick={() => handleInputSubmit()}>
-        send
-      </button>
     </div>
   )
 }
