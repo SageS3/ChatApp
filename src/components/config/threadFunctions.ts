@@ -11,10 +11,9 @@ import { auth } from "./firebase"
 
 export const addGroup = async () => {
   const user = auth.currentUser
-  const date = Date()
   const collectionRef = collection(db, "chat")
   await addDoc(collectionRef, {
-    createdAt: date,
+    createdAt: serverTimestamp(),
     createdBy: user?.uid,
     groupName: "",
     members: [user?.uid],
@@ -56,5 +55,3 @@ export const editGroupName = async (groupId: string, groupName: string) => {
     console.log(error)
   })
 }
-
-export const addMessageData = (id: string) => {}
