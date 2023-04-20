@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import "./Thread.css"
 import Input from "./Input"
 import { editGroupName } from "../config/threadFunctions"
-import { query, collection, getDocs, limit } from "firebase/firestore"
-import { db, auth } from "../config/firebase"
+import { query, collection, getDocs, limit, orderBy } from "firebase/firestore"
+import { db } from "../config/firebase"
 
 type ThreadProps = {
   threadObj: any
@@ -12,7 +12,7 @@ type ThreadProps = {
 const Thread = ({ threadObj }: ThreadProps) => {
   const [threadGroupName, setThreadGroupName] = useState<string>("")
   const [chats, setChats] = useState<any>([])
-  const user = auth.currentUser
+  // const [loading, setLoading] = useState<boolean>(false)
   const handleGroupName = (event: any) => {
     event.preventDefault()
     setThreadGroupName(event.target.value)
@@ -26,15 +26,27 @@ const Thread = ({ threadObj }: ThreadProps) => {
   const queryChats = async () => {
     const q = query(
       collection(db, `message/${threadObj.id}/messages`),
+      orderBy("sentAt"),
       limit(20)
     )
-    const chats: any = []
+    const chatsArr: any = []
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc) => {
-      chats.push(doc.data())
+      chatsArr.push(doc.data())
     })
-    setChats(chats)
+    setChats(chatsArr)
+    console.log(chats)
   }
+
+  const ListChats = () => (
+    <div className="chat-window">
+      {chats.map((chat: any) => (
+        <div className="chat-container" key={chat.sentAt}>
+          <p>{chat.message}</p>
+        </div>
+      ))}
+    </div>
+  )
 
   return (
     <div className="thread-directory">
@@ -43,15 +55,14 @@ const Thread = ({ threadObj }: ThreadProps) => {
           placeholder="group name"
           value={threadGroupName}
           onChange={(event) => handleGroupName(event)}
-          // event that takes the update groupName function
         ></input>
         <button
           type="submit"
           onClick={() => editGroupName(threadObj.id, threadGroupName)}
         ></button>
       </nav>
-      <section className="chat-window">{/* {<ListChats/>} */}</section>
-      <Input threadObj={threadObj} />
+      <ListChats></ListChats>
+      <Input threadObj={threadObj} queryChats={queryChats} />
     </div>
   )
 }
