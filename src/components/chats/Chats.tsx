@@ -6,26 +6,26 @@ import "./chats.css"
 
 type ChatsProps = {
   setDashboard: (a: string) => void
-  setThreadObj: (a: string | null) => void
+  setThreadObj: (a: Object | null) => void
 }
 
 const Chats = ({ setDashboard, setThreadObj }: ChatsProps) => {
-  const createMessage = () => {
+  const createMessage = async () => {
+    await addGroup(setThreadObj)
     setDashboard("chat")
-    addGroup()
   }
 
   return (
     <div className="main__chats">
       <header className="header">
         <button className="button" onClick={() => setDashboard("friends")}>
-          <FaUserFriends size={"2.2em"} color={"rgb(255,6,200)"} />
+          <FaUserFriends size={"2.2em"} color={"rgb(77, 255, 148)"} />
         </button>
         <button
           className="chats-nav-create_message button"
           onClick={() => createMessage()}
         >
-          <BiMessageSquareEdit size={"2.2em"} color={"rgb(255,6,200)"} />
+          <BiMessageSquareEdit size={"2.2em"} color={"rgb(77, 255, 148)"} />
         </button>
       </header>
       <Threads setDashboard={setDashboard} setThreadObj={setThreadObj} />
