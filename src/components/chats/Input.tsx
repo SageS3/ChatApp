@@ -1,21 +1,24 @@
 import { useState } from "react"
-import { addMessageSubCollection } from "../config/threadFunctions"
+import {
+  addMessageSubCollection,
+  updateRecentMessage,
+} from "../config/threadFunctions"
 import "./Input.css"
 
 type InputProps = {
   threadObj: any
+  queryChats: () => void
 }
-const Input = ({ threadObj }: InputProps) => {
+const Input = ({ threadObj, queryChats }: InputProps) => {
   const [messageText, setMessageText] = useState<string>("")
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleInputSubmit = (event: any) => {
     if (event.key === "Enter") {
-      setIsLoading(true)
       addMessageSubCollection(threadObj.id, messageText).then(() => {
         setMessageText("")
+        queryChats()
+        updateRecentMessage(messageText, threadObj.id)
       })
-      setIsLoading(false)
     }
   }
   return (
