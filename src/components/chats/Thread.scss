@@ -36,5 +36,23 @@
   .chat-window {
     grid-area: chat-window;
     background-color: Colors.$main-background-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    overflow: scroll;
+
+    .chat-container {
+      height: auto;
+      width: 100%;
+      background-color: Colors.$secondary-background-color;
+      display: flex;
+      align-items: center;
+      // justify-content: center;
+      p {
+        margin-left: 20px;
+      }
+    }
   }
 }

@@ -31,4 +31,20 @@
 .thread-directory .chat-window {
   grid-area: chat-window;
   background-color: rgb(30, 30, 30);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  overflow: scroll;
+}
+.thread-directory .chat-window .chat-container {
+  height: auto;
+  width: 100%;
+  background-color: rgb(55, 47, 73);
+  display: flex;
+  align-items: center;
+}
+.thread-directory .chat-window .chat-container p {
+  margin-left: 20px;
 }/*# sourceMappingURL=Thread.css.map */
