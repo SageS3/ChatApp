@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import "./Thread.css"
 import Input from "./Input"
 import { editGroupName } from "../config/threadFunctions"
@@ -12,16 +12,11 @@ type ThreadProps = {
 const Thread = ({ threadObj }: ThreadProps) => {
   const [threadGroupName, setThreadGroupName] = useState<string>("")
   const [chats, setChats] = useState<any>([])
-  // const [loading, setLoading] = useState<boolean>(false)
+
   const handleGroupName = (event: any) => {
     event.preventDefault()
     setThreadGroupName(event.target.value)
   }
-
-  useEffect(() => {
-    setThreadGroupName(threadObj.groupName)
-    queryChats()
-  }, [])
 
   const queryChats = async () => {
     const q = query(
@@ -47,6 +42,15 @@ const Thread = ({ threadObj }: ThreadProps) => {
       ))}
     </div>
   )
+
+  useEffect(() => {
+    setThreadGroupName(threadObj.groupName)
+    queryChats()
+    return () => {
+      setThreadGroupName("")
+      setChats([])
+    }
+  }, [])
 
   return (
     <div className="thread-directory">
