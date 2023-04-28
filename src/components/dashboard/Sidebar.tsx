@@ -27,45 +27,38 @@ const Sidebar: React.FC<SidebarProps> = ({
     console.log("user is signed out")
   }
 
-  const setDashboardHandler = (directory: string) => {
-    setDashboard(directory)
-  }
-
   return (
     <div className="sidebar-wrapper">
       <div className="image-container">
         <img src={userPhoto} alt="" />
       </div>
       {<h3>{userDisplayName}</h3>}
-      <button onClick={() => setDashboardHandler("chats")} className="chats">
-        {dashboard === "chats" ? (
-          <AiFillMessage size={"1.3em"} color={"rgb(255,6,200)"} />
+      <button onClick={() => setDashboard("chats")} className="chats">
+        {dashboard === "chats" || dashboard === "chat" ? (
+          <AiFillMessage size={"1.3em"} color={"rgb(77, 255, 148)"} />
         ) : (
-          <AiOutlineMessage size={"1.3em"} color={"rgb(255,6,200)"} />
+          <AiOutlineMessage size={"1.3em"} color={"rgb(77, 255, 148)"} />
         )}
         chats
       </button>
-      <button
-        className="profile"
-        onClick={() => setDashboardHandler("profile")}
-      >
+      <button className="profile" onClick={() => setDashboard("profile")}>
         {dashboard === "profile" ? (
-          <MdAccountCircle size={"1.3em"} color={"rgb(255,6,200)"} />
+          <MdAccountCircle size={"1.3em"} color={"rgb(77, 255, 148)"} />
         ) : (
-          <VscAccount size={"1.3em"} color={"rgb(255,6,200)"} />
+          <VscAccount size={"1.3em"} color={"rgb(77, 255, 148)"} />
         )}
         Profile
       </button>
       <button onClick={() => setDashboard("settings")}>
         {dashboard === "settings" ? (
-          <IoSettingsSharp size={"1.3em"} color={"rgb(255,6,200)"} />
+          <IoSettingsSharp size={"1.3em"} color={"rgb(77, 255, 148)"} />
         ) : (
-          <IoSettingsOutline size={"1.3em"} color={"rgb(255,6,200)"} />
+          <IoSettingsOutline size={"1.3em"} color={"rgb(77, 255, 148)"} />
         )}
         Settings
       </button>
       <button onClick={() => handleLogOut(auth)} id="btn--logout">
-        <MdOutlineLogout size={"1.3em"} color={"rgb(255,6,200)"} />
+        <MdOutlineLogout size={"1.3em"} color={"rgb(77, 255, 148)"} />
         Logout
       </button>
     </div>
