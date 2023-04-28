@@ -34,7 +34,7 @@ const Dashboard = () => {
   const [reauthEmail, setReauthEmail] = useState<string>("")
   const [reauthPassword, setReauthPassword] = useState<string>("")
   const [reauthError, setReauthError] = useState<string>("")
-  const [threadObj, setThreadObj] = useState<string | null>(null)
+  const [threadObj, setThreadObj] = useState<Object | null>(null)
 
   const user = auth.currentUser
   const userDisplayName = user?.displayName //used for the navbar
