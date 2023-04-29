@@ -162,7 +162,7 @@ const Profile = (props: ProfileProps) => {
         <input
           required
           spellCheck={false}
-          onKeyPress={(e) => preventEnterKey(e)}
+          onKeyDown={(e) => preventEnterKey(e)}
           type="text"
           value={userName}
           onChange={(e) => setUsernameHandler(e)}
@@ -174,8 +174,8 @@ const Profile = (props: ProfileProps) => {
           required
           spellCheck={false}
           type="email"
-          value={userEmail}
-          onKeyPress={(e) => preventEnterKey(e)}
+          value={userEmail.toLowerCase()}
+          onKeyDown={(e) => preventEnterKey(e)}
           onChange={(e) => setUserEmail(e.target.value)}
         ></input>
       </div>
