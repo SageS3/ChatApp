@@ -29,7 +29,7 @@
   overflow: hidden;
 }
 .profile--wrapper .edit_image_container .img-container .image__loading {
-  border: 2px solid rgb(255, 6, 200);
+  border: 2px solid rgb(77, 255, 148);
   width: 30px;
   height: 30px;
   border-radius: 100px;
@@ -41,19 +41,19 @@
   }
   25% {
     transform: scale(0.5);
-    border: 2px solid rgba(255, 6, 200, 0.6);
+    border: 2px solid rgba(77, 255, 148, 0.6);
   }
   50% {
     transform: scale(1);
-    border: 2px solid rgba(255, 6, 200, 0.6);
+    border: 2px solid rgba(77, 255, 148, 0.6);
   }
   75% {
     transform: scale(1.5);
-    border: 2px solid rgba(255, 6, 200, 0.4);
+    border: 2px solid rgba(77, 255, 148, 0.4);
   }
   100% {
     transform: scale(2);
-    border: 2px solid rgba(255, 6, 200, 0.2);
+    border: 2px solid rgba(77, 255, 148, 0.2);
   }
 }
 .profile--wrapper .edit_image_container .img-container .profile-picture {
@@ -70,7 +70,7 @@
   position: relative;
   left: 45px;
   top: 45px;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   outline: 1px solid rgb(120, 120, 120);
   border: none;
   border-radius: 100px;
@@ -125,7 +125,7 @@
   font-family: "Signika", sans-serif;
   border: none;
   color: white;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   border-bottom: 1px solid rgb(120, 120, 120);
   cursor: pointer;
   transition: border-bottom 200ms ease-out, margin-bottom 200ms ease-out, color 300ms ease-out;
@@ -156,7 +156,7 @@
   font-family: "Signika", sans-serif;
   transition: outline 200ms ease-out;
   border-radius: 12px;
-  outline: 1px solid rgb(255, 6, 200);
+  outline: 1px solid rgb(77, 255, 148);
 }
 .profile--wrapper > button:disabled {
   outline: none;
