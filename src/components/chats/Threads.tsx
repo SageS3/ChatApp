@@ -83,7 +83,11 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
           <button
             disabled={loading}
             type="button"
-            className={isOpen ? "thread-menu open" : "thread-menu"}
+            className={
+              isOpen && clickedItemId === group.id
+                ? "thread-menu open"
+                : "thread-menu"
+            }
             onClick={(e) => handleMenuSlide(e, group.id)}
           >
             <BsThreeDotsVertical size={"3em"} color={"rgb(77, 255, 148)"} />
