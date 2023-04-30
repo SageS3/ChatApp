@@ -3,6 +3,7 @@ import {
   addMessageSubCollection,
   updateRecentMessage,
 } from "../config/threadFunctions"
+import { auth } from "../config/firebase"
 import "./Input.css"
 
 type InputProps = {
@@ -11,13 +12,13 @@ type InputProps = {
 }
 const Input = ({ threadObj, queryChats }: InputProps) => {
   const [messageText, setMessageText] = useState<string>("")
-
   const handleInputSubmit = (event: any) => {
+    const user = auth.currentUser
     if (event.key === "Enter") {
       addMessageSubCollection(threadObj.id, messageText).then(() => {
         setMessageText("")
         queryChats()
-        updateRecentMessage(messageText, threadObj.id)
+        updateRecentMessage(messageText, threadObj.id, user?.displayName)
       })
     }
   }
