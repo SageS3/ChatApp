@@ -30,7 +30,7 @@
   position: relative;
   cursor: pointer;
   box-shadow: 5px 4px 4px black;
-  outline: 1px solid black;
+  outline: 2px solid black;
 }
 .threads .group-thread .thread:hover .thread-menu {
   visibility: visible;
@@ -49,8 +49,10 @@
 }
 .threads .group-thread .thread .thread__last-message-text {
   color: rgb(120, 120, 120);
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   position: absolute;
+  top: -35px;
+  left: 0;
 }
 .threads .group-thread .thread .thread__group-name {
   position: absolute;
@@ -68,7 +70,8 @@
   justify-content: center;
   padding-left: 0px;
   width: 0%;
-  animation: slide-open 200ms cubic-bezier(0.54, 0.93, 0.93, 0.15) 20ms forwards;
+  animation: slide-open 200ms cubic-bezier(0.54, 0.33, 0.23, 0.75) 20ms forwards;
+  border: 2px solid black;
 }
 .threads .group-thread .thread .delete-button li {
   font-size: 1.2rem;
@@ -79,7 +82,7 @@
 }
 .threads .group-thread .thread .closed {
   width: 20%;
-  animation: slide-closed 200ms cubic-bezier(0.54, 0.93, 0.93, 0.15) 20ms forwards;
+  animation: slide-closed 200ms cubic-bezier(0.24, 0.93, 0.93, 0.15) 20ms forwards;
 }
 .threads .group-thread .thread .closed li {
   visibility: hidden;
@@ -100,7 +103,7 @@
 }
 .threads .group-thread .thread .open {
   position: absolute;
-  right: 20%;
+  right: 21%;
 }
 
 @keyframes slide-open {
