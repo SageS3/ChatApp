@@ -4,60 +4,39 @@ import { db } from "../config/firebase"
 import "./Friends.css"
 
 const Friends = () => {
-  const [userQuery, setUserQuery] = useState<string>("")
-  const [userArr, setUserArr] = useState<string[]>([])
-  const q = query(collection(db, "users"))
+  const [allFriends, setAllFriends] = useState<[]>([])
 
-  const getUsers = async () => {
-    const snapShot = await getDocs(q)
-    return snapShot
-  }
+  // const queryFriends = () => {
+  //   const q = query(
+  //     collection(db, "users"),
 
-  // const queryUser = (usersArr: any) => {
-  //   const filteredUsers = usersArr.filter((userName: string) => {
-  //     userName.includes(userQuery)
+  //   )
+  //   const friendsArr: any = []
+  //   const querySnapshot = await getDocs(q)
+  //   querySnapshot.forEach((doc) => {
+  //     friendsArr.push(doc.data())
   //   })
-  //   console.log(filteredUsers)
+  //   setAllFriends(friendsArr)
   // }
 
-  const handleInput = (event: any) => {
-    setUserQuery(event.target.value)
-  }
-  // Search User
-  // qeury search users using firestore method that returns an array
-  // filter array on search feature
-
-  useEffect(() => {
-    getUsers()
-  }, [])
+  useEffect(() => {}, [])
 
   return (
-    <div className="friends-main">
-      <section className="input-container">
-        <input
-          autoFocus
-          type="text"
-          placeholder="Find friends..."
-          value={userQuery}
-          onChange={(e) => handleInput(e)}
-        />
-      </section>
+    <div className="friends">
+      <header className="friends__header">
+        <ul>
+          <li>Friends</li>
+          <li>
+            <button>All</button>
+          </li>
+          <li>
+            <button>Add Friends</button>
+          </li>
+        </ul>
+      </header>
+      <main className="friends--list">friends list</main>
     </div>
   )
 }
 
 export default Friends
-
-// This function will do two main things:
-
-// list user's friends alphabetically
-// list will contain user's image and username
-// you can select a user / user's to send a message to
-// if multiple users are selected, user will have the option to
-// send independently or as a group message.
-
-// The secound functionality will be that a user can search for
-// users and add them as a friend.
-
-// Another functionality- there will be a cog next to a user in the
-// list of users, which will allow a user to unfriend another user
