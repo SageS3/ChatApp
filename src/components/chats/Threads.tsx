@@ -31,8 +31,8 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
   const queryGroups = async () => {
     const q = query(
       collection(db, "chat"),
-      where("members", "array-contains", user?.uid)
-      // orderBy("createdAt", "desc")
+      where("members", "array-contains", user?.uid),
+      orderBy("recentMessage.readBy.sentAt", "desc")
     )
     const groupArr: any = []
     const querySnapshot = await getDocs(q)
