@@ -9,7 +9,7 @@ import {
 import { db } from "./firebase"
 import { auth } from "./firebase"
 
-export const addGroup = async () => {
+export const addGroup = async (setThreadObj: (a: Object) => void) => {
   const user = auth.currentUser
   const collectionRef = collection(db, "chat")
   await addDoc(collectionRef, {
@@ -17,13 +17,17 @@ export const addGroup = async () => {
     createdBy: user?.uid,
     groupName: "",
     members: [user?.uid],
-    recentMessage: { messageText: "", readBy: { sentAt: "", sentBy: "" } },
+    recentMessage: {
+      messageText: null,
+      readBy: { sentAt: serverTimestamp(), sentBy: "" },
+    },
     type: 1,
   })
     .then((re) => {
       let docRef = doc(db, "chat", re.id)
       updateDoc(docRef, { id: re.id })
       addMessageDoc(re.id)
+      setThreadObj(re)
     })
     .catch((error) => {
       console.log(error)
@@ -52,6 +56,25 @@ export const addMessageSubCollection = async (
 export const editGroupName = async (groupId: string, groupName: string) => {
   const docRef = doc(db, "chat", groupId)
   await updateDoc(docRef, { groupName: groupName }).catch((error) => {
+    console.log(error)
+  })
+}
+
+export const updateRecentMessage = async (
+  message: string,
+  groupId: string,
+  userName: string | null | undefined
+) => {
+  const docRef = doc(db, "chat", groupId)
+  await updateDoc(docRef, {
+    recentMessage: {
+      messageText: message,
+      readBy: {
+        sentAt: serverTimestamp(),
+        sentBy: userName,
+      },
+    },
+  }).catch((error) => {
     console.log(error)
   })
 }
