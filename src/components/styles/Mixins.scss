@@ -7,10 +7,6 @@
   color: Colors.$light-font-color;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 200ms ease-in, border-bottom 200ms ease-in-out;
-  &:hover {
-    transform: scale(1.1);
-  }
 }
 
 @mixin display-flex-center {
