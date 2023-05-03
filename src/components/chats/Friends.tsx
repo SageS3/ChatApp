@@ -1,25 +1,44 @@
 import { useEffect, useState } from "react"
-import { collection, query, getDocs } from "firebase/firestore"
+import { collection, query, getDoc, doc } from "firebase/firestore"
 import { db } from "../config/firebase"
+import { auth } from "../config/firebase"
 import "./Friends.css"
 
 const Friends = () => {
-  const [allFriends, setAllFriends] = useState<[]>([])
+  const [allFriends, setAllFriends] = useState<any>([])
+  const [friendsDirectory, setFriendsDirectory] = useState<string>("all")
+  const user = auth.currentUser
+  const queryFriends = async () => {
+    const docRef = doc(db, "users", `${user?.uid}`)
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+      setAllFriends(docSnap.data().friends)
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!")
+    }
+  }
 
-  // const queryFriends = () => {
-  //   const q = query(
-  //     collection(db, "users"),
+  useEffect(() => {
+    queryFriends()
+  }, [])
 
-  //   )
-  //   const friendsArr: any = []
-  //   const querySnapshot = await getDocs(q)
-  //   querySnapshot.forEach((doc) => {
-  //     friendsArr.push(doc.data())
-  //   })
-  //   setAllFriends(friendsArr)
-  // }
+  const ListFriends = () => (
+    <>
+      {allFriends.map((friend: any) => (
+        <div className="friend" key={allFriends.indexOf(friend)}>
+          {friend.userName}
+        </div>
+      ))}
+    </>
+  )
 
-  useEffect(() => {}, [])
+  const AddFriends = () => (
+    <div className="add-friends-container">
+      <input placeholder="find a friend" />
+      <div className="search-results-container"></div>
+    </div>
+  )
 
   return (
     <div className="friends">
@@ -27,14 +46,21 @@ const Friends = () => {
         <ul>
           <li>Friends</li>
           <li>
-            <button>All</button>
+            <button type="button" onClick={() => setFriendsDirectory("all")}>
+              All
+            </button>
           </li>
           <li>
-            <button>Add Friends</button>
+            <button type="button" onClick={() => setFriendsDirectory("add")}>
+              Add Friends
+            </button>
           </li>
         </ul>
       </header>
-      <main className="friends--list">friends list</main>
+      <main className="friends--list">
+        {friendsDirectory === "all" && allFriends.length > 0 && <ListFriends />}
+        {friendsDirectory === "add" && <AddFriends />}
+      </main>
     </div>
   )
 }
