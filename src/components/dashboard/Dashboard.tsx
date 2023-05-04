@@ -159,7 +159,9 @@ const Dashboard = () => {
         )}
         {dashboard === "friends" && <Friends />}
         {dashboard === "settings" && <Settings />}
-        {dashboard === "chat" && <Thread threadObj={threadObj} />}
+        {dashboard === "chat" && (
+          <Thread threadObj={threadObj} userPhoto={userPhoto} />
+        )}
       </main>
     </div>
   )
