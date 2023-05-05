@@ -31,7 +31,7 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
   const queryGroups = async () => {
     const q = query(
       collection(db, "chat"),
-      where("members", "array-contains", user?.uid),
+      where("createdBy", "==", user?.uid),
       orderBy("recentMessage.readBy.sentAt", "desc")
     )
     const groupArr: any = []
@@ -58,7 +58,6 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
   }
 
   const handleThreadId = (group: Object) => {
-    console.log(group)
     setThreadObj(group)
     setDashboard("chat")
   }
