@@ -3,6 +3,7 @@ import Register from "../entrypage/Register"
 import Login from "./Login"
 import "./EntryPage.css"
 import { animated, useSpring } from "@react-spring/web"
+import Cauldron from "../svg/Cauldron"
 
 const EntryPage = () => {
   const [form, setForm] = useState<string>("register")
@@ -42,6 +43,7 @@ const EntryPage = () => {
           Sign In
         </animated.button>
       </div>
+      <Cauldron />
       {form === "register" && <Register setForm={setForm} />}
       {form === "login" && <Login />}
     </>
