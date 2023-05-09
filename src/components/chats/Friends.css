@@ -55,4 +55,39 @@
 }
 .friends .friends--list {
   grid-area: list;
+  width: 100%;
+  background-color: rgb(30, 30, 30);
+}
+.friends .friends--list .friend {
+  color: white;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  background-color: rgb(55, 47, 73);
+  border: 2px solid white;
+}
+.friends .friends--list .add-friends-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  grid-area: list;
+  height: 100%;
+}
+.friends .friends--list .add-friends-container input {
+  outline: none;
+  border: none;
+  width: 400px;
+  padding: 10px;
+  background-color: rgb(55, 47, 73);
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+.friends .friends--list .add-friends-container .search-results-container {
+  width: 400px;
+  height: 400px;
+  background-color: rgb(30, 30, 30);
 }/*# sourceMappingURL=Friends.css.map */
