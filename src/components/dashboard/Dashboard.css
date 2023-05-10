@@ -3,8 +3,9 @@
   width: 100vw;
   display: grid;
   background-color: rgb(55, 47, 73);
-  grid-template-columns: 280px 2fr;
+  grid-template-columns: 0.25fr 2fr;
   grid-template-areas: "sidebar main" "sidebar main";
+  gap: 4px;
 }
 .user-dashboard nav {
   display: none;
@@ -85,17 +86,13 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 200ms ease-in, border-bottom 200ms ease-in-out;
-  }
-  .user-dashboard nav button:hover {
-    transform: scale(1.1);
   }
   .user-dashboard nav .logout-nav-button {
     cursor: pointer;
     width: 5rem;
     padding: 10px;
     border: none;
-    outline: 2px solid rgb(255, 6, 200);
+    outline: 2px solid rgb(77, 255, 148);
     background-color: rgb(30, 30, 30);
     border-radius: 12px;
     color: white;
@@ -105,7 +102,7 @@
   }
   .user-dashboard nav .logout-nav-button:hover {
     outline: none;
-    background-color: rgb(255, 6, 200);
+    background-color: rgb(77, 255, 148);
     color: rgb(30, 30, 30);
   }
 }

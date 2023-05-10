@@ -6,10 +6,11 @@
   width: 100vw;
   display: grid;
   background-color: Colors.$secondary-background-color;
-  grid-template-columns: 280px 2fr;
+  grid-template-columns: 0.25fr 2fr;
   grid-template-areas:
     "sidebar main"
     "sidebar main";
+  gap: 4px;
   nav {
     display: none;
   }
