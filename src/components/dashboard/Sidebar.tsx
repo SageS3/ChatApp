@@ -35,31 +35,27 @@ const Sidebar: React.FC<SidebarProps> = ({
       {<h3>{userDisplayName}</h3>}
       <button onClick={() => setDashboard("chats")} className="chats">
         {dashboard === "chats" || dashboard === "chat" ? (
-          <AiFillMessage size={"1.3em"} color={"rgb(77, 255, 148)"} />
+          <AiFillMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
         ) : (
-          <AiOutlineMessage size={"1.3em"} color={"rgb(77, 255, 148)"} />
+          <AiOutlineMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
         )}
-        chats
       </button>
       <button className="profile" onClick={() => setDashboard("profile")}>
         {dashboard === "profile" ? (
-          <MdAccountCircle size={"1.3em"} color={"rgb(77, 255, 148)"} />
+          <MdAccountCircle size={"1.5em"} color={"rgb(77, 255, 148)"} />
         ) : (
-          <VscAccount size={"1.3em"} color={"rgb(77, 255, 148)"} />
+          <VscAccount size={"1.5em"} color={"rgb(77, 255, 148)"} />
         )}
-        Profile
       </button>
       <button onClick={() => setDashboard("settings")}>
         {dashboard === "settings" ? (
-          <IoSettingsSharp size={"1.3em"} color={"rgb(77, 255, 148)"} />
+          <IoSettingsSharp size={"1.5em"} color={"rgb(77, 255, 148)"} />
         ) : (
-          <IoSettingsOutline size={"1.3em"} color={"rgb(77, 255, 148)"} />
+          <IoSettingsOutline size={"1.5em"} color={"rgb(77, 255, 148)"} />
         )}
-        Settings
       </button>
       <button onClick={() => handleLogOut(auth)} id="btn--logout">
-        <MdOutlineLogout size={"1.3em"} color={"rgb(77, 255, 148)"} />
-        Logout
+        <MdOutlineLogout size={"1.5em"} color={"rgb(77, 255, 148)"} />
       </button>
     </div>
   )
