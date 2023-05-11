@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { IoSkullOutline } from "react-icons/io5"
 import "./Threads.css"
 import {
   getDocs,
@@ -100,7 +101,7 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
               }
               onClick={(e) => deleteThread(e, group.id)}
             >
-              <li>delete</li>
+              <IoSkullOutline size={"2.5em"} />
             </ul>
           )}
         </div>
