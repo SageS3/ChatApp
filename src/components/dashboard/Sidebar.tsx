@@ -2,11 +2,11 @@ import "./Sidebar.css"
 import { signOut } from "firebase/auth"
 import { auth } from "../config/firebase"
 import { AiOutlineMessage } from "react-icons/ai"
-import { VscAccount } from "react-icons/vsc"
+import { FiUsers } from "react-icons/fi"
 import { IoSettingsOutline } from "react-icons/io5"
 import { MdOutlineLogout } from "react-icons/md"
 import { AiFillMessage } from "react-icons/ai"
-import { MdAccountCircle } from "react-icons/md"
+import { FaUserFriends } from "react-icons/fa"
 import { IoSettingsSharp } from "react-icons/io5"
 
 type SidebarProps = {
@@ -29,10 +29,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className="sidebar-wrapper">
-      <div className="image-container">
+      <div className="image-container" onClick={() => setDashboard("profile")}>
         <img src={userPhoto} alt="" />
       </div>
-      {<h3>{userDisplayName}</h3>}
       <button onClick={() => setDashboard("chats")} className="chats">
         {dashboard === "chats" || dashboard === "chat" ? (
           <AiFillMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
@@ -40,11 +39,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           <AiOutlineMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
         )}
       </button>
-      <button className="profile" onClick={() => setDashboard("profile")}>
-        {dashboard === "profile" ? (
-          <MdAccountCircle size={"1.5em"} color={"rgb(77, 255, 148)"} />
+      <button className="profile" onClick={() => setDashboard("friends")}>
+        {dashboard === "friends" ? (
+          <FaUserFriends size={"1.5em"} color={"rgb(77, 255, 148)"} />
         ) : (
-          <VscAccount size={"1.5em"} color={"rgb(77, 255, 148)"} />
+          <FiUsers size={"1.3em"} color={"rgb(77, 255, 148)"} />
         )}
       </button>
       <button onClick={() => setDashboard("settings")}>
