@@ -10,7 +10,6 @@
   justify-content: flex-start;
   flex-direction: column;
   animation: slide-in 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
-  position: absolute;
 
   @keyframes slide-in {
     0% {
@@ -25,40 +24,47 @@
   }
 
   button {
-    height: 40px;
-    width: 70%;
+    height: 80px;
+    width: 80px;
+    border-radius: 6px;
     margin-bottom: 20px;
     font-size: 1.3rem;
     border-radius: 12px;
     @include Mixins.display-flex-center;
-    justify-content: left;
     @include Mixins.white-border-button;
+    border: 2px solid black;
     font-family: Fonts.$form-font;
-    text-indent: 30px;
-    padding-inline-start: 20px;
+    box-shadow: 5px 4px 4px black;
+    transition: box-shadow 200ms ease-in-out;
+    &:active {
+      box-shadow: none;
+    }
   }
 
   #btn--logout {
     @include Mixins.white-border-button;
     background-color: Colors.$main-background-color;
     outline: none;
+    box-shadow: none;
   }
 
   .image-container {
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
     margin-bottom: 20px;
     margin-top: 50px;
-    border-radius: 100px;
+    border-radius: 8px;
     background-color: Colors.$main-background-color;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    overflow: hidden;
+    border: 2px solid black;
+    box-shadow: 5px 4px 4px black;
+    cursor: pointer;
     img {
-      width: 90px;
-      height: 90px;
-      border-radius: 100px;
+      width: 75px;
+      height: 75px;
       object-fit: cover;
     }
   }

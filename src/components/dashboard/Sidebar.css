@@ -1,12 +1,11 @@
 .sidebar-wrapper {
   grid-area: sidebar;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   animation: slide-in 450ms cubic-bezier(0.89, 0, 0.1, 0.99) forwards;
-  position: absolute;
 }
 @keyframes slide-in {
   0% {
@@ -19,59 +18,58 @@
   }
 }
 .sidebar-wrapper button {
-  height: 40px;
-  width: 70%;
+  height: 80px;
+  width: 80px;
+  border-radius: 6px;
   margin-bottom: 20px;
   font-size: 1.3rem;
   border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: left;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   outline: none;
   border: none;
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 100ms ease-in;
+  border: 2px solid black;
   font-family: "Signika", sans-serif;
-  text-indent: 30px;
-  -webkit-padding-start: 20px;
-          padding-inline-start: 20px;
+  box-shadow: 5px 4px 4px black;
+  transition: box-shadow 200ms ease-in-out;
 }
-.sidebar-wrapper button:hover {
-  background-color: rgb(55, 47, 73);
+.sidebar-wrapper button:active {
+  box-shadow: none;
 }
 .sidebar-wrapper #btn--logout {
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   outline: none;
   border: none;
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 100ms ease-in;
-  background-color: rgb(33, 30, 41);
+  background-color: rgb(30, 30, 30);
   outline: none;
-}
-.sidebar-wrapper #btn--logout:hover {
-  background-color: rgb(55, 47, 73);
+  box-shadow: none;
 }
 .sidebar-wrapper .image-container {
-  width: 90px;
-  height: 90px;
+  width: 75px;
+  height: 75px;
   margin-bottom: 20px;
   margin-top: 50px;
-  border-radius: 100px;
-  background-color: rgb(33, 30, 41);
+  border-radius: 8px;
+  background-color: rgb(30, 30, 30);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border: 2px solid black;
+  box-shadow: 5px 4px 4px black;
+  cursor: pointer;
 }
 .sidebar-wrapper .image-container img {
-  width: 90px;
-  height: 90px;
-  border-radius: 100px;
+  width: 75px;
+  height: 75px;
   -o-object-fit: cover;
      object-fit: cover;
 }
