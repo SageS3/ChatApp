@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { IoSkullOutline } from "react-icons/io5"
 import "./Threads.css"
 import {
@@ -21,7 +21,6 @@ type ThreadsProps = {
 
 const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
   const [groups, setGroups] = useState<any>([])
-  const [loading, setLoading] = useState<boolean>(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [clickedItemId, setclickedItemId] = useState<string | null>(null)
 
@@ -40,16 +39,16 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
     querySnapshot.forEach((doc) => {
       groupArr.push(doc.data())
     })
+    // setGroups((prev: []) => [...prev, ...groupArr])
     setGroups(groupArr)
+    console.log("query")
   }
 
   const deleteThread = async (event: any, groupId: string) => {
     setIsOpen(false)
-    setLoading(true)
     event.stopPropagation()
     await deleteDoc(doc(db, "chat", groupId)).then(queryGroups)
     await deleteDoc(doc(db, "message", groupId))
-    setLoading(false)
   }
 
   const handleMenuSlide = (event: any, id: string) => {
@@ -63,8 +62,12 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
     setDashboard("chat")
   }
 
+  useEffect(() => {
+    queryGroups()
+  }, [])
+
   const ListThreads = () => (
-    <div className="group-thread">
+    <>
       {groups.map((group: any) => (
         <div
           className="thread"
@@ -83,7 +86,6 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
             <p>{group.recentMessage.messageText}</p>
           )}
           <button
-            disabled={loading}
             type="button"
             className={
               isOpen && clickedItemId === group.id
@@ -106,12 +108,8 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
           )}
         </div>
       ))}
-    </div>
+    </>
   )
-
-  useEffect(() => {
-    queryGroups()
-  }, [])
 
   return (
     <div className="threads">
