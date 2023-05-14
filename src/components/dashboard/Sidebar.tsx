@@ -29,31 +29,39 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className="sidebar-wrapper">
-      <div className="image-container" onClick={() => setDashboard("profile")}>
+      <button
+        className="image-container"
+        onClick={() => setDashboard("profile")}
+        data-tooltip="Profile"
+      >
         <img src={userPhoto} alt="" />
-      </div>
-      <button onClick={() => setDashboard("chats")} className="chats">
+      </button>
+      <button onClick={() => setDashboard("chats")} data-tooltip="chats">
         {dashboard === "chats" || dashboard === "chat" ? (
           <AiFillMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
         ) : (
           <AiOutlineMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
         )}
       </button>
-      <button className="profile" onClick={() => setDashboard("friends")}>
+      <button onClick={() => setDashboard("friends")} data-tooltip="Friends">
         {dashboard === "friends" ? (
           <FaUserFriends size={"1.5em"} color={"rgb(77, 255, 148)"} />
         ) : (
           <FiUsers size={"1.3em"} color={"rgb(77, 255, 148)"} />
         )}
       </button>
-      <button onClick={() => setDashboard("settings")}>
+      <button onClick={() => setDashboard("settings")} data-tooltip="Settings">
         {dashboard === "settings" ? (
           <IoSettingsSharp size={"1.5em"} color={"rgb(77, 255, 148)"} />
         ) : (
           <IoSettingsOutline size={"1.5em"} color={"rgb(77, 255, 148)"} />
         )}
       </button>
-      <button onClick={() => handleLogOut(auth)} id="btn--logout">
+      <button
+        onClick={() => handleLogOut(auth)}
+        id="btn--logout"
+        data-tooltip="Logout"
+      >
         <MdOutlineLogout size={"1.5em"} color={"rgb(77, 255, 148)"} />
       </button>
     </div>
