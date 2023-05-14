@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, useCallback } from "react"
 import { IoSkullOutline } from "react-icons/io5"
 import "./Threads.css"
 import {
@@ -40,8 +40,8 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
       groupArr.push(doc.data())
     })
     // setGroups((prev: []) => [...prev, ...groupArr])
-    setGroups(groupArr)
     console.log("query")
+    setGroups(groupArr)
   }
 
   const deleteThread = async (event: any, groupId: string) => {
@@ -64,7 +64,12 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
 
   useEffect(() => {
     queryGroups()
+    return () => {
+      queryGroups()
+    }
   }, [])
+
+  // const memoizeData = () => useMemo(() => {}, [groups])
 
   const ListThreads = () => (
     <>
