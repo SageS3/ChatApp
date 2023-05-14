@@ -4,7 +4,7 @@
 
 .sidebar-wrapper {
   grid-area: sidebar;
-  background-color: Colors.$main-background-color;
+  background-color: rgb(20, 20, 20);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -36,8 +36,32 @@
     font-family: Fonts.$form-font;
     box-shadow: 5px 4px 4px black;
     transition: box-shadow 200ms ease-in-out;
+    transition: content 200ms ease-in-out;
+    position: relative;
     &:active {
       box-shadow: none;
+    }
+
+    &::before {
+      opacity: 0;
+      transition: opacity 200ms ease-in-out;
+      font-size: 1rem;
+      padding: 5px 10px 5px 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 90px;
+      width: max-content;
+      height: 30px;
+      background-color: Colors.$secondary-background-color;
+      z-index: 2;
+      content: attr(data-tooltip);
+    }
+
+    &:hover::before {
+      opacity: 1;
     }
   }
 
@@ -49,22 +73,22 @@
   }
 
   .image-container {
-    width: 75px;
-    height: 75px;
-    margin-bottom: 20px;
+    // width: 80px;
+    // height: 80px;
+    // margin-bottom: 20px;
     margin-top: 50px;
-    border-radius: 8px;
-    background-color: Colors.$main-background-color;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border: 2px solid black;
-    box-shadow: 5px 4px 4px black;
+    // border-radius: 8px;
+    // background-color: Colors.$main-background-color;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // overflow: hidden;
+    // border: 2px solid black;
+    // box-shadow: 5px 4px 4px black;
     cursor: pointer;
     img {
-      width: 75px;
-      height: 75px;
+      width: 80px;
+      height: 80px;
       object-fit: cover;
     }
   }
