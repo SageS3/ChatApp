@@ -55,7 +55,7 @@ export default function Register(props: registerProps) {
     await setDoc(docRef, {
       userName: userName,
       photoURL: snapShot,
-      friends: [{ userName: "fireBot" }],
+      friends: { pendingRequests: [], pendingSentRequests: [], friends: [] },
       groups: [],
     })
     console.log("user added to users collection")
