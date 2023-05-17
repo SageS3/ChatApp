@@ -41,7 +41,7 @@ const ReauthForm = (props: ReauthFormProps) => {
         <button type="button" onClick={() => setAuthorizing(false)}>
           Cancel
         </button>
-        <p>{reauthError}</p>
+        {reauthError && <p>{reauthError}</p>}
       </form>
     </div>
   )
