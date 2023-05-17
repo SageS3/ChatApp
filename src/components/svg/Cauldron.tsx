@@ -16,16 +16,16 @@ const Cauldron = () => {
             d="M189.024 156.925C189.024 164.986 185.9 171.531 182.035 171.567C178.17 171.603 179.263 167.941 179.229 159.88C179.195 151.819 171.896 158.468 193.269 138.321C195.961 135.783 188.955 148.866 189.024 156.925Z"
             fill="black"
             stroke="black"
-            stroke-width="1.42848"
-            stroke-linecap="round"
+            strokeWidth="1.42848"
+            strokeLinecap="round"
           />
           <path
             id="left-leg"
             d="M43.8611 157.061C43.8611 165.122 46.9851 171.667 50.8501 171.703C54.715 171.739 53.6218 168.076 53.6564 160.015C53.6904 151.955 60.989 158.604 39.6162 138.457C36.9238 135.919 43.9303 149.001 43.8611 157.061Z"
             fill="black"
             stroke="black"
-            stroke-width="1.42848"
-            stroke-linecap="round"
+            strokeWidth="1.42848"
+            strokeLinecap="round"
           />
         </g>
         <ellipse id="bowl" cx="117" cy="93" rx="90" ry="75" fill="black" />
