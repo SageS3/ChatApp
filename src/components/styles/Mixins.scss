@@ -1,14 +1,5 @@
 @use "../styles/Colors.scss";
 
-@mixin white-border-button {
-  background-color: Colors.$main-background-color;
-  outline: none;
-  border: none;
-  color: Colors.$light-font-color;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 @mixin display-flex-center {
   display: flex;
   justify-content: center;
