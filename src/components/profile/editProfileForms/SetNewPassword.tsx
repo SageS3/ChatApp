@@ -70,7 +70,7 @@ const SetNewPassword = ({
   return (
     <div className="password-modal-container">
       <form className="password-modal" onSubmit={(e) => handleFormSubmit(e)}>
-        <h3>Set Password</h3>
+        <h3>Change Password</h3>
         <input
           type="password"
           placeholder="Current Password"
