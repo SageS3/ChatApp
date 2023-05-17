@@ -5,52 +5,48 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(20, 20, 40, 0.4);
+  background-color: rgba(20, 20, 20, 0.5);
 }
 .auth-modal-container .auth-modal {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -70%);
   width: 500px;
-  height: 40%;
-  background-color: rgb(55, 47, 73);
+  height: 400px;
+  background-color: rgb(40, 40, 50);
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   border-radius: 12px;
-  border: 1px solid rgb(120, 120, 120);
-  margin-bottom: 200px;
+  border: 3px solid black;
 }
 .auth-modal-container .auth-modal h3 {
   color: white;
-  margin-bottom: 32px;
 }
 .auth-modal-container .auth-modal input {
   outline: none;
   border: none;
-  border-bottom: 2px solid rgb(120, 120, 120);
-  background-color: rgb(55, 47, 73);
+  border-bottom: 3px solid rgb(25, 25, 25);
+  background-color: rgb(40, 40, 50);
   color: white;
   width: 50%;
-  margin-bottom: 20px;
   font-size: 1.2rem;
 }
 .auth-modal-container .auth-modal button {
   width: 50%;
   background-color: rgb(33, 30, 41);
   border: none;
-  margin: 10px 0 10px 0;
   color: white;
-  height: 35px;
+  padding: 10px;
   border-radius: 12px;
   font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
 }
 .auth-modal-container .auth-modal button:first-of-type {
-  outline: 1px solid rgb(255, 6, 200);
-  transition: outline 200ms ease-in;
-}
-.auth-modal-container .auth-modal button:first-of-type:hover {
-  outline: 2px solid rgb(255, 6, 200);
+  outline: 3px solid black;
+  background-color: rgb(77, 255, 148);
+  color: black;
 }/*# sourceMappingURL=ReauthForm.css.map */
