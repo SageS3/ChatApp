@@ -7,31 +7,47 @@
   background-color: Colors.$secondary-background-color;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2px;
+  gap: 4px;
   grid-template-rows: 0.3fr 4fr;
   grid-template-areas:
-    "navigate navigate"
-    "threads threads";
-
+    "navigate"
+    "threads";
   .header {
     grid-area: navigate;
     background-color: Colors.$main-background-color;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 10% 0 10%;
-
-    button {
+    .header__ul {
+      list-style-type: none;
+      color: white;
+      font-size: 1.3rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      background-color: Colors.$main-background-color;
-      border: none;
-      cursor: pointer;
-      margin-left: 20px;
+      margin: 0;
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+      }
+      li:first-of-type {
+        border-right: 3px solid Colors.$grey-color;
+        padding: 0 20px 0 0px;
+      }
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: Colors.$main-background-color;
+        border: none;
+        cursor: pointer;
+        margin-left: 20px;
+      }
     }
   }
 }
