@@ -82,7 +82,7 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
           <p className="thread__last-message-text">
             {new Date(
               group.recentMessage.readBy.sentAt.seconds * 1000
-            ).toLocaleTimeString()}
+            ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
           </p>
           <p className="thread__group-name">{group.groupName}</p>
           {group.recentMessage.messageText === null ? (
