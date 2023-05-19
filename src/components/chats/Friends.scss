@@ -60,9 +60,34 @@
   }
   .friends--list {
     grid-area: list;
-    width: 100%;
     background-color: Colors.$main-background-color;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .user-container {
+      padding: 5px;
+      margin: 5px 0 0 0;
+      height: 60px;
+      width: 50%;
+      background-color: Colors.$secondary-background-color;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-radius: 6px;
+      & > * {
+        margin-left: 20px;
+      }
+      .user-image-container {
+        width: 50px;
+        height: 50px;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
     .friend {
       color: white;
       width: 100%;
