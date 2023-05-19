@@ -2,10 +2,11 @@ import { ChangeEvent, useEffect, useState } from "react"
 import {
   collection,
   query,
-  getDoc,
+  getDocs,
   doc,
   onSnapshot,
   where,
+  orderBy,
 } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { auth } from "../config/firebase"
@@ -16,69 +17,83 @@ const Friends = () => {
   const [friendsDirectory, setFriendsDirectory] = useState<string>("all")
   const [searchFriendQuery, setSearchFriendQuery] = useState<string>("")
   const [searchFriendResults, setSearchFriendResults] = useState<any>([])
+  const [users, setUsers] = useState<any>([])
   const user = auth.currentUser
-  // const queryFriends = async () => {
-  //   const docRef = doc(db, "users", `${user?.uid}`)
-  //   const docSnap = await getDoc(docRef)
-  //   if (docSnap.exists()) {
-  //     setAllFriends(docSnap.data().friends)
-  //   } else {
-  //     // docSnap.data() will be undefined in this case
-  //     console.log("No such document!")
-  //   }
-  // }
 
   useEffect(() => {
-    // queryFriends()
+    queryFriends()
     console.log(searchFriendResults)
   }, [])
 
-  const ListFriends = () => (
+  // const ListFriends = () => (
+  //   <>
+  //     {allFriends.map((friend: any) => (
+  //       <div className="friend" key={allFriends.indexOf(friend)}>
+  //         {friend.userName}
+  //       </div>
+  //     ))}
+  //   </>
+  // )
+
+  // const querySearchFriends = () => {
+  //   const q = query(
+  //     collection(db, "users"),
+  //     where("userName", "==", `${searchFriendQuery}`)
+  //   )
+  //   onSnapshot(q, (querySnapshot) => {
+  //     const users: any = []
+  //     querySnapshot.forEach((doc) => {
+  //       users.push(doc.data().name)
+  //     })
+  //     setSearchFriendResults(users)
+  //   })
+  // }
+  // const queryInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setSearchFriendQuery(event.target.value)
+  //   querySearchFriends()
+  // }
+
+  // const ListSearchResults = () => (
+  //   <div className="search-results-container">
+  //     {searchFriendResults.map((user: any) => (
+  //       <div key={searchFriendResults.indexOf(user)}>{user}</div>
+  //     ))}
+  //   </div>
+  // )
+  // const AddFriends = () => (
+  //   <div className="add-friends-container">
+  //     <input
+  //       type="text"
+  //       placeholder="find a friend"
+  //       value={searchFriendQuery}
+  //       onChange={(event) => queryInputChangeHandler(event)}
+  //     />
+  //     <ListUsers />
+  //   </div>
+  // )
+
+  const queryFriends = async () => {
+    const q = query(collection(db, "users"))
+    const querySnapshot = await getDocs(q)
+    const userList: any = []
+    querySnapshot.forEach((user: any) => {
+      userList.push(user.data())
+    })
+    setUsers(userList)
+    console.log(users[0].userName)
+  }
+
+  const ListUsers = () => (
     <>
-      {allFriends.map((friend: any) => (
-        <div className="friend" key={allFriends.indexOf(friend)}>
-          {friend.userName}
+      {users.map((user: any) => (
+        <div className="user-container">
+          <div className="user-image-container">
+            <img src={user.photoURL} alt="" />
+          </div>
+          <p>{user.userName}</p>
         </div>
       ))}
     </>
-  )
-
-  const querySearchFriends = () => {
-    const q = query(
-      collection(db, "users"),
-      where("userName", "==", `${searchFriendQuery}`)
-    )
-    onSnapshot(q, (querySnapshot) => {
-      const users: any = []
-      querySnapshot.forEach((doc) => {
-        users.push(doc.data().name)
-      })
-      setSearchFriendResults(users)
-    })
-  }
-
-  const ListSearchResults = () => (
-    <div className="search-results-container">
-      {/* {searchFriendResults.map((user: any) => (
-        <div>{"chatbot"}</div>
-      ))} */}
-      <p>user</p>
-    </div>
-  )
-  const queryInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchFriendQuery(event.target.value)
-    querySearchFriends()
-  }
-  const addFriends = () => (
-    <div className="add-friends-container">
-      <input
-        type="text"
-        placeholder="find a friend"
-        value={searchFriendQuery}
-        onChange={(event) => queryInputChangeHandler(event)}
-      />
-      <ListSearchResults />
-    </div>
   )
 
   return (
@@ -99,8 +114,8 @@ const Friends = () => {
         </ul>
       </header>
       <main className="friends--list">
-        {friendsDirectory === "all" && allFriends.length > 0 && <ListFriends />}
-        {friendsDirectory === "add" && addFriends()}
+        {/* {friendsDirectory === "all" && <ListFriends />} */}
+        {friendsDirectory === "add" && <ListUsers />}
       </main>
     </div>
   )
