@@ -11,6 +11,7 @@ import {
 import { db } from "../config/firebase"
 import { auth } from "../config/firebase"
 import "./Friends.css"
+import { MdAdd } from "react-icons/md"
 
 const Friends = () => {
   const [allFriends, setAllFriends] = useState<any>([])
@@ -21,7 +22,7 @@ const Friends = () => {
   const user = auth.currentUser
 
   useEffect(() => {
-    queryFriends()
+    queryFriends(user)
     console.log(searchFriendResults)
   }, [])
 
@@ -72,8 +73,8 @@ const Friends = () => {
   //   </div>
   // )
 
-  const queryFriends = async () => {
-    const q = query(collection(db, "users"))
+  const queryFriends = async (user: any) => {
+    const q = query(collection(db, "users"), where("id", "!=", `${user?.uid}`))
     const querySnapshot = await getDocs(q)
     const userList: any = []
     querySnapshot.forEach((user: any) => {
@@ -91,6 +92,9 @@ const Friends = () => {
             <img src={user.photoURL} alt="" />
           </div>
           <p>{user.userName}</p>
+          <button>
+            <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
+          </button>
         </div>
       ))}
     </>
@@ -109,6 +113,11 @@ const Friends = () => {
           <li>
             <button type="button" onClick={() => setFriendsDirectory("add")}>
               Add Friends
+            </button>
+          </li>
+          <li>
+            <button type="button" onClick={() => setFriendsDirectory("add")}>
+              Requests
             </button>
           </li>
         </ul>
