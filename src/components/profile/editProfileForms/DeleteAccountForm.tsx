@@ -1,8 +1,9 @@
-import { deleteUser } from "firebase/auth"
+import { deleteUser, onAuthStateChanged } from "firebase/auth"
 import { auth, storage } from "../../config/firebase"
 import { ref, deleteObject } from "firebase/storage"
 import { doc, deleteDoc } from "firebase/firestore"
 import { db } from "../../config/firebase"
+import { IoSkullOutline } from "react-icons/io5"
 
 import "./DeleteAccountForm.css"
 
@@ -23,9 +24,9 @@ const DeleteAccountForm = (props: DeleteAccountFormProps) => {
       .catch(() => console.log("user storage deletion unsuccessful"))
   }
 
-  const handleDeleteUserDoc = async () => {
-    const userID = user?.uid
-    await deleteDoc(doc(db, `users/${userID}`))
+  const handleDeleteUserDoc = async (user: any) => {
+    console.log(user.uid)
+    await deleteDoc(doc(db, `users/${user?.uid}`))
       .then(() => console.log("user doc deleted"))
       .catch(() => console.log("user doc deletion unsuccessful"))
   }
@@ -36,15 +37,15 @@ const DeleteAccountForm = (props: DeleteAccountFormProps) => {
       setIsUpdating(true)
       await deleteUser(user)
         .then(() => {
-          console.log("User Account Successfully Deleted")
           handleDeleteUserStorage()
-          handleDeleteUserDoc()
+          handleDeleteUserDoc(user)
         })
         .catch((error) => {
           error.message.includes("requires-recent-login") &&
             setAuthorizing(true)
         })
       setIsUpdating(false)
+      console.log("User Account Successfully Deleted")
     }
   }
 
@@ -54,6 +55,7 @@ const DeleteAccountForm = (props: DeleteAccountFormProps) => {
         className="delete-account-modal"
         onSubmit={(event) => handleDeleteAccount(event)}
       >
+        <IoSkullOutline size="3em" />
         <p>Are you sure you want to do this?</p>
         {isUpdating ? (
           <button>loading...</button>
