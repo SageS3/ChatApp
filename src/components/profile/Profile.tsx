@@ -5,6 +5,8 @@ import { FiEdit } from "react-icons/fi"
 import { updateProfile } from "firebase/auth"
 import { storage, auth } from "../../components/config/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { doc, updateDoc } from "firebase/firestore"
+import { db } from "../../components/config/firebase"
 import "./Profile.css"
 import DeleteAccountForm from "./editProfileForms/DeleteAccountForm"
 
@@ -80,6 +82,12 @@ const Profile = (props: ProfileProps) => {
     e.preventDefault()
     fileInputRef.current?.click()
   }
+  const updatePhotoURLFirestore = async (userId: string, photoURL: string) => {
+    const docRef = doc(db, "users", userId)
+    await updateDoc(docRef, { photoURL: photoURL }).catch((error) => {
+      console.log(error)
+    })
+  }
 
   const handlePictureChange = async (e: any) => {
     setUploadingPhoto(true)
@@ -90,6 +98,7 @@ const Profile = (props: ProfileProps) => {
       const downloadedPhoto = await getDownloadURL(fileRef)
       setUserPhoto(downloadedPhoto)
       await updateProfile(user, { photoURL: downloadedPhoto }) // updating user photoURL in firebase Auth
+      await updatePhotoURLFirestore(user.uid, downloadedPhoto)
     } else {
       // set profile picture to last picture. useRef?
       // or set profile picture to default user picture
