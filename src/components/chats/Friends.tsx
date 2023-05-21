@@ -5,6 +5,7 @@ import {
   getDocs,
   doc,
   onSnapshot,
+  updateDoc,
   where,
   orderBy,
 } from "firebase/firestore"
@@ -92,13 +93,27 @@ const Friends = () => {
             <img src={user.photoURL} alt="" />
           </div>
           <p>{user.userName}</p>
-          <button>
+          <button onClick={(user: any) => sendFriendRequestHandler(user)}>
             <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
           </button>
         </div>
       ))}
     </>
   )
+
+  const updateUserSentRequests = async (thirdPartyUser: any) => {
+    const ref = doc(db, "users", `${user?.uid}`)
+    await updateDoc(ref, {
+      pendingSentRequests: {
+        userName: thirdPartyUser.userName,
+        photoURL: thirdPartyUser.photoURL,
+      },
+    })
+  }
+
+  const sendFriendRequestHandler = async (user: any) => {
+    await updateUserSentRequests(user)
+  }
 
   return (
     <div className="friends">
