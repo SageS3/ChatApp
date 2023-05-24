@@ -27,18 +27,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(25, 25, 25);
-  outline: none;
-  border: none;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
+  background-color: rgb(40, 40, 50);
   border: 2px solid black;
   font-family: "Signika", sans-serif;
   box-shadow: 5px 4px 4px black;
   transition: box-shadow 200ms ease-in-out;
   transition: content 200ms ease-in-out;
   position: relative;
+  cursor: pointer;
 }
 .sidebar-wrapper button:active {
   box-shadow: none;
@@ -57,33 +53,33 @@
   width: -moz-max-content;
   width: max-content;
   height: 30px;
-  background-color: rgb(55, 47, 73);
   z-index: 2;
   content: attr(data-tooltip);
+  background-color: rgb(40, 40, 50);
+  color: white;
 }
 .sidebar-wrapper button:hover::before {
   opacity: 1;
 }
+.sidebar-wrapper button img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.sidebar-wrapper button:first-of-type {
+  margin-top: 30px;
+  padding: 0;
+}
+.sidebar-wrapper button:first-of-type:focus {
+  outline: 1px solid rgb(77, 255, 148);
+}
 .sidebar-wrapper #btn--logout {
   background-color: rgb(25, 25, 25);
   outline: none;
-  border: none;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  background-color: rgb(25, 25, 25);
-  outline: none;
   box-shadow: none;
-}
-.sidebar-wrapper .image-container {
-  margin-top: 50px;
-  cursor: pointer;
-}
-.sidebar-wrapper .image-container img {
-  width: 80px;
-  height: 80px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  border: none;
 }
 .sidebar-wrapper h3 {
   margin-bottom: 40px;

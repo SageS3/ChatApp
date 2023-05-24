@@ -4,7 +4,7 @@
 
 .sidebar-wrapper {
   grid-area: sidebar;
-  background-color: rgb(20, 20, 20);
+  background-color: Colors.$dark-background-color;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -31,13 +31,14 @@
     font-size: 1.3rem;
     border-radius: 12px;
     @include Mixins.display-flex-center;
-    @include Mixins.white-border-button;
+    background-color: Colors.$secondary-background-color;
     border: 2px solid black;
     font-family: Fonts.$form-font;
     box-shadow: 5px 4px 4px black;
     transition: box-shadow 200ms ease-in-out;
     transition: content 200ms ease-in-out;
     position: relative;
+    cursor: pointer;
     &:active {
       box-shadow: none;
     }
@@ -55,42 +56,37 @@
       left: 90px;
       width: max-content;
       height: 30px;
-      background-color: Colors.$secondary-background-color;
       z-index: 2;
       content: attr(data-tooltip);
+      background-color: Colors.$secondary-background-color;
+      color: white;
     }
 
     &:hover::before {
       opacity: 1;
     }
+
+    img {
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  button:first-of-type {
+    margin-top: 30px;
+    padding: 0;
+    &:focus {
+      outline: 1px solid Colors.$accent-color;
+    }
   }
 
   #btn--logout {
-    @include Mixins.white-border-button;
     background-color: Colors.$main-background-color;
     outline: none;
     box-shadow: none;
-  }
-
-  .image-container {
-    // width: 80px;
-    // height: 80px;
-    // margin-bottom: 20px;
-    margin-top: 50px;
-    // border-radius: 8px;
-    // background-color: Colors.$main-background-color;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // overflow: hidden;
-    // border: 2px solid black;
-    // box-shadow: 5px 4px 4px black;
-    cursor: pointer;
-    img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-    }
+    border: none;
   }
 
   h3 {
