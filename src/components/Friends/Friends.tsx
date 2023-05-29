@@ -46,13 +46,13 @@ const Friends = () => {
     })
     setUsers(userList)
   }
-  const buttonState = (userID: string) => {
+  const buttonState = (userID: string, userObj: FriendObj) => {
     if (pendingSentRequestsIDs.includes(userID)) {
       return <div className="pending-text">Pending...</div>
     }
     if (pendingRequestsIDs.includes(userID)) {
       return (
-        <button>
+        <button onClick={() => addFriendHandler(userObj)}>
           <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
         </button>
       )
@@ -62,7 +62,7 @@ const Friends = () => {
       !pendingSentRequestsIDs.includes(userID)
     ) {
       return (
-        <button onClick={() => sendFriendRequestHandler(user)}>
+        <button onClick={() => sendFriendRequestHandler(userObj)}>
           <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
         </button>
       )
@@ -76,7 +76,8 @@ const Friends = () => {
             <img src={user.photoURL} alt="" />
           </div>
           <p>{user.userName}</p>
-          {buttonState(user.id)}
+
+          {buttonState(user.id, user)}
         </div>
       ))}
     </>
@@ -95,6 +96,13 @@ const Friends = () => {
         id: requestedUser.id,
       }),
     })
+  }
+
+  const addFriendHandler = (user: FriendObj) => {
+    // from the pendingRequests array, the listed user click event will add that user's obj to the friends arr in Firebase
+    // this function will also handle adding the current user Obj to that selected user's friends arr in Firebase.
+    // resulting in the request being accepted
+    console.log(user)
   }
 
   const updateThirdPartyPendingRequests = async (
@@ -117,6 +125,7 @@ const Friends = () => {
     const currentUser = auth?.currentUser
     await updateUserSentRequests(requestedUser, currentUser)
     await updateThirdPartyPendingRequests(requestedUser, currentUser)
+    await getPendingUserRequestsIDs()
   }
 
   const getPendingUserRequestsIDs = async () => {
@@ -153,6 +162,7 @@ const Friends = () => {
     getPendingUserRequestsIDs()
     queryFriends(user)
   }, [])
+
   return (
     <div className="friends">
       <header className="friends__header">
