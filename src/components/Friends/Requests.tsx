@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react"
-import { getDoc, doc } from "firebase/firestore"
+import {
+  getDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore"
 import { auth } from "../config/firebase"
 import { db } from "../config/firebase"
 import "../Friends/Requests.css"
@@ -31,18 +37,78 @@ const Requests = () => {
 
   const ListRequests = () => (
     <>
-      {requests.map((request: User) => (
-        <div key={request.id} className="user-request-container">
+      {requests.map((user: User) => (
+        <div key={user.id} className="user-request-container">
           <div className="image-container">
-            <img src={request.userPhoto} alt="" />
+            <img src={user.userPhoto} alt="" />
           </div>
-          {request.userName}
-          <button>Accept</button>
-          <button>Ignore</button>
+          {user.userName}
+          <button type="button" onClick={() => acceptRequest(user)}>
+            Accept
+          </button>
+          <button type="button" onClick={() => ignoreRequest(user)}>
+            Ignore
+          </button>
         </div>
       ))}
     </>
   )
+
+  const acceptRequest = async (requester: User) => {
+    const currentUser = auth?.currentUser
+    const currentUserID = currentUser?.uid
+    const currentUserRef = doc(db, `users/${currentUserID}`)
+    const requesterRef = doc(db, `users/${requester.id}`)
+    await updateDoc(currentUserRef, {
+      "friends.friends": arrayUnion({
+        userName: requester.userName,
+        userPhoto: requester.userPhoto,
+        id: requester.id,
+      }),
+      "friends.pendingRequests": arrayRemove({
+        userName: requester.userName,
+        userPhoto: requester.userPhoto,
+        id: requester.id,
+      }),
+    })
+    if (currentUser) {
+      await updateDoc(requesterRef, {
+        "friends.friends": arrayUnion({
+          userName: currentUser.displayName,
+          userPhoto: currentUser.photoURL,
+          id: currentUser.uid,
+        }),
+        "friends.pendingSentRequests": arrayRemove({
+          userName: currentUser.displayName,
+          userPhoto: currentUser.photoURL,
+          id: currentUser.uid,
+        }),
+      })
+    }
+  }
+
+  const ignoreRequest = async (requester: User) => {
+    const currentUser = auth?.currentUser
+    const currentUserID = currentUser?.uid
+    const currentUserRef = doc(db, `users/${currentUserID}`)
+    const requesterRef = doc(db, `users/${requester.id}`)
+    await updateDoc(currentUserRef, {
+      "friends.pendingRequests": arrayRemove({
+        userName: requester.userName,
+        userPhoto: requester.userPhoto,
+        id: requester.id,
+      }),
+    })
+    if (currentUser) {
+      await updateDoc(requesterRef, {
+        "friends.pendingSentRequests": arrayRemove({
+          userName: currentUser.displayName,
+          userPhoto: currentUser.photoURL,
+          id: currentUser.uid,
+        }),
+      })
+    }
+  }
 
   useEffect(() => {
     queryRequests()
