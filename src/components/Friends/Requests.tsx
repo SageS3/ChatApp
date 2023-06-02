@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react"
-import {
-  getDoc,
-  doc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-} from "firebase/firestore"
+import { getDoc, doc, updateDoc, arrayRemove } from "firebase/firestore"
 import { auth } from "../config/firebase"
 import { db } from "../config/firebase"
 import "../Friends/Requests.css"
