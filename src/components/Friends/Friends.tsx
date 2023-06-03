@@ -38,7 +38,7 @@ const Friends = () => {
             <img src={user.userPhoto} alt="" />
           </div>
           <p>{user.userName}</p>
-          <button>
+          <button className="message-button">
             <BiMessageSquareEdit size={"2.2em"} color={"rgb(77, 255, 148)"} />
           </button>
         </div>
