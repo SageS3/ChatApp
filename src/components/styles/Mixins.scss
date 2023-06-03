@@ -5,3 +5,23 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin accept-ignore__buttons {
+  position: absolute;
+  right: 20px;
+  button {
+    width: max-content;
+    height: max-content;
+    padding: 7px;
+    background-color: Colors.$main-background-color;
+    border: 2px solid Colors.$main-background-color;
+    color: white;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    &:first-of-type {
+      background-color: Colors.$accent-color;
+      color: black;
+    }
+  }
+}
