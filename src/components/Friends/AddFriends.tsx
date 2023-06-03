@@ -16,7 +16,9 @@ import {
   acceptRequestFromListedUsers,
   LimitedUserObj,
   FullUserObj,
+  ignoreRequestFromListedUsers,
 } from "./updateDocUtils"
+import { AcceptIgnoreButtons } from "./reusable"
 
 const AddFriends = () => {
   const [pendingSentRequestsIDs, setPendingSentRequestsIDs] = useState<
@@ -25,6 +27,7 @@ const AddFriends = () => {
   const [pendingRequestsIDs, setPendingRequestsIDs] = useState<string[]>([])
   const [friendsIDs, setFriendsIDs] = useState<string[]>([])
   const [users, setUsers] = useState<FullUserObj[]>([])
+
   const user = auth?.currentUser
 
   const sendFriendRequestHandler = async (requestedUser: any) => {
@@ -81,7 +84,6 @@ const AddFriends = () => {
   }
 
   const buttonState = (userID: string, userObj: FullUserObj) => {
-    //
     if (pendingSentRequestsIDs.includes(userID)) {
       return <div className="pending-text">Pending...</div>
     }
@@ -90,12 +92,11 @@ const AddFriends = () => {
     }
     if (pendingRequestsIDs.includes(userID)) {
       return (
-        <div>
-          <button onClick={() => acceptRequestFromListedUsers(userObj)}>
-            Accept
-          </button>
-          <button type="button">Ignore</button>
-        </div>
+        <AcceptIgnoreButtons
+          accept={() => acceptRequestFromListedUsers(userObj)}
+          ignore={() => ignoreRequestFromListedUsers(userObj)}
+          userObj={userObj}
+        />
       )
     }
     if (
@@ -103,7 +104,10 @@ const AddFriends = () => {
       !pendingSentRequestsIDs.includes(userID)
     ) {
       return (
-        <button onClick={() => sendFriendRequestHandler(userObj)}>
+        <button
+          onClick={() => sendFriendRequestHandler(userObj)}
+          className="add-friend__button"
+        >
           <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
         </button>
       )
@@ -117,7 +121,6 @@ const AddFriends = () => {
             <img src={user.photoURL} alt="" />
           </div>
           <p>{user.userName}</p>
-
           {buttonState(user.id, user)}
         </div>
       ))}
