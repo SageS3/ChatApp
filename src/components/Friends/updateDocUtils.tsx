@@ -88,6 +88,31 @@ export const acceptRequestFromListedUsers = async (requester: FullUserObj) => {
   updateCurrentUserDocs(currentUser, requesterRef)
 }
 
+export const ignoreRequestFromListedUsers = async (
+  requesterObj: FullUserObj
+) => {
+  const currentUser = auth?.currentUser
+  const currentUserID = currentUser?.uid
+  const requesterRef = doc(db, `users/${requesterObj.id}`)
+  const currentUserRef = doc(db, `users/${currentUserID}`)
+  if (currentUser) {
+    await updateDoc(currentUserRef, {
+      "friends.pendingRequests": arrayRemove({
+        userName: requesterObj.userName,
+        userPhoto: requesterObj.photoURL,
+        id: requesterObj.id,
+      }),
+    })
+    await updateDoc(requesterRef, {
+      "friends.pendingSentRequests": arrayRemove({
+        userName: currentUser.displayName,
+        userPhoto: currentUser.photoURL,
+        id: currentUser.uid,
+      }),
+    })
+  }
+}
+
 const updateCurrentUserDocs = async (currentUser: any, requesterRef: any) => {
   if (currentUser) {
     await updateDoc(requesterRef, {
