@@ -3,6 +3,7 @@ import { getDoc, doc, updateDoc, arrayRemove } from "firebase/firestore"
 import { auth } from "../config/firebase"
 import { db } from "../config/firebase"
 import "../Friends/Requests.css"
+import { AcceptIgnoreButtons } from "./reusable"
 import {
   acceptRequestFromListedRequests,
   LimitedUserObj,
@@ -36,15 +37,11 @@ const Requests = () => {
             <img src={user.userPhoto} alt="" />
           </div>
           {user.userName}
-          <button
-            type="button"
-            onClick={() => acceptRequestFromListedRequests(user)}
-          >
-            Accept
-          </button>
-          <button type="button" onClick={() => ignoreRequest(user)}>
-            Ignore
-          </button>
+          <AcceptIgnoreButtons
+            accept={acceptRequestFromListedRequests}
+            ignore={ignoreRequest}
+            userObj={user}
+          />
         </div>
       ))}
     </>
@@ -71,6 +68,10 @@ const Requests = () => {
         }),
       })
     }
+    const updateRequests = requests.filter(
+      (request: LimitedUserObj) => request.id != requester.id
+    )
+    setRequests(updateRequests)
   }
 
   useEffect(() => {
