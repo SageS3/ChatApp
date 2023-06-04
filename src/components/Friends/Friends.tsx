@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { BiMessageSquareEdit } from "react-icons/bi"
 import { getDoc, doc } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { auth } from "../config/firebase"
@@ -7,6 +6,7 @@ import "./Friends.css"
 import Requests from "./Requests"
 import AddFriends from "./AddFriends"
 import { LimitedUserObj } from "./updateDocUtils"
+import { MappedUsers } from "./reusable"
 
 const Friends = () => {
   const [friendsDirectory, setFriendsDirectory] = useState<string>("all")
@@ -29,22 +29,6 @@ const Friends = () => {
     }
     setFriends(friendsObjArr)
   }
-
-  const ListFriends = () => (
-    <>
-      {friends.map((user: LimitedUserObj) => (
-        <div key={user.id} className="friend-container">
-          <div className="friend-image-container">
-            <img src={user.userPhoto} alt="" />
-          </div>
-          <p>{user.userName}</p>
-          <button className="message-button">
-            <BiMessageSquareEdit size={"2.2em"} color={"rgb(77, 255, 148)"} />
-          </button>
-        </div>
-      ))}
-    </>
-  )
 
   useEffect(() => {
     queryFriends()
@@ -76,7 +60,7 @@ const Friends = () => {
         </ul>
       </header>
       <main className="friends--list">
-        {friendsDirectory === "all" && <ListFriends />}
+        {friendsDirectory === "all" && <MappedUsers userArr={friends} />}
         {friendsDirectory === "add" && <AddFriends />}
         {friendsDirectory === "requests" && <Requests />}
       </main>
