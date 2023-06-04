@@ -34,7 +34,7 @@ const Requests = () => {
       {requests.map((user: LimitedUserObj) => (
         <div key={user.id} className="user-request-container">
           <div className="image-container">
-            <img src={user.userPhoto} alt="" />
+            <img src={user.photoURL} alt="" />
           </div>
           {user.userName}
           <AcceptIgnoreButtons
@@ -55,7 +55,7 @@ const Requests = () => {
     await updateDoc(currentUserRef, {
       "friends.pendingRequests": arrayRemove({
         userName: requester.userName,
-        userPhoto: requester.userPhoto,
+        userPhoto: requester.photoURL,
         id: requester.id,
       }),
     })
