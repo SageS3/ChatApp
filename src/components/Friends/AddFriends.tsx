@@ -19,6 +19,7 @@ import {
   ignoreRequestFromListedUsers,
 } from "./updateDocUtils"
 import { AcceptIgnoreButtons } from "./reusable"
+import { MappedUsers } from "./reusable"
 
 const AddFriends = () => {
   const [pendingSentRequestsIDs, setPendingSentRequestsIDs] = useState<
@@ -83,49 +84,39 @@ const AddFriends = () => {
     }
   }
 
-  const buttonState = (userID: string, userObj: FullUserObj) => {
-    if (pendingSentRequestsIDs.includes(userID)) {
-      return <div className="pending-text">Pending...</div>
-    }
-    if (friendsIDs.includes(userID)) {
-      return <div className="button-state__friends">Friends</div>
-    }
-    if (pendingRequestsIDs.includes(userID)) {
-      return (
-        <AcceptIgnoreButtons
-          accept={() => acceptRequestFromListedUsers(userObj)}
-          ignore={() => ignoreRequestFromListedUsers(userObj)}
-          userObj={userObj}
-        />
-      )
-    }
-    if (
-      !pendingRequestsIDs.includes(userID) &&
-      !pendingSentRequestsIDs.includes(userID)
-    ) {
-      return (
-        <button
-          onClick={() => sendFriendRequestHandler(userObj)}
-          className="add-friend__button"
-        >
-          <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
-        </button>
-      )
-    }
+  type ButtonStateProps = {
+    userID: string
+    userObj: FullUserObj
   }
-  const ListUsers = () => (
-    <>
-      {users.map((user: FullUserObj) => (
-        <div key={user.id} className="user-container">
-          <div className="user-image-container">
-            <img src={user.photoURL} alt="" />
-          </div>
-          <p>{user.userName}</p>
-          {buttonState(user.id, user)}
-        </div>
-      ))}
-    </>
-  )
+
+  const ButtonState = ({ userID, userObj }: ButtonStateProps): JSX.Element => {
+    return (
+      <>
+        {pendingSentRequestsIDs.includes(userID) && (
+          <div className="pending-text">Pending...</div>
+        )}
+        {friendsIDs.includes(userID) && (
+          <div className="button-state__friends">Friends</div>
+        )}
+        {pendingRequestsIDs.includes(userID) && (
+          <AcceptIgnoreButtons
+            accept={() => acceptRequestFromListedUsers(userObj)}
+            ignore={() => ignoreRequestFromListedUsers(userObj)}
+            userObj={userObj}
+          />
+        )}
+        {!pendingRequestsIDs.includes(userID) &&
+          !pendingSentRequestsIDs.includes(userID) && (
+            <button
+              onClick={() => sendFriendRequestHandler(userObj)}
+              className="add-friend__button"
+            >
+              <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
+            </button>
+          )}
+      </>
+    )
+  }
 
   useEffect(() => {
     getUserIDs()
@@ -133,7 +124,7 @@ const AddFriends = () => {
   }, [])
   return (
     <>
-      <ListUsers />
+      <MappedUsers userArr={users} ButtonState={ButtonState} />
     </>
   )
 }
