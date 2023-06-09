@@ -106,7 +106,8 @@ const AddFriends = () => {
           />
         )}
         {!pendingRequestsIDs.includes(userID) &&
-          !pendingSentRequestsIDs.includes(userID) && (
+          !pendingSentRequestsIDs.includes(userID) &&
+          !friendsIDs.includes(userID) && (
             <button
               onClick={() => sendFriendRequestHandler(userObj)}
               className="add-friend__button"
