@@ -26,24 +26,24 @@ export const AcceptIgnoreButtons = ({
 
 type MappedUserProps = {
   userArr: LimitedUserObj[] | FullUserObj[]
-  buttonState?: (a: string, b: FullUserObj) => JSX.Element
+  ButtonState?: any
 }
 
-const fullUserObjTypeCheck = (
-  userArr: LimitedUserObj | FullUserObj
-): userArr is FullUserObj => {
-  return true
-}
-
-export const MappedUsers = ({ userArr, buttonState }: MappedUserProps) => (
+export const MappedUsers = ({ userArr, ButtonState }: MappedUserProps) => (
   <>
     {userArr.map((user: LimitedUserObj | FullUserObj) => (
       <div className="user-container" key={user.id}>
         <div className="user-image-container">
-          <img src={user.photoURL} />
+          <img src={user.photoURL} alt="" />
         </div>
         <p>{user.userName}</p>
-        {/* {fullUserObjTypeCheck(user) && buttonState(user.id, user)} */}
+        {ButtonState ? (
+          <ButtonState userID={user.id} userObj={user} />
+        ) : (
+          <button>
+            <BiMessageSquareEdit />
+          </button>
+        )}
       </div>
     ))}
   </>
