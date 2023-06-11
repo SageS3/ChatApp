@@ -3,9 +3,9 @@ import { db } from "../config/firebase"
 import { auth } from "../config/firebase"
 
 export type LimitedUserObj = {
-  id: string
   userName: string
-  userPhoto: string
+  photoURL: string
+  id: string
 }
 
 export type FullUserObj = {
@@ -24,7 +24,7 @@ export const updateUserSentRequests = async (
   await updateDoc(ref, {
     "friends.pendingSentRequests": arrayUnion({
       userName: requestedUser.userName,
-      userPhoto: requestedUser.photoURL,
+      photoURL: requestedUser.photoURL,
       id: requestedUser.id,
     }),
   })
@@ -39,7 +39,7 @@ export const updateThirdPartyPendingRequests = async (
   await updateDoc(ref, {
     "friends.pendingRequests": arrayUnion({
       userName: currentUser.displayName,
-      userPhoto: currentUser.photoURL,
+      photoURL: currentUser.photoURL,
       id: currentUser.uid,
     }),
   })
@@ -55,12 +55,12 @@ export const acceptRequestFromListedRequests = async (
   await updateDoc(currentUserRef, {
     "friends.friends": arrayUnion({
       userName: requester.userName,
-      userPhoto: requester.userPhoto,
+      photoURL: requester.photoURL,
       id: requester.id,
     }),
     "friends.pendingRequests": arrayRemove({
       userName: requester.userName,
-      userPhoto: requester.userPhoto,
+      photoURL: requester.photoURL,
       id: requester.id,
     }),
   })
@@ -76,12 +76,12 @@ export const acceptRequestFromListedUsers = async (requester: FullUserObj) => {
   await updateDoc(currentUserRef, {
     "friends.friends": arrayUnion({
       userName: requester.userName,
-      userPhoto: requester.photoURL,
+      photoURL: requester.photoURL,
       id: requester.id,
     }),
     "friends.pendingRequests": arrayRemove({
       userName: requester.userName,
-      userPhoto: requester.photoURL,
+      photoURL: requester.photoURL,
       id: requester.id,
     }),
   })
@@ -99,14 +99,14 @@ export const ignoreRequestFromListedUsers = async (
     await updateDoc(currentUserRef, {
       "friends.pendingRequests": arrayRemove({
         userName: requesterObj.userName,
-        userPhoto: requesterObj.photoURL,
+        photoURL: requesterObj.photoURL,
         id: requesterObj.id,
       }),
     })
     await updateDoc(requesterRef, {
       "friends.pendingSentRequests": arrayRemove({
         userName: currentUser.displayName,
-        userPhoto: currentUser.photoURL,
+        photoURL: currentUser.photoURL,
         id: currentUser.uid,
       }),
     })
@@ -118,12 +118,12 @@ const updateCurrentUserDocs = async (currentUser: any, requesterRef: any) => {
     await updateDoc(requesterRef, {
       "friends.friends": arrayUnion({
         userName: currentUser.displayName,
-        userPhoto: currentUser.photoURL,
+        photoURL: currentUser.photoURL,
         id: currentUser.uid,
       }),
       "friends.pendingSentRequests": arrayRemove({
         userName: currentUser.displayName,
-        userPhoto: currentUser.photoURL,
+        photoURL: currentUser.photoURL,
         id: currentUser.uid,
       }),
     })
