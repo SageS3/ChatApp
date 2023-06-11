@@ -28,11 +28,28 @@ const Friends = () => {
       console.log("no requests")
     }
     setFriends(friendsObjArr)
+    console.log(friends)
   }
 
   useEffect(() => {
     queryFriends()
   }, [])
+
+  type ButtonProps = {
+    selected: boolean
+    id: string
+    onClick: () => void
+  }
+
+  const Button = ({ selected, id, onClick }: ButtonProps) => (
+    <button className={selected ? "selected" : ""} onClick={onClick}>
+      {id}
+    </button>
+  )
+
+  const handleButtonClick = (directory: string) => {
+    setFriendsDirectory(directory)
+  }
 
   return (
     <div className="friends">
@@ -40,22 +57,25 @@ const Friends = () => {
         <ul>
           <li>Friends</li>
           <li>
-            <button type="button" onClick={() => setFriendsDirectory("all")}>
-              All
-            </button>
+            <Button
+              selected={friendsDirectory === "all"}
+              id="All"
+              onClick={() => handleButtonClick("all")}
+            />
           </li>
           <li>
-            <button type="button" onClick={() => setFriendsDirectory("add")}>
-              Add Friends
-            </button>
+            <Button
+              selected={friendsDirectory === "add"}
+              id="Add Friends"
+              onClick={() => handleButtonClick("add")}
+            />
           </li>
           <li>
-            <button
-              type="button"
-              onClick={() => setFriendsDirectory("requests")}
-            >
-              Requests
-            </button>
+            <Button
+              selected={friendsDirectory === "requests"}
+              id="Requests"
+              onClick={() => handleButtonClick("requests")}
+            />
           </li>
         </ul>
       </header>
