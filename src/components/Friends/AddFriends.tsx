@@ -28,7 +28,7 @@ const AddFriends = () => {
   const [pendingRequestsIDs, setPendingRequestsIDs] = useState<string[]>([])
   const [friendsIDs, setFriendsIDs] = useState<string[]>([])
   const [users, setUsers] = useState<FullUserObj[]>([])
-  const [searchQuery, setSearchQuery] = useState()
+  const [searchQuery, setSearchQuery] = useState<string>("")
   const user = auth?.currentUser
 
   const sendFriendRequestHandler = async (requestedUser: any) => {
@@ -84,10 +84,20 @@ const AddFriends = () => {
     }
   }
 
-  const querySearch = () => {
-    setTimeout(() => {
-      console.log("query")
-    }, 300)
+  const filterUserArr = (usersArr: FullUserObj[], searchString: string) => {
+    const filtered = usersArr.filter((user: FullUserObj) => {
+      user.userName.toLowerCase().includes(searchString.toLowerCase())
+    })
+    setUsers(filtered)
+  }
+  const handleInputChange = (
+    event: any,
+    userArr: FullUserObj[],
+    searchString: string,
+    filterUserArr: any
+  ) => {
+    setSearchQuery(event.target.value)
+    filterUserArr(userArr, searchString)
   }
 
   type ButtonStateProps = {
@@ -135,8 +145,13 @@ const AddFriends = () => {
         type="search"
         className="input__search-bar"
         placeholder="Search Users"
+        onChange={(event) =>
+          handleInputChange(event, users, searchQuery, filterUserArr)
+        }
       />
-      <MappedUsers userArr={users} ButtonState={ButtonState} />
+      {searchQuery.length > 0 && (
+        <MappedUsers userArr={users} ButtonState={ButtonState} />
+      )}
     </>
   )
 }
