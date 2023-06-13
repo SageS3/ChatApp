@@ -27,9 +27,18 @@ export const AcceptIgnoreButtons = ({
 type MappedUserProps = {
   userArr: LimitedUserObj[] | FullUserObj[]
   ButtonState?: any
+  AcceptIgnoreButtons?: any
+  accept?: any
+  ignore?: any
 }
 
-export const MappedUsers = ({ userArr, ButtonState }: MappedUserProps) => (
+export const MappedUsers = ({
+  userArr,
+  ButtonState,
+  AcceptIgnoreButtons,
+  accept,
+  ignore,
+}: MappedUserProps) => (
   <>
     {userArr.map((user: LimitedUserObj | FullUserObj) => (
       <div className="user-container" key={user.id}>
@@ -40,9 +49,16 @@ export const MappedUsers = ({ userArr, ButtonState }: MappedUserProps) => (
         {ButtonState ? (
           <ButtonState userID={user.id} userObj={user} />
         ) : (
-          <button>
-            <BiMessageSquareEdit />
+          <button className="message-button">
+            <BiMessageSquareEdit size="1.8rem" color={"rgb(77, 255, 148)"} />
           </button>
+        )}
+        {AcceptIgnoreButtons && (
+          <AcceptIgnoreButtons
+            accept={() => accept(user)}
+            ignore={() => ignore(user)}
+            userObj={user}
+          />
         )}
       </div>
     ))}
