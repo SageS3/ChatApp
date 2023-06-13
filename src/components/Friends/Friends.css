@@ -43,10 +43,10 @@
   font-size: 1.2rem;
   cursor: pointer;
   padding: 7px;
-  border-radius: 5px;
 }
-.friends .friends__header ul li button:hover {
-  background-color: rgb(40, 40, 50);
+.friends .friends__header ul li .selected {
+  border-bottom: 2px solid rgb(77, 255, 148);
+  margin-bottom: -2px;
 }
 .friends .friends--list {
   grid-area: list;
@@ -56,10 +56,21 @@
   justify-content: flex-start;
   align-items: center;
 }
+.friends .friends--list .input__search-bar {
+  outline: none;
+  border: 2px solid rgb(40, 40, 50);
+  background-color: rgb(25, 25, 25);
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 1.3rem;
+  padding: 6px;
+  width: 50%;
+  color: rgb(120, 120, 120);
+}
 .friends .friends--list .user-container {
   position: relative;
   padding: 5px;
-  margin: 5px 0 0 0;
+  margin: 15px 0 0 0;
   height: 70px;
   width: 50%;
   background-color: rgb(40, 40, 50);
@@ -71,18 +82,21 @@
 .friends .friends--list .user-container > * {
   margin-left: 20px;
 }
-.friends .friends--list .user-container .user-image-container {
+.friends .friends--list .user-container .user-image-container,
+.friends .friends--list .user-container .friend-image-container {
   width: 60px;
   height: 60px;
 }
-.friends .friends--list .user-container .user-image-container img {
+.friends .friends--list .user-container .user-image-container img,
+.friends .friends--list .user-container .friend-image-container img {
   height: 100%;
   width: 100%;
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.friends .friends--list .user-container button {
+.friends .friends--list .user-container .message-button,
+.friends .friends--list .user-container .add-friend__button {
   outline: none;
   border: none;
   cursor: pointer;
@@ -93,6 +107,36 @@
   align-items: center;
   padding: 5px;
   border-radius: 50%;
+}
+.friends .friends--list .user-container .pending-text,
+.friends .friends--list .user-container .button-state__friends {
+  background-color: rgb(25, 25, 25);
+  padding: 7px;
+  color: rgb(77, 255, 148);
+  border-radius: 6px;
+  position: absolute;
+  right: 10%;
+}
+.friends .friends--list .user-container .accept-ignore__buttons {
+  position: absolute;
+  right: 20px;
+}
+.friends .friends--list .user-container .accept-ignore__buttons button {
+  width: -moz-max-content;
+  width: max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 7px;
+  background-color: rgb(25, 25, 25);
+  border: 2px solid rgb(25, 25, 25);
+  color: white;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.friends .friends--list .user-container .accept-ignore__buttons button:first-of-type {
+  background-color: rgb(77, 255, 148);
+  color: black;
 }
 .friends .friends--list .friend {
   color: white;
