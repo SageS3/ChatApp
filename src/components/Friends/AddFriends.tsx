@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { auth } from "../config/firebase"
 import {
   doc,
@@ -29,6 +29,7 @@ const AddFriends = () => {
   const [friendsIDs, setFriendsIDs] = useState<string[]>([])
   const [users, setUsers] = useState<FullUserObj[]>([])
   const [searchQuery, setSearchQuery] = useState<string>("")
+  const searchRef = useRef<HTMLInputElement>(null)
   const user = auth?.currentUser
 
   const sendFriendRequestHandler = async (requestedUser: any) => {
@@ -45,6 +46,7 @@ const AddFriends = () => {
       userList.push(user.data())
     })
     setUsers(userList)
+    console.log(users)
   }
 
   const getUserIDs = async () => {
@@ -84,20 +86,20 @@ const AddFriends = () => {
     }
   }
 
-  const filterUserArr = (usersArr: FullUserObj[], searchString: string) => {
-    const filtered = usersArr.filter((user: FullUserObj) => {
-      user.userName.toLowerCase().includes(searchString.toLowerCase())
-    })
-    setUsers(filtered)
-  }
+  // const filterUserArr = (usersArr: FullUserObj[], searchString: string) => {
+  //   const filtered = usersArr.filter((user: FullUserObj) => {
+  //     user.userName.toLowerCase().includes(searchString.toLowerCase())
+  //   })
+  //   setUsers(filtered)
+  // }
   const handleInputChange = (
     event: any,
     userArr: FullUserObj[],
-    searchString: string,
-    filterUserArr: any
+    searchString: string
+    // filterUserArr: any
   ) => {
     setSearchQuery(event.target.value)
-    filterUserArr(userArr, searchString)
+    // filterUserArr(userArr, searchString)
   }
 
   type ButtonStateProps = {
@@ -138,16 +140,19 @@ const AddFriends = () => {
   useEffect(() => {
     getUserIDs()
     queryUsers(user)
+    if (searchRef.current) {
+      searchRef.current.focus()
+    }
   }, [])
   return (
     <>
       <input
-        type="search"
+        ref={searchRef}
+        type="text"
         className="input__search-bar"
         placeholder="Search Users"
-        onChange={(event) =>
-          handleInputChange(event, users, searchQuery, filterUserArr)
-        }
+        value={searchQuery}
+        onChange={(event) => handleInputChange(event, users, searchQuery)}
       />
       {searchQuery.length > 0 && (
         <MappedUsers userArr={users} ButtonState={ButtonState} />
