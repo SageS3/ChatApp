@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react"
-import { getDoc, doc, updateDoc, arrayRemove } from "firebase/firestore"
+import {
+  getDoc,
+  doc,
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
+} from "firebase/firestore"
 import { auth } from "../config/firebase"
 import { db } from "../config/firebase"
 import "../Friends/Requests.css"
 import { AcceptIgnoreButtons } from "./reusable"
-import {
-  acceptRequestFromListedRequests,
-  LimitedUserObj,
-} from "./updateDocUtils"
+import { LimitedUserObj, updateCurrentUserDocs } from "./updateDocUtils"
+import { MappedUsers } from "./reusable"
 
 const Requests = () => {
   const [requests, setRequests] = useState<LimitedUserObj[]>([])
@@ -29,24 +33,6 @@ const Requests = () => {
     setRequests(users)
   }
 
-  const ListRequests = () => (
-    <>
-      {requests.map((user: LimitedUserObj) => (
-        <div key={user.id} className="user-request-container">
-          <div className="image-container">
-            <img src={user.photoURL} alt="" />
-          </div>
-          {user.userName}
-          <AcceptIgnoreButtons
-            accept={acceptRequestFromListedRequests}
-            ignore={ignoreRequest}
-            userObj={user}
-          />
-        </div>
-      ))}
-    </>
-  )
-
   const ignoreRequest = async (requester: LimitedUserObj) => {
     const currentUser = auth?.currentUser
     const currentUserID = currentUser?.uid
@@ -55,7 +41,7 @@ const Requests = () => {
     await updateDoc(currentUserRef, {
       "friends.pendingRequests": arrayRemove({
         userName: requester.userName,
-        userPhoto: requester.photoURL,
+        photoURL: requester.photoURL,
         id: requester.id,
       }),
     })
@@ -63,11 +49,35 @@ const Requests = () => {
       await updateDoc(requesterRef, {
         "friends.pendingSentRequests": arrayRemove({
           userName: currentUser.displayName,
-          userPhoto: currentUser.photoURL,
+          photoURL: currentUser.photoURL,
           id: currentUser.uid,
         }),
       })
     }
+    const updateRequests = requests.filter(
+      (request: LimitedUserObj) => request.id != requester.id
+    )
+    setRequests(updateRequests)
+  }
+
+  const acceptRequestFromListedRequests = async (requester: LimitedUserObj) => {
+    const currentUser = auth?.currentUser
+    const currentUserID = currentUser?.uid
+    const currentUserRef = doc(db, `users/${currentUserID}`)
+    const requesterRef = doc(db, `users/${requester.id}`)
+    await updateDoc(currentUserRef, {
+      "friends.friends": arrayUnion({
+        userName: requester.userName,
+        photoURL: requester.photoURL,
+        id: requester.id,
+      }),
+      "friends.pendingRequests": arrayRemove({
+        userName: requester.userName,
+        photoURL: requester.photoURL,
+        id: requester.id,
+      }),
+    })
+    updateCurrentUserDocs(currentUser, requesterRef)
     const updateRequests = requests.filter(
       (request: LimitedUserObj) => request.id != requester.id
     )
@@ -79,7 +89,12 @@ const Requests = () => {
   }, [])
   return (
     <div className="main__requests">
-      <ListRequests />
+      <MappedUsers
+        userArr={requests}
+        AcceptIgnoreButtons={AcceptIgnoreButtons}
+        accept={acceptRequestFromListedRequests}
+        ignore={ignoreRequest}
+      />
     </div>
   )
 }
