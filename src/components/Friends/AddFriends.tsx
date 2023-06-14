@@ -28,10 +28,11 @@ const AddFriends = () => {
   const [pendingRequestsIDs, setPendingRequestsIDs] = useState<string[]>([])
   const [friendsIDs, setFriendsIDs] = useState<string[]>([])
   const [users, setUsers] = useState<FullUserObj[]>([])
+  const [searchedUsers, setSearchedUsers] = useState<FullUserObj[]>([])
   const [searchQuery, setSearchQuery] = useState<string>("")
   const searchRef = useRef<HTMLInputElement>(null)
   const user = auth?.currentUser
-
+  console.log(searchQuery)
   const sendFriendRequestHandler = async (requestedUser: any) => {
     const currentUser = auth?.currentUser
     await updateUserSentRequests(requestedUser, currentUser)
@@ -86,20 +87,20 @@ const AddFriends = () => {
     }
   }
 
-  // const filterUserArr = (usersArr: FullUserObj[], searchString: string) => {
-  //   const filtered = usersArr.filter((user: FullUserObj) => {
-  //     user.userName.toLowerCase().includes(searchString.toLowerCase())
-  //   })
-  //   setUsers(filtered)
-  // }
+  const filterUserArr = (usersArr: FullUserObj[], searchString: string) => {
+    const filtered = usersArr.filter((user: FullUserObj) =>
+      user.userName.toLowerCase().includes(searchString.toLowerCase())
+    )
+    setSearchedUsers(filtered)
+  }
   const handleInputChange = (
     event: any,
     userArr: FullUserObj[],
-    searchString: string
-    // filterUserArr: any
+    searchString: string,
+    filterUserArr: any
   ) => {
     setSearchQuery(event.target.value)
-    // filterUserArr(userArr, searchString)
+    searchString.length > 0 && filterUserArr(userArr, searchString)
   }
 
   type ButtonStateProps = {
@@ -148,14 +149,19 @@ const AddFriends = () => {
     <>
       <input
         ref={searchRef}
-        type="text"
+        type="search"
         className="input__search-bar"
         placeholder="Search Users"
         value={searchQuery}
-        onChange={(event) => handleInputChange(event, users, searchQuery)}
+        onChange={(event) =>
+          handleInputChange(event, users, searchQuery, filterUserArr)
+        }
       />
       {searchQuery.length > 0 && (
-        <MappedUsers userArr={users} ButtonState={ButtonState} />
+        <MappedUsers userArr={searchedUsers} ButtonState={ButtonState} />
+      )}
+      {searchedUsers.length === 0 && searchQuery.length > 0 && (
+        <p className="paragraph--error-message">no users found</p>
       )}
     </>
   )
