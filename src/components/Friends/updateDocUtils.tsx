@@ -45,28 +45,6 @@ export const updateThirdPartyPendingRequests = async (
   })
 }
 
-export const acceptRequestFromListedRequests = async (
-  requester: LimitedUserObj
-) => {
-  const currentUser = auth?.currentUser
-  const currentUserID = currentUser?.uid
-  const currentUserRef = doc(db, `users/${currentUserID}`)
-  const requesterRef = doc(db, `users/${requester.id}`)
-  await updateDoc(currentUserRef, {
-    "friends.friends": arrayUnion({
-      userName: requester.userName,
-      photoURL: requester.photoURL,
-      id: requester.id,
-    }),
-    "friends.pendingRequests": arrayRemove({
-      userName: requester.userName,
-      photoURL: requester.photoURL,
-      id: requester.id,
-    }),
-  })
-  updateCurrentUserDocs(currentUser, requesterRef)
-}
-
 export const acceptRequestFromListedUsers = async (requester: FullUserObj) => {
   const currentUser = auth?.currentUser
   const currentUserID = currentUser?.uid
@@ -113,7 +91,10 @@ export const ignoreRequestFromListedUsers = async (
   }
 }
 
-const updateCurrentUserDocs = async (currentUser: any, requesterRef: any) => {
+export const updateCurrentUserDocs = async (
+  currentUser: any,
+  requesterRef: any
+) => {
   if (currentUser) {
     await updateDoc(requesterRef, {
       "friends.friends": arrayUnion({
