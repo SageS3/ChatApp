@@ -10,9 +10,8 @@ import { MappedUsers } from "./reusable"
 
 const Friends = () => {
   const [friendsDirectory, setFriendsDirectory] = useState<string>("all")
-
   const [friends, setFriends] = useState<LimitedUserObj[]>([])
-
+  const [hasRequests, setHasRequests] = useState<boolean>(false)
   const queryFriends = async () => {
     const currentUser = auth.currentUser
     const userID = currentUser?.uid
@@ -42,7 +41,11 @@ const Friends = () => {
   }
 
   const Button = ({ selected, id, onClick }: ButtonProps) => (
-    <button className={selected ? "selected" : ""} onClick={onClick}>
+    <button
+      className={selected ? "selected" : ""}
+      onClick={onClick}
+      id={id === "Requests" && hasRequests ? "requests" : ""}
+    >
       {id}
     </button>
   )
@@ -82,7 +85,9 @@ const Friends = () => {
       <main className="friends--list">
         {friendsDirectory === "all" && <MappedUsers userArr={friends} />}
         {friendsDirectory === "add" && <AddFriends />}
-        {friendsDirectory === "requests" && <Requests />}
+        {friendsDirectory === "requests" && (
+          <Requests setHasRequests={setHasRequests} />
+        )}
       </main>
     </div>
   )
