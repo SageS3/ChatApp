@@ -45,8 +45,22 @@
   padding: 7px;
 }
 .friends .friends__header ul li .selected {
-  border-bottom: 2px solid rgb(77, 255, 148);
+  border-bottom: 2px solid rgb(39, 194, 160);
   margin-bottom: -2px;
+}
+.friends .friends__header ul li #requests {
+  position: relative;
+}
+.friends .friends__header ul li #requests::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(39, 194, 160);
+  left: 50%;
+  top: 50%;
+  transform: translate(500%, -50%);
 }
 .friends .friends--list {
   grid-area: list;
@@ -55,6 +69,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+.friends .friends--list .paragraph--error-message {
+  color: rgb(120, 120, 120);
 }
 .friends .friends--list .input__search-bar {
   outline: none;
@@ -91,6 +108,7 @@
 }
 .friends .friends--list .user-container .user-image-container img,
 .friends .friends--list .user-container .friend-image-container img {
+  outline: 2px solid black;
   height: 100%;
   width: 100%;
   border-radius: 50%;
@@ -102,7 +120,7 @@
   outline: none;
   border: none;
   cursor: pointer;
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(40, 40, 50);
   position: absolute;
   right: 10%;
   display: flex;
@@ -114,7 +132,7 @@
 .friends .friends--list .user-container .button-state__friends {
   background-color: rgb(25, 25, 25);
   padding: 7px;
-  color: rgb(77, 255, 148);
+  color: rgb(39, 194, 160);
   border-radius: 6px;
   position: absolute;
   right: 10%;
@@ -137,7 +155,7 @@
   cursor: pointer;
 }
 .friends .friends--list .user-container .accept-ignore__buttons button:first-of-type {
-  background-color: rgb(77, 255, 148);
+  background-color: rgb(39, 194, 160);
   color: black;
 }
 .friends .friends--list .friend {
