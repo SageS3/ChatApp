@@ -12,8 +12,10 @@ import "../Friends/Requests.css"
 import { AcceptIgnoreButtons } from "./reusable"
 import { LimitedUserObj, updateCurrentUserDocs } from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
-
-const Requests = () => {
+type RequestsProps = {
+  setHasRequests: any
+}
+const Requests = ({ setHasRequests }: RequestsProps) => {
   const [requests, setRequests] = useState<LimitedUserObj[]>([])
 
   const queryRequests = async () => {
@@ -31,6 +33,7 @@ const Requests = () => {
       console.log("no requests")
     }
     setRequests(users)
+    setHasRequests(users.length > 0)
   }
 
   const ignoreRequest = async (requester: LimitedUserObj) => {
