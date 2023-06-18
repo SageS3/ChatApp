@@ -14,7 +14,7 @@
     "threads";
   .header {
     grid-area: navigate;
-    background-color: Colors.$main-background-color;
+    background-color: Colors.$dark-background-color;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -30,11 +30,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 20px;
+        padding: 0px 10px 0px 10px;
       }
       li:first-of-type {
         border-right: 3px solid Colors.$grey-color;
-        padding: 0 20px 0 0px;
       }
       button {
         display: flex;

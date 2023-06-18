@@ -11,7 +11,7 @@
 }
 .main__chats .header {
   grid-area: navigate;
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(20, 20, 20);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -29,11 +29,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20px;
+  padding: 0px 10px 0px 10px;
 }
 .main__chats .header .header__ul li:first-of-type {
   border-right: 3px solid rgb(120, 120, 120);
-  padding: 0 20px 0 0px;
 }
 .main__chats .header .header__ul button {
   display: flex;
