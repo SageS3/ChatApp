@@ -1,13 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { auth } from "../config/firebase"
-import {
-  doc,
-  getDoc,
-  query,
-  collection,
-  where,
-  getDocs,
-} from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { MdAdd } from "react-icons/md"
 import {
@@ -21,33 +14,26 @@ import {
 import { AcceptIgnoreButtons } from "./reusable"
 import { MappedUsers } from "./reusable"
 
-const AddFriends = () => {
+type AddFriendsProps = {
+  users: FullUserObj[]
+}
+
+const AddFriends = ({ users }: AddFriendsProps) => {
   const [pendingSentRequestsIDs, setPendingSentRequestsIDs] = useState<
     string[]
   >([])
   const [pendingRequestsIDs, setPendingRequestsIDs] = useState<string[]>([])
   const [friendsIDs, setFriendsIDs] = useState<string[]>([])
-  const [users, setUsers] = useState<FullUserObj[]>([])
   const [searchedUsers, setSearchedUsers] = useState<FullUserObj[]>([])
   const [searchQuery, setSearchQuery] = useState<string>("")
   const searchRef = useRef<HTMLInputElement>(null)
   const user = auth?.currentUser
-  console.log(searchQuery)
+
   const sendFriendRequestHandler = async (requestedUser: any) => {
     const currentUser = auth?.currentUser
     await updateUserSentRequests(requestedUser, currentUser)
     await updateThirdPartyPendingRequests(requestedUser, currentUser)
     await getUserIDs()
-  }
-  const queryUsers = async (user: any) => {
-    const q = query(collection(db, "users"), where("id", "!=", `${user?.uid}`))
-    const querySnapshot = await getDocs(q)
-    const userList: any = []
-    querySnapshot.forEach((user: any) => {
-      userList.push(user.data())
-    })
-    setUsers(userList)
-    console.log(users)
   }
 
   const getUserIDs = async () => {
@@ -131,7 +117,7 @@ const AddFriends = () => {
               onClick={() => sendFriendRequestHandler(userObj)}
               className="add-friend__button"
             >
-              <MdAdd size="1.8rem" color={"rgb(77, 255, 148)"} />
+              <MdAdd size="1.8rem" color={"rgb(39 194 160)"} />
             </button>
           )}
       </>
@@ -140,11 +126,11 @@ const AddFriends = () => {
 
   useEffect(() => {
     getUserIDs()
-    queryUsers(user)
     if (searchRef.current) {
       searchRef.current.focus()
     }
   }, [])
+
   return (
     <>
       <input
