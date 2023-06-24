@@ -1,41 +1,29 @@
-import { useState, useEffect } from "react"
-import {
-  getDoc,
-  doc,
-  updateDoc,
-  arrayRemove,
-  arrayUnion,
-} from "firebase/firestore"
+import { useEffect } from "react"
+import { doc, updateDoc, arrayRemove, arrayUnion } from "firebase/firestore"
 import { auth } from "../config/firebase"
 import { db } from "../config/firebase"
 import "../Friends/Requests.css"
 import { AcceptIgnoreButtons } from "./reusable"
-import { LimitedUserObj, updateCurrentUserDocs } from "./updateDocUtils"
+import {
+  FullUserObj,
+  LimitedUserObj,
+  updateCurrentUserDocs,
+} from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
+
 type RequestsProps = {
-  setHasRequests: any
+  requestIDs: string[]
+  setRequestIDs: any
+  queryRequests: () => void
+  requests: FullUserObj[]
 }
-const Requests = ({ setHasRequests }: RequestsProps) => {
-  const [requests, setRequests] = useState<LimitedUserObj[]>([])
 
-  const queryRequests = async () => {
-    const currentUser = auth.currentUser
-    const userID = currentUser?.uid
-    const ref = doc(db, `users/${userID}`)
-    const querySnapshot = await getDoc(ref)
-    const users: LimitedUserObj[] = []
-    if (querySnapshot.exists()) {
-      const pendingRequests = querySnapshot.data().friends.pendingRequests
-      pendingRequests.forEach((userObj: LimitedUserObj) => {
-        users.push(userObj)
-      })
-    } else {
-      console.log("no requests")
-    }
-    setRequests(users)
-    setHasRequests(users.length > 0)
-  }
-
+const Requests = ({
+  requestIDs,
+  requests,
+  setRequestIDs,
+  queryRequests,
+}: RequestsProps) => {
   const ignoreRequest = async (requester: LimitedUserObj) => {
     const currentUser = auth?.currentUser
     const currentUserID = currentUser?.uid
@@ -43,24 +31,20 @@ const Requests = ({ setHasRequests }: RequestsProps) => {
     const requesterRef = doc(db, `users/${requester.id}`)
     await updateDoc(currentUserRef, {
       "friends.pendingRequests": arrayRemove({
-        userName: requester.userName,
-        photoURL: requester.photoURL,
         id: requester.id,
       }),
     })
     if (currentUser) {
       await updateDoc(requesterRef, {
         "friends.pendingSentRequests": arrayRemove({
-          userName: currentUser.displayName,
-          photoURL: currentUser.photoURL,
           id: currentUser.uid,
         }),
       })
     }
-    const updateRequests = requests.filter(
-      (request: LimitedUserObj) => request.id != requester.id
+    const updateRequests = requestIDs.filter(
+      (request: string) => request !== requester.id
     )
-    setRequests(updateRequests)
+    setRequestIDs(updateRequests)
   }
 
   const acceptRequestFromListedRequests = async (requester: LimitedUserObj) => {
@@ -70,21 +54,17 @@ const Requests = ({ setHasRequests }: RequestsProps) => {
     const requesterRef = doc(db, `users/${requester.id}`)
     await updateDoc(currentUserRef, {
       "friends.friends": arrayUnion({
-        userName: requester.userName,
-        photoURL: requester.photoURL,
         id: requester.id,
       }),
       "friends.pendingRequests": arrayRemove({
-        userName: requester.userName,
-        photoURL: requester.photoURL,
         id: requester.id,
       }),
     })
     updateCurrentUserDocs(currentUser, requesterRef)
-    const updateRequests = requests.filter(
-      (request: LimitedUserObj) => request.id != requester.id
+    const updateRequests = requestIDs.filter(
+      (request: string) => request !== requester.id
     )
-    setRequests(updateRequests)
+    setRequestIDs(updateRequests)
   }
 
   useEffect(() => {
