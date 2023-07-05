@@ -16,34 +16,38 @@ const EntryPage = () => {
 
   const fontColorChange = useSpring({
     config: { duration: 200 },
-    color: form === "login" ? "black" : "rgb(77, 255, 148)",
+    color: form === "login" ? "black" : "rgb(39,194,160)",
   })
 
   const registerFontColorChange = useSpring({
     config: { duration: 200 },
-    color: form === "register" ? "black" : "rgb(77, 255, 148)",
+    color: form === "register" ? "black" : "rgb(39,194,160)",
   })
+
+  const ToggleSwitch = () => (
+    <div className="toggle">
+      <animated.span style={slider} className="slider"></animated.span>
+      <animated.button
+        type="button"
+        onClick={() => setForm("register")}
+        style={registerFontColorChange}
+      >
+        Sign Up
+      </animated.button>
+      <animated.button
+        type="button"
+        onClick={() => setForm("login")}
+        style={fontColorChange}
+      >
+        Sign In
+      </animated.button>
+    </div>
+  )
 
   return (
     <>
-      <div className="toggle">
-        <animated.span style={slider} className="slider"></animated.span>
-        <animated.button
-          type="button"
-          onClick={() => setForm("register")}
-          style={registerFontColorChange}
-        >
-          Sign Up
-        </animated.button>
-        <animated.button
-          type="button"
-          onClick={() => setForm("login")}
-          style={fontColorChange}
-        >
-          Sign In
-        </animated.button>
-      </div>
       <Cauldron />
+      <ToggleSwitch />
       {form === "register" && <Register setForm={setForm} />}
       {form === "login" && <Login />}
     </>
