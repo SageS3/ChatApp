@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 import {
   addMessageSubCollection,
   updateRecentMessage,
@@ -37,6 +37,7 @@ const Input = ({ threadObj, queryChats }: InputProps) => {
         type="text"
         placeholder="type..."
         spellCheck={true}
+        value={messageText}
         onChange={(event) => setMessageText(event.target.value)}
         onKeyDown={(event) => handleInputSubmit(event)}
       />
