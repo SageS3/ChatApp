@@ -10,12 +10,15 @@ import {
   updateCurrentUserDocs,
 } from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
+import { populateRequests } from "./updateDocUtils"
 
 type RequestsProps = {
   requestIDs: string[]
   setRequestIDs: any
   queryRequests: () => void
   requests: FullUserObj[]
+  users: FullUserObj[]
+  setRequests: any
 }
 
 const Requests = ({
@@ -23,6 +26,8 @@ const Requests = ({
   requests,
   setRequestIDs,
   queryRequests,
+  users,
+  setRequests,
 }: RequestsProps) => {
   const ignoreRequest = async (requester: LimitedUserObj) => {
     const currentUser = auth?.currentUser
@@ -69,7 +74,9 @@ const Requests = ({
 
   useEffect(() => {
     queryRequests()
+    populateRequests(users, requestIDs, setRequests)
   }, [])
+
   return (
     <div className="main__requests">
       <MappedUsers
