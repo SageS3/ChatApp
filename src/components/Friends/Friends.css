@@ -14,7 +14,7 @@
   grid-area: header;
   display: flex;
   flex-direction: row;
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(20, 20, 20);
 }
 .friends .friends__header ul {
   list-style-type: none;
@@ -38,7 +38,7 @@
 .friends .friends__header ul li button {
   border: none;
   outline: none;
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(20, 20, 20);
   color: rgb(120, 120, 120);
   font-size: 1.2rem;
   cursor: pointer;
@@ -76,7 +76,7 @@
 .friends .friends--list .input__search-bar {
   outline: none;
   border: 2px solid rgb(40, 40, 50);
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(20, 20, 20);
   border-radius: 6px;
   margin-top: 10px;
   font-size: 1.3rem;
@@ -151,12 +151,13 @@
   border: 2px solid rgb(25, 25, 25);
   color: white;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 0px 6px 6px 0px;
   cursor: pointer;
 }
 .friends .friends--list .user-container .accept-ignore__buttons button:first-of-type {
   background-color: rgb(39, 194, 160);
   color: black;
+  border-radius: 6px 0px 0px 6px;
 }
 .friends .friends--list .friend {
   color: white;

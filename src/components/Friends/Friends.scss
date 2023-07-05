@@ -18,7 +18,7 @@
     grid-area: header;
     display: flex;
     flex-direction: row;
-    background-color: Colors.$main-background-color;
+    background-color: Colors.$dark-background-color;
     ul {
       list-style-type: none;
       font-size: 1.3rem;
@@ -39,7 +39,7 @@
         button {
           border: none;
           outline: none;
-          background-color: Colors.$main-background-color;
+          background-color: Colors.$dark-background-color;
           color: Colors.$grey-color;
           font-size: 1.2rem;
           cursor: pointer;
@@ -79,7 +79,7 @@
     .input__search-bar {
       outline: none;
       border: 2px solid Colors.$secondary-background-color;
-      background-color: Colors.$main-background-color;
+      background-color: Colors.$dark-background-color;
       border-radius: 6px;
       margin-top: 10px;
       font-size: 1.3rem;
@@ -151,11 +151,12 @@
           border: 2px solid Colors.$main-background-color;
           color: white;
           font-size: 1rem;
-          border-radius: 6px;
+          border-radius: 0px 6px 6px 0px;
           cursor: pointer;
           &:first-of-type {
             background-color: Colors.$accent-color;
             color: black;
+            border-radius: 6px 0px 0px 6px;
           }
         }
       }
