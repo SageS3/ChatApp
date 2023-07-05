@@ -25,7 +25,7 @@ export const AcceptIgnoreButtons = ({
 }
 
 type MappedUserProps = {
-  userArr: LimitedUserObj[] | FullUserObj[]
+  userArr: FullUserObj[]
   ButtonState?: any
   AcceptIgnoreButtons?: any
   accept?: any
@@ -40,7 +40,7 @@ export const MappedUsers = ({
   ignore,
 }: MappedUserProps) => (
   <>
-    {userArr.map((user: LimitedUserObj | FullUserObj) => (
+    {userArr?.map((user: FullUserObj) => (
       <div className="user-container" key={user.id}>
         <div className="user-image-container">
           <img src={user.photoURL} alt="" />
@@ -50,7 +50,7 @@ export const MappedUsers = ({
           <ButtonState userID={user.id} userObj={user} />
         ) : (
           <button className="message-button">
-            <BiMessageSquareEdit size="1.8rem" color={"rgb(77, 255, 148)"} />
+            <BiMessageSquareEdit size="1.8rem" color={"rgb(39 194 160)"} />
           </button>
         )}
         {AcceptIgnoreButtons && (
