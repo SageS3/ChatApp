@@ -27,7 +27,6 @@ const AddFriends = ({ users }: AddFriendsProps) => {
   const [searchedUsers, setSearchedUsers] = useState<FullUserObj[]>([])
   const [searchQuery, setSearchQuery] = useState<string>("")
   const searchRef = useRef<HTMLInputElement>(null)
-  const user = auth?.currentUser
 
   const sendFriendRequestHandler = async (requestedUser: any) => {
     const currentUser = auth?.currentUser
