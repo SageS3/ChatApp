@@ -7,12 +7,16 @@ import {
   getDocs,
   query,
 } from "firebase/firestore"
-import { db } from "../config/firebase"
-import { auth } from "../config/firebase"
+import { db, auth } from "../config/firebase"
 import "./Friends.css"
 import Requests from "./Requests"
 import AddFriends from "./AddFriends"
-import { LimitedUserObj, FullUserObj } from "./updateDocUtils"
+import {
+  LimitedUserObj,
+  FullUserObj,
+  populateFriends,
+  populateRequests,
+} from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
 
 const Friends = () => {
@@ -48,6 +52,7 @@ const Friends = () => {
       console.log("no requests")
     }
     setRequestIDs(requestsArr)
+    populateRequests(users, requestIDs, setRequests)
   }
 
   const queryFriends = async () => {
@@ -65,36 +70,17 @@ const Friends = () => {
       console.log("no requests")
     }
     setFriendIDs(friendsObjArr)
+    populateFriends(users, friendIDs, setFriends)
   }
 
-  const populateRequests = (users: FullUserObj[], requestIDs: string[]) => {
-    const reqs: FullUserObj[] = []
-    requestIDs.forEach((id: string) => {
-      const filtered = users.filter((user: FullUserObj) => {
-        return user.id === id
-      })
-      reqs.push(...filtered)
-    })
-    setRequests(reqs)
-  }
-
-  const populateFriends = (users: FullUserObj[], friendIDs: string[]) => {
-    const friendsArr: FullUserObj[] = []
-    friendIDs.forEach((id: string) => {
-      const filtered = users.filter((user: LimitedUserObj) => {
-        return user.id === id
-      })
-      friendsArr.push(...filtered)
-    })
-    setFriends(friendsArr)
+  const populateState = async () => {
+    const currentUser = auth?.currentUser
+    await queryUsers(currentUser)
+    await queryFriends()
   }
 
   useEffect(() => {
-    const currentUser = auth?.currentUser
-    queryUsers(currentUser)
-    populateRequests(users, requestIDs)
-    populateFriends(users, friendIDs)
-    queryFriends()
+    populateState()
   }, [])
 
   type ButtonProps = {
@@ -154,6 +140,8 @@ const Friends = () => {
             requests={requests}
             setRequestIDs={setRequestIDs}
             queryRequests={queryRequests}
+            users={users}
+            setRequests={setRequests}
           />
         )}
       </main>
