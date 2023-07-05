@@ -56,7 +56,7 @@ export default function Register(props: registerProps) {
       userName: userName,
       photoURL: snapShot,
       friends: { pendingRequests: [], pendingSentRequests: [], friends: [] },
-      groups: [],
+      id: user.uid,
     })
     console.log("user added to users collection")
   }
