@@ -7,40 +7,51 @@
   grid-template-columns: 1fr;
   grid-template-rows: 0.5fr 4fr 1fr;
   grid-template-areas: "thread-navbar thread-navbar" "chat-window chat-window" "input input";
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(40, 40, 50);
 }
 .thread-directory .thread-nav {
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: flex-start;
   grid-area: thread-navbar;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
 }
 .thread-directory .thread-nav input {
-  width: 50%;
+  width: 200px;
   height: 50%;
   outline: none;
   border: none;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
   border-radius: 12px;
   padding: 2px;
-  color: rgb(77, 255, 148);
+  color: rgb(39, 194, 160);
   margin-left: 50px;
   font-size: 1.3rem;
 }
+.thread-directory .thread-nav button {
+  background-color: rgb(25, 25, 25);
+  outline: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 6px;
+}
+.thread-directory .thread-nav button:hover {
+  background-color: rgb(40, 40, 50);
+}
 .thread-directory .chat-window {
   grid-area: chat-window;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 .thread-directory .chat-window .chat-container {
-  height: auto;
+  height: 100px;
   width: 90%;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
   display: flex;
   align-items: center;
   border-bottom: 0.1px solid rgb(120, 120, 120);
@@ -48,10 +59,27 @@
   cursor: pointer;
 }
 .thread-directory .chat-window .chat-container:hover {
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(40, 40, 50);
 }
 .thread-directory .chat-window .chat-container p {
   margin-left: 20px;
   font-weight: 200;
   color: rgb(220, 220, 220);
+}
+.thread-directory .chat-window .chat-container .image-container {
+  width: 50px;
+  height: 50px;
+  margin: 20px;
+  border-radius: 100px;
+  background-color: rgb(25, 25, 25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.thread-directory .chat-window .chat-container .image-container img {
+  width: 90px;
+  height: 90px;
+  border-radius: 100px;
 }/*# sourceMappingURL=Thread.css.map */
