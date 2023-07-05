@@ -1,6 +1,6 @@
 .input {
   grid-area: input;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -15,6 +15,6 @@
   border: none;
   outline: none;
   border-radius: 14px;
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(40, 40, 50);
   color: white;
 }/*# sourceMappingURL=Input.css.map */
