@@ -3,8 +3,6 @@ import { db } from "../config/firebase"
 import { auth } from "../config/firebase"
 
 export type LimitedUserObj = {
-  userName: string
-  photoURL: string
   id: string
 }
 
@@ -23,8 +21,6 @@ export const updateUserSentRequests = async (
   const ref = doc(db, "users", userID)
   await updateDoc(ref, {
     "friends.pendingSentRequests": arrayUnion({
-      userName: requestedUser.userName,
-      photoURL: requestedUser.photoURL,
       id: requestedUser.id,
     }),
   })
@@ -38,8 +34,6 @@ export const updateThirdPartyPendingRequests = async (
   const ref = doc(db, "users", thirdParyUserID)
   await updateDoc(ref, {
     "friends.pendingRequests": arrayUnion({
-      userName: currentUser.displayName,
-      photoURL: currentUser.photoURL,
       id: currentUser.uid,
     }),
   })
@@ -53,13 +47,9 @@ export const acceptRequestFromListedUsers = async (requester: FullUserObj) => {
 
   await updateDoc(currentUserRef, {
     "friends.friends": arrayUnion({
-      userName: requester.userName,
-      photoURL: requester.photoURL,
       id: requester.id,
     }),
     "friends.pendingRequests": arrayRemove({
-      userName: requester.userName,
-      photoURL: requester.photoURL,
       id: requester.id,
     }),
   })
@@ -76,15 +66,11 @@ export const ignoreRequestFromListedUsers = async (
   if (currentUser) {
     await updateDoc(currentUserRef, {
       "friends.pendingRequests": arrayRemove({
-        userName: requesterObj.userName,
-        photoURL: requesterObj.photoURL,
         id: requesterObj.id,
       }),
     })
     await updateDoc(requesterRef, {
       "friends.pendingSentRequests": arrayRemove({
-        userName: currentUser.displayName,
-        photoURL: currentUser.photoURL,
         id: currentUser.uid,
       }),
     })
@@ -98,15 +84,41 @@ export const updateCurrentUserDocs = async (
   if (currentUser) {
     await updateDoc(requesterRef, {
       "friends.friends": arrayUnion({
-        userName: currentUser.displayName,
-        photoURL: currentUser.photoURL,
         id: currentUser.uid,
       }),
       "friends.pendingSentRequests": arrayRemove({
-        userName: currentUser.displayName,
-        photoURL: currentUser.photoURL,
         id: currentUser.uid,
       }),
     })
   }
+}
+
+export const populateRequests = (
+  users: FullUserObj[],
+  requestIDs: string[],
+  setRequests: any
+) => {
+  const reqs: FullUserObj[] = []
+  requestIDs.forEach((id: string) => {
+    const filtered = users.filter((user: FullUserObj) => {
+      return user.id === id
+    })
+    reqs.push(...filtered)
+  })
+  setRequests(reqs)
+}
+
+export const populateFriends = (
+  users: FullUserObj[],
+  friendIDs: string[],
+  setFriends: any
+) => {
+  const friendsArr: FullUserObj[] = []
+  friendIDs.forEach((id: string) => {
+    const filtered = users.filter((user: LimitedUserObj) => {
+      return user.id === id
+    })
+    friendsArr.push(...filtered)
+  })
+  setFriends(friendsArr)
 }
