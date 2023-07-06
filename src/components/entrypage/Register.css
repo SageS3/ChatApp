@@ -1,15 +1,13 @@
 .entry-page-form {
   height: auto;
   width: 500px;
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(40, 40, 50);
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding: 20px;
-  margin: 20px;
-  margin-top: 80px;
   border: 4px solid black;
 }
 .entry-page-form h1 {
@@ -21,9 +19,9 @@
   height: 20px;
   width: 50%;
   min-width: 200px;
-  background-color: rgb(255, 6, 200);
+  background-color: rgb(39, 194, 160);
   font-weight: 600;
-  color: rgb(55, 47, 73);
+  color: rgb(40, 40, 50);
   margin: 10px;
   outline: none;
   font-size: 1.2rem;
@@ -32,19 +30,19 @@
   letter-spacing: 0.1ch;
 }
 .entry-page-form input::-moz-placeholder {
-  color: rgb(55, 47, 73);
+  color: rgb(40, 40, 50);
   font-weight: 600;
 }
 .entry-page-form input::placeholder {
-  color: rgb(55, 47, 73);
+  color: rgb(40, 40, 50);
   font-weight: 600;
 }
 .entry-page-form input:-webkit-autofill,
 .entry-page-form input:-webkit-autofill:hover,
 .entry-page-form input:-webkit-autofill:focus,
 .entry-page-form input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px rgb(255, 6, 200) inset;
-  -webkit-text-fill-color: rgb(55, 47, 73);
+  -webkit-box-shadow: 0 0 0 30px rgb(39, 194, 160) inset;
+  -webkit-text-fill-color: rgb(40, 40, 50);
 }
 .entry-page-form button {
   font-size: 1.2rem;
@@ -56,12 +54,12 @@
   width: 54%;
   min-width: 220px;
   height: 40px;
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(40, 40, 50);
   border: none;
   margin: 10px;
   color: white;
   font-weight: 600;
-  border: 2px solid rgb(255, 6, 200);
+  border: 2px solid rgb(39, 194, 160);
   cursor: pointer;
 }
 .entry-page-form h4 {
