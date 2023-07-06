@@ -73,7 +73,6 @@ const Profile = (props: ProfileProps) => {
   }
 
   const setUsernameHandler = (e: any) => {
-    // not preventing page reload
     setUserName(e.target.value)
     e.preventDefault()
   }
@@ -100,8 +99,6 @@ const Profile = (props: ProfileProps) => {
       await updateProfile(user, { photoURL: downloadedPhoto }) // updating user photoURL in firebase Auth
       await updatePhotoURLFirestore(user.uid, downloadedPhoto)
     } else {
-      // set profile picture to last picture. useRef?
-      // or set profile picture to default user picture
       console.log("Wrong file type")
     }
     setUploadingPhoto(false)
