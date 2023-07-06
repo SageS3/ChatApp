@@ -2,9 +2,10 @@
   height: 100vh;
   width: 100vw;
   display: grid;
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(40, 40, 50);
   grid-template-columns: 0.25fr 2fr;
-  grid-template-areas: "sidebar main" "sidebar main";
+  grid-template-rows: 1fr;
+  grid-template-areas: "sidebar main";
   gap: 4px;
 }
 .user-dashboard nav {
@@ -15,12 +16,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
   height: 100%;
 }
 .user-dashboard .user-input {
   grid-area: input;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(25, 25, 25);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -29,7 +30,7 @@
 .user-dashboard .user-input input {
   width: 100%;
   height: 30px;
-  background-color: rgb(55, 47, 73);
+  background-color: rgb(40, 40, 50);
   border-radius: 12px;
   border: 2px solid white;
   font-size: 1.1rem;
@@ -44,7 +45,7 @@
     width: 100%;
     display: grid;
     grid-gap: 4px;
-    background-color: rgb(55, 47, 73);
+    background-color: rgb(25, 25, 25);
     grid-template-columns: 100%;
     grid-template-rows: 0.4fr 4fr 1fr;
     grid-template-areas: "navbar" "main" "main";
@@ -55,7 +56,7 @@
   }
   .user-dashboard nav {
     grid-area: navbar;
-    background-color: rgb(30, 30, 30);
+    background-color: rgb(25, 25, 25);
     color: white;
     display: flex;
     align-items: center;
@@ -80,20 +81,14 @@
     width: 5rem;
     padding: 10px;
     margin: 0 10px 0 10px;
-    background-color: rgb(30, 30, 30);
-    outline: none;
-    border: none;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
   }
   .user-dashboard nav .logout-nav-button {
     cursor: pointer;
     width: 5rem;
     padding: 10px;
     border: none;
-    outline: 2px solid rgb(77, 255, 148);
-    background-color: rgb(30, 30, 30);
+    outline: 2px solid rgb(39, 194, 160);
+    background-color: rgb(25, 25, 25);
     border-radius: 12px;
     color: white;
     font-weight: 700;
@@ -102,8 +97,8 @@
   }
   .user-dashboard nav .logout-nav-button:hover {
     outline: none;
-    background-color: rgb(77, 255, 148);
-    color: rgb(30, 30, 30);
+    background-color: rgb(39, 194, 160);
+    color: rgb(25, 25, 25);
   }
 }
 @media screen and (max-width: 550px) {
