@@ -29,32 +29,28 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className="sidebar-wrapper">
-      <button
-        className="image-container"
-        onClick={() => setDashboard("profile")}
-        data-tooltip="Profile"
-      >
+      <button onClick={() => setDashboard("profile")} data-tooltip="Profile">
         <img src={userPhoto} alt="" />
       </button>
-      <button onClick={() => setDashboard("chats")} data-tooltip="chats">
+      <button onClick={() => setDashboard("chats")} data-tooltip="Chats">
         {dashboard === "chats" || dashboard === "chat" ? (
-          <AiFillMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
+          <AiFillMessage size={"1.5em"} color={"rgb(39 194 160)"} />
         ) : (
-          <AiOutlineMessage size={"1.5em"} color={"rgb(77, 255, 148)"} />
+          <AiOutlineMessage size={"1.5em"} color={"rgb(39 194 160)"} />
         )}
       </button>
       <button onClick={() => setDashboard("friends")} data-tooltip="Friends">
         {dashboard === "friends" ? (
-          <FaUserFriends size={"1.5em"} color={"rgb(77, 255, 148)"} />
+          <FaUserFriends size={"1.5em"} color={"rgb(39 194 160)"} />
         ) : (
-          <FiUsers size={"1.3em"} color={"rgb(77, 255, 148)"} />
+          <FiUsers size={"1.3em"} color={"rgb(39 194 160)"} />
         )}
       </button>
       <button onClick={() => setDashboard("settings")} data-tooltip="Settings">
         {dashboard === "settings" ? (
-          <IoSettingsSharp size={"1.5em"} color={"rgb(77, 255, 148)"} />
+          <IoSettingsSharp size={"1.5em"} color={"rgb(39 194 160)"} />
         ) : (
-          <IoSettingsOutline size={"1.5em"} color={"rgb(77, 255, 148)"} />
+          <IoSettingsOutline size={"1.5em"} color={"rgb(39 194 160)"} />
         )}
       </button>
       <button
@@ -62,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         id="btn--logout"
         data-tooltip="Logout"
       >
-        <MdOutlineLogout size={"1.5em"} color={"rgb(77, 255, 148)"} />
+        <MdOutlineLogout size={"1.5em"} color={"rgb(39 194 160)"} />
       </button>
     </div>
   )
