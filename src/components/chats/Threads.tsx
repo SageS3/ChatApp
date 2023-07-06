@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useCallback } from "react"
+import { useEffect, useState } from "react"
 import { IoSkullOutline } from "react-icons/io5"
 import "./Threads.css"
 import {
@@ -39,7 +39,7 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
     querySnapshot.forEach((doc) => {
       groupArr.push(doc.data())
     })
-    // setGroups((prev: []) => [...prev, ...groupArr])
+    // setGroups((prev: []) => [prev, ...groupArr])
     console.log("query")
     setGroups(groupArr)
   }
@@ -99,7 +99,7 @@ const Threads = ({ setDashboard, setThreadObj }: ThreadsProps) => {
             }
             onClick={(e) => handleMenuSlide(e, group.id)}
           >
-            <BsThreeDotsVertical size={"3em"} color={"rgb(77, 255, 148)"} />
+            <BsThreeDotsVertical size={"3em"} color={"rgb(39 194 160)"} />
           </button>
           {clickedItemId === group.id && (
             <ul
