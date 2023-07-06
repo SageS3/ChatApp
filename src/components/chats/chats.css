@@ -4,10 +4,10 @@
   height: 100vh;
   background-color: rgb(40, 40, 50);
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 4px;
+  grid-template-columns: 0.8fr 4fr;
+  gap: 4px 0px;
   grid-template-rows: 0.3fr 4fr;
-  grid-template-areas: "navigate" "threads";
+  grid-template-areas: "navigate navigate" "friends threads";
 }
 .main__chats .header {
   grid-area: navigate;
@@ -45,4 +45,8 @@
   border: none;
   cursor: pointer;
   margin-left: 20px;
+}
+.main__chats .section__friends-list {
+  grid-area: friends;
+  background-color: rgb(20, 20, 20);
 }/*# sourceMappingURL=chats.css.map */

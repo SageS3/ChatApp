@@ -6,12 +6,12 @@
   height: 100vh;
   background-color: Colors.$secondary-background-color;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 4px;
+  grid-template-columns: clamp(0fr, 0.8fr, 0.8fr) 4fr;
+  gap: 4px 0px;
   grid-template-rows: 0.3fr 4fr;
   grid-template-areas:
-    "navigate"
-    "threads";
+    "navigate navigate"
+    "friends threads";
   .header {
     grid-area: navigate;
     background-color: Colors.$dark-background-color;
@@ -48,5 +48,10 @@
         margin-left: 20px;
       }
     }
+  }
+
+  .section__friends-list {
+    grid-area: friends;
+    background-color: Colors.$dark-background-color;
   }
 }
