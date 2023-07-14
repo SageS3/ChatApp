@@ -26,6 +26,7 @@ const Friends = () => {
   const [requests, setRequests] = useState<FullUserObj[]>([])
   const [requestIDs, setRequestIDs] = useState<string[]>([])
   const [friendIDs, setFriendIDs] = useState<string[]>([])
+  const [hasRequests, setHasRequests] = useState<boolean>(false)
 
   const queryUsers = async (user: any) => {
     const q = query(collection(db, "users"), where("id", "!=", `${user?.uid}`))
@@ -35,6 +36,7 @@ const Friends = () => {
       userList.push(user.data())
     })
     setUsers(userList)
+    console.log(users)
   }
 
   const queryRequests = async () => {
@@ -52,6 +54,9 @@ const Friends = () => {
       console.log("no requests")
     }
     setRequestIDs(requestsArr)
+    if (requestIDs.length > 0) {
+      setHasRequests(true)
+    }
     populateRequests(users, requestIDs, setRequests)
   }
 
@@ -70,13 +75,14 @@ const Friends = () => {
       console.log("no requests")
     }
     setFriendIDs(friendsObjArr)
+    console.log(friends)
     populateFriends(users, friendIDs, setFriends)
   }
 
-  const populateState = async () => {
+  const populateState = () => {
     const currentUser = auth?.currentUser
-    await queryUsers(currentUser)
-    await queryFriends()
+    queryUsers(currentUser)
+    queryFriends()
   }
 
   useEffect(() => {
@@ -93,7 +99,7 @@ const Friends = () => {
     <button
       className={selected ? "selected" : ""}
       onClick={onClick}
-      id={id === "Requests" ? "requests" : ""}
+      id={id === "Requests" && hasRequests ? "requests" : ""}
     >
       {id}
     </button>
