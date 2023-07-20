@@ -65,27 +65,29 @@ const Friends = () => {
     const userID = currentUser?.uid
     const ref = doc(db, `users/${userID}`)
     const querySnapshot = await getDoc(ref)
-    const friendsObjArr: string[] = []
     if (querySnapshot.exists()) {
       const friendsArr = querySnapshot.data().friends.friends
-      friendsArr.forEach((userObj: LimitedUserObj) => {
-        friendsObjArr.push(userObj.id)
+      const idArr = friendsArr.map((userObj: LimitedUserObj) => {
+        return userObj.id
       })
+      setFriendIDs(idArr)
     } else {
-      console.log("no requests")
+      console.log("no friends")
     }
-    setFriendIDs(friendsObjArr)
-    console.log(friends)
-    populateFriends(users, friendIDs, setFriends)
+    const result = populateFriends(users, friendIDs)
+    console.log(result)
+    setFriends(result)
   }
 
   const populateState = () => {
     const currentUser = auth?.currentUser
-    queryUsers(currentUser)
-    queryFriends()
+    queryUsers(currentUser).then(() => {
+      queryFriends()
+    })
   }
 
   useEffect(() => {
+    setFriendsDirectory("all")
     populateState()
   }, [])
 
@@ -138,7 +140,9 @@ const Friends = () => {
         </ul>
       </header>
       <main className="friends--list">
-        {friendsDirectory === "all" && <MappedUsers userArr={friends} />}
+        {friendsDirectory === "all" && friends.length > 0 && (
+          <MappedUsers userArr={friends} />
+        )}
         {friendsDirectory === "add" && <AddFriends users={users} />}
         {friendsDirectory === "requests" && (
           <Requests
