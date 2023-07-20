@@ -97,7 +97,7 @@ const AddFriends = ({ users }: AddFriendsProps) => {
     return (
       <>
         {pendingSentRequestsIDs.includes(userID) && (
-          <div className="pending-text">Pending...</div>
+          <div className="pending-text">Request Sent</div>
         )}
         {friendsIDs.includes(userID) && (
           <div className="button-state__friends">Friends</div>
