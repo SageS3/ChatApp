@@ -89,6 +89,7 @@ const Friends = () => {
   useEffect(() => {
     setFriendsDirectory("all")
     populateState()
+    console.log("Friends mounted")
   }, [])
 
   type ButtonProps = {
@@ -140,9 +141,7 @@ const Friends = () => {
         </ul>
       </header>
       <main className="friends--list">
-        {friendsDirectory === "all" && friends.length > 0 && (
-          <MappedUsers userArr={friends} />
-        )}
+        {friendsDirectory === "all" && <MappedUsers userArr={friends} />}
         {friendsDirectory === "add" && <AddFriends users={users} />}
         {friendsDirectory === "requests" && (
           <Requests
