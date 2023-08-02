@@ -20,8 +20,8 @@
       @include Mixins.display-flex-center;
       position: absolute;
       background-color: Colors.$secondary-background-color;
-      width: 120px;
-      height: 120px;
+      width: clamp(80px, 110px, 120px);
+      height: clamp(80px, 110px, 120px);
       border-radius: 100px;
       object-fit: cover;
       border: none;
@@ -119,7 +119,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // margin-top: 20px;
 
     button {
       width: 45%;
@@ -198,8 +197,6 @@
 
 @media screen and (max-width: 500px) {
   .profile--wrapper {
-    padding-left: 80px;
-    padding-right: 80px;
     height: 100%;
 
     .profile-info-container {
