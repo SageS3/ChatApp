@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react"
 import Sidebar from "../dashboard/Sidebar"
+import { AiFillMessage } from "react-icons/ai"
+import { FaUser } from "react-icons/fa"
+import { IoSettingsSharp } from "react-icons/io5"
+import { MdOutlineLogout } from "react-icons/md"
 import {
   signOut,
   updateProfile,
@@ -115,15 +119,18 @@ const Dashboard = () => {
 
   return (
     <div className="user-dashboard">
-      <nav>
-        <p>{userDisplayName}</p>
-        <button onClick={() => setDashboard(navigateTo.chats)}>Chats</button>
-        <button onClick={() => setDashboard(navigateTo.profile)}>
-          Profile
+      <nav className="navbar__tablet--display">
+        <button onClick={() => setDashboard(navigateTo.chats)}>
+          <AiFillMessage size={"2.2em"} color={"rgb(39 194 160)"} />
         </button>
-        <button>Settings</button>
+        <button onClick={() => setDashboard(navigateTo.profile)}>
+          <FaUser size={"2.2em"} color={"rgb(39 194 160)"} />
+        </button>
+        <button>
+          <IoSettingsSharp size={"2.2em"} color={"rgb(39 194 160)"} />
+        </button>
         <button className="logout-nav-button" onClick={handleLogOut}>
-          Logout
+          <MdOutlineLogout size={"2.2em"} color={"rgb(39 194 160)"} />
         </button>
       </nav>
       {/* <img src={cauldron}/> */}
