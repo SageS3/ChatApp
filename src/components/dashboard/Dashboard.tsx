@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import Sidebar from "../dashboard/Sidebar"
 import { AiFillMessage } from "react-icons/ai"
-import { FaUser } from "react-icons/fa"
 import { IoSettingsSharp } from "react-icons/io5"
 import { MdOutlineLogout } from "react-icons/md"
+import { FaUserFriends } from "react-icons/fa"
 import {
   signOut,
   updateProfile,
@@ -122,6 +122,9 @@ const Dashboard = () => {
       <nav className="navbar__tablet--display">
         <button onClick={() => setDashboard(navigateTo.profile)}>
           <img src={userPhoto} />
+        </button>
+        <button onClick={() => setDashboard(navigateTo.friends)}>
+          <FaUserFriends size={"2.2em"} color={"rgb(39 194 160)"} />
         </button>
         <button onClick={() => setDashboard(navigateTo.chats)}>
           <AiFillMessage size={"2.2em"} color={"rgb(39 194 160)"} />
