@@ -120,13 +120,13 @@ const Dashboard = () => {
   return (
     <div className="user-dashboard">
       <nav className="navbar__tablet--display">
+        <button onClick={() => setDashboard(navigateTo.profile)}>
+          <img src={userPhoto} />
+        </button>
         <button onClick={() => setDashboard(navigateTo.chats)}>
           <AiFillMessage size={"2.2em"} color={"rgb(39 194 160)"} />
         </button>
-        <button onClick={() => setDashboard(navigateTo.profile)}>
-          <FaUser size={"2.2em"} color={"rgb(39 194 160)"} />
-        </button>
-        <button>
+        <button onClick={() => setDashboard(navigateTo.settings)}>
           <IoSettingsSharp size={"2.2em"} color={"rgb(39 194 160)"} />
         </button>
         <button className="logout-nav-button" onClick={handleLogOut}>
