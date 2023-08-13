@@ -1,14 +1,13 @@
 .friends {
   grid-area: main;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: grid;
   background-color: rgb(40, 40, 50);
   grid-template-columns: 1fr;
   grid-template-rows: 0.3fr 4fr;
-  gap: 4px;
+  gap: 2px;
   grid-template-areas: "header" "list";
-  gap: 4px;
 }
 .friends .friends__header {
   grid-area: header;
