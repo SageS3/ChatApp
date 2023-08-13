@@ -83,7 +83,9 @@
       margin-top: 10px;
       font-size: 1.3rem;
       padding: 6px;
-      width: 50%;
+      width: 60%;
+      min-width: 300px;
+      max-width: 400px;
       color: Colors.$grey-color;
     }
     .user-container {
@@ -150,31 +152,6 @@
       display: flex;
       background-color: Colors.$secondary-background-color;
       border: 2px solid white;
-    }
-    .add-friends-container {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      grid-area: list;
-      height: 100%;
-      input {
-        outline: none;
-        border: none;
-        width: 400px;
-        padding: 10px;
-        background-color: Colors.$secondary-background-color;
-        color: white;
-        font-size: 1.2rem;
-        border-radius: 6px;
-        margin-top: 20px;
-      }
-      .search-results-container {
-        width: 400px;
-        height: 400px;
-        background-color: Colors.$main-background-color;
-      }
     }
   }
 }

@@ -80,7 +80,9 @@
   margin-top: 10px;
   font-size: 1.3rem;
   padding: 6px;
-  width: 50%;
+  width: 60%;
+  min-width: 300px;
+  max-width: 400px;
   color: rgb(120, 120, 120);
 }
 .friends .friends--list .user-container {
@@ -165,29 +167,4 @@
   display: flex;
   background-color: rgb(40, 40, 50);
   border: 2px solid white;
-}
-.friends .friends--list .add-friends-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  grid-area: list;
-  height: 100%;
-}
-.friends .friends--list .add-friends-container input {
-  outline: none;
-  border: none;
-  width: 400px;
-  padding: 10px;
-  background-color: rgb(40, 40, 50);
-  color: white;
-  font-size: 1.2rem;
-  border-radius: 6px;
-  margin-top: 20px;
-}
-.friends .friends--list .add-friends-container .search-results-container {
-  width: 400px;
-  height: 400px;
-  background-color: rgb(25, 25, 25);
 }/*# sourceMappingURL=Friends.css.map */
