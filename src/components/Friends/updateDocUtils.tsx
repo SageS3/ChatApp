@@ -5,9 +5,13 @@ import { auth } from "../config/firebase"
 export type LimitedUserObj = {
   id: string
 }
-
+type FriendsObj = {
+  friends: string[]
+  pendingRequests: string[]
+  pendingSentRequests: string[]
+}
 export type FullUserObj = {
-  friends: {}
+  friends: FriendsObj
   id: string
   photoURL: string
   userName: string
@@ -95,8 +99,7 @@ export const updateCurrentUserDocs = async (
 
 export const populateRequests = (
   users: FullUserObj[],
-  requestIDs: string[],
-  setRequests: any
+  requestIDs: string[]
 ) => {
   const reqs: FullUserObj[] = []
   requestIDs.forEach((id: string) => {
@@ -105,14 +108,10 @@ export const populateRequests = (
     })
     reqs.push(...filtered)
   })
-  setRequests(reqs)
+  return reqs
 }
 
-export const populateFriends = (
-  users: FullUserObj[],
-  friendIDs: string[],
-  setFriends: any
-) => {
+export const populateFriends = (users: FullUserObj[], friendIDs: string[]) => {
   const friendsArr: FullUserObj[] = []
   friendIDs.forEach((id: string) => {
     const filtered = users.filter((user: LimitedUserObj) => {
@@ -120,5 +119,5 @@ export const populateFriends = (
     })
     friendsArr.push(...filtered)
   })
-  setFriends(friendsArr)
+  return friendsArr
 }
