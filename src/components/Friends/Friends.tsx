@@ -22,21 +22,24 @@ import { MappedUsers } from "./reusable"
 const Friends = () => {
   const [friendsDirectory, setFriendsDirectory] = useState<string>("all")
   const [friends, setFriends] = useState<FullUserObj[]>([])
-  const [users, setUsers] = useState<FullUserObj[]>([])
+  const [users, setUsers] = useState<any>([])
   const [requests, setRequests] = useState<FullUserObj[]>([])
   const [requestIDs, setRequestIDs] = useState<string[]>([])
   const [friendIDs, setFriendIDs] = useState<string[]>([])
   const [hasRequests, setHasRequests] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const queryUsers = async (user: any) => {
     const q = query(collection(db, "users"), where("id", "!=", `${user?.uid}`))
-    const querySnapshot = await getDocs(q)
-    const userList: any = []
-    querySnapshot.forEach((user: any) => {
-      userList.push(user.data())
-    })
-    setUsers(userList)
-    console.log(users)
+    try {
+      const snapShot = await getDocs(q)
+      const userData = snapShot.docs.map((doc) => doc.data())
+      console.log(userData)
+      setUsers(userData)
+      console.log(friendsDirectory)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const queryRequests = async () => {
@@ -44,20 +47,17 @@ const Friends = () => {
     const userID = currentUser?.uid
     const ref = doc(db, `users/${userID}`)
     const querySnapshot = await getDoc(ref)
-    const requestsArr: string[] = []
-    if (querySnapshot.exists()) {
-      const pendingRequests = querySnapshot.data().friends.pendingRequests
-      pendingRequests.forEach((userObj: LimitedUserObj) => {
-        requestsArr.push(userObj.id)
-      })
-    } else {
-      console.log("no requests")
+    try {
+      const pendingReqs = querySnapshot.data()?.friends.pendingRequests
+      const pendingRequestsIds = pendingReqs.map(
+        (userObj: LimitedUserObj) => userObj.id
+      )
+      setRequestIDs(pendingRequestsIds)
+    } catch (error) {
+      console.log(error)
     }
-    setRequestIDs(requestsArr)
-    if (requestIDs.length > 0) {
-      setHasRequests(true)
-    }
-    populateRequests(users, requestIDs, setRequests)
+    setHasRequests(true)
+    setRequests(() => populateRequests(users, requestIDs))
   }
 
   const queryFriends = async () => {
@@ -65,31 +65,23 @@ const Friends = () => {
     const userID = currentUser?.uid
     const ref = doc(db, `users/${userID}`)
     const querySnapshot = await getDoc(ref)
-    if (querySnapshot.exists()) {
-      const friendsArr = querySnapshot.data().friends.friends
-      const idArr = friendsArr.map((userObj: LimitedUserObj) => {
-        return userObj.id
-      })
+    try {
+      const friendsArr = querySnapshot.data()?.friends.friends
+      const idArr = friendsArr.map((userObj: LimitedUserObj) => userObj.id)
       setFriendIDs(idArr)
-    } else {
-      console.log("no friends")
+    } catch (error) {
+      console.log(error)
     }
-    const result = populateFriends(users, friendIDs)
-    console.log(result)
-    setFriends(result)
-  }
 
-  const populateState = () => {
-    const currentUser = auth?.currentUser
-    queryUsers(currentUser).then(() => {
-      queryFriends()
-    })
+    setFriends(() => populateFriends(users, friendIDs))
   }
 
   useEffect(() => {
-    setFriendsDirectory("all")
-    populateState()
-    console.log("Friends mounted")
+    const currentUser = auth?.currentUser
+    setIsLoading(true)
+    queryUsers(currentUser)
+    queryFriends()
+    setIsLoading(false)
   }, [])
 
   type ButtonProps = {
@@ -110,6 +102,16 @@ const Friends = () => {
 
   const handleButtonClick = (directory: string) => {
     setFriendsDirectory(directory)
+  }
+
+  const renderUsers = () => {
+    if (friendsDirectory == "all") {
+      if (isLoading) {
+        return <div>loading...</div>
+      } else {
+        return <div>{friends.length}</div>
+      }
+    }
   }
 
   return (
@@ -141,7 +143,7 @@ const Friends = () => {
         </ul>
       </header>
       <main className="friends--list">
-        {friendsDirectory === "all" && <MappedUsers userArr={friends} />}
+        {friendsDirectory == "all" && renderUsers()}
         {friendsDirectory === "add" && <AddFriends users={users} />}
         {friendsDirectory === "requests" && (
           <Requests
