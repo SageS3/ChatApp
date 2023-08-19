@@ -34,17 +34,14 @@ const Friends = () => {
     try {
       const snapShot = await getDocs(q)
       const userData = snapShot.docs.map((doc) => doc.data())
-      console.log(userData)
       setUsers(userData)
-      console.log(friendsDirectory)
+      console.log(userData)
     } catch (error) {
       console.log(error)
     }
   }
 
-  const queryRequests = async () => {
-    const currentUser = auth.currentUser
-    const userID = currentUser?.uid
+  const queryRequests = async (userID: string | undefined) => {
     const ref = doc(db, `users/${userID}`)
     const querySnapshot = await getDoc(ref)
     try {
@@ -52,11 +49,11 @@ const Friends = () => {
       const pendingRequestsIds = pendingReqs.map(
         (userObj: LimitedUserObj) => userObj.id
       )
+      pendingRequestsIds.length > 0 && setHasRequests(true)
       setRequestIDs(pendingRequestsIds)
     } catch (error) {
       console.log(error)
     }
-    setHasRequests(true)
     setRequests(() => populateRequests(users, requestIDs))
   }
 
@@ -78,9 +75,12 @@ const Friends = () => {
 
   useEffect(() => {
     const currentUser = auth?.currentUser
+    const userID = currentUser?.uid
+    // declare vars here and pass to funcs as args
     setIsLoading(true)
     queryUsers(currentUser)
     queryFriends()
+    queryRequests(userID)
     setIsLoading(false)
   }, [])
 
@@ -150,7 +150,6 @@ const Friends = () => {
             requestIDs={requestIDs}
             requests={requests}
             setRequestIDs={setRequestIDs}
-            queryRequests={queryRequests}
             users={users}
             setRequests={setRequests}
           />
