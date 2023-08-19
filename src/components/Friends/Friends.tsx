@@ -57,9 +57,7 @@ const Friends = () => {
     setRequests(() => populateRequests(users, requestIDs))
   }
 
-  const queryFriends = async () => {
-    const currentUser = auth.currentUser
-    const userID = currentUser?.uid
+  const queryFriends = async (userID: string | undefined) => {
     const ref = doc(db, `users/${userID}`)
     const querySnapshot = await getDoc(ref)
     try {
@@ -69,17 +67,16 @@ const Friends = () => {
     } catch (error) {
       console.log(error)
     }
-
     setFriends(() => populateFriends(users, friendIDs))
   }
 
   useEffect(() => {
     const currentUser = auth?.currentUser
     const userID = currentUser?.uid
-    // declare vars here and pass to funcs as args
+
     setIsLoading(true)
     queryUsers(currentUser)
-    queryFriends()
+    queryFriends(userID)
     queryRequests(userID)
     setIsLoading(false)
   }, [])
