@@ -49,12 +49,12 @@ const Friends = () => {
       const pendingRequestsIds = pendingReqs.map(
         (userObj: LimitedUserObj) => userObj.id
       )
-      pendingRequestsIds.length > 0 && setHasRequests(true)
+      pendingRequestsIds.length && setHasRequests(true)
       setRequestIDs(pendingRequestsIds)
+      setRequests(populateRequests(users, requestIDs))
     } catch (error) {
       console.log(error)
     }
-    setRequests(() => populateRequests(users, requestIDs))
   }
 
   const queryFriends = async (userID: string | undefined) => {
@@ -64,10 +64,10 @@ const Friends = () => {
       const friendsArr = querySnapshot.data()?.friends.friends
       const idArr = friendsArr.map((userObj: LimitedUserObj) => userObj.id)
       setFriendIDs(idArr)
+      setFriends(populateFriends(users, friendIDs))
     } catch (error) {
       console.log(error)
     }
-    setFriends(() => populateFriends(users, friendIDs))
   }
 
   useEffect(() => {
@@ -101,15 +101,9 @@ const Friends = () => {
     setFriendsDirectory(directory)
   }
 
-  const renderUsers = () => {
-    if (friendsDirectory == "all") {
-      if (isLoading) {
-        return <div>loading...</div>
-      } else {
-        return <div>{friends.length}</div>
-      }
-    }
-  }
+  const renderUsers = () =>
+    friendsDirectory === "all" &&
+    (isLoading ? <div>loading</div> : <MappedUsers userArr={friends} />)
 
   return (
     <div className="friends">
@@ -140,7 +134,7 @@ const Friends = () => {
         </ul>
       </header>
       <main className="friends--list">
-        {friendsDirectory == "all" && renderUsers()}
+        {friendsDirectory === "all" && renderUsers()}
         {friendsDirectory === "add" && <AddFriends users={users} />}
         {friendsDirectory === "requests" && (
           <Requests
