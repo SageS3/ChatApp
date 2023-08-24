@@ -1,1 +1,8 @@
-/*# sourceMappingURL=Mixins.css.map */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}/*# sourceMappingURL=Mixins.css.map */

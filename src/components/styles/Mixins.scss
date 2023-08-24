@@ -27,7 +27,7 @@
 }
 
 @mixin opacity__animation {
-  animation: fadeIn 1s ease-in forwards;
+  animation: fadeIn 200ms ease-in forwards;
 }
 
 @keyframes fadeIn {
