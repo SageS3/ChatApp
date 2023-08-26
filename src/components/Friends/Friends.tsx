@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import {
   getDoc,
   doc,
@@ -88,13 +88,14 @@ const Friends = () => {
   }
 
   const Button = ({ selected, id, onClick }: ButtonProps) => (
-    <button
-      className={selected ? "selected" : ""}
-      onClick={onClick}
-      id={id === "Requests" && hasRequests ? "requests" : ""}
-    >
+    <button className={selected ? "selected" : ""} onClick={onClick}>
       {id}
     </button>
+  )
+
+  const memoizedNotificationIndicator = useMemo(
+    () => <div className="request--indicator"></div>,
+    [hasRequests]
   )
 
   const handleButtonClick = (directory: string) => {
@@ -130,6 +131,7 @@ const Friends = () => {
               id="Requests"
               onClick={() => handleButtonClick("requests")}
             />
+            {hasRequests && memoizedNotificationIndicator}
           </li>
         </ul>
       </header>
