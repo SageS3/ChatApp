@@ -22,7 +22,7 @@ import { MappedUsers } from "./reusable"
 const Friends = () => {
   const [friendsDirectory, setFriendsDirectory] = useState<string>("all")
   const [friends, setFriends] = useState<FullUserObj[]>([])
-  const [users, setUsers] = useState<any>([])
+  const [users, setUsers] = useState<FullUserObj[]>([])
   const [requests, setRequests] = useState<FullUserObj[]>([])
   const [requestIDs, setRequestIDs] = useState<string[]>([])
   const [friendIDs, setFriendIDs] = useState<string[]>([])
@@ -33,7 +33,7 @@ const Friends = () => {
     const q = query(collection(db, "users"), where("id", "!=", `${user?.uid}`))
     try {
       const snapShot = await getDocs(q)
-      const userData = snapShot.docs.map((doc) => doc.data())
+      const userData = snapShot.docs.map((doc) => doc.data() as FullUserObj)
       setUsers(userData)
       console.log(userData)
     } catch (error) {
