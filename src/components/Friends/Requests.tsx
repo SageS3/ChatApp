@@ -15,7 +15,6 @@ import { populateRequests } from "./updateDocUtils"
 type RequestsProps = {
   requestIDs: string[]
   setRequestIDs: any
-  queryRequests: () => void
   requests: FullUserObj[]
   users: FullUserObj[]
   setRequests: any
@@ -25,9 +24,7 @@ const Requests = ({
   requestIDs,
   requests,
   setRequestIDs,
-  queryRequests,
   users,
-  setRequests,
 }: RequestsProps) => {
   const ignoreRequest = async (requester: LimitedUserObj) => {
     const currentUser = auth?.currentUser
@@ -73,8 +70,8 @@ const Requests = ({
   }
 
   useEffect(() => {
-    queryRequests()
-    populateRequests(users, requestIDs, setRequests)
+    populateRequests(users, requestIDs)
+    console.log("reqs")
   }, [])
 
   return (
