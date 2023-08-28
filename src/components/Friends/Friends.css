@@ -55,20 +55,12 @@
   border-bottom: 2px solid rgb(39, 194, 160);
   margin-bottom: -2px;
 }
-.friends .friends__header ul li #requests {
-  position: relative;
-}
-.friends .friends__header ul li #requests::after {
-  content: "";
-  position: absolute;
+.friends .friends__header ul li .request--indicator {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background-color: rgb(39, 194, 160);
-  left: 50%;
-  top: 50%;
-  transform: translate(500%, -50%);
-  animation: fadeIn 100ms ease-in forwards;
+  animation: fadeIn 200ms ease-in forwards;
 }
 .friends .friends--list {
   grid-area: list;

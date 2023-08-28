@@ -48,20 +48,13 @@
           border-bottom: 2px solid Colors.$accent-color;
           margin-bottom: -2px;
         }
-        #requests {
-          position: relative;
-          &::after {
-            content: "";
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: Colors.$accent-color;
-            left: 50%;
-            top: 50%;
-            transform: translate(500%, -50%);
-            @include Mixins.opacity__animation;
-          }
+
+        .request--indicator {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: Colors.$accent-color;
+          @include Mixins.opacity__animation;
         }
       }
     }
