@@ -13,6 +13,7 @@ import {
 } from "./updateDocUtils"
 import { AcceptIgnoreButtons } from "./reusable"
 import { MappedUsers } from "./reusable"
+import EmptySpace from "../svg/EmptySpace"
 
 type AddFriendsProps = {
   users: FullUserObj[]
@@ -145,9 +146,7 @@ const AddFriends = ({ users }: AddFriendsProps) => {
       {searchQuery.length > 0 && (
         <MappedUsers userArr={searchedUsers} ButtonState={ButtonState} />
       )}
-      {searchedUsers.length === 0 && searchQuery.length > 0 && (
-        <p className="paragraph--error-message">no users found</p>
-      )}
+      {searchedUsers.length === 0 && searchQuery.length >= 0 && <EmptySpace />}
     </>
   )
 }
