@@ -11,19 +11,15 @@ import "./Profile.css"
 import DeleteAccountForm from "./editProfileForms/DeleteAccountForm"
 
 type ProfileProps = {
-  setUserEmail: (a: string | null) => void
-  setUserName: (a: string | null) => void
+  setProfileForm: any
   updateUser: (e: React.FormEvent<HTMLFormElement>) => void
   reauthUser: (e: any) => void
   setReauthEmail: (e: any) => void
   setReauthPassword: (e: any) => void
-  setUserPhoto: (a: string | null) => void
   setAuthorizing: (a: boolean) => void
   setIsUpdating: (a: boolean) => void
-  userName: any
-  userEmail: string
+  profileForm: any
   isUpdating: boolean
-  userPhoto: string
   authorizing: boolean
   reauthEmail: string
   reauthPassword: string
@@ -37,17 +33,13 @@ const Profile = (props: ProfileProps) => {
   const [isDeletingAccout, setIsDeletingAccount] = useState<boolean>(false)
   const user = auth.currentUser
   const {
-    userName,
-    userEmail,
-    isUpdating,
-    setUserName,
-    setUserEmail,
+    profileForm,
+    setProfileForm,
     updateUser,
-    userPhoto,
-    setUserPhoto,
     authorizing,
     reauthEmail,
     reauthPassword,
+    isUpdating,
     reauthUser,
     setAuthorizing,
     setReauthEmail,
@@ -56,14 +48,19 @@ const Profile = (props: ProfileProps) => {
     setIsUpdating,
   } = props
 
+  const { userName, userEmail, userPhoto } = profileForm
+
   const isSaveBtnDisabled =
     userName === user?.displayName && userEmail === user?.email
 
   useEffect(() => {
     return () => {
       if (user) {
-        setUserName(user.displayName)
-        setUserEmail(user.email)
+        setProfileForm({
+          ...profileForm,
+          userName: user.displayName,
+          userEmail: user.email,
+        })
       }
     }
   }, [])
@@ -72,8 +69,9 @@ const Profile = (props: ProfileProps) => {
     e.key === "Enter" && e.preventDefault()
   }
 
-  const setUsernameHandler = (e: any) => {
-    setUserName(e.target.value)
+  const inputHandler = (e: any) => {
+    const inputName = e.target.name
+    setProfileForm({ ...profileForm, [inputName]: e.target.value })
     e.preventDefault()
   }
 
@@ -95,7 +93,7 @@ const Profile = (props: ProfileProps) => {
       const fileRef = ref(storage, `userPhotoStorage/${user?.uid}.png`)
       await uploadBytes(fileRef, e.target.files[0]) // updating photo url in firebase storage
       const downloadedPhoto = await getDownloadURL(fileRef)
-      setUserPhoto(downloadedPhoto)
+      setProfileForm({ ...profileForm, userPhoto: downloadedPhoto })
       await updateProfile(user, { photoURL: downloadedPhoto }) // updating user photoURL in firebase Auth
       await updatePhotoURLFirestore(user.uid, downloadedPhoto)
     } else {
@@ -157,6 +155,7 @@ const Profile = (props: ProfileProps) => {
           <FiEdit size="1.2em" color={"white"} />
         </button>
         <input
+          name="userPhoto"
           type="file"
           style={{ display: "none" }}
           ref={fileInputRef}
@@ -166,23 +165,25 @@ const Profile = (props: ProfileProps) => {
       <div className="profile-info-container">
         <h3>Username</h3>
         <input
+          name="userName"
           required
           spellCheck={false}
           onKeyDown={(e) => preventEnterKey(e)}
           type="text"
           value={userName}
-          onChange={(e) => setUsernameHandler(e)}
+          onChange={(e) => inputHandler(e)}
         ></input>
       </div>
       <div className="profile-info-container">
         <h3>Email</h3>
         <input
+          name="userEmail"
           required
           spellCheck={false}
           type="email"
           value={userEmail.toLowerCase()}
           onKeyDown={(e) => preventEnterKey(e)}
-          onChange={(e) => setUserEmail(e.target.value)}
+          onChange={(e) => inputHandler(e)}
         ></input>
       </div>
       <div className="sensitive-zone">
