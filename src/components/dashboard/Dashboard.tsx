@@ -34,6 +34,12 @@ type ProfileForm = {
   userPhoto: string | null
 }
 
+type ReauthUserCredentials = {
+  reauthError: string
+  reauthEmail: string
+  reauthPassword: string
+}
+
 const Dashboard = () => {
   const [profileForm, setProfileForm] = useState<ProfileForm>({
     userName: "",
