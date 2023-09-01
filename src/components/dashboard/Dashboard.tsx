@@ -28,11 +28,20 @@ const navigateTo = {
   settings: "settings",
 }
 
+type ProfileForm = {
+  userName: string | null
+  userEmail: string | null
+  userPhoto: string | null
+}
+
 const Dashboard = () => {
+  const [profileForm, setProfileForm] = useState<ProfileForm>({
+    userName: "",
+    userEmail: "",
+    userPhoto: "",
+  })
+
   const [dashboard, setDashboard] = useState<string>(navigateTo.chats)
-  const [userName, setUserName] = useState<string | null>("")
-  const [userEmail, setUserEmail] = useState<any>("")
-  const [userPhoto, setUserPhoto] = useState<any>("")
   const [isUpdating, setIsUpdating] = useState<boolean>(false)
   const [authorizing, setAuthorizing] = useState<boolean>(false)
   const [reauthEmail, setReauthEmail] = useState<string>("")
@@ -46,9 +55,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user) {
-      setUserName(user.displayName)
-      setUserEmail(user.email)
-      setUserPhoto(user.photoURL)
+      setProfileForm({
+        userName: user.displayName,
+        userEmail: user.email,
+        userPhoto: user.photoURL,
+      })
     }
   }, [user])
 
@@ -57,12 +68,14 @@ const Dashboard = () => {
     //updating Firestore userName...
     const docRef = doc(collectionRef, user.uid) // document id === user.uid
     await updateDoc(docRef, {
-      userName: userName,
+      userName: profileForm.userName,
     })
     //updating Firebase auth displayName...
-    await updateProfile(user, { displayName: userName }).then(() => {
-      console.log("updated username")
-    })
+    await updateProfile(user, { displayName: profileForm.userName }).then(
+      () => {
+        console.log("updated username")
+      }
+    )
     setIsUpdating(false)
   }
 
@@ -85,26 +98,27 @@ const Dashboard = () => {
     setReauthPassword("")
   }
 
-  const updateUserEmail = async (user: any) => {
+  const updateUserEmail = async (user: any, userEmail: string | null) => {
     setIsUpdating(true)
-    await updateEmail(user, userEmail)
-      .then(() => {
-        console.log("email updated")
-      })
-      .catch((error) => {
-        console.log(error.message)
-        error.message.includes("auth/requires-recent-login") &&
-          setAuthorizing(true)
-      })
+    if (userEmail != null) {
+      await updateEmail(user, userEmail)
+        .then(() => {
+          console.log("email updated")
+        })
+        .catch((error) => {
+          console.log(error.message)
+          error.message.includes("auth/requires-recent-login") &&
+            setAuthorizing(true)
+        })
+    }
     setIsUpdating(false)
   }
 
   const updateUserProfile = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (user) {
-      user.displayName !== userName && updateUsername(user)
-      user.email !== userEmail && updateUserEmail(user)
-    }
+    user?.displayName !== profileForm.userName && updateUsername(user)
+    user?.email !== profileForm.userEmail &&
+      updateUserEmail(user, profileForm.userEmail)
   }
 
   const handleLogOut = async () => {
@@ -127,7 +141,7 @@ const Dashboard = () => {
           <AiFillMessage size={"2.2em"} color={"rgb(39 194 160)"} />
         </button>
         <button onClick={() => setDashboard(navigateTo.profile)}>
-          <img src={userPhoto} />
+          <img src={profileForm?.userPhoto || ""} />
         </button>
         <button onClick={() => setDashboard(navigateTo.settings)}>
           <IoSettingsSharp size={"2.2em"} color={"rgb(39 194 160)"} />
@@ -140,19 +154,15 @@ const Dashboard = () => {
       <Sidebar
         dashboard={dashboard}
         setDashboard={setDashboard}
-        userPhoto={userPhoto}
+        userPhoto={profileForm?.userPhoto || ""}
       ></Sidebar>
       <main>
         {dashboard === "profile" && (
           <Profile
-            userName={userName}
-            userEmail={userEmail}
-            setUserName={setUserName}
+            profileForm={profileForm}
+            setProfileForm={setProfileForm}
             updateUser={updateUserProfile}
-            setUserEmail={setUserEmail}
             isUpdating={isUpdating}
-            userPhoto={userPhoto}
-            setUserPhoto={setUserPhoto}
             authorizing={authorizing}
             reauthEmail={reauthEmail}
             reauthPassword={reauthPassword}
@@ -170,7 +180,7 @@ const Dashboard = () => {
         {dashboard === "friends" && <Friends />}
         {dashboard === "settings" && <Settings />}
         {dashboard === "chat" && (
-          <Thread threadObj={threadObj} userPhoto={userPhoto} />
+          <Thread threadObj={threadObj} userPhoto={profileForm.userPhoto} />
         )}
       </main>
     </div>
