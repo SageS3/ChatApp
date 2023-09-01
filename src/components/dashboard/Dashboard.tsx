@@ -47,6 +47,12 @@ const Dashboard = () => {
     userPhoto: "",
   })
 
+  const [reauthUserForm, setReauthUserForm] = useState<ReauthUserCredentials>({
+    reauthError: "",
+    reauthEmail: "",
+    reauthPassword: "",
+  })
+
   const [dashboard, setDashboard] = useState<string>(navigateTo.chats)
   const [isUpdating, setIsUpdating] = useState<boolean>(false)
   const [authorizing, setAuthorizing] = useState<boolean>(false)
