@@ -1,41 +1,40 @@
 import "./ReauthForm.css"
 
 type ReauthFormProps = {
-  setReauthEmail: (e: any) => void
-  setReauthPassword: (e: any) => void
+  setReauthUserForm: any
+  reauthUserForm: any
   reauthUser: (e: any) => void
   setAuthorizing: (a: boolean) => void
-  reauthEmail: string
-  reauthPassword: string
-  reauthError: string
 }
 
 const ReauthForm = (props: ReauthFormProps) => {
-  const {
-    setReauthEmail,
-    setReauthPassword,
-    setAuthorizing,
-    reauthEmail,
-    reauthPassword,
-    reauthUser,
-    reauthError,
-  } = props
+  const { setReauthUserForm, reauthUserForm, setAuthorizing, reauthUser } =
+    props
+
+  const { reauthError, reauthEmail, reauthPassword } = reauthUserForm
+
+  const reauthHandler = (e: any) => {
+    const inputName = e.target.name
+    setReauthUserForm({ ...reauthUserForm, [inputName]: e.target.value })
+  }
 
   return (
     <div className="auth-modal-container">
       <form className="auth-modal" onSubmit={(event) => reauthUser(event)}>
         <h3>Enter Credentials</h3>
         <input
+          name="reauthEmail"
           type="email"
           placeholder="Email"
           value={reauthEmail}
-          onChange={(e) => setReauthEmail(e.target.value)}
+          onChange={reauthHandler}
         />
         <input
+          name="reauthPassword"
           type="password"
           placeholder="Password"
           value={reauthPassword}
-          onChange={(e) => setReauthPassword(e.target.value)}
+          onChange={reauthHandler}
         />
         <button type="submit">Confirm</button>
         <button type="button" onClick={() => setAuthorizing(false)}>
