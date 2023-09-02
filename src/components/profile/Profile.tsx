@@ -11,19 +11,16 @@ import "./Profile.css"
 import DeleteAccountForm from "./editProfileForms/DeleteAccountForm"
 
 type ProfileProps = {
+  reauthUserForm: any
+  setReauthUserForm: any
   setProfileForm: any
   updateUser: (e: React.FormEvent<HTMLFormElement>) => void
   reauthUser: (e: any) => void
-  setReauthEmail: (e: any) => void
-  setReauthPassword: (e: any) => void
   setAuthorizing: (a: boolean) => void
   setIsUpdating: (a: boolean) => void
   profileForm: any
   isUpdating: boolean
   authorizing: boolean
-  reauthEmail: string
-  reauthPassword: string
-  reauthError: string
 }
 
 const Profile = (props: ProfileProps) => {
@@ -33,23 +30,19 @@ const Profile = (props: ProfileProps) => {
   const [isDeletingAccout, setIsDeletingAccount] = useState<boolean>(false)
   const user = auth.currentUser
   const {
+    reauthUserForm,
+    setReauthUserForm,
     profileForm,
     setProfileForm,
     updateUser,
     authorizing,
-    reauthEmail,
-    reauthPassword,
     isUpdating,
     reauthUser,
     setAuthorizing,
-    setReauthEmail,
-    setReauthPassword,
-    reauthError,
     setIsUpdating,
   } = props
 
   const { userName, userEmail, userPhoto } = profileForm
-
   const isSaveBtnDisabled =
     userName === user?.displayName && userEmail === user?.email
 
@@ -105,13 +98,10 @@ const Profile = (props: ProfileProps) => {
   if (authorizing) {
     return (
       <ReauthForm
-        reauthError={reauthError}
-        reauthEmail={reauthEmail}
-        reauthPassword={reauthPassword}
         reauthUser={reauthUser}
         setAuthorizing={setAuthorizing}
-        setReauthEmail={setReauthEmail}
-        setReauthPassword={setReauthPassword}
+        reauthUserForm={reauthUserForm}
+        setReauthUserForm={setReauthUserForm}
       />
     )
   }
