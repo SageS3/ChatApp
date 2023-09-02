@@ -46,19 +46,16 @@ const Dashboard = () => {
     userEmail: "",
     userPhoto: "",
   })
-
   const [reauthUserForm, setReauthUserForm] = useState<ReauthUserCredentials>({
     reauthError: "",
     reauthEmail: "",
     reauthPassword: "",
   })
-
   const [dashboard, setDashboard] = useState<string>(navigateTo.chats)
   const [isUpdating, setIsUpdating] = useState<boolean>(false)
   const [authorizing, setAuthorizing] = useState<boolean>(false)
   const [reauthEmail, setReauthEmail] = useState<string>("")
   const [reauthPassword, setReauthPassword] = useState<string>("")
-  const [reauthError, setReauthError] = useState<string>("")
   const [threadObj, setThreadObj] = useState<Object | null>(null)
 
   const user = auth.currentUser
@@ -73,7 +70,7 @@ const Dashboard = () => {
         userPhoto: user.photoURL,
       })
     }
-  }, [user])
+  }, [])
 
   const updateUsername = async (user: any) => {
     setIsUpdating(true)
@@ -103,7 +100,10 @@ const Dashboard = () => {
         })
         .catch((error) => {
           console.log(error.message)
-          setReauthError("incorrect email or password")
+          setReauthUserForm({
+            ...reauthUserForm,
+            reauthError: "incorrect email or password",
+          })
         })
     }
     setReauthEmail("")
@@ -176,13 +176,10 @@ const Dashboard = () => {
             updateUser={updateUserProfile}
             isUpdating={isUpdating}
             authorizing={authorizing}
-            reauthEmail={reauthEmail}
-            reauthPassword={reauthPassword}
             reauthUser={reauthUser}
-            setReauthEmail={setReauthEmail}
-            setReauthPassword={setReauthPassword}
             setAuthorizing={setAuthorizing}
-            reauthError={reauthError}
+            reauthUserForm={reauthUserForm}
+            setReauthUserForm={setReauthUserForm}
             setIsUpdating={setIsUpdating}
           />
         )}
