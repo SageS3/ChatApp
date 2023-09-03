@@ -27,7 +27,6 @@ const Friends = () => {
   const [requestIDs, setRequestIDs] = useState<string[]>([])
   const [friendIDs, setFriendIDs] = useState<string[]>([])
   const [hasRequests, setHasRequests] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const queryUsers = async (user: any) => {
     const q = query(collection(db, "users"), where("id", "!=", `${user?.uid}`))
@@ -73,12 +72,9 @@ const Friends = () => {
   useEffect(() => {
     const currentUser = auth?.currentUser
     const userID = currentUser?.uid
-
-    setIsLoading(true)
     queryUsers(currentUser)
     queryFriends(userID)
     queryRequests(userID)
-    setIsLoading(false)
   }, [])
 
   type ButtonProps = {
@@ -103,8 +99,7 @@ const Friends = () => {
   }
 
   const renderUsers = () =>
-    friendsDirectory === "all" &&
-    (isLoading ? <div>loading</div> : <MappedUsers userArr={friends} />)
+    friendsDirectory === "all" && <MappedUsers userArr={friends} />
 
   return (
     <div className="friends">
