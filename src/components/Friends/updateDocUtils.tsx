@@ -101,23 +101,11 @@ export const populateRequests = (
   users: FullUserObj[],
   requestIDs: string[]
 ) => {
-  const reqs: FullUserObj[] = []
-  requestIDs.forEach((id: string) => {
-    const filtered = users.filter((user: FullUserObj) => {
-      return user.id === id
-    })
-    reqs.push(...filtered)
-  })
-  return reqs
+  const idSet = new Set(requestIDs)
+  return users.filter((user: FullUserObj) => idSet.has(user.id))
 }
 
 export const populateFriends = (users: FullUserObj[], friendIDs: string[]) => {
-  const friendsArr: FullUserObj[] = []
-  friendIDs.forEach((id: string) => {
-    const filtered = users.filter((user: LimitedUserObj) => {
-      return user.id === id
-    })
-    friendsArr.push(...filtered)
-  })
-  return friendsArr
+  const idSet = new Set(friendIDs)
+  return users.filter((user: FullUserObj) => idSet.has(user.id))
 }
