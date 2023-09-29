@@ -47,10 +47,10 @@ const Friends = () => {
       const pendingRequestsIds = pendingReqs.map(
         (userObj: LimitedUserObj) => userObj.id
       )
-      pendingRequestsIds.length && setHasRequests(true)
+      pendingRequestsIds.length > 0 && setHasRequests(true)
       setRequestIDs(pendingRequestsIds)
-      const result = filterRequests(users, requestIDs)
-      setRequests(result)
+      const result = filterRequests(users, pendingRequestsIds)
+      return result
     } catch (error) {
       setErrorMessage(error as string)
     }
@@ -80,7 +80,7 @@ const Friends = () => {
 
   const filterRequests = (users: FullUserObj[], requestIDs: string[]) => {
     const idSet = new Set(requestIDs)
-    return users?.filter((user: FullUserObj) => idSet.has(user.id))
+    return users.filter((user: FullUserObj) => idSet.has(user.id))
   }
 
   useEffect(() => {
