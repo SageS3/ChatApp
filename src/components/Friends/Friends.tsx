@@ -11,12 +11,7 @@ import { db, auth } from "../config/firebase"
 import "./Friends.css"
 import Requests from "./Requests"
 import AddFriends from "./AddFriends"
-import {
-  LimitedUserObj,
-  FullUserObj,
-  // filterFriends,
-  populateRequests,
-} from "./updateDocUtils"
+import { LimitedUserObj, FullUserObj } from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
 
 const Friends = () => {
@@ -42,7 +37,8 @@ const Friends = () => {
 
   const queryRequests = async (
     userID: string | undefined,
-    users: FullUserObj[]
+    users: FullUserObj[],
+    filterRequests: (users: FullUserObj[], idArr: string[]) => FullUserObj[]
   ) => {
     const ref = doc(db, `users/${userID}`)
     try {
@@ -53,15 +49,11 @@ const Friends = () => {
       )
       pendingRequestsIds.length && setHasRequests(true)
       setRequestIDs(pendingRequestsIds)
-      setRequests(populateRequests(users, requestIDs) as FullUserObj[])
+      const result = filterRequests(users, requestIDs)
+      setRequests(result)
     } catch (error) {
       setErrorMessage(error as string)
     }
-  }
-
-  const filterFriends = (users: FullUserObj[], friendIDs: string[]) => {
-    const idSet = new Set(friendIDs)
-    return users.filter((user: FullUserObj) => idSet.has(user.id))
   }
 
   const queryFriends = async (
@@ -81,24 +73,39 @@ const Friends = () => {
     }
   }
 
+  const filterFriends = (users: FullUserObj[], friendIDs: string[]) => {
+    const idSet = new Set(friendIDs)
+    return users.filter((user: FullUserObj) => idSet.has(user.id))
+  }
+
+  const filterRequests = (users: FullUserObj[], requestIDs: string[]) => {
+    const idSet = new Set(requestIDs)
+    return users?.filter((user: FullUserObj) => idSet.has(user.id))
+  }
+
   useEffect(() => {
     const fetchUserData = async () => {
       setIsLoading(true)
       try {
         const currentUser = auth?.currentUser
         const userID = currentUser?.uid
-        if (currentUser) {
-          // Fetch user data
-          const usersData = await queryUsers(currentUser)
-          setUsers(usersData as FullUserObj[])
-          const friendsData = await queryFriends(
-            userID,
-            usersData as FullUserObj[],
-            filterFriends
-          )
-          setFriends(friendsData as FullUserObj[])
-          await queryRequests(userID, usersData as FullUserObj[])
-        }
+        if (!currentUser) setErrorMessage("User not signed in.")
+
+        const usersData = await queryUsers(currentUser)
+        const friendsData = await queryFriends(
+          userID,
+          usersData as FullUserObj[],
+          filterFriends
+        )
+        const requestData = await queryRequests(
+          userID,
+          usersData as FullUserObj[],
+          filterRequests
+        )
+
+        setUsers(usersData as FullUserObj[])
+        setFriends(friendsData as FullUserObj[])
+        setRequests(requestData as any)
       } catch (error) {
         // Handle errors here
         setErrorMessage(error as string)
