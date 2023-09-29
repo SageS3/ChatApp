@@ -14,67 +14,99 @@ import AddFriends from "./AddFriends"
 import {
   LimitedUserObj,
   FullUserObj,
-  populateFriends,
+  // filterFriends,
   populateRequests,
 } from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
 
 const Friends = () => {
-  const [friendsDirectory, setFriendsDirectory] = useState<string>("all")
-  const [friends, setFriends] = useState<FullUserObj[]>([])
+  const [friendsDirectory, setFriendsDirectory] = useState<string>("friends")
   const [users, setUsers] = useState<FullUserObj[]>([])
+  const [friends, setFriends] = useState<FullUserObj[]>([])
   const [requests, setRequests] = useState<FullUserObj[]>([])
   const [requestIDs, setRequestIDs] = useState<string[]>([])
-  const [friendIDs, setFriendIDs] = useState<string[]>([])
   const [hasRequests, setHasRequests] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   const queryUsers = async (user: any) => {
-    const q = query(collection(db, "users"), where("id", "!=", `${user?.uid}`))
     try {
+      const q = query(collection(db, "users"), where("id", "!=", `${user.uid}`))
       const snapShot = await getDocs(q)
       const userData = snapShot.docs.map((doc) => doc.data() as FullUserObj)
-      setUsers(userData)
-      console.log(userData)
+      return userData
     } catch (error) {
-      console.log(error)
+      setErrorMessage(error as string)
     }
   }
 
-  const queryRequests = async (userID: string | undefined) => {
+  const queryRequests = async (
+    userID: string | undefined,
+    users: FullUserObj[]
+  ) => {
     const ref = doc(db, `users/${userID}`)
-    const querySnapshot = await getDoc(ref)
     try {
+      const querySnapshot = await getDoc(ref)
       const pendingReqs = querySnapshot.data()?.friends.pendingRequests
       const pendingRequestsIds = pendingReqs.map(
         (userObj: LimitedUserObj) => userObj.id
       )
       pendingRequestsIds.length && setHasRequests(true)
       setRequestIDs(pendingRequestsIds)
-      setRequests(populateRequests(users, requestIDs))
+      setRequests(populateRequests(users, requestIDs) as FullUserObj[])
     } catch (error) {
-      console.log(error)
+      setErrorMessage(error as string)
     }
   }
 
-  const queryFriends = async (userID: string | undefined) => {
-    const ref = doc(db, `users/${userID}`)
-    const querySnapshot = await getDoc(ref)
+  const filterFriends = (users: FullUserObj[], friendIDs: string[]) => {
+    const idSet = new Set(friendIDs)
+    return users.filter((user: FullUserObj) => idSet.has(user.id))
+  }
+
+  const queryFriends = async (
+    userID: string | undefined,
+    users: FullUserObj[],
+    filterFriends: (users: any, idArr: any) => FullUserObj[]
+  ) => {
     try {
+      const ref = doc(db, `users/${userID}`)
+      const querySnapshot = await getDoc(ref)
       const friendsArr = querySnapshot.data()?.friends.friends
       const idArr = friendsArr.map((userObj: LimitedUserObj) => userObj.id)
-      setFriendIDs(idArr)
-      setFriends(populateFriends(users, friendIDs))
+      const result = filterFriends(users, idArr)
+      return result
     } catch (error) {
-      console.log(error)
+      setErrorMessage(error as string)
     }
   }
 
   useEffect(() => {
-    const currentUser = auth?.currentUser
-    const userID = currentUser?.uid
-    queryUsers(currentUser)
-    queryFriends(userID)
-    queryRequests(userID)
+    const fetchUserData = async () => {
+      setIsLoading(true)
+      try {
+        const currentUser = auth?.currentUser
+        const userID = currentUser?.uid
+        if (currentUser) {
+          // Fetch user data
+          const usersData = await queryUsers(currentUser)
+          setUsers(usersData as FullUserObj[])
+          const friendsData = await queryFriends(
+            userID,
+            usersData as FullUserObj[],
+            filterFriends
+          )
+          setFriends(friendsData as FullUserObj[])
+          await queryRequests(userID, usersData as FullUserObj[])
+        }
+      } catch (error) {
+        // Handle errors here
+        setErrorMessage(error as string)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchUserData()
   }, [])
 
   type ButtonProps = {
@@ -90,8 +122,8 @@ const Friends = () => {
   )
 
   const memoizedNotificationIndicator = useMemo(
-    () => <div className="request--indicator"></div>,
-    [hasRequests]
+    () => <div className="request--indicator" />,
+    []
   )
 
   const handleButtonClick = (directory: string) => {
@@ -99,7 +131,11 @@ const Friends = () => {
   }
 
   const renderUsers = () =>
-    friendsDirectory === "all" && <MappedUsers userArr={friends} />
+    !isLoading ? (
+      <MappedUsers userArr={friends} />
+    ) : (
+      <div style={{ color: "white" }}>loading...</div>
+    )
 
   return (
     <div className="friends">
@@ -108,9 +144,9 @@ const Friends = () => {
           <li>Friends</li>
           <li>
             <Button
-              selected={friendsDirectory === "all"}
-              id="All"
-              onClick={() => handleButtonClick("all")}
+              selected={friendsDirectory === "friends"}
+              id="friends"
+              onClick={() => handleButtonClick("friends")}
             />
           </li>
           <li>
@@ -131,7 +167,8 @@ const Friends = () => {
         </ul>
       </header>
       <main className="friends--list">
-        {friendsDirectory === "all" && renderUsers()}
+        {errorMessage && <p>{errorMessage}</p>}
+        {friendsDirectory === "friends" && renderUsers()}
         {friendsDirectory === "add" && <AddFriends users={users} />}
         {friendsDirectory === "requests" && (
           <Requests
