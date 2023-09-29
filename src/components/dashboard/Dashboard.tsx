@@ -189,7 +189,7 @@ const Dashboard = () => {
         {dashboard === "friends" && <Friends />}
         {dashboard === "settings" && <Settings />}
         {dashboard === "chat" && (
-          <Thread threadObj={threadObj} userPhoto={profileForm.userPhoto} />
+          <Thread threadObj={threadObj} userPhoto={user?.photoURL} />
         )}
       </main>
     </div>
