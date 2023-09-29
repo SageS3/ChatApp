@@ -182,7 +182,6 @@ const Friends = () => {
             requestIDs={requestIDs}
             requests={requests}
             setRequestIDs={setRequestIDs}
-            users={users}
             setRequests={setRequests}
           />
         )}
