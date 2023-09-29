@@ -10,22 +10,15 @@ import {
   updateCurrentUserDocs,
 } from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
-import { populateRequests } from "./updateDocUtils"
 
 type RequestsProps = {
   requestIDs: string[]
   setRequestIDs: any
   requests: FullUserObj[]
-  users: FullUserObj[]
   setRequests: any
 }
 
-const Requests = ({
-  requestIDs,
-  requests,
-  setRequestIDs,
-  users,
-}: RequestsProps) => {
+const Requests = ({ requestIDs, requests, setRequestIDs }: RequestsProps) => {
   const ignoreRequest = async (requester: LimitedUserObj) => {
     const currentUser = auth?.currentUser
     const currentUserID = currentUser?.uid
@@ -68,11 +61,6 @@ const Requests = ({
     )
     setRequestIDs(updateRequests)
   }
-
-  useEffect(() => {
-    populateRequests(users, requestIDs)
-    console.log("reqs")
-  }, [])
 
   return (
     <div className="main__requests">
