@@ -12,7 +12,7 @@ import "./Friends.css"
 import Requests from "./Requests"
 import AddFriends from "./AddFriends"
 import { LimitedUserObj, FullUserObj } from "./updateDocUtils"
-import { MappedUsers } from "./reusable"
+import { MappedUsers, LoadingUi } from "./reusable"
 
 const Friends = () => {
   const [friendsDirectory, setFriendsDirectory] = useState<string>("friends")
@@ -137,12 +137,15 @@ const Friends = () => {
     setFriendsDirectory(directory)
   }
 
-  const renderUsers = () =>
-    !isLoading ? (
-      <MappedUsers userArr={friends} />
-    ) : (
-      <div style={{ color: "white" }}>loading...</div>
-    )
+  const renderUsers = () => {
+    if (isLoading) {
+      return <LoadingUi />
+    } else if (!isLoading && friends.length === 0) {
+      return <p>no friends</p>
+    } else {
+      return <MappedUsers userArr={friends} />
+    }
+  }
 
   return (
     <div className="friends">
@@ -152,7 +155,7 @@ const Friends = () => {
           <li>
             <Button
               selected={friendsDirectory === "friends"}
-              id="friends"
+              id="Friends"
               onClick={() => handleButtonClick("friends")}
             />
           </li>
@@ -183,6 +186,9 @@ const Friends = () => {
             requests={requests}
             setRequestIDs={setRequestIDs}
             setRequests={setRequests}
+            filterRequests={filterRequests}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
         )}
       </main>
