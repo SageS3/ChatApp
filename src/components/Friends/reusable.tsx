@@ -25,7 +25,7 @@ export const AcceptIgnoreButtons = ({
 }
 
 type MappedUserProps = {
-  userArr: FullUserObj[]
+  userArr: FullUserObj[] | null
   ButtonState?: any
   AcceptIgnoreButtons?: any
   accept?: any
