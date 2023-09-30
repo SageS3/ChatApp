@@ -64,3 +64,13 @@ export const MappedUsers = ({
     ))}
   </>
 )
+
+export const LoadingUi = () => {
+  return (
+    <div className="loading-ui">
+      <span />
+      <span />
+      <span />
+    </div>
+  )
+}
