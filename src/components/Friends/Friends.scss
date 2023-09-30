@@ -151,4 +151,29 @@
       border: 2px solid white;
     }
   }
+  .loading-ui {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100px;
+    height: 20px;
+    span {
+      width: 15px;
+      height: 15px;
+      border: 1px solid Colors.$accent-color;
+      border-radius: 2px;
+      animation: fade 1s ease-in-out infinite forwards;
+    }
+    span:nth-of-type(2) {
+      animation-delay: 100ms;
+    }
+    span:nth-of-type(3) {
+      animation-delay: 200ms;
+    }
+    @keyframes fade {
+      100% {
+        border-color: Colors.$main-background-color;
+      }
+    }
+  }
 }
