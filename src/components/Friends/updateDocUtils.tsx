@@ -2,14 +2,16 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore"
 import { db } from "../config/firebase"
 import { auth } from "../config/firebase"
 
-export type LimitedUserObj = {
+export type UserID = {
   id: string
 }
+
 type FriendsObj = {
   friends: string[]
   pendingRequests: string[]
   pendingSentRequests: string[]
 }
+
 export type FullUserObj = {
   friends: FriendsObj
   id: string
@@ -95,17 +97,4 @@ export const updateCurrentUserDocs = async (
       }),
     })
   }
-}
-
-export const populateRequests = (
-  users: FullUserObj[],
-  requestIDs: string[]
-) => {
-  const idSet = new Set(requestIDs)
-  return users.filter((user: FullUserObj) => idSet.has(user.id))
-}
-
-export const populateFriends = (users: FullUserObj[], friendIDs: string[]) => {
-  const idSet = new Set(friendIDs)
-  return users.filter((user: FullUserObj) => idSet.has(user.id))
 }

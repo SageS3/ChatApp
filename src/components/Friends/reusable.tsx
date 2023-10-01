@@ -1,10 +1,10 @@
-import { LimitedUserObj, FullUserObj } from "./updateDocUtils"
+import { UserID, FullUserObj } from "./updateDocUtils"
 import { BiMessageSquareEdit } from "react-icons/bi"
 
 type AcceptIgnoreButtonsProps = {
   accept: (user: any) => {}
   ignore: (user: any) => {}
-  userObj: LimitedUserObj | FullUserObj
+  userObj: UserID | FullUserObj
 }
 
 export const AcceptIgnoreButtons = ({

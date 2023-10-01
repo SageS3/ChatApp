@@ -4,11 +4,7 @@ import { auth } from "../config/firebase"
 import { db } from "../config/firebase"
 import "../Friends/Requests.css"
 import { AcceptIgnoreButtons } from "./reusable"
-import {
-  FullUserObj,
-  LimitedUserObj,
-  updateCurrentUserDocs,
-} from "./updateDocUtils"
+import { FullUserObj, UserID, updateCurrentUserDocs } from "./updateDocUtils"
 import { MappedUsers } from "./reusable"
 
 type RequestsProps = {
@@ -30,7 +26,7 @@ const Requests = ({
   setIsLoading,
   isLoading,
 }: RequestsProps) => {
-  const ignoreRequest = async (requester: LimitedUserObj) => {
+  const ignoreRequest = async (requester: UserID) => {
     // updates Firestore:
     // removes requester from pendingRequests.
     // removes requester's pendingSentRequests data.
@@ -67,12 +63,12 @@ const Requests = ({
     }
   }
 
-  const acceptRequestFromListedRequests = async (requester: LimitedUserObj) => {
+  const acceptRequestFromListedRequests = async (requester: UserID) => {
     // updates Firestore:
     // adds requester as friends.
     // removes requester from requests array.
 
-    const currentUser = auth?.currentUser
+    const currentUser = auth?.currentUser // create a hook that returns user data?
     const currentUserID = currentUser?.uid
     const currentUserRef = doc(db, `users/${currentUserID}`)
     const requesterRef = doc(db, `users/${requester.id}`)

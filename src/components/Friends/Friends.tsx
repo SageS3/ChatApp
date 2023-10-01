@@ -11,7 +11,7 @@ import { db, auth } from "../config/firebase"
 import "./Friends.css"
 import Requests from "./Requests"
 import AddFriends from "./AddFriends"
-import { LimitedUserObj, FullUserObj } from "./updateDocUtils"
+import { UserID, FullUserObj } from "./updateDocUtils"
 import { MappedUsers, LoadingUi } from "./reusable"
 
 const Friends = () => {
@@ -45,7 +45,7 @@ const Friends = () => {
       const querySnapshot = await getDoc(ref)
       const pendingReqs = querySnapshot.data()?.friends.pendingRequests
       const pendingRequestsIds = pendingReqs.map(
-        (userObj: LimitedUserObj) => userObj.id
+        (userObj: UserID) => userObj.id
       )
       pendingRequestsIds.length > 0 && setHasRequests(true)
       setRequestIDs(pendingRequestsIds)
@@ -65,7 +65,7 @@ const Friends = () => {
       const ref = doc(db, `users/${userID}`)
       const querySnapshot = await getDoc(ref)
       const friendsArr = querySnapshot.data()?.friends.friends
-      const idArr = friendsArr.map((userObj: LimitedUserObj) => userObj.id)
+      const idArr = friendsArr.map((userObj: UserID) => userObj.id)
       const result = filterFriends(users, idArr)
       return result
     } catch (error) {

@@ -7,7 +7,7 @@ import {
   updateUserSentRequests,
   updateThirdPartyPendingRequests,
   acceptRequestFromListedUsers,
-  LimitedUserObj,
+  UserID,
   FullUserObj,
   ignoreRequestFromListedUsers,
 } from "./updateDocUtils"
@@ -47,23 +47,21 @@ const AddFriends = ({ users }: AddFriendsProps) => {
       const pendingRequestsArr = docs.data().friends.pendingRequests
       const friendsArr = docs.data().friends.friends
       if (pendingRequestsArr) {
-        const pendingRequestsIdArr = pendingRequestsArr.map(
-          (user: LimitedUserObj) => {
-            return user.id
-          }
-        )
+        const pendingRequestsIdArr = pendingRequestsArr.map((user: UserID) => {
+          return user.id
+        })
         setPendingRequestsIDs(pendingRequestsIdArr)
       }
       if (pendingSentRequestsArr) {
         const pendingSentRequestsIdArr = pendingSentRequestsArr.map(
-          (user: LimitedUserObj) => {
+          (user: UserID) => {
             return user.id
           }
         )
         setPendingSentRequestsIDs(pendingSentRequestsIdArr)
       }
       if (friendsArr) {
-        const friendsIdArr = friendsArr.map((user: LimitedUserObj) => {
+        const friendsIdArr = friendsArr.map((user: UserID) => {
           return user.id
         })
         setFriendsIDs(friendsIdArr)
@@ -79,6 +77,7 @@ const AddFriends = ({ users }: AddFriendsProps) => {
     )
     setSearchedUsers(filtered)
   }
+
   const handleInputChange = (
     event: any,
     userArr: FullUserObj[],
