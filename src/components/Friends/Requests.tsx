@@ -11,16 +11,16 @@ type RequestsProps = {
   filterRequests: (users: FullUserObj[], idArr: string[]) => FullUserObj[]
   requestIDs: string[]
   setRequestIDs: any
-  requests: FullUserObj[]
-  setRequests: any
+  listedUsers: any
+  setListedUsers: any
   setIsLoading: any
   isLoading: any
 }
 
 const Requests = ({
   requestIDs,
-  requests,
-  setRequests,
+  listedUsers,
+  setListedUsers,
   setRequestIDs,
   filterRequests,
   setIsLoading,
@@ -54,8 +54,8 @@ const Requests = ({
         (request: string) => request !== requester.id
       )
       setRequestIDs(updateRequestIds)
-      const result = filterRequests(requests, updateRequestIds)
-      setRequests(result)
+      const result = filterRequests(listedUsers.requests, updateRequestIds)
+      setListedUsers({ ...listedUsers, requests: result })
     } catch (error) {
       console.log(error)
     } finally {
@@ -90,8 +90,9 @@ const Requests = ({
         (request: string) => request !== requester.id
       )
       setRequestIDs(updateRequestIds)
-      const result = filterRequests(requests, updateRequestIds)
-      setRequests(result)
+      const result = filterRequests(listedUsers.requests, updateRequestIds)
+      setListedUsers({ ...listedUsers, requests: result })
+      // setFriends state
     } catch (error) {
       console.log(error)
     } finally {
@@ -105,7 +106,7 @@ const Requests = ({
         <div>...loading</div>
       ) : (
         <MappedUsers
-          userArr={requests}
+          userArr={listedUsers.requests}
           AcceptIgnoreButtons={AcceptIgnoreButtons}
           accept={acceptRequestFromListedRequests}
           ignore={ignoreRequest}
