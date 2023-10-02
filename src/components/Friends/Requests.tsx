@@ -1,11 +1,10 @@
-import { useEffect } from "react"
 import { doc, updateDoc, arrayRemove, arrayUnion } from "firebase/firestore"
 import { auth } from "../config/firebase"
 import { db } from "../config/firebase"
 import "../Friends/Requests.css"
 import { AcceptIgnoreButtons } from "./reusable"
 import { FullUserObj, UserID, updateCurrentUserDocs } from "./updateDocUtils"
-import { MappedUsers } from "./reusable"
+import { MappedUsers, LoadingUi } from "./reusable"
 
 type RequestsProps = {
   filterRequests: (users: FullUserObj[], idArr: string[]) => FullUserObj[]
@@ -103,7 +102,7 @@ const Requests = ({
   return (
     <div className="main__requests">
       {isLoading ? (
-        <div>...loading</div>
+        <LoadingUi />
       ) : (
         <MappedUsers
           userArr={listedUsers.requests}
