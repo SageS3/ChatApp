@@ -14,7 +14,18 @@ import AddFriends from "./AddFriends"
 import { UserID, FullUserObj } from "./updateDocUtils"
 import { MappedUsers, LoadingUi } from "./reusable"
 
+type ListedUsers = {
+  users: FullUserObj[]
+  friends: FullUserObj[]
+  requests: FullUserObj[]
+}
+
 const Friends = () => {
+  const [listedUsers, setListedUsers] = useState<ListedUsers>({
+    users: [],
+    friends: [],
+    requests: [],
+  })
   const [friendsDirectory, setFriendsDirectory] = useState<string>("friends")
   const [users, setUsers] = useState<FullUserObj[]>([])
   const [friends, setFriends] = useState<FullUserObj[]>([])
@@ -103,9 +114,11 @@ const Friends = () => {
           filterRequests
         )
 
-        setUsers(usersData as FullUserObj[])
-        setFriends(friendsData as FullUserObj[])
-        setRequests(requestData as any)
+        setListedUsers({
+          users: usersData as FullUserObj[],
+          friends: friendsData as FullUserObj[],
+          requests: requestData as FullUserObj[],
+        })
       } catch (error) {
         // Handle errors here
         setErrorMessage(error as string)
@@ -140,10 +153,10 @@ const Friends = () => {
   const renderUsers = () => {
     if (isLoading) {
       return <LoadingUi />
-    } else if (!isLoading && friends.length === 0) {
+    } else if (!isLoading && listedUsers.friends.length === 0) {
       return <p>no friends</p>
     } else {
-      return <MappedUsers userArr={friends} />
+      return <MappedUsers userArr={listedUsers.friends} />
     }
   }
 
@@ -179,13 +192,13 @@ const Friends = () => {
       <main className="friends--list">
         {errorMessage && <p>{errorMessage}</p>}
         {friendsDirectory === "friends" && renderUsers()}
-        {friendsDirectory === "add" && <AddFriends users={users} />}
+        {friendsDirectory === "add" && <AddFriends users={listedUsers.users} />}
         {friendsDirectory === "requests" && (
           <Requests
             requestIDs={requestIDs}
-            requests={requests}
+            listedUsers={listedUsers}
             setRequestIDs={setRequestIDs}
-            setRequests={setRequests}
+            setListedUsers={setListedUsers}
             filterRequests={filterRequests}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
