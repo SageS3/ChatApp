@@ -27,9 +27,6 @@ const Friends = () => {
     requests: [],
   })
   const [friendsDirectory, setFriendsDirectory] = useState<string>("friends")
-  const [users, setUsers] = useState<FullUserObj[]>([])
-  const [friends, setFriends] = useState<FullUserObj[]>([])
-  const [requests, setRequests] = useState<FullUserObj[]>([])
   const [requestIDs, setRequestIDs] = useState<string[]>([])
   const [hasRequests, setHasRequests] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
