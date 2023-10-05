@@ -89,8 +89,11 @@ const Requests = ({
         (request: string) => request !== requester.id
       )
       setRequestIDs(updateRequestIds)
-      const result = filterRequests(listedUsers.requests, updateRequestIds)
-      setListedUsers({ ...listedUsers, requests: result })
+      const filteredRequests = filterRequests(
+        listedUsers.requests,
+        updateRequestIds
+      )
+      setListedUsers({ ...listedUsers, requests: filteredRequests })
       // setFriends state
     } catch (error) {
       console.log(error)
